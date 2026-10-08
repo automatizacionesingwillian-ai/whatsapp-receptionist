@@ -3,7 +3,7 @@ export default function Loading() {
     <div
       role="status"
       aria-live="polite"
-      aria-label="Caricamento in corso"
+      aria-label="Cargando"
       style={{
         minHeight: '60vh',
         display: 'grid',
@@ -31,7 +31,7 @@ export default function Loading() {
           }}
         />
         <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-          Un attimo...
+          Un momento...
         </span>
       </div>
       <style>{`

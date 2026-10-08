@@ -23,7 +23,7 @@ const ENTRIES: RssEntry[] = [
     isoDate: 'Mon, 05 May 2026 10:00:00 +0200',
     title: 'CSP nonce-based + GDPR Art.15/17',
     body: 'Hardening completo: CSP per-request nonce, COEP/COOP/CORP, endpoint export e delete dati GDPR, rate limiting Upstash su tutti gli endpoint sensibili.',
-    category: 'Sicurezza',
+    category: 'Seguridad',
   },
   {
     date: '2 maggio 2026',

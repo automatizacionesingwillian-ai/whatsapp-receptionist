@@ -69,7 +69,7 @@ const CATEGORY_BADGE = {
   feature: { label: 'Nuovo', class: 'badge' },
   improvement: { label: 'Miglioria', class: 'badge-warm' },
   fix: { label: 'Fix', class: 'badge-success' },
-  security: { label: 'Sicurezza', class: 'badge-danger' },
+  security: { label: 'Seguridad', class: 'badge-danger' },
 } as const;
 
 export default async function ChangelogPage() {

@@ -1,29 +1,20 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
-const SIDEBAR_ITEMS = [
-  { href: '/dashboard', label: 'Panoramica', icon: '◐' },
-  { href: '/conversations', label: 'Conversazioni', icon: '✻' },
-  { href: '/calendar', label: 'Calendario', icon: '◫' },
-  { href: '/knowledge', label: 'Knowledge base', icon: '☰' },
-  { href: '/settings', label: 'Impostazioni', icon: '⚙' },
-  { href: '/billing', label: 'Fatturazione', icon: '€' },
-] as const;
+import { DashboardSidebarNav } from '@/components/dashboard/DashboardSidebarNav';
 
 export interface DashboardShellProps {
   children: ReactNode;
-  currentPath?: string;
   tenantName?: string;
 }
 
 export function DashboardShell({
   children,
-  currentPath,
-  tenantName = 'Il tuo studio',
+  tenantName = 'Tu negocio',
 }: Readonly<DashboardShellProps>) {
   return (
     <div className="dashboard-shell">
-      <aside className="sidebar" aria-label="Navigazione dashboard">
+      <aside className="sidebar" aria-label="Navegación del panel">
         <Link
           href="/dashboard"
           className="site-logo"
@@ -40,7 +31,7 @@ export function DashboardShell({
           }}
         >
           <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-            Tenant attivo
+            Negocio activo
           </p>
           <p
             style={{
@@ -53,25 +44,7 @@ export function DashboardShell({
           </p>
         </div>
 
-        <ul className="sidebar-nav">
-          {SIDEBAR_ITEMS.map((item) => {
-            const active = currentPath === item.href;
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="sidebar-link"
-                  aria-current={active ? 'page' : undefined}
-                >
-                  <span aria-hidden="true" style={{ width: '1.25rem' }}>
-                    {item.icon}
-                  </span>
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <DashboardSidebarNav />
 
         <div
           style={{
@@ -83,7 +56,7 @@ export function DashboardShell({
         >
           <Link href="/help" className="sidebar-link" style={{ fontSize: 'var(--text-xs)' }}>
             <span aria-hidden="true">?</span>
-            Centro assistenza
+            Centro de ayuda
           </Link>
         </div>
       </aside>

@@ -25,32 +25,32 @@ const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://ambrogio.ai';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Ambrogio.ai — AI Receptionist Italia per studi e PMI',
+    default: 'Ambrogio.ai — recepcionista con IA para negocios',
     template: '%s · Ambrogio.ai',
   },
   description:
-    'WhatsApp, voce, prenotazioni automatiche. Niente più chiamate perse, niente clienti persi. Setup in 24h.',
+    'WhatsApp, voz y reservas automáticas. Sin llamadas perdidas ni clientes que se van. Configuración en 24 h.',
   applicationName: 'Ambrogio.ai',
   authors: [{ name: 'Ambrogio.ai Team', url: SITE_URL }],
   creator: 'Ambrogio.ai Team',
   publisher: 'Ambrogio.ai',
   generator: 'Next.js',
   keywords: [
-    'AI receptionist Italia',
-    'reception virtuale',
-    'WhatsApp business automatico',
-    'prenotazioni automatiche',
-    'AI per studi dentistici',
-    'AI per estetisti',
-    'AI per palestre',
-    'studi professionali',
-    'Italia',
+    'recepcionista IA',
+    'recepción virtual',
+    'WhatsApp Business automático',
+    'reservas automáticas',
+    'IA para clínicas dentales',
+    'IA para centros de estética',
+    'IA para gimnasios',
+    'servicios profesionales',
+    'Latinoamérica',
     'GDPR',
   ],
   formatDetection: { telephone: false, email: false, address: false },
   openGraph: {
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
     url: SITE_URL,
     siteName: 'Ambrogio.ai',
   },
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: {
-      'it-IT': SITE_URL,
+      'es-419': SITE_URL,
       'x-default': SITE_URL,
     },
     types: {
@@ -93,7 +93,7 @@ const websiteSchema = {
   '@id': `${SITE_URL}#website`,
   name: 'Ambrogio.ai',
   url: SITE_URL,
-  inLanguage: 'it-IT',
+  inLanguage: 'es-419',
   publisher: { '@id': `${SITE_URL}#organization` },
   potentialAction: {
     '@type': 'SearchAction',
@@ -110,7 +110,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const nonce = headerList.get('x-nonce') ?? undefined;
 
   return (
-    <html lang="it" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="es" className={`${inter.variable} ${fraunces.variable}`}>
       <head>
         <link rel="preconnect" href="https://api.anthropic.com" />
         <link rel="dns-prefetch" href="https://api.stripe.com" />
@@ -118,7 +118,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <link rel="dns-prefetch" href="https://graph.facebook.com" />
         <link rel="me" href="https://twitter.com/ambrogio_ai" />
         <link rel="me" href="https://linkedin.com/company/ambrogio-ai" />
-        <link rel="alternate" hrefLang="it-IT" href={SITE_URL} />
+        <link rel="alternate" hrefLang="es-419" href={SITE_URL} />
         <link rel="alternate" hrefLang="x-default" href={SITE_URL} />
         <meta name="author" content="Ambrogio.ai Team" />
         <meta name="application-name" content="Ambrogio.ai" />
@@ -126,15 +126,20 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#0d766e" />
         <meta name="format-detection" content="telephone=no" />
+        {/*
+          Los navegadores quitan el atributo `nonce` del DOM tras aplicar CSP:
+          sin suppressHydrationWarning React marca un mismatch SSR/cliente.
+        */}
         <script
           type="application/ld+json"
           nonce={nonce}
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
       <body data-csp-nonce={nonce}>
         <a href="#main" className="skip-link">
-          Salta al contenuto
+          Saltar al contenido
         </a>
         {children}
       </body>

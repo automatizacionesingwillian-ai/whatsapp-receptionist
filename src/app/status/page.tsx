@@ -6,12 +6,12 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 import { type HealthStatus, overallStatus, runHealthChecks } from '@/lib/health/checks';
 
 export const metadata: Metadata = {
-  title: 'Stato del servizio · Dipendenze in tempo reale',
+  title: 'Estado del servicio · Dipendenze in tempo reale',
   description:
     'Stato in tempo reale delle dipendenze Ambrogio.ai: database, rate limiting, motore AI e fatturazione. Misurato a ogni richiesta, non dichiarato.',
   alternates: { canonical: '/status' },
   openGraph: {
-    title: 'Stato del servizio · Ambrogio.ai',
+    title: 'Estado del servicio · Ambrogio.ai',
     description: 'Stato in tempo reale delle dipendenze di sistema.',
     url: '/status',
     type: 'website',
@@ -61,7 +61,7 @@ export default async function StatusPage() {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Stato del servizio', url: '/status' },
+          { name: 'Estado del servicio', url: '/status' },
         ])}
       />
       <SiteHeader />
@@ -73,7 +73,7 @@ export default async function StatusPage() {
               style={{ maxWidth: '720px', margin: '0 auto var(--space-12)' }}
             >
               <span className="eyebrow">Status pubblico</span>
-              <h1 className="display text-balance">Stato del servizio Ambrogio.ai</h1>
+              <h1 className="display text-balance">Estado del servicio Ambrogio.ai</h1>
               <div
                 style={{
                   display: 'inline-flex',

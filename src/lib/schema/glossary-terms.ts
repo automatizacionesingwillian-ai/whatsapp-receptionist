@@ -53,7 +53,7 @@ export const GLOSSARY_TERMS: ReadonlyArray<GlossaryTerm> = [
   {
     name: 'RLS (Row-Level Security)',
     description:
-      'Funzionalità di PostgreSQL che permette di applicare regole di accesso a livello di singola riga della tabella, basate sull’utente autenticato. In Ambrogio.ai, RLS garantisce che ogni tenant veda esclusivamente i propri dati, anche in caso di errore applicativo, perché la regola è applicata a livello di database engine.',
+      'Funcionalidades di PostgreSQL che permette di applicare regole di accesso a livello di singola riga della tabella, basate sull’utente autenticato. In Ambrogio.ai, RLS garantisce che ogni tenant veda esclusivamente i propri dati, anche in caso di errore applicativo, perché la regola è applicata a livello di database engine.',
     termCode: 'RLS',
   },
   {

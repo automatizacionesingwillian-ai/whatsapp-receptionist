@@ -94,14 +94,14 @@ async function checkUpstash(): Promise<HealthCheck> {
 
 async function checkStripe(): Promise<HealthCheck> {
   const key = process.env['STRIPE_SECRET_KEY'];
-  if (!key) return notConfigured('stripe', 'Fatturazione (Stripe)');
+  if (!key) return notConfigured('stripe', 'Facturación (Stripe)');
 
   // `/v1/balance` è un endpoint autenticato: a differenza della radice `/v1`
   // (che risponde 404 a qualsiasi chiave) distingue una chiave valida da una
   // revocata o errata. 401/403 = credenziale non valida, non "servizio su".
   return probe(
     'stripe',
-    'Fatturazione (Stripe)',
+    'Facturación (Stripe)',
     () =>
       fetch('https://api.stripe.com/v1/balance', {
         headers: { Authorization: `Bearer ${key}` },

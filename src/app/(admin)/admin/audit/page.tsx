@@ -28,7 +28,7 @@ export default function AdminAuditPage() {
       </header>
 
       <div className="card card-padded stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Non ancora collegato al registro reale</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado al registro reale</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
           Le voci mostrate erano di esempio e sono state rimosse. La tabella{' '}
           <code className="mono">audit_log</code> esiste ed è realmente popolata dagli endpoint GDPR

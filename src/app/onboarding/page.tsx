@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import { buildHowToEnrichedSchema, JsonLd } from '@/components/marketing/JsonLd';
 import { OnboardingForm } from '@/components/onboarding/OnboardingForm';
+import { requireAuthenticatedOrRedirect } from '@/lib/auth/guards';
+import { createTenantOnboardingService } from '@/server/onboarding/tenant-onboarding';
 
 export const metadata: Metadata = {
   title: 'Onboarding · Ambrogio.ai',
@@ -10,59 +13,61 @@ export const metadata: Metadata = {
 };
 
 const ONBOARDING_HOWTO_SCHEMA = buildHowToEnrichedSchema({
-  name: 'Come configurare Ambrogio.ai per il tuo studio',
+  name: 'Cómo configurar Ambrogio.ai para tu negocio',
   description:
-    'Quattro step guidati per attivare il tuo AI Receptionist: profilo studio, orari e servizi, canali (WhatsApp + Calendar), test conversazione.',
+    'Cuatro pasos guiados para activar tu recepcionista con IA: perfil, horarios y servicios, canales (WhatsApp + Calendar), prueba de conversación.',
   url: '/onboarding',
   totalTime: 'PT24H',
-  tool: ['Account Meta Business Manager', 'Google Calendar', 'Numero WhatsApp Business'],
+  tool: ['Cuenta Meta Business Manager', 'Google Calendar', 'Número WhatsApp Business'],
   supply: [
-    'Listino servizi',
-    'Orari di apertura',
-    'Dati fatturazione (P.IVA, Codice Destinatario SDI)',
+    'Listado de servicios',
+    'Horario de apertura',
+    'Datos de facturación',
   ],
   steps: [
     {
-      name: 'Profilo studio',
-      text: 'Inserisci nome studio, settore (dental, beauty, fitness, professional), fuso orario e lingua. Tempo: 30 secondi.',
+      name: 'Perfil del negocio',
+      text: 'Ingresa nombre, sector (dental, beauty, fitness, professional), zona horaria e idioma. Tiempo: 30 segundos.',
     },
     {
-      name: 'Orari e servizi',
-      text: 'Configura gli orari di apertura per ogni giorno della settimana e carica il listino servizi (manuale o tramite import CSV).',
+      name: 'Horarios y servicios',
+      text: 'Configura el horario de apertura de cada día y carga el listado de servicios (manual o importando CSV).',
     },
     {
-      name: 'Connetti canali',
-      text: 'Autorizza il numero WhatsApp Business tramite Meta Business Manager e collega Google Calendar per i booking automatici.',
+      name: 'Conectar canales',
+      text: 'Autoriza el número WhatsApp Business con Meta Business Manager y vincula Google Calendar para reservas automáticas.',
     },
     {
-      name: 'Test conversazione',
-      text: 'Invia un messaggio di prova al tuo numero WhatsApp e verifica che Ambrogio risponda correttamente. Setup completo in 24h.',
+      name: 'Probar conversación',
+      text: 'Envía un mensaje de prueba a tu número WhatsApp y verifica que Ambrogio responda bien. Configuración completa en 24 h.',
     },
   ],
 });
 
 const STEPS = [
-  { n: 1, label: 'Profilo studio', current: true, done: false },
-  { n: 2, label: 'Orari e servizi', current: false, done: false },
-  { n: 3, label: 'Connetti canali', current: false, done: false },
-  { n: 4, label: 'Test conversazione', current: false, done: false },
+  { n: 1, label: 'Perfil del negocio', current: true, done: false },
+  { n: 2, label: 'Horarios y servicios', current: false, done: false },
+  { n: 3, label: 'Conectar canales', current: false, done: false },
+  { n: 4, label: 'Probar conversación', current: false, done: false },
 ] as const;
 
 const VERTICALS = [
-  { value: 'dental', label: 'Studio dentistico' },
-  { value: 'beauty', label: 'Centro estetico / SPA' },
-  { value: 'fitness', label: 'Palestra / personal trainer' },
-  { value: 'professional', label: 'Studio professionale' },
-  { value: 'other', label: 'Altro' },
+  { value: 'dental', label: 'Clínica dental' },
+  { value: 'beauty', label: 'Centro de estética / spa' },
+  { value: 'fitness', label: 'Gimnasio / entrenador personal' },
+  { value: 'professional', label: 'Servicios profesionales' },
+  { value: 'other', label: 'Otro' },
 ] as const;
 
 const VALID_VERTICALS: readonly string[] = VERTICALS.map((v) => v.value);
 
 const TIMEZONES = [
-  { value: 'Europe/Rome', label: 'Europe/Rome (Italia)' },
+  { value: 'America/Mexico_City', label: 'America/Mexico_City (Ciudad de México)' },
+  { value: 'America/Bogota', label: 'America/Bogota (Colombia)' },
+  { value: 'America/Lima', label: 'America/Lima (Perú)' },
+  { value: 'America/Santiago', label: 'America/Santiago (Chile)' },
+  { value: 'America/Buenos_Aires', label: 'America/Buenos_Aires (Argentina)' },
   { value: 'Europe/Madrid', label: 'Europe/Madrid' },
-  { value: 'Europe/Paris', label: 'Europe/Paris' },
-  { value: 'Europe/Berlin', label: 'Europe/Berlin' },
 ] as const;
 
 interface OnboardingSearchParams {
@@ -78,6 +83,12 @@ const CURRENT_STEP = 1;
 const TOTAL_STEPS = STEPS.length;
 
 export default async function OnboardingPage({ searchParams }: Readonly<OnboardingPageProps>) {
+  const user = await requireAuthenticatedOrRedirect();
+  const status = await createTenantOnboardingService().getStatus({ user });
+  if (status.onboarded) {
+    redirect('/dashboard');
+  }
+
   const params = await searchParams;
   // Pre-popoliamo da register form per evitare redundant entry (WCAG 2.2 SC 3.3.7).
   const prefilledBusinessName =
@@ -101,7 +112,7 @@ export default async function OnboardingPage({ searchParams }: Readonly<Onboardi
             Ambrogio<span style={{ color: 'var(--color-accent)' }}>.ai</span>
           </Link>
           <Link href="/help" className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            Hai bisogno di aiuto? Contattaci →
+            ¿Necesitas ayuda? Contáctanos →
           </Link>
         </div>
       </header>
@@ -114,7 +125,7 @@ export default async function OnboardingPage({ searchParams }: Readonly<Onboardi
         {/* Progress indicator: ol con role="progressbar" per screen reader,
             aria-current="step" sull'<li> corrente, span sr-only "corrente". */}
         <ol
-          aria-label={`Onboarding step ${CURRENT_STEP} di ${TOTAL_STEPS}`}
+          aria-label={`Onboarding paso ${CURRENT_STEP} de ${TOTAL_STEPS}`}
           role="progressbar"
           aria-valuemin={1}
           aria-valuemax={TOTAL_STEPS}
@@ -205,17 +216,17 @@ export default async function OnboardingPage({ searchParams }: Readonly<Onboardi
               >
                 {step.label}
               </span>
-              {step.current ? <span className="sr-only">Step corrente.</span> : null}
+              {step.current ? <span className="sr-only">Paso actual.</span> : null}
             </li>
           ))}
         </ol>
 
         <div className="card card-padded stack stack-6">
           <div className="stack stack-2">
-            <span className="eyebrow">Step 1 di 4</span>
-            <h1 style={{ fontSize: 'var(--text-3xl)' }}>Parlaci del tuo studio</h1>
+            <span className="eyebrow">Paso 1 de 4</span>
+            <h1 style={{ fontSize: 'var(--text-3xl)' }}>Cuéntanos sobre tu negocio</h1>
             <p className="muted">
-              Le info di base per personalizzare Ambrogio. Puoi cambiarle in qualsiasi momento.
+              Datos básicos para personalizar Ambrogio. Puedes cambiarlos cuando quieras.
             </p>
           </div>
 
@@ -231,9 +242,9 @@ export default async function OnboardingPage({ searchParams }: Readonly<Onboardi
           className="muted text-center"
           style={{ marginTop: 'var(--space-6)', fontSize: 'var(--text-sm)' }}
         >
-          I tuoi dati sono criptati e ospitati in EU. Vedi{' '}
+          Tus datos están cifrados y alojados en la UE. Consulta la{' '}
           <Link href="/legal/privacy" className="btn-link">
-            privacy policy
+            política de privacidad
           </Link>
           .
         </p>

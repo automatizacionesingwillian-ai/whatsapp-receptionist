@@ -4,18 +4,18 @@ import { FormFeedback } from '@/components/forms/FormFeedback';
 import { useApiForm } from '@/components/forms/useApiForm';
 
 const VERTICALS = [
-  { value: 'dental', label: 'Studio dentistico' },
-  { value: 'beauty', label: 'Centro estetico / SPA' },
-  { value: 'fitness', label: 'Palestra / personal trainer' },
-  { value: 'professional', label: 'Studio professionale' },
-  { value: 'other', label: 'Altro' },
+  { value: 'dental', label: 'Clínica dental' },
+  { value: 'beauty', label: 'Centro de estética / spa' },
+  { value: 'fitness', label: 'Gimnasio / entrenador personal' },
+  { value: 'professional', label: 'Servicios profesionales' },
+  { value: 'other', label: 'Otro' },
 ] as const;
 
 export function RegisterForm() {
   const { state, onSubmit } = useApiForm({
     endpoint: '/api/auth/sign-up',
     successMessage:
-      'Account creato. Ti abbiamo inviato un link di accesso via email: aprilo per completare la configurazione.',
+      'Cuenta creada. Te enviamos un enlace de acceso por correo: ábrelo para completar la configuración.',
   });
 
   const isSubmitting = state.status === 'submitting';
@@ -26,7 +26,7 @@ export function RegisterForm() {
 
       <div className="field">
         <label htmlFor="business_name" className="label">
-          Nome studio o azienda
+          Nombre del negocio
         </label>
         <input
           id="business_name"
@@ -36,7 +36,7 @@ export function RegisterForm() {
           required
           minLength={2}
           maxLength={120}
-          placeholder="Studio Dentistico Rossi"
+          placeholder="Clínica Dental Rossi"
           className="input"
           disabled={isSubmitting}
         />
@@ -44,7 +44,7 @@ export function RegisterForm() {
 
       <div className="field">
         <label htmlFor="email" className="label">
-          Email di lavoro
+          Correo de trabajo
         </label>
         <input
           id="email"
@@ -54,19 +54,19 @@ export function RegisterForm() {
           inputMode="email"
           required
           maxLength={254}
-          placeholder="info@studio.it"
+          placeholder="info@negocio.com"
           className="input"
           aria-describedby="register-email-helper"
           disabled={isSubmitting}
         />
         <p className="helper" id="register-email-helper">
-          Useremo questa email per l&apos;account principale del tenant.
+          Usaremos este correo para la cuenta principal del tenant.
         </p>
       </div>
 
       <div className="field">
         <label htmlFor="vertical" className="label">
-          Settore
+          Sector
         </label>
         <select
           id="vertical"
@@ -77,7 +77,7 @@ export function RegisterForm() {
           disabled={isSubmitting}
         >
           <option value="" disabled>
-            Seleziona il settore
+            Selecciona el sector
           </option>
           {VERTICALS.map((vertical) => (
             <option key={vertical.value} value={vertical.value}>
@@ -88,7 +88,7 @@ export function RegisterForm() {
       </div>
 
       <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting}>
-        {isSubmitting ? 'Creazione in corso…' : 'Crea account'}
+        {isSubmitting ? 'Creando cuenta…' : 'Crear cuenta'}
       </button>
     </form>
   );

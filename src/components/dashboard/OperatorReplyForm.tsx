@@ -33,7 +33,7 @@ export function OperatorReplyForm({ conversationId, disabledReason }: OperatorRe
 
   const { state, onSubmit } = useApiForm({
     endpoint: `/api/conversations/${conversationId}/messages`,
-    successMessage: 'Messaggio accodato. Comparirà nella cronologia appena il worker lo invia.',
+    successMessage: 'Mensaje en cola. Aparecerá en el historial cuando el worker lo envíe.',
     buildBody: (formData) => ({ content: String(formData.get('content') ?? '') }),
   });
 
@@ -77,7 +77,7 @@ export function OperatorReplyForm({ conversationId, disabledReason }: OperatorRe
 
       <div className="field">
         <label htmlFor={`operator-reply-${conversationId}`} className="label">
-          Messaggio
+          Mensaje
         </label>
         <textarea
           id={`operator-reply-${conversationId}`}
@@ -86,7 +86,7 @@ export function OperatorReplyForm({ conversationId, disabledReason }: OperatorRe
           required
           maxLength={WHATSAPP_TEXT_MAX_LENGTH}
           className="textarea"
-          placeholder="Scrivi la risposta che il cliente riceverà su WhatsApp."
+          placeholder="Escribe la respuesta que el cliente recibirá en WhatsApp."
           disabled={isDisabled}
           onChange={handleChange}
           aria-describedby={
@@ -96,17 +96,17 @@ export function OperatorReplyForm({ conversationId, disabledReason }: OperatorRe
           }
         />
         <p id={`operator-reply-helper-${conversationId}`} className="helper">
-          {length}/{WHATSAPP_TEXT_MAX_LENGTH} caratteri. Il messaggio resta registrato nella
-          cronologia come inviato da operatore.
+          {length}/{WHATSAPP_TEXT_MAX_LENGTH} caracteres. El mensaje queda registrado en el
+          historial como enviado por un operador.
         </p>
       </div>
 
       <div className="row-between" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
         <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-          L’invio viene accodato e parte dal numero WhatsApp collegato.
+          El envío se encola y sale desde el número de WhatsApp conectado.
         </span>
         <button type="submit" className="btn btn-primary" disabled={isDisabled || length === 0}>
-          {isSubmitting ? 'Invio in corso…' : 'Invia messaggio'}
+          {isSubmitting ? 'Enviando…' : 'Enviar mensaje'}
         </button>
       </div>
     </form>

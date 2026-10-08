@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard' },
-  { href: '/conversations', label: 'Conversazioni' },
-  { href: '/settings', label: 'Impostazioni' },
+  { href: '/conversations', label: 'Conversaciones' },
+  { href: '/settings', label: 'Configuración' },
 ];
 
 export function AppShell({ children }: Readonly<{ children: ReactNode }>) {
@@ -12,7 +12,7 @@ export function AppShell({ children }: Readonly<{ children: ReactNode }>) {
     <div className="app-shell">
       <header className="panel" style={{ borderRadius: 0 }}>
         <nav
-          aria-label="Navigazione principale"
+          aria-label="Navegación principal"
           style={{
             alignItems: 'center',
             display: 'flex',

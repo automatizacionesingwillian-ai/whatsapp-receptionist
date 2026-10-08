@@ -2,42 +2,42 @@ import Link from 'next/link';
 
 const FOOTER_COLUMNS = [
   {
-    title: 'Prodotto',
+    title: 'Producto',
     links: [
-      { href: '/#features', label: 'Funzionalità' },
-      { href: '/pricing', label: 'Piani e prezzi' },
-      { href: '/verticali/dental', label: 'Per dentisti' },
-      { href: '/verticali/beauty', label: 'Per centri estetici' },
-      { href: '/verticali/fitness', label: 'Per palestre e PT' },
-      { href: '/verticali/professional', label: 'Studi professionali' },
+      { href: '/#features', label: 'Funcionalidades' },
+      { href: '/pricing', label: 'Planes y precios' },
+      { href: '/verticali/dental', label: 'Para dentistas' },
+      { href: '/verticali/beauty', label: 'Para centros de estética' },
+      { href: '/verticali/fitness', label: 'Para gimnasios y PT' },
+      { href: '/verticali/professional', label: 'Servicios profesionales' },
     ],
   },
   {
-    title: 'Risorse',
+    title: 'Recursos',
     links: [
-      { href: '/case-studies', label: 'Case study' },
+      { href: '/case-studies', label: 'Casos de éxito' },
       { href: '/blog', label: 'Blog' },
       { href: '/changelog', label: 'Changelog' },
-      { href: '/docs', label: 'Documentazione' },
-      { href: '/help', label: 'Centro assistenza' },
+      { href: '/docs', label: 'Documentación' },
+      { href: '/help', label: 'Centro de ayuda' },
     ],
   },
   {
-    title: 'Azienda',
+    title: 'Empresa',
     links: [
-      { href: '/about', label: 'Chi siamo' },
-      { href: '/contact', label: 'Contatti' },
-      { href: '/status', label: 'Stato del servizio' },
+      { href: '/about', label: 'Quiénes somos' },
+      { href: '/contact', label: 'Contacto' },
+      { href: '/status', label: 'Estado del servicio' },
     ],
   },
   {
-    title: 'Legale',
+    title: 'Legal',
     links: [
-      { href: '/legal/privacy', label: 'Privacy policy' },
-      { href: '/legal/terms', label: 'Termini' },
+      { href: '/legal/privacy', label: 'Política de privacidad' },
+      { href: '/legal/terms', label: 'Términos' },
       { href: '/legal/dpa', label: 'DPA' },
-      { href: '/legal/cookie', label: 'Cookie policy' },
-      { href: '/legal/security', label: 'Sicurezza' },
+      { href: '/legal/cookie', label: 'Política de cookies' },
+      { href: '/legal/security', label: 'Seguridad' },
     ],
   },
 ] as const;
@@ -52,8 +52,8 @@ export function SiteFooter() {
               Ambrogio<span style={{ color: 'var(--color-accent)' }}>.ai</span>
             </Link>
             <p className="muted" style={{ fontSize: 'var(--text-sm)', maxWidth: '36ch' }}>
-              Reception AI sempre attivo per PMI italiane. WhatsApp, voce, prenotazioni automatiche
-              e ROI misurabile.
+              Recepción AI siempre activa para PyMEs. WhatsApp, voz, reservas automáticas y ROI
+              medible.
             </p>
             <div
               className="row"
@@ -67,7 +67,7 @@ export function SiteFooter() {
                 GDPR ready
               </span>
               <span className="badge badge-neutral" data-trust="italian">
-                Made in Italia
+                Hecho en la UE
               </span>
             </div>
             <address
@@ -100,12 +100,12 @@ export function SiteFooter() {
         <hr className="divider" />
         <div className="row-between" style={{ alignItems: 'center', flexWrap: 'wrap' }}>
           <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-            © {new Date().getFullYear()} Ambrogio.ai — Made with care in Italia.
+            © {new Date().getFullYear()} Ambrogio.ai — Hecho con cuidado en la UE.
           </p>
           <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
             v0.1.0 ·{' '}
             <Link href="/status" style={{ color: 'var(--color-success)', fontWeight: 600 }}>
-              <span className="sr-only">Stato del servizio: </span>
+              <span className="sr-only">Estado del servicio: </span>
               <span aria-hidden="true">● </span>
               Operativo
             </Link>

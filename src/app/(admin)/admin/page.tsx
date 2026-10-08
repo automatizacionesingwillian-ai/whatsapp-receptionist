@@ -151,7 +151,7 @@ export default async function AdminOverviewPage() {
               </span>
             </article>
             <article className="kpi">
-              <span className="kpi-label">Conversazioni attive 24h</span>
+              <span className="kpi-label">Conversaciones attive 24h</span>
               <span className="kpi-value">
                 {counts.recentConversations.toLocaleString('it-IT')}
               </span>

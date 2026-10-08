@@ -61,7 +61,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
 
   const { state, onSubmit } = useApiForm({
     endpoint: ENDPOINT,
-    successMessage: 'Personalita pubblicata. La versione precedente resta consultabile qui sotto.',
+    successMessage: 'Personalidad publicada. La versión anterior sigue disponible abajo.',
     buildBody: (formData) => ({
       action: 'publish',
       promptText: String(formData.get('promptText') ?? ''),
@@ -98,7 +98,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
       setPendingVersionId(null);
       setRestoreState({
         status: 'error',
-        message: 'Connessione non riuscita. Controlla la rete e riprova.',
+        message: 'No se pudo conectar. Revisa tu red e inténtalo de nuevo.',
       });
       return;
     }
@@ -112,7 +112,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
 
     setRestoreState({
       status: 'success',
-      message: 'Versione ripristinata. Ambrogio risponde di nuovo con questo testo.',
+      message: 'Versión restaurada. Ambrogio vuelve a responder con este texto.',
     });
   }, []);
 
@@ -126,31 +126,31 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
       <section className="card stack stack-4">
         <div className="row-between" style={{ gap: 'var(--space-4)' }}>
           <div className="stack stack-2">
-            <span className="eyebrow">Stato</span>
+            <span className="eyebrow">Estado</span>
             <h2 style={{ fontSize: 'var(--text-xl)' }}>
               {settings.activeVersion
-                ? `Personalita personalizzata, versione ${settings.activeVersion.version}`
-                : 'Personalita di default'}
+                ? `Personalidad personalizada, versión ${settings.activeVersion.version}`
+                : 'Personalidad predeterminada'}
             </h2>
           </div>
           <span className={settings.activeVersion ? 'badge badge-success' : 'badge badge-neutral'}>
-            {settings.activeVersion ? 'Personalizzata' : 'Default'}
+            {settings.activeVersion ? 'Personalizada' : 'Predeterminada'}
           </span>
         </div>
         <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
           {settings.activeVersion
-            ? `Pubblicata il ${formatDate(settings.activeVersion.createdAt)}.`
-            : `Nessuna versione pubblicata: ${settings.assistantName} usa il testo di default, che trovi gia compilato qui sotto.`}
+            ? `Publicada el ${formatDate(settings.activeVersion.createdAt)}.`
+            : `Ninguna versión publicada: ${settings.assistantName} usa el texto predeterminado, que ya está compilado abajo.`}
         </p>
       </section>
 
       <section className="card stack stack-4">
         <div className="stack stack-2">
-          <span className="eyebrow">Perimetro</span>
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Cosa non puoi cambiare</h2>
+          <span className="eyebrow">Perímetro</span>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Lo que no puedes cambiar</h2>
           <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            Il testo che scrivi viene inserito <em>tra</em> questi due blocchi, non al loro posto.
-            Restano attivi anche se il tuo testo chiede di ignorarli.
+            El texto que escribes se inserta <em>entre</em> estos dos bloques, no en lugar de ellos.
+            Siguen activos aunque tu texto pida ignorarlos.
           </p>
         </div>
 
@@ -181,7 +181,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
 
         <details className="stack stack-2">
           <summary style={{ cursor: 'pointer', fontSize: 'var(--text-sm)', fontWeight: 500 }}>
-            Mostra il prompt completo che riceve il modello
+            Mostrar el prompt completo que recibe el modelo
           </summary>
           <pre
             className="mono"
@@ -203,11 +203,10 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
       {canManage ? (
         <form onSubmit={onSubmit} className="card stack stack-6" noValidate>
           <div className="stack stack-2">
-            <h2 style={{ fontSize: 'var(--text-xl)' }}>Personalita e tono</h2>
+            <h2 style={{ fontSize: 'var(--text-xl)' }}>Personalidad y tono</h2>
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-              Come si presenta {settings.assistantName}, che registro usa, cosa mette in evidenza.
-              Ogni salvataggio crea una nuova versione e disattiva la precedente, che resta
-              ripristinabile.
+              Cómo se presenta {settings.assistantName}, qué registro usa y qué destaca. Cada
+              guardado crea una nueva versión y desactiva la anterior, que puedes restaurar.
             </p>
           </div>
 
@@ -215,7 +214,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
 
           <div className="field">
             <label htmlFor="promptText" className="label">
-              Testo della personalita
+              Texto de la personalidad
             </label>
             <textarea
               id="promptText"
@@ -232,9 +231,9 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
               disabled={isSubmitting}
             />
             <p id="promptText-help" className="helper">
-              {personaLength} / {settings.limits.maxLength} caratteri. Minimo{' '}
-              {settings.limits.minLength}. Scrivi istruzioni, non esempi di risposta: il modello le
-              applica a ogni messaggio.
+              {personaLength} / {settings.limits.maxLength} caracteres. Mínimo{' '}
+              {settings.limits.minLength}. Escribe instrucciones, no ejemplos de respuesta: el modelo
+              las aplica a cada mensaje.
             </p>
           </div>
 
@@ -244,7 +243,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
               className="btn btn-primary"
               disabled={isSubmitting || isTooShort || persona.trim() === currentPersona.trim()}
             >
-              {isSubmitting ? 'Pubblicazione…' : 'Pubblica nuova versione'}
+              {isSubmitting ? 'Publicando…' : 'Publicar nueva versión'}
             </button>
             <button
               type="button"
@@ -252,23 +251,23 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
               onClick={() => setPersona(settings.defaultPersona)}
               disabled={isSubmitting}
             >
-              Riporta al testo di default
+              Volver al texto predeterminado
             </button>
           </div>
         </form>
       ) : (
         <p className="helper">
-          Solo il titolare dell&apos;account e gli amministratori possono modificare la personalita
-          dell&apos;assistente.
+          Solo el titular de la cuenta y los administradores pueden modificar la personalidad del
+          asistente.
         </p>
       )}
 
       <section className="card stack stack-4">
         <div className="stack stack-2">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Versioni</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Versiones</h2>
           <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            Se una modifica peggiora le risposte, riattiva la versione precedente: il testo non
-            viene riscritto, cambia solo quale versione e attiva.
+            Si un cambio empeora las respuestas, reactiva la versión anterior: el texto no se
+            reescribe, solo cambia cuál versión está activa.
           </p>
         </div>
 
@@ -276,7 +275,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
 
         {settings.versions.length === 0 ? (
           <p className="helper">
-            Nessuna versione pubblicata. La cronologia inizia dal primo salvataggio.
+            Ninguna versión publicada. El historial empieza con el primer guardado.
           </p>
         ) : (
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="stack stack-3">
@@ -292,10 +291,10 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
               >
                 <div className="row-between" style={{ gap: 'var(--space-4)' }}>
                   <span style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>
-                    Versione {version.version} · {formatDate(version.createdAt)}
+                    Versión {version.version} · {formatDate(version.createdAt)}
                   </span>
                   {version.active ? (
-                    <span className="badge badge-success">Attiva</span>
+                    <span className="badge badge-success">Activa</span>
                   ) : canManage ? (
                     <button
                       type="button"
@@ -303,7 +302,7 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
                       onClick={() => void onRestore(version.id)}
                       disabled={isRestoring}
                     >
-                      {pendingVersionId === version.id ? 'Ripristino…' : 'Ripristina'}
+                      {pendingVersionId === version.id ? 'Restaurando…' : 'Restaurar'}
                     </button>
                   ) : null}
                 </div>
@@ -326,10 +325,10 @@ function formatDate(value: string): string {
   const parsed = new Date(value);
 
   if (Number.isNaN(parsed.getTime())) {
-    return 'data non disponibile';
+    return 'fecha no disponible';
   }
 
-  return parsed.toLocaleDateString('it-IT', {
+  return parsed.toLocaleDateString('es-419', {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
@@ -348,19 +347,19 @@ async function readErrorMessage(response: Response): Promise<string> {
   const code = readErrorField(payload, 'code');
 
   if (code === 'forbidden') {
-    return 'Non hai i permessi per modificare la personalita dell’assistente.';
+    return 'No tienes permisos para modificar la personalidad del asistente.';
   }
 
   if (code === 'rate_limited') {
-    return 'Troppi tentativi ravvicinati. Riprova tra qualche minuto.';
+    return 'Demasiados intentos seguidos. Vuelve a intentarlo en unos minutos.';
   }
 
   if (code === 'unauthorized') {
-    return 'Sessione non valida. Effettua di nuovo l’accesso.';
+    return 'Sesión no válida. Inicia sesión de nuevo.';
   }
 
   if (code === 'not_found') {
-    return 'Questa versione non esiste piu. Ricarica la pagina.';
+    return 'Esta versión ya no existe. Recarga la página.';
   }
 
   const exposed = readErrorField(payload, 'message');
@@ -368,7 +367,7 @@ async function readErrorMessage(response: Response): Promise<string> {
     return exposed;
   }
 
-  return 'Non siamo riusciti a ripristinare la versione. Riprova tra poco.';
+  return 'No pudimos restaurar la versión. Inténtalo de nuevo pronto.';
 }
 
 function readErrorField(payload: unknown, field: 'code' | 'message'): string | null {

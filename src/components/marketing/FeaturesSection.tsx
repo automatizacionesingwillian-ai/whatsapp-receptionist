@@ -11,9 +11,9 @@ interface Feature {
 
 const FEATURES: ReadonlyArray<Feature> = [
   {
-    title: 'WhatsApp e voce, end-to-end',
+    title: 'WhatsApp y voz, de punta a punta',
     description:
-      'Riceve e gestisce messaggi testo e vocali. Trascrive, capisce, risponde in italiano naturale. ElevenLabs per voci umane.',
+      'Recibe y gestiona mensajes de texto y voz. Transcribe, entiende y responde en español natural. ElevenLabs para voces humanas.',
     icon: '/assets/site-images/ambrogio/svg/02-whatsapp-voice-transcript.svg',
     size: 'wide',
     isHighlight: true,
@@ -21,33 +21,33 @@ const FEATURES: ReadonlyArray<Feature> = [
   {
     title: 'Agenda Google Calendar',
     description:
-      'Prende appuntamenti reali, controlla disponibilità, evita conflitti. Niente doppia-prenotazione mai più.',
+      'Toma citas reales, revisa disponibilidad y evita conflictos. Nunca más doble reserva.',
     icon: '/assets/site-images/ambrogio/svg/03-calendar-booking-flow.svg',
     size: 'half',
   },
   {
-    title: 'Escalation umana fluida',
+    title: 'Escalamiento humano fluido',
     description:
-      'Quando serve, passa la palla a te. Senza imbarazzo, senza perdere il filo della conversazione.',
+      'Cuando hace falta, te pasa la conversación. Sin incomodidad, sin perder el hilo.',
     icon: '/assets/site-images/ambrogio/svg/04-human-escalation.svg',
     size: 'half',
   },
   {
-    title: 'Privacy vault GDPR',
+    title: 'Bóveda de privacidad GDPR',
     description:
-      'Server EU. RLS multi-tenant. PII redatti in log. DPA pronto. Articolo 15/17 a portata di un click.',
+      'Servidores en la UE. RLS multi-tenant. PII redactada en logs. DPA listo. Artículos 15/17 a un clic.',
     icon: '/assets/site-images/ambrogio/svg/05-privacy-vault.svg',
     size: 'third',
   },
   {
-    title: 'Tutti i canali, una sola coda',
-    description: 'WhatsApp, Instagram DM, web chat, telefono. Una memoria sola.',
+    title: 'Todos los canales, una sola cola',
+    description: 'WhatsApp, Instagram DM, chat web, teléfono. Una sola memoria.',
     icon: '/assets/site-images/ambrogio/svg/10-multi-channel-orbit.svg',
     size: 'third',
   },
   {
-    title: 'Dashboard chiara, dati onesti',
-    description: 'KPI in tempo reale. Conversazioni, booking, voce, fatturato — in una schermata.',
+    title: 'Panel claro, datos honestos',
+    description: 'KPI en tiempo real. Conversaciones, reservas, voz, facturación — en una pantalla.',
     icon: '/assets/site-images/ambrogio/svg/11-dashboard-command-center.svg',
     size: 'third',
   },
@@ -64,13 +64,13 @@ export function FeaturesSection() {
     <section className="section" id="features" aria-labelledby="features-heading">
       <div className="container stack stack-12">
         <div className="stack stack-4" style={{ maxWidth: '52ch' }}>
-          <span className="eyebrow">Cosa fa Ambrogio</span>
+          <span className="eyebrow">Qué hace Ambrogio</span>
           <h2 id="features-heading" className="text-balance">
-            Sei capacità che funzionano insieme, non sei feature da spuntare.
+            Seis capacidades que funcionan juntas, no features para marcar.
           </h2>
           <p className="lead">
-            Costruito da chi ha gestito reception reali per cliniche e palestre. Ogni funzionalità
-            risolve un problema quotidiano misurabile.
+            Hecho por quienes gestionaron recepciones reales en clínicas y gimnasios. Cada función
+            resuelve un problema diario medible.
           </p>
         </div>
 

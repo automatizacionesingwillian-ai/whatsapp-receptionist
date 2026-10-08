@@ -19,7 +19,7 @@ interface AdminErrorProps {
 export default function AdminError({ error, reset }: Readonly<AdminErrorProps>) {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = 'Errore · Admin';
+    document.title = 'Error · Admin';
     return () => {
       document.title = previousTitle;
     };
@@ -45,7 +45,7 @@ export default function AdminError({ error, reset }: Readonly<AdminErrorProps>) 
 
         {error.digest ? (
           <p className="muted mono" style={{ fontSize: 'var(--text-xs)' }}>
-            Riferimento errore: {error.digest}
+            Referencia de error: {error.digest}
           </p>
         ) : null}
 

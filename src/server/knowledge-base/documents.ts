@@ -117,7 +117,7 @@ export class KnowledgeBaseDocumentService {
     });
 
     if (!document) {
-      throw new AppError('not_found', 'Knowledge base document not found');
+      throw new AppError('not_found', 'Base de conocimiento document not found');
     }
 
     return document;
@@ -169,7 +169,7 @@ export class KnowledgeBaseDocumentService {
     const patch = await this.normalizeUpdate(input.session.tenantId, current, input.patch);
 
     if (Object.keys(patch).length === 0) {
-      throw new AppError('bad_request', 'Knowledge base update payload is empty');
+      throw new AppError('bad_request', 'Base de conocimiento update payload is empty');
     }
 
     const document = await this.repository.updateDocument({
@@ -179,7 +179,7 @@ export class KnowledgeBaseDocumentService {
     });
 
     if (!document) {
-      throw new AppError('not_found', 'Knowledge base document not found');
+      throw new AppError('not_found', 'Base de conocimiento document not found');
     }
 
     await this.repository.recordAuditLog({
@@ -216,7 +216,7 @@ export class KnowledgeBaseDocumentService {
     });
 
     if (!document) {
-      throw new AppError('not_found', 'Knowledge base document not found');
+      throw new AppError('not_found', 'Base de conocimiento document not found');
     }
 
     await this.repository.recordAuditLog({

@@ -75,7 +75,7 @@ Ambrogio.ai`,
        <p>ecco il tuo link di accesso ad Ambrogio.ai. Scade tra <strong>${params.expiresInMinutes} minuti</strong>.</p>
        <p style="color:${BRAND_MUTED};font-size:13px;">Se non hai richiesto tu questo link, ignora questa email — nessuno può accedere senza riceverla.</p>`,
       params.link,
-      'Accedi ad Ambrogio.ai',
+      'Iniciar sesión ad Ambrogio.ai',
     ),
   };
 }

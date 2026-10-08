@@ -25,7 +25,7 @@ export default function AdminTenantsPage() {
       </header>
 
       <div className="card card-padded stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Non ancora collegato ai dati reali</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado ai dati reali</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
           Questa schermata mostrava dati di esempio. Sono stati rimossi: un pannello di
           amministrazione che mostra numeri inventati è peggio di un pannello assente, perché chi lo

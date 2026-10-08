@@ -41,8 +41,8 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
   const { state, onSubmit } = useApiForm({
     endpoint: ENDPOINT,
     successMessage: isConnected
-      ? 'Numero aggiornato. Ambrogio risponde su questo canale.'
-      : 'Numero collegato. Ambrogio risponde su questo canale.',
+      ? 'Número actualizado. Ambrogio responde en este canal.'
+      : 'Número conectado. Ambrogio responde en este canal.',
     buildBody: (formData) => ({
       phoneNumberId: String(formData.get('phoneNumberId') ?? ''),
       displayPhoneNumber: String(formData.get('displayPhoneNumber') ?? ''),
@@ -71,7 +71,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
     } catch {
       setDisconnectState({
         status: 'error',
-        message: 'Connessione non riuscita. Controlla la rete e riprova.',
+        message: 'No se pudo conectar. Revisa tu red e inténtalo de nuevo.',
       });
       return;
     }
@@ -84,7 +84,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
     setIsConfirmingDisconnect(false);
     setDisconnectState({
       status: 'success',
-      message: 'Numero scollegato. I messaggi in arrivo non verranno più gestiti.',
+      message: 'Número desvinculado. Los mensajes entrantes ya no se gestionarán.',
     });
   }, []);
 
@@ -96,9 +96,9 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
       <section className="card stack stack-4">
         <div className="row-between" style={{ gap: 'var(--space-4)' }}>
           <div className="stack stack-2">
-            <span className="eyebrow">Stato del canale</span>
+            <span className="eyebrow">Estado del canal</span>
             <h2 style={{ fontSize: 'var(--text-xl)' }}>
-              {isConnected ? 'Numero collegato' : 'Nessun numero collegato'}
+              {isConnected ? 'Número conectado' : 'Ningún número conectado'}
             </h2>
           </div>
           <span className={isConnected ? 'badge badge-success' : 'badge badge-neutral'}>
@@ -109,28 +109,28 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
         {isConnected ? (
           <dl className="stack stack-3" style={{ margin: 0 }}>
             <DetailRow
-              label="Numero visualizzato"
-              value={status.displayPhoneNumber ?? 'Non impostato'}
+              label="Número mostrado"
+              value={status.displayPhoneNumber ?? 'No configurado'}
               isMono={status.displayPhoneNumber !== null}
             />
             <DetailRow label="Phone number ID" value={status.phoneNumberId ?? '—'} isMono />
             <DetailRow
               label="API key"
-              value={status.hasApiKey ? 'Salvata e cifrata' : 'Mancante: il canale non può inviare'}
+              value={status.hasApiKey ? 'Guardada y cifrada' : 'Faltante: el canal no puede enviar'}
             />
-            <DetailRow label="Integrazione creata il" value={formatDate(status.connectedAt)} />
+            <DetailRow label="Integración creada el" value={formatDate(status.connectedAt)} />
           </dl>
         ) : (
           <div className="stack stack-3">
             <p className="muted">
-              Finché il numero non è collegato, i messaggi che arrivano su WhatsApp non vengono
-              associati al tuo studio e Ambrogio non risponde. Compila il modulo qui sotto con i
-              dati del pannello 360dialog: bastano trenta secondi e il canale è attivo.
+              Mientras el número no esté conectado, los mensajes que llegan a WhatsApp no se
+              asocian a tu negocio y Ambrogio no responde. Completa el formulario abajo con los
+              datos del panel 360dialog: bastan treinta segundos y el canal queda activo.
             </p>
             {status.status !== null && status.status !== 'active' ? (
               <p className="helper">
-                Esiste una configurazione precedente in stato «{status.status}». Salvando i nuovi
-                dati verrà riattivata.
+                Existe una configuración anterior en estado «{status.status}». Al guardar los nuevos
+                datos se reactivará.
               </p>
             ) : null}
           </div>
@@ -143,7 +143,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
             {isConfirmingDisconnect ? (
               <>
                 <span className="helper" style={{ alignSelf: 'center' }}>
-                  Confermi? Ambrogio smette di rispondere su questo numero.
+                  ¿Confirmas? Ambrogio dejará de responder en este número.
                 </span>
                 <button
                   type="button"
@@ -151,7 +151,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
                   onClick={onDisconnect}
                   disabled={isDisconnecting}
                 >
-                  {isDisconnecting ? 'Scollegamento…' : 'Sì, scollega'}
+                  {isDisconnecting ? 'Desvinculando…' : 'Sí, desvincular'}
                 </button>
                 <button
                   type="button"
@@ -159,7 +159,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
                   onClick={() => setIsConfirmingDisconnect(false)}
                   disabled={isDisconnecting}
                 >
-                  Annulla
+                  Cancelar
                 </button>
               </>
             ) : (
@@ -168,7 +168,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
                 className="btn btn-ghost btn-sm"
                 onClick={() => setIsConfirmingDisconnect(true)}
               >
-                Scollega numero
+                Desvincular número
               </button>
             )}
           </div>
@@ -179,10 +179,10 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
         <form onSubmit={onSubmit} className="card stack stack-6" noValidate>
           <div className="stack stack-2">
             <h2 style={{ fontSize: 'var(--text-xl)' }}>
-              {isConnected ? 'Aggiorna la connessione' : 'Collega il numero'}
+              {isConnected ? 'Actualizar la conexión' : 'Conectar el número'}
             </h2>
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-              I dati arrivano dal Client Hub di 360dialog, il provider che ospita il tuo numero
+              Los datos vienen del Client Hub de 360dialog, el proveedor que aloja tu número de
               WhatsApp Business.
             </p>
           </div>
@@ -202,20 +202,20 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               autoComplete="off"
               className="input"
               defaultValue={status.phoneNumberId ?? ''}
-              placeholder="es. 109876543210987"
+              placeholder="ej. 109876543210987"
               aria-describedby="phoneNumberId-help"
               disabled={isSubmitting}
             />
             <p id="phoneNumberId-help" className="helper">
-              In hub.360dialog.com apri il canale WhatsApp: il Phone number ID è nella scheda del
-              numero, accanto al nome del canale. È l&apos;identificativo con cui riconosciamo a
-              quale studio appartiene ogni messaggio in arrivo.
+              En hub.360dialog.com abre el canal de WhatsApp: el Phone number ID está en la ficha del
+              número, junto al nombre del canal. Es el identificador con el que asociamos cada
+              mensaje entrante a tu negocio.
             </p>
           </div>
 
           <div className="field">
             <label htmlFor="displayPhoneNumber" className="label">
-              Numero in formato leggibile
+              Número en formato legible
             </label>
             <input
               id="displayPhoneNumber"
@@ -230,7 +230,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               disabled={isSubmitting}
             />
             <p id="displayPhoneNumber-help" className="helper">
-              Facoltativo. Serve solo a te per riconoscere il numero nelle schermate.
+              Opcional. Solo te ayuda a reconocer el número en las pantallas.
             </p>
           </div>
 
@@ -248,15 +248,14 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               autoComplete="off"
               spellCheck={false}
               className="input"
-              placeholder={isConnected ? 'Reinserisci la chiave per salvare' : 'Incolla la chiave'}
+              placeholder={isConnected ? 'Vuelve a ingresar la clave para guardar' : 'Pega la clave'}
               aria-describedby="apiKey-help"
               disabled={isSubmitting}
             />
             <p id="apiKey-help" className="helper">
-              Nel Client Hub, sezione API key del canale: la chiave viene mostrata una sola volta
-              alla generazione, quindi se non ce l&apos;hai più ne generi una nuova. La salviamo
-              cifrata e non la mostriamo mai più, nemmeno mascherata: per ogni modifica va
-              reinserita.
+              En el Client Hub, sección API key del canal: la clave se muestra una sola vez al
+              generarla; si ya no la tienes, crea una nueva. La guardamos cifrada y no la mostramos
+              de nuevo, ni enmascarada: para cada cambio debes ingresarla otra vez.
             </p>
           </div>
 
@@ -266,13 +265,13 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
             style={{ alignSelf: 'flex-start' }}
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Salvataggio…' : isConnected ? 'Salva modifiche' : 'Collega numero'}
+            {isSubmitting ? 'Guardando…' : isConnected ? 'Guardar cambios' : 'Conectar número'}
           </button>
         </form>
       ) : (
         <p className="helper">
-          Solo il titolare dell&apos;account e gli amministratori possono modificare questa
-          integrazione. Chiedi a chi gestisce lo studio di collegare il numero.
+          Solo el titular de la cuenta y los administradores pueden modificar esta integración. Pide
+          a quien gestione el negocio que conecte el número.
         </p>
       )}
     </div>
@@ -305,27 +304,27 @@ function DetailRow({
 
 function statusLabel(status: WhatsAppConnectionView): string {
   if (status.connected) {
-    return 'Attivo';
+    return 'Activo';
   }
 
   if (status.status === 'revoked') {
-    return 'Scollegato';
+    return 'Desvinculado';
   }
 
-  return status.status === null ? 'Non configurato' : status.status;
+  return status.status === null ? 'No configurado' : status.status;
 }
 
 function formatDate(value: string | null): string {
   if (value === null) {
-    return 'Non disponibile';
+    return 'No disponible';
   }
 
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) {
-    return 'Non disponibile';
+    return 'No disponible';
   }
 
-  return parsed.toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+  return parsed.toLocaleDateString('es-419', { day: '2-digit', month: 'long', year: 'numeric' });
 }
 
 /** L'envelope d'errore di `jsonHandler` è `{ ok: false, error: { code, message } }`. */
@@ -340,15 +339,15 @@ async function readErrorMessage(response: Response): Promise<string> {
   const code = readErrorField(payload, 'code');
 
   if (code === 'forbidden') {
-    return 'Non hai i permessi per modificare questa integrazione.';
+    return 'No tienes permiso para modificar esta integración.';
   }
 
   if (code === 'rate_limited') {
-    return 'Troppi tentativi ravvicinati. Riprova tra qualche minuto.';
+    return 'Demasiados intentos seguidos. Vuelve a intentarlo en unos minutos.';
   }
 
   if (code === 'unauthorized') {
-    return 'Sessione non valida. Effettua di nuovo l’accesso.';
+    return 'Sesión no válida. Inicia sesión de nuevo.';
   }
 
   const exposed = readErrorField(payload, 'message');
@@ -356,7 +355,7 @@ async function readErrorMessage(response: Response): Promise<string> {
     return exposed;
   }
 
-  return 'Non siamo riusciti a scollegare il numero. Riprova tra poco.';
+  return 'No pudimos desconectar el número. Inténtalo de nuevo pronto.';
 }
 
 function readErrorField(payload: unknown, field: 'code' | 'message'): string | null {

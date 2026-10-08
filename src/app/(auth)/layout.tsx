@@ -70,7 +70,7 @@ export default function AuthLayout({ children }: Readonly<{ children: ReactNode 
               alignSelf: 'center',
             }}
           >
-            Beta Italia · 2026
+            Beta · 2026
           </span>
           <h2
             style={{
@@ -81,7 +81,7 @@ export default function AuthLayout({ children }: Readonly<{ children: ReactNode 
             }}
             className="text-balance"
           >
-            La reception che non dorme. Il fatturato che non si ferma.
+            La recepción que no duerme. Los ingresos que no se detienen.
           </h2>
           <p
             className="text-pretty"
@@ -91,8 +91,8 @@ export default function AuthLayout({ children }: Readonly<{ children: ReactNode 
               color: 'oklch(95% 0.005 150)',
             }}
           >
-            Ogni giorno migliaia di chiamate vanno perse. Ambrogio risponde, prenota, conferma. Tu
-            fai il tuo lavoro.
+            Cada día se pierden miles de llamadas. Ambrogio responde, reserva y confirma. Tú te
+            enfocas en tu trabajo.
           </p>
         </div>
       </aside>

@@ -56,13 +56,13 @@ const RUNTIME_VARS: readonly RuntimeVar[] = [
   { key: 'WHATSAPP_WEBHOOK_HEADER_SECRET', area: 'WhatsApp', required: true },
   { key: 'WHATSAPP_WEBHOOK_VERIFY_TOKEN', area: 'WhatsApp', required: false },
   { key: 'ELEVENLABS_API_KEY', area: 'Voce', required: false },
-  { key: 'STRIPE_SECRET_KEY', area: 'Fatturazione', required: true },
-  { key: 'STRIPE_WEBHOOK_SECRET', area: 'Fatturazione', required: true },
-  { key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', area: 'Fatturazione', required: false },
-  { key: 'STRIPE_PRICE_STARTER', area: 'Fatturazione', required: false },
-  { key: 'STRIPE_PRICE_PROFESSIONAL', area: 'Fatturazione', required: false },
-  { key: 'FATTUREINCLOUD_API_TOKEN', area: 'Fatturazione', required: false },
-  { key: 'FATTUREINCLOUD_COMPANY_ID', area: 'Fatturazione', required: false },
+  { key: 'STRIPE_SECRET_KEY', area: 'Facturación', required: true },
+  { key: 'STRIPE_WEBHOOK_SECRET', area: 'Facturación', required: true },
+  { key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', area: 'Facturación', required: false },
+  { key: 'STRIPE_PRICE_STARTER', area: 'Facturación', required: false },
+  { key: 'STRIPE_PRICE_PROFESSIONAL', area: 'Facturación', required: false },
+  { key: 'FATTUREINCLOUD_API_TOKEN', area: 'Facturación', required: false },
+  { key: 'FATTUREINCLOUD_COMPANY_ID', area: 'Facturación', required: false },
   { key: 'GOOGLE_OAUTH_CLIENT_ID', area: 'Calendario', required: false },
   { key: 'GOOGLE_OAUTH_CLIENT_SECRET', area: 'Calendario', required: false },
   { key: 'GOOGLE_OAUTH_STATE_SECRET', area: 'Calendario', required: false },
@@ -248,10 +248,10 @@ function formatAge(iso: string, now: Date): string {
   if (Number.isNaN(parsed.getTime())) return '';
   const minutes = Math.floor((now.getTime() - parsed.getTime()) / 60_000);
   if (minutes < 1) return 'meno di un minuto fa';
-  if (minutes < 60) return `${minutes} min fa`;
+  if (minutes < 60) return `${minutes} min`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours} h fa`;
-  return `${Math.floor(hours / 24)} g fa`;
+  if (hours < 24) return `${hours} h`;
+  return `${Math.floor(hours / 24)} d`;
 }
 
 export default async function AdminSystemPage() {
@@ -383,7 +383,7 @@ export default async function AdminSystemPage() {
                   </span>
                 </div>
                 <span className={`badge ${enabled ? 'badge-success' : 'badge-neutral'}`}>
-                  {enabled ? 'Attivo' : 'Disattivo'}
+                  {enabled ? 'Activo' : 'Disattivo'}
                 </span>
               </li>
             );
@@ -413,7 +413,7 @@ export default async function AdminSystemPage() {
             <thead>
               <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
                 <Th>Endpoint</Th>
-                <Th>Pianificazione</Th>
+                <Th>Planesficazione</Th>
                 <Th>Frequenza</Th>
               </tr>
             </thead>

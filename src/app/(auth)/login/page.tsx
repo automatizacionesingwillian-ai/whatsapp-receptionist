@@ -4,21 +4,52 @@ import Link from 'next/link';
 import { LoginForm } from '@/components/auth/LoginForm';
 
 export const metadata: Metadata = {
-  title: 'Accedi · Ambrogio.ai',
-  description: 'Accedi al tuo account Ambrogio.ai',
+  title: 'Iniciar sesión · Ambrogio.ai',
+  description: 'Accede a tu cuenta de Ambrogio.ai',
   robots: { index: false, follow: false },
 };
 
-export default function LoginPage() {
+const ERROR_MESSAGES: Record<string, string> = {
+  link_non_valido:
+    'El enlace de acceso no es válido o expiró. Solicita uno nuevo abajo.',
+  link_incompleto:
+    'El enlace de acceso está incompleto. Solicita uno nuevo con el formulario de abajo.',
+  sessione_mancante:
+    'No pudimos crear la sesión. Solicita un nuevo enlace de acceso.',
+};
+
+interface LoginPageProps {
+  searchParams: Promise<{ error?: string }>;
+}
+
+export default async function LoginPage({ searchParams }: Readonly<LoginPageProps>) {
+  const params = await searchParams;
+  const errorKey = typeof params.error === 'string' ? params.error : null;
+  const errorMessage = errorKey ? (ERROR_MESSAGES[errorKey] ?? null) : null;
+
   return (
     <div className="stack stack-6">
       <div className="stack stack-2">
-        <h1 style={{ fontSize: 'var(--text-3xl)' }}>Bentornato</h1>
+        <h1 style={{ fontSize: 'var(--text-3xl)' }}>Bienvenido de nuevo</h1>
         <p className="muted">
-          Inserisci la tua email e ti mandiamo un link sicuro per accedere. Niente password da
-          ricordare.
+          Ingresa tu correo y te enviamos un enlace seguro para acceder. Sin contraseñas que
+          recordar.
         </p>
       </div>
+
+      {errorMessage ? (
+        <div
+          role="alert"
+          className="card card-padded"
+          style={{
+            borderColor: 'var(--color-danger)',
+            background: 'var(--color-danger-soft, #fef2f2)',
+            color: 'var(--color-danger)',
+          }}
+        >
+          {errorMessage}
+        </div>
+      ) : null}
 
       <LoginForm />
 
@@ -30,19 +61,19 @@ export default function LoginPage() {
         }}
       >
         <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)' }}>
-          Non hai ancora un account?{' '}
+          ¿Aún no tienes cuenta?{' '}
           <Link href="/register" className="btn-link">
-            Crea il tuo studio
+            Crea tu negocio
           </Link>
         </p>
         <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-          Cliccando su &quot;Invia link&quot; accetti i{' '}
+          Al hacer clic en &quot;Enviar enlace&quot; aceptas los{' '}
           <Link href="/legal/terms" className="btn-link">
-            termini di servizio
+            términos de servicio
           </Link>{' '}
-          e la{' '}
+          y la{' '}
           <Link href="/legal/privacy" className="btn-link">
-            privacy policy
+            política de privacidad
           </Link>
           .
         </p>

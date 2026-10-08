@@ -18,11 +18,11 @@ import { createTenantSettingsService } from '@/server/settings/tenant-settings';
 import { createUsageLimitsService, type UsageSnapshot } from '@/server/usage/limits';
 
 export const metadata: Metadata = {
-  title: 'Fatturazione · Ambrogio.ai',
+  title: 'Facturación · Ambrogio.ai',
 };
 
 const PLAN_LABEL: Record<BillingPlan, string> = {
-  trial: 'Prova gratuita',
+  trial: 'Prueba gratuita',
   starter: 'Starter',
   professional: 'Professional',
   agency: 'Agency',
@@ -32,21 +32,21 @@ const TENANT_STATUS: Record<
   BillingTenantStatus,
   { readonly label: string; readonly badge: string }
 > = {
-  active: { label: 'Attivo', badge: 'badge-success' },
-  expired: { label: 'Scaduto', badge: 'badge-danger' },
-  suspended: { label: 'Sospeso', badge: 'badge-warm' },
-  cancelled: { label: 'Disdetto', badge: 'badge-neutral' },
+  active: { label: 'Activo', badge: 'badge-success' },
+  expired: { label: 'Vencido', badge: 'badge-danger' },
+  suspended: { label: 'Suspendido', badge: 'badge-warm' },
+  cancelled: { label: 'Cancelado', badge: 'badge-neutral' },
 };
 
 const SUBSCRIPTION_STATUS_LABEL: Record<string, string> = {
-  active: 'Abbonamento attivo',
-  trialing: 'In periodo di prova',
-  past_due: 'Pagamento in ritardo',
-  canceled: 'Abbonamento annullato',
-  incomplete: 'Pagamento da completare',
-  incomplete_expired: 'Pagamento non completato',
-  unpaid: 'Fattura non saldata',
-  paused: 'Abbonamento in pausa',
+  active: 'Suscripción activa',
+  trialing: 'En periodo de prueba',
+  past_due: 'Pago atrasado',
+  canceled: 'Suscripción cancelada',
+  incomplete: 'Pago por completar',
+  incomplete_expired: 'Pago no completado',
+  unpaid: 'Factura impaga',
+  paused: 'Suscripción en pausa',
 };
 
 type BillingData = {
@@ -107,14 +107,14 @@ export default async function BillingPage() {
       <>
         <BillingHeader />
         <section className="card card-padded stack stack-3">
-          <h2 style={{ fontSize: 'var(--text-lg)' }}>Non riesco a leggere il tuo abbonamento</h2>
+          <h2 style={{ fontSize: 'var(--text-lg)' }}>No puedo leer tu suscripción</h2>
           <p className="muted">
-            I dati di fatturazione non sono raggiungibili in questo momento. Riprova fra qualche
-            istante: nel frattempo puoi gestire tutto dal portale clienti Stripe che ti abbiamo
-            inviato via email alla sottoscrizione.
+            Los datos de facturación no están disponibles en este momento. Reintenta en unos
+            instantes: mientras tanto puedes gestionar todo desde el portal de clientes de Stripe que
+            te enviamos por correo al suscribirte.
           </p>
           <Link href="/status" className="btn btn-secondary" style={{ alignSelf: 'flex-start' }}>
-            Stato del servizio
+            Estado del servicio
           </Link>
         </section>
       </>
@@ -132,7 +132,7 @@ export default async function BillingPage() {
         <section className="card stack stack-6">
           <div className="row-between" style={{ gap: 'var(--space-4)', flexWrap: 'wrap' }}>
             <div className="stack stack-2">
-              <span className="badge">Piano attuale</span>
+              <span className="badge">Plan actual</span>
               <h2 style={{ fontSize: 'var(--text-2xl)' }}>{PLAN_LABEL[status.plan]}</h2>
               <div className="row" style={{ gap: 'var(--space-2)', flexWrap: 'wrap' }}>
                 <span className={`badge ${tenantStatus.badge}`}>{tenantStatus.label}</span>
@@ -147,12 +147,12 @@ export default async function BillingPage() {
 
             <div className="row" style={{ gap: 'var(--space-2)', flexWrap: 'wrap' }}>
               <Link href="/pricing" className="btn btn-secondary">
-                Confronta i piani
+                Comparar planes
               </Link>
               {status.canManageBilling ? (
                 <form action={openBillingPortal}>
                   <button type="submit" className="btn btn-primary">
-                    Apri il portale Stripe
+                    Abrir portal de Stripe
                   </button>
                 </form>
               ) : null}
@@ -161,36 +161,36 @@ export default async function BillingPage() {
 
           <dl className="stack stack-3" style={{ margin: 0 }}>
             <BillingFact
-              label="Rinnovo del periodo"
+              label="Renovación del periodo"
               value={formatDate(status.currentPeriodEnd)}
               hint={
                 status.cancelAtPeriodEnd
-                  ? 'Abbonamento in disdetta: non verrà rinnovato a fine periodo.'
+                  ? 'Suscripción cancelada: no se renovará al final del periodo.'
                   : null
               }
             />
             {status.plan === 'trial' || status.trialEndsAt ? (
-              <BillingFact label="Fine della prova" value={formatDate(status.trialEndsAt)} />
+              <BillingFact label="Fin de la prueba" value={formatDate(status.trialEndsAt)} />
             ) : null}
             <BillingFact
               label="Cliente Stripe"
-              value={status.hasStripeCustomer ? 'Collegato' : 'Non ancora collegato'}
+              value={status.hasStripeCustomer ? 'Conectado' : 'Aún no conectado'}
             />
           </dl>
 
           {status.canCheckout && status.availablePlans.length > 0 ? (
             <div className="stack stack-3">
               <hr className="divider" style={{ margin: 0 }} />
-              <h3 style={{ fontSize: 'var(--text-lg)' }}>Attiva un abbonamento</h3>
+              <h3 style={{ fontSize: 'var(--text-lg)' }}>Activar una suscripción</h3>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                Il pagamento si completa su Stripe. Puoi cambiare o disdire in qualunque momento dal
-                portale clienti.
+                El pago se completa en Stripe. Puedes cambiar o cancelar en cualquier momento desde el
+                portal de clientes.
               </p>
               <div className="row" style={{ gap: 'var(--space-2)', flexWrap: 'wrap' }}>
                 {status.availablePlans.map((plan) => (
                   <form key={plan} action={startCheckout.bind(null, plan)}>
                     <button type="submit" className="btn btn-primary">
-                      Attiva {PLAN_LABEL[plan]}
+                      Activar {PLAN_LABEL[plan]}
                     </button>
                   </form>
                 ))}
@@ -200,51 +200,51 @@ export default async function BillingPage() {
 
           {!status.canManageBilling && !status.canCheckout ? (
             <p className="helper">
-              Solo i profili owner e admin dello studio possono gestire abbonamento e pagamenti.
+              Solo los perfiles owner y admin del negocio pueden gestionar suscripción y pagos.
             </p>
           ) : null}
         </section>
 
         <aside className="card stack stack-3">
-          <span className="eyebrow">Dati di fatturazione</span>
+          <span className="eyebrow">Datos de facturación</span>
           {profile ? (
             <>
               <p style={{ fontWeight: 600 }}>{profile.name}</p>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                {profile.email ?? 'Email non disponibile'}
+                {profile.email ?? 'Correo no disponible'}
                 <br />
-                {profile.address ?? 'Indirizzo non disponibile'}
+                {profile.address ?? 'Dirección no disponible'}
               </p>
             </>
           ) : (
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-              Dati dello studio non disponibili in questo momento.
+              Datos del negocio no disponibles en este momento.
             </p>
           )}
           <p className="helper">
-            Ragione sociale, P.IVA e codice destinatario SDI usati in fattura si modificano dal
-            portale clienti Stripe.
+            Razón social, NIF/CIF y datos fiscales usados en factura se modifican desde el portal de
+            clientes de Stripe.
           </p>
           <Link
             href="/settings"
             className="btn btn-ghost btn-sm"
             style={{ alignSelf: 'flex-start' }}
           >
-            Impostazioni studio
+            Configuración del negocio
           </Link>
         </aside>
       </div>
 
       <section className="card stack stack-4" style={{ marginTop: 'var(--space-6)' }}>
         <div className="row-between" style={{ gap: 'var(--space-4)', flexWrap: 'wrap' }}>
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Consumi del mese</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Consumo del mes</h2>
           {usage ? <UsageBadge usage={usage} /> : null}
         </div>
 
         {usage ? (
           <>
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-              Periodo di riferimento: {formatMonth(usage.metricMonth)}.
+              Periodo de referencia: {formatMonth(usage.metricMonth)}.
             </p>
             <div
               style={{
@@ -254,60 +254,60 @@ export default async function BillingPage() {
               }}
             >
               <UsageMeter
-                label="Conversazioni"
+                label="Conversaciones"
                 used={usage.conversations.used}
                 limit={usage.conversations.limit}
                 percent={usage.conversations.percent}
               />
               <UsageMeter
-                label="Vocali trascritti"
+                label="Audios transcritos"
                 used={usage.voiceMessages.used}
                 limit={usage.voiceMessages.limit}
                 percent={usage.voiceMessages.percent}
               />
               <div>
-                <p className="kpi-label">Messaggi scambiati</p>
+                <p className="kpi-label">Mensajes intercambiados</p>
                 <p className="kpi-value">{formatNumber(usage.messages.used)}</p>
-                <p className="helper">Nessun limite di piano su questa metrica.</p>
+                <p className="helper">Sin límite de plan en esta métrica.</p>
               </div>
             </div>
           </>
         ) : (
           <p className="muted">
-            I consumi del mese non sono leggibili in questo momento. Riprova più tardi.
+            El consumo del mes no se puede leer en este momento. Reintentar más tarde.
           </p>
         )}
       </section>
 
       <section className="card stack stack-4" style={{ marginTop: 'var(--space-6)' }}>
-        <h2 style={{ fontSize: 'var(--text-xl)' }}>Fatture e ricevute</h2>
+        <h2 style={{ fontSize: 'var(--text-xl)' }}>Facturas y recibos</h2>
         {status.hasStripeCustomer ? (
           <>
             <p className="muted">
-              Lo storico completo delle fatture, le ricevute in PDF e il metodo di pagamento vivono
-              nel portale clienti Stripe. È la fonte autorevole: non ne teniamo una copia qui.
+              El historial completo de facturas, los recibos en PDF y el método de pago están en el
+              portal de clientes de Stripe. Es la fuente oficial: no guardamos una copia aquí.
             </p>
             {status.canManageBilling ? (
               <form action={openBillingPortal}>
                 <button type="submit" className="btn btn-secondary">
-                  Vedi le fatture su Stripe
+                  Ver facturas en Stripe
                 </button>
               </form>
             ) : (
               <p className="helper">
-                Chiedi a un profilo owner o admin dello studio di aprire il portale clienti.
+                Pide a un perfil owner o admin del negocio que abra el portal de clientes.
               </p>
             )}
           </>
         ) : (
           <div className="empty-state">
-            <p className="empty-state-title">Ancora nessuna fattura</p>
+            <p className="empty-state-title">Aún no hay facturas</p>
             <p className="empty-state-text">
-              Le fatture compaiono dopo il primo pagamento. Attiva un piano per iniziare a
-              utilizzare Ambrogio oltre la prova.
+              Las facturas aparecen después del primer pago. Activa un plan para usar Ambrogio más
+              allá de la prueba.
             </p>
             <Link href="/pricing" className="btn btn-primary">
-              Guarda i piani
+              Ver planes
             </Link>
           </div>
         )}
@@ -320,9 +320,9 @@ function BillingHeader() {
   return (
     <div className="dashboard-header">
       <div className="stack stack-2">
-        <span className="eyebrow">Fatturazione</span>
-        <h1>Piano e abbonamento</h1>
-        <p className="muted">Stato del tuo piano, consumi del mese e accesso al portale Stripe.</p>
+        <span className="eyebrow">Facturación</span>
+        <h1>Plan y suscripción</h1>
+        <p className="muted">Estado de tu plan, consumo del mes y acceso al portal de Stripe.</p>
       </div>
     </div>
   );
@@ -352,14 +352,14 @@ function BillingFact({
 
 function UsageBadge({ usage }: { readonly usage: UsageSnapshot }) {
   if (usage.blockReason) {
-    return <span className="badge badge-danger">Limite raggiunto</span>;
+    return <span className="badge badge-danger">Límite alcanzado</span>;
   }
 
   if (usage.softWarning) {
     return <span className="badge badge-warm">Sopra l&apos;80% del piano</span>;
   }
 
-  return <span className="badge badge-success">Nei limiti del piano</span>;
+  return <span className="badge badge-success">Dentro de los límites del plan</span>;
 }
 
 function UsageMeter({
@@ -462,16 +462,16 @@ async function loadProfile(session: AuthSession): Promise<BillingProfile | null>
 
 function formatDate(value: string | null): string {
   if (!value) {
-    return 'Non disponibile';
+    return 'No disponible';
   }
 
   const date = new Date(value);
 
   if (Number.isNaN(date.getTime())) {
-    return 'Non disponibile';
+    return 'No disponible';
   }
 
-  return new Intl.DateTimeFormat('it-IT', { dateStyle: 'long' }).format(date);
+  return new Intl.DateTimeFormat('es-419', { dateStyle: 'long' }).format(date);
 }
 
 /** `metricMonth` arriva dal servizio usage nel formato `YYYY-MM-01`. */
@@ -482,7 +482,7 @@ function formatMonth(value: string): string {
     return value;
   }
 
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat('es-419', {
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC',
@@ -490,5 +490,5 @@ function formatMonth(value: string): string {
 }
 
 function formatNumber(value: number): string {
-  return new Intl.NumberFormat('it-IT').format(value);
+  return new Intl.NumberFormat('es-419').format(value);
 }

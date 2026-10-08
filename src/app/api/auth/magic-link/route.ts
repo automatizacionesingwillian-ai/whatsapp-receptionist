@@ -32,13 +32,16 @@ export async function POST(request: NextRequest): Promise<Response> {
     await applyRateLimit('authMagicLink', identifier);
 
     const service = createMagicLinkService();
-    await service.request({
+    const result = await service.request({
       email: parsed.email,
       requestId: context.requestId,
     });
 
-    // Risposta uniforme: anti-enumeration, niente differenze tra
-    // email esistente / inesistente / invalida.
+    // Risposta uniforme: anti-enumeration. In development, se Supabase ha
+    // rate-limitato l'email, `recoveryLink` permette di aprire il login senza mail.
+    if (result.recoveryLink) {
+      return { sent: true, recoveryLink: result.recoveryLink };
+    }
     return { sent: true };
   }, request);
 }

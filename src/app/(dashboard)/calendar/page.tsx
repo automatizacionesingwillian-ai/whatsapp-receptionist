@@ -24,17 +24,17 @@ const DEFAULT_TIMEZONE = 'Europe/Rome';
 
 const STATUS_CONFIG: Record<AppointmentStatus, { readonly label: string; readonly badge: string }> =
   {
-    confirmed: { label: 'Confermato', badge: 'badge-success' },
-    cancelled: { label: 'Cancellato', badge: 'badge-danger' },
-    completed: { label: 'Concluso', badge: 'badge-neutral' },
-    no_show: { label: 'Non presentato', badge: 'badge-warm' },
+    confirmed: { label: 'Confirmada', badge: 'badge-success' },
+    cancelled: { label: 'Cancelada', badge: 'badge-danger' },
+    completed: { label: 'Completada', badge: 'badge-neutral' },
+    no_show: { label: 'No presentado', badge: 'badge-warm' },
   };
 
 const SOURCE_LABEL: Record<BookingSource, string> = {
-  manual: 'Inserito a mano',
-  whatsapp_ai: 'Prenotato da Ambrogio su WhatsApp',
-  dashboard: 'Creato dalla dashboard',
-  api: 'Creato via API',
+  manual: 'Ingresado a mano',
+  whatsapp_ai: 'Reservado por Ambrogio en WhatsApp',
+  dashboard: 'Creado desde el panel',
+  api: 'Creado vía API',
 };
 
 type CalendarAppointment = {
@@ -73,15 +73,15 @@ export default async function CalendarPage() {
   if (!result.ok) {
     return (
       <>
-        <CalendarHeader subtitle="Agenda non disponibile in questo momento." />
+        <CalendarHeader subtitle="Agenda no disponible en este momento." />
         <section className="card card-padded stack stack-3">
-          <h2 style={{ fontSize: 'var(--text-lg)' }}>Non riesco a leggere gli appuntamenti</h2>
+          <h2 style={{ fontSize: 'var(--text-lg)' }}>No puedo leer las citas</h2>
           <p className="muted">
-            La lettura dell&apos;agenda è fallita. Ricarica la pagina fra qualche istante: se il
-            problema resta, controlla lo stato dei servizi.
+            La lectura de la agenda falló. Recarga la página en unos instantes: si el problema
+            continúa, revisa el estado de los servicios.
           </p>
           <Link href="/status" className="btn btn-secondary" style={{ alignSelf: 'flex-start' }}>
-            Stato del servizio
+            Estado del servicio
           </Link>
         </section>
       </>
@@ -92,26 +92,26 @@ export default async function CalendarPage() {
 
   return (
     <>
-      <CalendarHeader subtitle={`${data.rangeLabel} · fuso orario ${data.timezone}`} />
+      <CalendarHeader subtitle={`${data.rangeLabel} · zona horaria ${data.timezone}`} />
 
       <div
         className="kpi-grid"
         style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}
       >
         <article className="kpi">
-          <span className="kpi-label">Oggi</span>
+          <span className="kpi-label">Hoy</span>
           <span className="kpi-value">{data.todayCount}</span>
         </article>
         <article className="kpi">
-          <span className="kpi-label">Prossimi 7 giorni</span>
+          <span className="kpi-label">Próximos 7 días</span>
           <span className="kpi-value">{data.weekCount}</span>
         </article>
         <article className="kpi">
-          <span className="kpi-label">Confermati</span>
+          <span className="kpi-label">Confirmadas</span>
           <span className="kpi-value">{data.confirmedCount}</span>
         </article>
         <article className="kpi">
-          <span className="kpi-label">Prenotati da Ambrogio</span>
+          <span className="kpi-label">Reservadas por Ambrogio</span>
           <span className="kpi-value">{data.aiBookedCount}</span>
         </article>
       </div>
@@ -119,17 +119,17 @@ export default async function CalendarPage() {
       {data.days.length === 0 ? (
         <section className="card">
           <div className="empty-state">
-            <p className="empty-state-title">Nessun appuntamento in agenda</p>
+            <p className="empty-state-title">Ninguna cita en la agenda</p>
             <p className="empty-state-text">
-              Ambrogio prenota da solo quando servizi e orari di apertura sono configurati. Se
-              l&apos;agenda resta vuota, parti da lì.
+              Ambrogio reserva solo cuando servicios y horarios de apertura están configurados. Si
+              la agenda sigue vacía, empieza por ahí.
             </p>
             <div className="row" style={{ gap: 'var(--space-2)' }}>
               <Link href="/settings" className="btn btn-primary">
-                Configura servizi e orari
+                Configurar servicios y horarios
               </Link>
               <Link href="/conversations" className="btn btn-ghost">
-                Vedi le conversazioni
+                Ver conversaciones
               </Link>
             </div>
           </div>
@@ -152,8 +152,8 @@ export default async function CalendarPage() {
                 <h2 style={{ fontSize: 'var(--text-lg)' }}>{day.label}</h2>
                 <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
                   {day.appointments.length === 1
-                    ? '1 appuntamento'
-                    : `${day.appointments.length} appuntamenti`}
+                    ? '1 cita'
+                    : `${day.appointments.length} citas`}
                 </span>
               </header>
 
@@ -330,7 +330,7 @@ function buildDayLabel(
   dayKeys: readonly string[],
   timezone: string,
 ): string {
-  const formatted = new Intl.DateTimeFormat('it-IT', {
+  const formatted = new Intl.DateTimeFormat('es-419', {
     timeZone: timezone,
     weekday: 'long',
     day: 'numeric',
@@ -338,11 +338,11 @@ function buildDayLabel(
   }).format(date);
 
   if (key === dayKeys[0]) {
-    return `Oggi · ${formatted}`;
+    return `Hoy · ${formatted}`;
   }
 
   if (key === dayKeys[1]) {
-    return `Domani · ${formatted}`;
+    return `Mañana · ${formatted}`;
   }
 
   return formatted;
@@ -353,23 +353,23 @@ function buildRangeLabel(dayKeys: readonly string[], timezone: string): string {
   const last = dayKeys[dayKeys.length - 1];
 
   if (!first || !last) {
-    return 'Prossimi giorni';
+    return 'Próximos días';
   }
 
-  const formatter = new Intl.DateTimeFormat('it-IT', {
+  const formatter = new Intl.DateTimeFormat('es-419', {
     timeZone: timezone,
     day: 'numeric',
     month: 'long',
   });
 
-  return `Dal ${formatter.format(new Date(`${first}T12:00:00Z`))} al ${formatter.format(
+  return `Del ${formatter.format(new Date(`${first}T12:00:00Z`))} al ${formatter.format(
     new Date(`${last}T12:00:00Z`),
   )}`;
 }
 
 function describeAppointment(appointment: CalendarAppointment): string {
   const parts = [
-    appointment.serviceName ?? 'Servizio non indicato',
+    appointment.serviceName ?? 'Servicio no indicado',
     appointment.durationMinutes !== null ? `${appointment.durationMinutes} min` : null,
     SOURCE_LABEL[appointment.bookingSource],
   ].filter((part): part is string => part !== null);
@@ -378,7 +378,7 @@ function describeAppointment(appointment: CalendarAppointment): string {
 }
 
 function formatTime(date: Date, timezone: string): string {
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat('es-419', {
     timeZone: timezone,
     hour: '2-digit',
     minute: '2-digit',
@@ -426,7 +426,7 @@ function toCalendarAppointment(row: unknown, timezone: string): CalendarAppointm
     customerName:
       readString(record['customer_name']) ??
       readString(record['customer_identifier']) ??
-      'Contatto senza nome',
+      'Contacto sin nombre',
     serviceName: readString(record['service_type']),
     status,
     bookingSource,

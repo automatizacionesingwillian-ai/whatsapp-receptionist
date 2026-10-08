@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { LegalPageLayout } from '@/components/marketing/LegalPageLayout';
 
 export const metadata: Metadata = {
-  title: 'Sicurezza e Compliance',
+  title: 'Seguridad e Compliance',
   description:
     'Architettura di sicurezza Ambrogio.ai: CSP nonce-based, RLS Postgres, redact PII, pen test annuale, bug bounty, GDPR Art. 15/17.',
   alternates: { canonical: '/legal/security' },
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SecurityPage() {
   return (
-    <LegalPageLayout title="Sicurezza e Compliance" lastUpdated="8 maggio 2026">
+    <LegalPageLayout title="Seguridad e Compliance" lastUpdated="8 maggio 2026">
       <p>
         La sicurezza non è un add-on. È parte dell&apos;architettura sin dal primo commit. Questa
         pagina riassume le misure tecniche e organizzative in produzione.

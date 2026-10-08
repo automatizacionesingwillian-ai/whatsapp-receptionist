@@ -4,54 +4,54 @@ const PLANS = [
   {
     name: 'Starter',
     price: '€97',
-    period: '/mese',
-    badge: 'Per studi singoli',
-    description: 'Un solo numero WhatsApp, 1 calendario, 500 conversazioni AI/mese.',
+    period: '/mes',
+    badge: 'Para un solo negocio',
+    description: 'Un número WhatsApp, 1 calendario, 500 conversaciones AI/mes.',
     features: [
-      '1 numero WhatsApp Business',
+      '1 número WhatsApp Business',
       '1 calendario Google',
-      '500 conversazioni AI / mese',
-      'Trascrizione vocali',
-      'Dashboard base',
+      '500 conversaciones AI / mes',
+      'Transcripción de audios',
+      'Panel básico',
     ],
-    cta: 'Inizia con Starter',
+    cta: 'Empezar con Starter',
     href: '/register?plan=starter',
     highlight: false,
   },
   {
     name: 'Professional',
     price: '€297',
-    period: '/mese',
-    badge: 'Più popolare',
-    description: 'Multi-operatore, voce in uscita, integrazioni avanzate, supporto prioritario.',
+    period: '/mes',
+    badge: 'Más popular',
+    description: 'Multi-operador, voz saliente, integraciones avanzadas, soporte prioritario.',
     features: [
-      'Fino a 3 numeri WhatsApp',
-      'Multi-calendario operatore',
-      '2.500 conversazioni AI / mese',
-      'Voce ElevenLabs in uscita',
-      'Reminder automatici',
-      'Knowledge base custom',
-      'Supporto prioritario',
+      'Hasta 3 números WhatsApp',
+      'Multi-calendario por operador',
+      '2.500 conversaciones AI / mes',
+      'Voz ElevenLabs saliente',
+      'Recordatorios automáticos',
+      'Base de conocimiento personalizada',
+      'Soporte prioritario',
     ],
-    cta: 'Inizia con Professional',
+    cta: 'Empezar con Professional',
     href: '/register?plan=professional',
     highlight: true,
   },
   {
     name: 'Agency',
     price: '€897',
-    period: '/mese',
+    period: '/mes',
     badge: 'White-label',
-    description: 'Per agenzie e consulenti che gestiscono più clienti finali.',
+    description: 'Para agencias y consultores que gestionan varios clientes finales.',
     features: [
-      '5 clienti inclusi',
-      'White-label dashboard',
-      'API e webhook',
-      'Conversazioni illimitate*',
-      'Account manager dedicato',
-      'Onboarding co-gestito',
+      '5 clientes incluidos',
+      'Panel white-label',
+      'API y webhooks',
+      'Conversaciones ilimitadas*',
+      'Account manager dedicado',
+      'Onboarding co-gestionado',
     ],
-    cta: 'Parliamone',
+    cta: 'Hablemos',
     href: '/contact?plan=agency',
     highlight: false,
   },
@@ -62,13 +62,13 @@ export function PricingTeaser() {
     <section className="section" aria-labelledby="pricing-heading">
       <div className="container stack stack-12">
         <div className="stack stack-4" style={{ maxWidth: '52ch' }}>
-          <span className="eyebrow">Piani trasparenti</span>
+          <span className="eyebrow">Planes transparentes</span>
           <h2 id="pricing-heading" className="text-balance">
-            Paghi solo quando Ambrogio fa il suo lavoro.
+            Pagas solo cuando Ambrogio hace su trabajo.
           </h2>
           <p className="lead">
-            Niente costi nascosti, niente moltiplicatori sui token. Sai esattamente quanto spendi al
-            mese e quanto guadagni in più.
+            Sin costos ocultos ni multiplicadores por tokens. Sabes exactamente cuánto gastas al mes
+            y cuánto ganas de más.
           </p>
         </div>
 
@@ -165,8 +165,8 @@ export function PricingTeaser() {
           className="muted text-center"
           style={{ fontSize: 'var(--text-xs)', marginTop: 'var(--space-4)' }}
         >
-          Tutti i prezzi escludono IVA. Pagamento mensile o annuale (-20%). Fatturazione elettronica
-          SDI inclusa.
+          Todos los precios excluyen impuestos. Pago mensual o anual (-20%). Facturación electrónica
+          incluida donde aplique.
         </p>
       </div>
     </section>

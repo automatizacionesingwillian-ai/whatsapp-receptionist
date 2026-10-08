@@ -575,7 +575,7 @@ function maskIdentifier(identifier: string): string {
 
 function formatInTimezone(date: Date, timezone: string): string {
   try {
-    return new Intl.DateTimeFormat('it-IT', {
+    return new Intl.DateTimeFormat('es-419', {
       timeZone: timezone,
       dateStyle: 'full',
       timeStyle: 'short',

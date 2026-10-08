@@ -33,6 +33,8 @@ pnpm-debug.log*
 .vercel/
 .turbo/
 .cache/
+.data/
+supabase/.temp/
 
 # OS/editor
 .DS_Store

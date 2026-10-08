@@ -6,17 +6,17 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 import { ContactForm } from '@/components/forms/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contatti · Parla con il team Ambrogio.ai',
+  title: 'Contacto · Habla con el equipo Ambrogio.ai',
   description:
-    'Contatta il team Ambrogio.ai per supporto tecnico, vendite, partnership o richieste stampa. Risposta entro 4 ore lavorative.',
+    'Contacta al equipo Ambrogio.ai para soporte técnico, ventas, partnerships o prensa. Respuesta en 4 horas hábiles.',
   alternates: { canonical: '/contact' },
   openGraph: {
-    title: 'Contatti · Ambrogio.ai',
+    title: 'Contacto · Ambrogio.ai',
     description:
-      'Parla con il team. Vendite, supporto, partnership o stampa. Risposta entro 4 ore lavorative.',
+      'Habla con el equipo. Ventas, soporte, partnerships o prensa. Respuesta en 4 horas hábiles.',
     url: '/contact',
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
@@ -26,8 +26,8 @@ export default function ContactPage() {
       <JsonLd data={organizationSchema} />
       <JsonLd
         data={buildBreadcrumbSchema([
-          { name: 'Home', url: '/' },
-          { name: 'Contatti', url: '/contact' },
+          { name: 'Inicio', url: '/' },
+          { name: 'Contacto', url: '/contact' },
         ])}
       />
       <SiteHeader />
@@ -44,10 +44,10 @@ export default function ContactPage() {
               }}
             >
               <div className="stack stack-4 text-center">
-                <span className="badge">Contatti</span>
-                <h1 className="display text-balance">Parliamone.</h1>
+                <span className="badge">Contacto</span>
+                <h1 className="display text-balance">Hablemos.</h1>
                 <p className="lead text-pretty" style={{ margin: '0 auto' }}>
-                  Compila il form qui sotto. Per casi urgenti scrivi diretto:{' '}
+                  Completa el formulario abajo. Para casos urgentes escribe directo:{' '}
                   <a href="mailto:hello@ambrogio.ai" className="btn-link">
                     hello@ambrogio.ai
                   </a>
@@ -68,13 +68,13 @@ export default function ContactPage() {
               >
                 <strong style={{ color: 'var(--color-text)' }}>Ambrogio.ai · Roma, Italia</strong>
                 <p>
-                  <strong>Sales &amp; partnership:</strong>{' '}
+                  <strong>Ventas y partnerships:</strong>{' '}
                   <a href="mailto:hello@ambrogio.ai" className="btn-link">
                     hello@ambrogio.ai
                   </a>
                 </p>
                 <p>
-                  <strong>Supporto tecnico:</strong>{' '}
+                  <strong>Soporte técnico:</strong>{' '}
                   <a href="mailto:support@ambrogio.ai" className="btn-link">
                     support@ambrogio.ai
                   </a>

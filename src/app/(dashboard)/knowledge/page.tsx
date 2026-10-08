@@ -12,7 +12,7 @@ import {
 } from '@/server/knowledge-base/documents';
 
 export const metadata: Metadata = {
-  title: 'Knowledge base · Ambrogio.ai',
+  title: 'Base de conocimiento · Ambrogio.ai',
 };
 
 const DOCUMENT_LIMIT = 100;
@@ -45,7 +45,7 @@ async function loadKnowledgeBase(): Promise<LoadResult> {
     const message =
       error instanceof AppError && error.expose
         ? error.message
-        : 'Non è stato possibile caricare la knowledge base. Ricarica la pagina; se il problema resta, il servizio dati non è raggiungibile.';
+        : 'No fue posible cargar la base de conocimiento. Recarga la página; si el problema continúa, el servicio de datos no está disponible.';
 
     return { ok: false, message };
   }
@@ -58,11 +58,11 @@ export default async function KnowledgePage() {
     <>
       <div className="dashboard-header">
         <div className="stack stack-2">
-          <span className="eyebrow">Knowledge base</span>
-          <h1>Quello che l’assistente sa del tuo studio</h1>
+          <span className="eyebrow">Base de conocimiento</span>
+          <h1>Lo que el asistente sabe de tu negocio</h1>
           <p className="muted" style={{ maxWidth: '60ch' }}>
-            Ogni documento viene indicizzato e recuperato quando un cliente fa una domanda
-            pertinente. Senza documenti l’assistente risponde solo in modo generico.
+            Cada documento se indexa y se recupera cuando un cliente hace una pregunta
+            pertinente. Sin documentos, el asistente responde solo de forma genérica.
           </p>
         </div>
       </div>
@@ -72,7 +72,7 @@ export default async function KnowledgePage() {
       ) : (
         <div className="card card-padded" role="alert">
           <div className="stack stack-2">
-            <p style={{ fontWeight: 600 }}>Knowledge base non disponibile</p>
+            <p style={{ fontWeight: 600 }}>Base de conocimiento no disponible</p>
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
               {result.message}
             </p>
@@ -102,11 +102,11 @@ function KnowledgeBaseContent({
       <section className="stack stack-4" aria-labelledby="knowledge-list-heading">
         <div className="row row-between">
           <h2 id="knowledge-list-heading" style={{ fontSize: 'var(--text-lg)' }}>
-            Documenti
+            Documentos
           </h2>
           {documents.length > 0 ? (
             <span className="muted mono" style={{ fontSize: 'var(--text-xs)' }}>
-              {activeCount} attivi su {documents.length}
+              {activeCount} activos de {documents.length}
             </span>
           ) : null}
         </div>
@@ -115,10 +115,12 @@ function KnowledgeBaseContent({
           <div className="card card-padded" role="status">
             <p style={{ fontSize: 'var(--text-sm)' }}>
               <strong>{notIndexedCount}</strong>{' '}
-              {notIndexedCount === 1 ? 'documento attivo non è' : 'documenti attivi non sono'}{' '}
-              indicizzato per la ricerca semantica. L’assistente non{' '}
-              {notIndexedCount === 1 ? 'lo' : 'li'} recupera finché l’indicizzazione non viene
-              rigenerata.
+              {notIndexedCount === 1
+                ? 'documento activo no está'
+                : 'documentos activos no están'}{' '}
+              indexado para la búsqueda semántica. El asistente no{' '}
+              {notIndexedCount === 1 ? 'lo' : 'los'} recupera hasta que la indexación se
+              regenere.
             </p>
           </div>
         ) : null}
@@ -137,7 +139,7 @@ function KnowledgeBaseContent({
 
         {documents.length >= DOCUMENT_LIMIT ? (
           <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-            Mostriamo i {DOCUMENT_LIMIT} documenti aggiornati più di recente.
+            Mostramos los {DOCUMENT_LIMIT} documentos actualizados más recientemente.
           </p>
         ) : null}
       </section>
@@ -145,11 +147,11 @@ function KnowledgeBaseContent({
       <section className="card card-padded stack stack-4" aria-labelledby="knowledge-form-heading">
         <div className="stack stack-2">
           <h2 id="knowledge-form-heading" style={{ fontSize: 'var(--text-lg)' }}>
-            Aggiungi un documento
+            Agregar un documento
           </h2>
           <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            Testo semplice. Niente allegati: quello che scrivi qui è esattamente quello che
-            l’assistente può citare.
+            Texto simple. Sin adjuntos: lo que escribes aquí es exactamente lo que el asistente
+            puede citar.
           </p>
         </div>
 
@@ -157,8 +159,8 @@ function KnowledgeBaseContent({
           <KnowledgeDocumentForm />
         ) : (
           <p className="helper">
-            Il tuo ruolo consente la sola lettura. Chiedi a un amministratore dello studio di
-            aggiungere o modificare i documenti.
+            Tu rol solo permite lectura. Pide a un administrador del negocio que agregue o modifique
+            los documentos.
           </p>
         )}
       </section>
@@ -181,11 +183,11 @@ function KnowledgeDocumentCard({
         </div>
         <div className="row" style={{ gap: 'var(--space-2)' }}>
           {!doc.active ? (
-            <span className="badge badge-neutral">Archiviato</span>
+            <span className="badge badge-neutral">Archivado</span>
           ) : doc.hasEmbedding ? (
-            <span className="badge badge-success">Indicizzato</span>
+            <span className="badge badge-success">Indexado</span>
           ) : (
-            <span className="badge badge-warm">Non indicizzato</span>
+            <span className="badge badge-warm">No indexado</span>
           )}
         </div>
       </div>
@@ -196,7 +198,7 @@ function KnowledgeDocumentCard({
 
       <div className="row row-between" style={{ gap: 'var(--space-3)' }}>
         <span className="muted mono" style={{ fontSize: 'var(--text-xs)' }}>
-          Aggiornato il {formatDate(doc.updatedAt)}
+          Actualizado el {formatDate(doc.updatedAt)}
         </span>
         {canEdit ? (
           <KnowledgeDocumentArchiveButton
@@ -214,10 +216,10 @@ function EmptyKnowledgeBase({ canEdit }: Readonly<{ canEdit: boolean }>) {
   return (
     <div className="card">
       <div className="empty-state">
-        <p className="empty-state-title">Nessun documento, nessuna fonte di verità</p>
+        <p className="empty-state-title">Ningún documento, ninguna fuente de verdad</p>
         <p className="empty-state-text">
-          Finché questa lista è vuota l’assistente può rispondere solo in modo generico: non conosce
-          i tuoi prezzi, i tuoi orari né le tue regole.
+          Mientras esta lista esté vacía, el asistente solo puede responder de forma genérica: no
+          conoce tus precios, tus horarios ni tus reglas.
         </p>
         <ul
           className="stack stack-2"
@@ -231,27 +233,27 @@ function EmptyKnowledgeBase({ canEdit }: Readonly<{ canEdit: boolean }>) {
           }}
         >
           <li>
-            <strong>Listino</strong> — prestazioni e prezzi, con eventuali fasce o pacchetti.
+            <strong>Tarifario</strong> — servicios y precios, con posibles rangos o paquetes.
           </li>
           <li>
-            <strong>Politica di disdetta</strong> — entro quante ore, con quale penale, e le
-            eccezioni.
+            <strong>Política de cancelación</strong> — con cuántas horas de antelación, penalidad y
+            excepciones.
           </li>
           <li>
-            <strong>Come raggiungere lo studio</strong> — indirizzo, piano, parcheggio, mezzi.
+            <strong>Cómo llegar al negocio</strong> — dirección, piso, estacionamiento, transporte.
           </li>
           <li>
-            <strong>Domande frequenti</strong> — quelle che ti fanno ogni settimana al telefono.
+            <strong>Preguntas frecuentes</strong> — las que te hacen cada semana por teléfono.
           </li>
         </ul>
         {canEdit ? (
           <p className="helper" style={{ marginTop: 'var(--space-4)' }}>
-            Inizia dal riquadro qui a fianco: un documento basta per cambiare la qualità delle
-            risposte.
+            Empieza con el panel de al lado: un documento basta para cambiar la calidad de las
+            respuestas.
           </p>
         ) : (
           <p className="helper" style={{ marginTop: 'var(--space-4)' }}>
-            Chiedi a un amministratore dello studio di caricare il primo documento.
+            Pide a un administrador del negocio que cargue el primer documento.
           </p>
         )}
       </div>
@@ -269,7 +271,7 @@ function toExcerpt(content: string): string {
   return `${normalized.slice(0, EXCERPT_LENGTH).trimEnd()}…`;
 }
 
-const DATE_FORMATTER = new Intl.DateTimeFormat('it-IT', {
+const DATE_FORMATTER = new Intl.DateTimeFormat('es-419', {
   day: '2-digit',
   month: '2-digit',
   year: 'numeric',
@@ -282,7 +284,7 @@ function formatDate(value: string): string {
   const parsed = new Date(value);
 
   if (Number.isNaN(parsed.getTime())) {
-    return 'data non disponibile';
+    return 'fecha no disponible';
   }
 
   return DATE_FORMATTER.format(parsed);

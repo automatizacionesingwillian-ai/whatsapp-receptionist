@@ -1,5 +1,5 @@
 /**
- * Fatturazione elettronica SDI tramite Fatture in Cloud API.
+ * Facturación elettronica SDI tramite Fatture in Cloud API.
  *
  * Required env:
  * - FATTURE_IN_CLOUD_API_TOKEN

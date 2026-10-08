@@ -23,7 +23,7 @@ export function OnboardingForm({
 }: OnboardingFormProps) {
   const { state, onSubmit } = useApiForm({
     endpoint: '/api/onboarding/tenant',
-    successMessage: 'Studio configurato.',
+    successMessage: 'Negocio configurado.',
     redirectTo: '/dashboard',
     // I nomi dei campi del form non coincidono con lo schema dell'API
     // (`business_name` → `tenantName`, `vertical` → `businessType`): la
@@ -32,7 +32,7 @@ export function OnboardingForm({
     buildBody: (formData) => ({
       tenantName: String(formData.get('business_name') ?? ''),
       businessType: formData.get('vertical') ? String(formData.get('vertical')) : null,
-      timezone: String(formData.get('timezone') ?? 'Europe/Rome'),
+      timezone: String(formData.get('timezone') ?? 'America/Mexico_City'),
     }),
   });
 
@@ -44,7 +44,7 @@ export function OnboardingForm({
 
       <div className="field">
         <label htmlFor="business_name" className="label">
-          Nome studio o azienda
+          Nombre del negocio
         </label>
         <input
           id="business_name"
@@ -54,7 +54,7 @@ export function OnboardingForm({
           required
           minLength={2}
           maxLength={120}
-          placeholder="Studio Dentistico Rossi"
+          placeholder="Clínica Dental Rossi"
           className="input"
           defaultValue={prefilledBusinessName}
           disabled={isSubmitting}
@@ -63,7 +63,7 @@ export function OnboardingForm({
 
       <div className="field">
         <label htmlFor="vertical" className="label">
-          Settore
+          Sector
         </label>
         <select
           id="vertical"
@@ -74,7 +74,7 @@ export function OnboardingForm({
           disabled={isSubmitting}
         >
           <option value="" disabled>
-            Seleziona il settore
+            Selecciona el sector
           </option>
           {verticals.map((vertical) => (
             <option key={vertical.value} value={vertical.value}>
@@ -86,14 +86,14 @@ export function OnboardingForm({
 
       <div className="field">
         <label htmlFor="timezone" className="label">
-          Fuso orario
+          Zona horaria
         </label>
         <select
           id="timezone"
           name="timezone"
           required
           className="select"
-          defaultValue="Europe/Rome"
+          defaultValue="America/Mexico_City"
           disabled={isSubmitting}
         >
           {timezones.map((timezone) => (
@@ -113,13 +113,13 @@ export function OnboardingForm({
           color: 'var(--color-text-secondary)',
         }}
       >
-        <strong>P.IVA e codice SDI</strong> li chiediamo dopo, alla prima fattura. Adesso bastano i
-        dati base: 30 secondi.
+        <strong>Datos fiscales y facturación electrónica</strong> los pedimos después, con la
+        primera factura. Por ahora bastan estos datos básicos: 30 segundos.
       </p>
 
       <div className="row" style={{ gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
         <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting}>
-          {isSubmitting ? 'Salvataggio…' : 'Continua →'}
+          {isSubmitting ? 'Guardando…' : 'Continuar →'}
         </button>
       </div>
     </form>

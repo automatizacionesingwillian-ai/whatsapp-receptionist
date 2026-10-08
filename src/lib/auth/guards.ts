@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation';
 
 import {
   requireAuthenticatedUser,
-  requireSession,
   type AuthenticatedUser,
   type AuthSession,
 } from '@/lib/auth/session';
@@ -22,11 +21,38 @@ import { isSuperAdmin } from '@/lib/auth/super-admin';
  * stessa e il redirect non avverrebbe.
  */
 export async function requireSessionOrRedirect(): Promise<AuthSession> {
+  let user: AuthenticatedUser;
+
   try {
-    return await requireSession();
+    user = await requireAuthenticatedUser();
   } catch {
-    // Non distinguiamo "non autenticato" da "claim tenant assente": in
-    // entrambi i casi la sessione non è utilizzabile e il rimedio è il login.
+    redirect('/login');
+  }
+
+  const tenantId = user.appMetadata['tenant_id'];
+  const role = user.appMetadata['role'];
+
+  // Autenticato ma senza claim tenant: l'onboarding non è ancora completato.
+  // Prima qui si faceva redirect a `/login` e l'utente restava in loop dopo il
+  // magic link (sessione valida, dashboard rifiutata, form "invia link" di nuovo).
+  if (
+    typeof tenantId !== 'string' ||
+    (role !== 'owner' && role !== 'admin' && role !== 'member')
+  ) {
+    redirect('/onboarding');
+  }
+
+  return {
+    userId: user.userId,
+    tenantId,
+    role,
+  };
+}
+
+export async function requireAuthenticatedOrRedirect(): Promise<AuthenticatedUser> {
+  try {
+    return await requireAuthenticatedUser();
+  } catch {
     redirect('/login');
   }
 }

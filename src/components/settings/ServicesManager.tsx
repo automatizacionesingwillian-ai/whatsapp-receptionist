@@ -35,7 +35,7 @@ function compareServices(left: ServiceView, right: ServiceView): number {
     return left.active ? -1 : 1;
   }
 
-  return left.name.localeCompare(right.name, 'it');
+  return left.name.localeCompare(right.name, 'es');
 }
 
 export function ServicesManager({ services, canManage }: ServicesManagerProps) {
@@ -60,7 +60,7 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
     const created = result.data;
     setList((current) => [...current, created].sort(compareServices));
     setIsCreating(false);
-    setState({ status: 'success', message: `Servizio «${created.name}» creato.` });
+    setState({ status: 'success', message: `Servicio «${created.name}» creado.` });
   }, []);
 
   const onUpdate = useCallback(
@@ -70,7 +70,7 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
       if (Object.keys(patch).length === 0) {
         // L'API rifiuta un patch vuoto con 400: meglio non partire.
         setEditingId(null);
-        setState({ status: 'success', message: 'Nessuna modifica da salvare.' });
+        setState({ status: 'success', message: 'No hay cambios que guardar.' });
         return;
       }
 
@@ -89,7 +89,7 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
         current.map((item) => (item.id === updated.id ? updated : item)).sort(compareServices),
       );
       setEditingId(null);
-      setState({ status: 'success', message: `Servizio «${updated.name}» aggiornato.` });
+      setState({ status: 'success', message: `Servicio «${updated.name}» actualizado.` });
     },
     [],
   );
@@ -112,7 +112,7 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
     setPendingArchiveId(null);
     setState({
       status: 'success',
-      message: `Servizio «${archived.name}» archiviato: Ambrogio non lo propone più.`,
+      message: `Servicio «${archived.name}» archivado: Ambrogio ya no lo propone.`,
     });
   }, []);
 
@@ -121,10 +121,10 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
       <section className="card stack stack-4">
         <div className="row-between" style={{ gap: 'var(--space-4)', flexWrap: 'wrap' }}>
           <div className="stack stack-2">
-            <h2 style={{ fontSize: 'var(--text-xl)' }}>Listino</h2>
+            <h2 style={{ fontSize: 'var(--text-xl)' }}>Tarifario</h2>
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-              Ambrogio propone solo i servizi attivi, e usa la durata per capire quanto spazio
-              occupare in agenda.
+              Ambrogio propone solo servicios activos y usa la duración para calcular cuánto espacio
+              ocupar en la agenda.
             </p>
           </div>
           {canManage && !isCreating ? (
@@ -136,7 +136,7 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
                 setEditingId(null);
               }}
             >
-              Aggiungi servizio
+              Agregar servicio
             </button>
           ) : null}
         </div>
@@ -147,8 +147,8 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
           <ServiceForm
             formId="service-new"
             initial={EMPTY_SERVICE_DRAFT}
-            title="Nuovo servizio"
-            submitLabel="Crea servizio"
+            title="Nuevo servicio"
+            submitLabel="Crear servicio"
             busy={busyId === 'new'}
             onCancel={() => setIsCreating(false)}
             onValid={onCreate}
@@ -157,8 +157,8 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
 
         {list.length === 0 ? (
           <p className="helper">
-            Nessun servizio configurato. Finché il listino è vuoto Ambrogio non può proporre né
-            prenotare nulla.
+            Ningún servicio configurado. Mientras el tarifario esté vacío, Ambrogio no puede proponer
+            ni reservar nada.
           </p>
         ) : (
           <ul className="stack stack-3" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -168,8 +168,8 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
                   <ServiceForm
                     formId={`service-${service.id}`}
                     initial={toServiceDraft(service)}
-                    title={`Modifica «${service.name}»`}
-                    submitLabel="Salva modifiche"
+                    title={`Editar «${service.name}»`}
+                    submitLabel="Guardar cambios"
                     busy={busyId === service.id}
                     onCancel={() => setEditingId(null)}
                     onValid={(value) => onUpdate(service, value)}
@@ -197,7 +197,7 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
 
       {canManage ? null : (
         <p className="helper">
-          Solo il titolare dell&apos;account e gli amministratori possono modificare il listino.
+          Solo el titular de la cuenta y los administradores pueden modificar el tarifario.
         </p>
       )}
     </div>
@@ -243,7 +243,7 @@ function ServiceRow({
           )}
         </div>
         <span className={service.active ? 'badge badge-success' : 'badge badge-neutral'}>
-          {service.active ? 'Attivo' : 'Archiviato'}
+          {service.active ? 'Activo' : 'Archivado'}
         </span>
       </div>
 
@@ -255,14 +255,14 @@ function ServiceRow({
             onClick={onEdit}
             disabled={busy}
           >
-            Modifica
+            Editar
           </button>
           {service.active ? (
             isConfirmingArchive ? (
               <>
                 <span className="helper" style={{ alignSelf: 'center' }}>
-                  Confermi? Il servizio resta sugli appuntamenti già presi, ma Ambrogio smette di
-                  proporlo.
+                  ¿Confirmas? El servicio sigue en las citas ya reservadas, pero Ambrogio dejará de
+                  ofrecerlo.
                 </span>
                 <button
                   type="button"
@@ -270,7 +270,7 @@ function ServiceRow({
                   onClick={onArchive}
                   disabled={busy}
                 >
-                  {busy ? 'Archiviazione…' : 'Sì, archivia'}
+                  {busy ? 'Archivando…' : 'Sí, archivar'}
                 </button>
                 <button
                   type="button"
@@ -278,7 +278,7 @@ function ServiceRow({
                   onClick={onCancelArchive}
                   disabled={busy}
                 >
-                  Annulla
+                  Cancelar
                 </button>
               </>
             ) : (
@@ -288,7 +288,7 @@ function ServiceRow({
                 onClick={onAskArchive}
                 disabled={busy}
               >
-                Archivia
+                Archivar
               </button>
             )
           ) : null}
@@ -352,7 +352,7 @@ function ServiceForm({
 
       <div className="field">
         <label htmlFor={nameId} className="label">
-          Nome
+          Nombre
         </label>
         <input
           id={nameId}
@@ -375,7 +375,7 @@ function ServiceForm({
       <div className="row" style={{ gap: 'var(--space-4)', flexWrap: 'wrap' }}>
         <div className="field" style={{ minWidth: '12rem', flex: 1 }}>
           <label htmlFor={durationId} className="label">
-            Durata (minuti)
+            Duración (minutos)
           </label>
           <input
             id={durationId}
@@ -408,14 +408,14 @@ function ServiceForm({
 
         <div className="field" style={{ minWidth: '12rem', flex: 1 }}>
           <label htmlFor={priceId} className="label">
-            Prezzo (€)
+            Precio (€)
           </label>
           <input
             id={priceId}
             type="text"
             inputMode="decimal"
             className="input"
-            placeholder="es. 45,00"
+            placeholder="ej. 45,00"
             value={draft.price}
             disabled={busy}
             aria-invalid={errors.price !== undefined}
@@ -424,7 +424,7 @@ function ServiceForm({
           />
           {errors.price === undefined ? (
             <p id={`${priceId}-help`} className="helper">
-              Lascialo vuoto se il prezzo va concordato caso per caso.
+              Déjalo vacío si el precio se acuerda caso por caso.
             </p>
           ) : (
             <p id={`${priceId}-error`} className="helper" style={{ color: 'var(--color-danger)' }}>
@@ -436,7 +436,7 @@ function ServiceForm({
 
       <div className="field">
         <label htmlFor={descriptionId} className="label">
-          Descrizione
+          Descripción
         </label>
         <textarea
           id={descriptionId}
@@ -455,7 +455,7 @@ function ServiceForm({
         />
         {errors.description === undefined ? (
           <p id={`${descriptionId}-help`} className="helper">
-            Facoltativa. Ambrogio la usa per spiegare il servizio a chi chiede informazioni.
+            Opcional. Ambrogio la usa para explicar el servicio a quien pide información.
           </p>
         ) : (
           <p
@@ -479,16 +479,16 @@ function ServiceForm({
           }
         />
         <label htmlFor={activeId} className="label" style={{ margin: 0 }}>
-          Attivo: Ambrogio può proporlo e prenotarlo
+          Activo: Ambrogio puede ofrecerlo y reservarlo
         </label>
       </div>
 
       <div className="row" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
         <button type="submit" className="btn btn-primary btn-sm" disabled={busy}>
-          {busy ? 'Salvataggio…' : submitLabel}
+          {busy ? 'Guardando…' : submitLabel}
         </button>
         <button type="button" className="btn btn-ghost btn-sm" onClick={onCancel} disabled={busy}>
-          Annulla
+          Cancelar
         </button>
       </div>
     </form>

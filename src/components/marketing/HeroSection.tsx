@@ -7,23 +7,23 @@ export function HeroSection() {
       <div className="container hero-grid">
         <div className="stack stack-6 animate-fade-up">
           <span className="hero-eyebrow">
-            <span aria-hidden="true">●</span> Beta Italia · Posti limitati
+            <span aria-hidden="true">●</span> Beta LATAM · Cupos limitados
           </span>
           <h1 id="hero-heading" className="display text-balance">
-            La tua reception AI risponde anche di notte. E prenota davvero.
+            Tu recepción AI responde también de noche. Y agenda de verdad.
           </h1>
           <p className="lead text-pretty">
-            Ambrogio.ai è il receptionist AI sempre attivo che risponde su WhatsApp, gestisce voci e
-            testi, prende appuntamenti sul tuo calendario e ti consegna ogni mattina la lista delle
-            cose fatte mentre dormivi.
+            Ambrogio.ai es el recepcionista AI siempre activo que responde en WhatsApp, gestiona
+            audios y textos, agenda citas en tu calendario y cada mañana te entrega la lista de lo
+            hecho mientras dormías.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
             <Link href="/register" className="btn btn-primary btn-lg">
-              Inizia la prova
+              Empezar la prueba
               <span aria-hidden="true">→</span>
             </Link>
             <Link href="/#how-it-works" className="btn btn-secondary btn-lg">
-              Vedi come funziona
+              Ver cómo funciona
             </Link>
           </div>
           <div
@@ -37,15 +37,15 @@ export function HeroSection() {
           >
             <div className="stat">
               <span className="stat-value">24/7</span>
-              <span className="stat-label">Sempre in ascolto</span>
+              <span className="stat-label">Siempre escuchando</span>
             </div>
             <div className="stat">
               <span className="stat-value">EU</span>
-              <span className="stat-label">Dati in Europa</span>
+              <span className="stat-label">Datos en Europa</span>
             </div>
             <div className="stat">
               <span className="stat-value">MIT</span>
-              <span className="stat-label">Codice open source</span>
+              <span className="stat-label">Código open source</span>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ export function HeroSection() {
         >
           <Image
             src="/assets/site-images/ambrogio/svg/01-hero-always-on-reception.svg"
-            alt="Illustrazione di una reception AI sempre attiva"
+            alt="Ilustración de una recepción AI siempre activa"
             width={640}
             height={520}
             priority

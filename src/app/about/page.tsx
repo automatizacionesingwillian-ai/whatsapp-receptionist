@@ -14,12 +14,12 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://ambrogio.ai';
 
 export const metadata: Metadata = {
-  title: 'Chi siamo · Storia, missione e team',
+  title: 'Quiénes somos · Storia, missione e team',
   description:
     'Ambrogio.ai è costruito da operatori di studi reali. Missione, valori, team e perché esistiamo: ridare il telefono alla vita.',
   alternates: { canonical: '/about' },
   openGraph: {
-    title: 'Chi siamo · Ambrogio.ai',
+    title: 'Quiénes somos · Ambrogio.ai',
     description:
       'Ambrogio.ai è costruito da operatori di studi reali. Missione, valori, team italiano.',
     url: '/about',
@@ -64,7 +64,7 @@ export default function AboutPage() {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Chi siamo', url: '/about' },
+          { name: 'Quiénes somos', url: '/about' },
         ])}
       />
       {FOUNDERS.map((person) => (
@@ -82,7 +82,7 @@ export default function AboutPage() {
       <JsonLd
         data={buildWebPageSchema({
           type: 'AboutPage',
-          name: 'Chi siamo · Ambrogio.ai',
+          name: 'Quiénes somos · Ambrogio.ai',
           description:
             'Ambrogio.ai è costruito da operatori di studi reali. Missione, valori, team italiano.',
           url: '/about',
@@ -98,7 +98,7 @@ export default function AboutPage() {
         <section className="section">
           <div className="container-narrow stack stack-12">
             <header className="stack stack-4">
-              <span className="badge">Chi siamo</span>
+              <span className="badge">Quiénes somos</span>
               <h1 className="display text-balance">
                 Costruito da chi ha gestito reception vere, non da chi le ha studiate.
               </h1>
@@ -209,7 +209,7 @@ export default function AboutPage() {
               </address>
               <div className="row" style={{ gap: 'var(--space-3)' }}>
                 <Link href="/contact" className="btn btn-primary">
-                  Contattaci
+                  Contáctanos
                 </Link>
                 <Link href="/legal/privacy" className="btn btn-secondary">
                   Privacy policy

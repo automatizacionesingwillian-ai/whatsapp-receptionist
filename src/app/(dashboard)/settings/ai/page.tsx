@@ -7,7 +7,7 @@ import { logger } from '@/lib/logging/logger';
 import { createAiPromptSettingsService } from '@/server/ai/prompt-settings';
 
 export const metadata: Metadata = {
-  title: 'Personalita AI · Impostazioni · Ambrogio.ai',
+  title: 'Personalidad AI · Configuración · Ambrogio.ai',
 };
 
 // Lo stato dipende dalla sessione: non deve finire in cache statica.
@@ -39,14 +39,14 @@ export default async function AiSettingsPage() {
         <div className="stack stack-2">
           <span className="eyebrow">
             <Link href="/settings" className="btn-link">
-              Impostazioni
+              Configuración
             </Link>{' '}
             / AI
           </span>
-          <h1>Personalita dell&apos;assistente</h1>
+          <h1>Personalidad del asistente</h1>
           <p className="muted">
-            Decidi come parla Ambrogio ai tuoi clienti. Le regole di sicurezza e il formato della
-            risposta restano nostri: puoi leggerli qui sotto, ma non sovrascriverli.
+            Decide cómo habla Ambrogio con tus clientes. Las reglas de seguridad y el formato de la
+            respuesta siguen siendo nuestros: puedes leerlas abajo, pero no reemplazarlas.
           </p>
         </div>
       </div>
@@ -58,19 +58,19 @@ export default async function AiSettingsPage() {
         />
       ) : (
         <section className="card stack stack-3">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Configurazione non leggibile</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Configuración no legible</h2>
           <p className="muted">
-            Non siamo riusciti a recuperare la personalita configurata. Non significa che sia stata
-            persa: e la lettura ad aver fallito, e le risposte continuano a usare l&apos;ultima
-            versione attiva. Ricarica tra poco, e se il problema resta scrivici dalla pagina
-            contatti.
+            No pudimos recuperar la personalidad configurada. No significa que se haya
+            perdido: solo falló la lectura y las respuestas siguen usando la
+            última versión activa. Recarga en un momento y, si el problema continúa, escríbenos desde
+            contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/ai" className="btn btn-secondary btn-sm">
-              Riprova
+              Reintentar
             </Link>
             <Link href="/contact" className="btn btn-ghost btn-sm">
-              Contatta il supporto
+              Contactar soporte
             </Link>
           </div>
         </section>

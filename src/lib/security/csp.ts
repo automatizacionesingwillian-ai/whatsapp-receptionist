@@ -88,9 +88,15 @@ export function generateNonce(): string {
  * - `upgrade-insecure-requests`: auto-upgrade http:// to https://.
  */
 export function buildContentSecurityPolicy(nonce: string): string {
+  const scriptSources = ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'"];
+  if (process.env.NODE_ENV !== 'production') {
+    // Next.js React Refresh evaluates development bundles during hydration.
+    scriptSources.push("'unsafe-eval'");
+  }
+
   const directives: ReadonlyArray<readonly [string, readonly string[]]> = [
     ['default-src', ["'self'"]],
-    ['script-src', ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'"]],
+    ['script-src', scriptSources],
     ['style-src', CSP_STYLE_SRC],
     ['img-src', CSP_IMG_SRC],
     ['font-src', CSP_FONT_SRC],

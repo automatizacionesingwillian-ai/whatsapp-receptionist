@@ -1,5 +1,80 @@
 # Ambrogio.ai Agent Memory
 
+## 2026-10-08 — Auditoría UI es-419 (horarios + panel) — Cursor
+
+- Horarios: días Lunes–Domingo, Abre/Cierra/Cerrado; breadcrumbs `/ Negocio`.
+- Settings/dashboard/pricing/verticales: copy restante IT → es-419; placeholders `es.` → `ej.`.
+- Fuera de alcance por ahora: help article bodies, legal, admin, prompts AI WhatsApp IT.
+
+## 2026-10-08 — Cookies Server Component (dashboard) — Cursor
+
+- Error: `Cookies can only be modified in a Server Action or Route Handler` desde `createSupabaseServerClient` → `getUser()` en páginas RSC.
+- Fix mínimo: `setAll` en `src/lib/supabase/server.ts` con try/catch (patrón oficial Supabase SSR).
+
+## 2026-10-08 — Onboarding audit_log inet — Cursor
+
+- Segundo 502 al continuar onboarding: `42804 column ip_address is of type inet but expression is of type text` (`::1` local).
+- Fix: `create_tenant_onboarding` casteá IP a `inet` (inválidas → NULL). Migración aplicada en SENTRA AI.
+
+## 2026-10-08 — Onboarding RPC + UI es-419 — Cursor
+
+- Fix PG: `create_tenant_onboarding` ambiguous `trial_ends_at` (RETURNS TABLE vs tenants column) → qualify `public.tenants.*`; migration applied on SENTRA AI.
+- Fix hydration: `JsonLd` + `suppressHydrationWarning`; removed JSON-LD from private `/onboarding`.
+- UI product copy → español latinoamericano (auth, onboarding, shell, dashboard, marketing principal); `lang=es`, locale default `es-419`.
+- Post-traducción (2 pases): dashboard/settings/marketing/help chrome OK; `twitter-image` runtime local (anti-spam HMR); `npm run typecheck` OK. Pendiente opcional: cuerpos help/articles, legal profundo, admin.
+
+## 2026-10-08 — Magic link: rate limit + callback hash — Cursor
+
+- Causa: `email rate limit exceeded` (Supabase) → nessun nuovo email; callback server `route.ts` non vede `#access_token` → `link_incompleto`.
+- Fix: rimosso `auth/callback/route.ts` a favore di `AuthCallbackClient` (hash/PKCE/OTP); su rate limit email in development fallback `admin.generateLink` + `recoveryLink` in UI login.
+- Verifica: test magic-link + typecheck.
+
+## 2026-10-08 — Fix loop auth magic link → login — Cursor
+
+- Causa: dopo il magic link la sessione c’era ma senza `tenant_id` in `app_metadata`; la dashboard faceva redirect a `/login` in loop.
+- Fix: callback scrive i cookie sulla `NextResponse`, destinazione post-auth → `/onboarding` se mancano i claim; `requireSessionOrRedirect` idem.
+- Onboarding richiede autenticazione; login mostra errori da query; JSON-LD con `suppressHydrationWarning` per il nonce CSP.
+- Test: `tests/server/auth/post-auth-destination.test.ts`.
+
+## 2026-10-08 — Node 22 + migraciones SENTRA AI — Cursor
+
+- Validado Node del sistema: v24.19.0 (fuera de `engines >=22 <23`).
+- Instalado `fnm` y Node **22.23.3**; perfil PowerShell actualizado con `fnm env --use-on-cd`.
+- Proyecto Supabase **SENTRA AI** (`tkaayejekdpyimmmpbdi`, us-west-2) enlazado vía MCP; `.env.local` ya apuntaba a ese ref.
+- Aplicadas migraciones de schema (22 tablas, RLS, RPCs, onboarding, Stripe, usage, GDPR, contact).
+- Ajuste PG17: constraint anti-overlap de appointments vía función IMMUTABLE `appointment_tstzrange` (`202610080001_appointments_gist_pg17.sql`).
+- Verificación: `npm run db:lint` → `RLS migration coverage OK: 22 tables`.
+
+## 2026-10-08 — Vuelta a auth Supabase (magic link) — Cursor
+
+- Eliminado modo `local-auth` (archivo JSON en `.data/`, ruta `/api/auth/login`, dashboard local).
+- Restaurados formularios y sesión oficiales: magic link en login, sign-up vía `createSignUpService`, callback `/auth/callback`.
+- Creado `.env.local` de plantilla con secretos de dev generados y guía `docs/setup/SUPABASE-DEV.es.md`.
+- Verificación: `npm run typecheck` (pendiente Supabase keys del usuario para flujo E2E manual).
+
+## 2026-09-07 - Redirección de registro local - Fatto da GitHub Copilot
+
+- Corregida la CSP de desarrollo para permitir `unsafe-eval` únicamente con React Refresh; el bloqueo impedía hidratar los formularios y ejecutar la redirección.
+- Verificado en navegador real: crear cuenta desde `/register` redirige a `/dashboard` y la sesión local permanece activa.
+- Corregido un error de TypeScript causado por `exactOptionalPropertyTypes` en el layout del dashboard.
+- Verificación: typecheck correcto.
+
+## 2026-09-07 - Autenticación local - Fatto da GitHub Copilot
+
+- Añadido registro y login local con password hash `scrypt`, sesiones `httpOnly` y persistencia en `.data/local-auth.json`.
+- El modo local se activa automáticamente cuando no hay credenciales Supabase configuradas.
+- El dashboard permite explorar la interfaz sin Supabase y mantiene el flujo Supabase cuando sus credenciales existen.
+- Verificación end-to-end: registro HTTP 200, cookie creada, login HTTP 200 y `/dashboard` HTTP 200 con modo local.
+- Verificación adicional: TypeScript y ESLint completados sin errores.
+
+## 2026-09-07 - Fatto da GitHub Copilot
+
+- Actualizadas las dependencias dentro de sus rangos compatibles y sincronizado `package-lock.json`.
+- Corregido el script `typecheck` para que funcione en Windows sin depender de `rm`.
+- Alineado el override de PostCSS con la versión directa actualizada.
+- Verificación: TypeScript, tests y lint completados; lint con 0 errores y 14 warnings preexistentes.
+- La interfaz de desarrollo quedó disponible en `http://localhost:3000` y respondió HTTP 200.
+
 ## 2026-04-24 - Fatto da Codex
 
 - Trasformata `[project-root]` in repo operativo indipendente con `git init`.

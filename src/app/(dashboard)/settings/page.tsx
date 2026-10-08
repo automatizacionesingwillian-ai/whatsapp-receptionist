@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Impostazioni · Ambrogio.ai',
+  title: 'Configuración · Ambrogio.ai',
 };
 
 interface SettingsLink {
@@ -27,46 +27,46 @@ interface SettingsGroup {
 
 const SETTINGS_GROUPS: readonly SettingsGroup[] = [
   {
-    title: 'Studio',
-    description: 'Nome, settore, lingua, fuso orario.',
+    title: 'Negocio',
+    description: 'Nombre, sector, idioma, zona horaria.',
     links: [
-      { href: '/settings/profile', label: 'Profilo studio', available: false },
-      { href: '/settings/business-hours', label: 'Orari di apertura', available: true },
-      { href: '/settings/services', label: 'Servizi e listino', available: true },
-      { href: '/settings/team', label: 'Team e operatori', available: false },
+      { href: '/settings/profile', label: 'Perfil del negocio', available: false },
+      { href: '/settings/business-hours', label: 'Horarios de apertura', available: true },
+      { href: '/settings/services', label: 'Servicios y tarifario', available: true },
+      { href: '/settings/team', label: 'Equipo y operadores', available: false },
     ],
   },
   {
-    title: 'Integrazioni',
-    description: 'Connetti i canali di comunicazione e gli strumenti che già usi.',
+    title: 'Integraciones',
+    description: 'Conecta los canales de comunicación y las herramientas que ya usas.',
     links: [
       { href: '/settings/whatsapp', label: 'WhatsApp Business', available: true },
       { href: '/settings/calendar', label: 'Google Calendar', available: false },
-      { href: '/settings/voice', label: 'Voce ElevenLabs', available: false },
-      { href: '/settings/webhooks', label: 'Webhook custom', available: false },
+      { href: '/settings/voice', label: 'Voz ElevenLabs', available: false },
+      { href: '/settings/webhooks', label: 'Webhooks personalizados', available: false },
     ],
   },
   {
     title: 'AI',
-    description: 'Personalità, prompt, knowledge base.',
+    description: 'Personalidad, prompts, base de conocimiento.',
     links: [
-      { href: '/settings/personality', label: 'Tono e personalità', available: false },
-      { href: '/settings/knowledge', label: 'Knowledge base', available: false },
-      { href: '/settings/escalation', label: 'Regole di escalation', available: false },
+      { href: '/settings/personality', label: 'Tono y personalidad', available: false },
+      { href: '/settings/knowledge', label: 'Base de conocimiento', available: false },
+      { href: '/settings/escalation', label: 'Reglas de escalamiento', available: false },
     ],
   },
   {
-    title: 'Account e sicurezza',
-    description: 'Piano, fatturazione, privacy, GDPR.',
+    title: 'Cuenta y seguridad',
+    description: 'Plan, facturación, privacidad, GDPR.',
     links: [
-      { href: '/billing', label: 'Piano e fatturazione', available: true },
-      { href: '/settings/security', label: 'Sicurezza', available: false },
+      { href: '/billing', label: 'Plan y facturación', available: true },
+      { href: '/settings/security', label: 'Seguridad', available: false },
       {
         href: '/settings/data-export',
-        label: 'Esporta i tuoi dati (GDPR Art. 15)',
+        label: 'Exportar tus datos (GDPR art. 15)',
         available: false,
       },
-      { href: '/settings/danger-zone', label: 'Cancella account', available: false },
+      { href: '/settings/danger-zone', label: 'Eliminar cuenta', available: false },
     ],
   },
 ];
@@ -84,11 +84,11 @@ export default function SettingsPage() {
     <>
       <div className="dashboard-header">
         <div className="stack stack-2">
-          <span className="eyebrow">Impostazioni</span>
-          <h1>Configura il tuo studio</h1>
+          <span className="eyebrow">Configuración</span>
+          <h1>Configura tu negocio</h1>
           <p className="muted">
-            Tutto quello che riguarda Ambrogio: come parla, come prenota, come ti notifica. Le voci
-            marcate «In arrivo» non sono ancora attive.
+            Todo lo que tiene que ver con Ambrogio: cómo habla, cómo reserva, cómo te notifica. Las
+            opciones marcadas «Próximamente» aún no están activas.
           </p>
         </div>
       </div>
@@ -120,7 +120,7 @@ export default function SettingsPage() {
                   ) : (
                     <div className="row-between" style={{ ...ROW_STYLE, opacity: 0.65 }}>
                       <span className="muted">{link.label}</span>
-                      <span className="badge badge-neutral">In arrivo</span>
+                      <span className="badge badge-neutral">Próximamente</span>
                     </div>
                   )}
                 </li>

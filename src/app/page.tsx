@@ -15,14 +15,14 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 import { VerticalsSection } from '@/components/marketing/VerticalsSection';
 
 export const metadata: Metadata = {
-  title: 'AI Receptionist Italia per studi e PMI',
+  title: 'Recepcionista AI para negocios y PyMEs',
   description:
-    'Reception AI sempre attiva su WhatsApp e voce: prenota appuntamenti, filtra urgenze e libera la segretaria. Setup in 24h, trial 14 giorni.',
+    'Recepción AI siempre activa en WhatsApp y voz: agenda citas, filtra urgencias y libera a recepción. Configuración en 24 h, prueba 14 días.',
   openGraph: {
-    title: 'Ambrogio.ai — AI Receptionist Italia sempre attivo',
+    title: 'Ambrogio.ai — Recepcionista AI siempre activo',
     description:
-      'AI Receptionist su WhatsApp e voce per studi dentistici, centri estetici, palestre e studi professionali. Hosting EU, GDPR ready.',
-    locale: 'it_IT',
+      'Recepcionista AI en WhatsApp y voz para clínicas dentales, centros de estética, gimnasios y servicios profesionales. Hosting EU, listo para GDPR.',
+    locale: 'es_419',
     type: 'website',
     url: '/',
   },

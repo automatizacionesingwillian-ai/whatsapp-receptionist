@@ -34,6 +34,22 @@ describe('MagicLinkService', () => {
     expect(result).toEqual({ ok: true });
   });
 
+  it('returns recoveryLink when sender provides one (dev rate-limit bypass)', async () => {
+    const sender: MagicLinkSender = {
+      send: vi.fn(async () => ({
+        error: null,
+        recoveryLink: 'https://auth.test/verify?token=abc',
+      })),
+    };
+    const service = new MagicLinkService(sender, 'https://app.test/cb');
+
+    const result = await service.request({ email: 'mario@example.it', requestId: 'req_4' });
+    expect(result).toEqual({
+      ok: true,
+      recoveryLink: 'https://auth.test/verify?token=abc',
+    });
+  });
+
   it('returns ok and skips sender when email is invalid (anti-enumeration)', async () => {
     const sender = new FakeSender();
     const service = new MagicLinkService(sender, 'https://app.test/cb');

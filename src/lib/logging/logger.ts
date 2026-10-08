@@ -8,7 +8,7 @@ import { env } from '@/lib/env';
  * Copre:
  * - Credenziali e header sensibili (password/token/cookie/authorization).
  * - PII personali italiane (codice fiscale, partita IVA, IBAN).
- * - Contatti (email, telefono, WhatsApp).
+ * - Contacto (email, telefono, WhatsApp).
  * - Dati cliente (nome, indirizzo) anche annidati sotto `customer.*`.
  * - Contenuti messaggi (`messageBody`, `body`) e media URL audio
  *   (vocali utente in webhook WhatsApp).
@@ -40,7 +40,7 @@ const redactPaths: string[] = [
   '*.authorization',
   '*.cookie',
 
-  // Contatti
+  // Contacto
   'email',
   'phone',
   'phoneNumber',

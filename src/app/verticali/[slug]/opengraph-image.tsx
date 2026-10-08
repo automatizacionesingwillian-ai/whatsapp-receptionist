@@ -7,15 +7,19 @@ export const contentType = 'image/png';
 
 const VERTICAL_META: Record<string, { label: string; metric: string; color: string }> = {
   dental: {
-    label: 'Studi dentistici',
-    metric: 'Risponde 24/7',
+    label: 'Clínicas dentales',
+    metric: 'Responde 24/7',
     color: 'oklch(45% 0.12 175)',
   },
-  beauty: { label: 'Centri estetici', metric: 'Promemoria automatici', color: 'oklch(55% 0.1 80)' },
-  fitness: { label: 'Palestre e PT', metric: 'Disponibilità live', color: 'oklch(45% 0.13 145)' },
+  beauty: {
+    label: 'Centros de estética',
+    metric: 'Recordatorios automáticos',
+    color: 'oklch(55% 0.1 80)',
+  },
+  fitness: { label: 'Gimnasios y PT', metric: 'Disponibilidad en vivo', color: 'oklch(45% 0.13 145)' },
   professional: {
-    label: 'Studi professionali',
-    metric: 'Lead pre-qualificati',
+    label: 'Negocios profesionales',
+    metric: 'Leads precalificados',
     color: 'oklch(40% 0.1 260)',
   },
 };

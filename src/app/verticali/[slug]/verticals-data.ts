@@ -1,5 +1,5 @@
 /**
- * Verticali dataset.
+ * Verticales dataset.
  * Estratto in modulo dedicato per mantenere la pagina <250 righe.
  */
 
@@ -24,178 +24,178 @@ export interface VerticalContent {
 export const VERTICALS_DATA: Record<string, VerticalContent> = {
   dental: {
     slug: 'dental',
-    title: 'Studi dentistici',
-    metaTitle: 'AI Receptionist Studi Dentistici',
+    title: 'Clínicas dentales',
+    metaTitle: 'Recepción AI para clínicas dentales',
     metaDescription:
-      'AI receptionist per studi dentistici. Filtra urgenze, gestisce richiami, capisce quando serve la dottoressa.',
-    serviceType: 'AI Reception per Studi Dentistici',
+      'Recepción AI para clínicas dentales. Filtra urgencias, gestiona recordatorios y sabe cuándo hace falta el especialista.',
+    serviceType: 'Recepción AI para clínicas dentales',
     hero: {
-      eyebrow: 'Per studi dentistici',
-      h1: 'Mai più una chiamata di urgenza persa.',
-      body: 'Ambrogio capisce se è un mal di denti acuto o una richiesta di pulizia, fissa appuntamenti, gestisce i richiami semestrali e ti consegna ogni mattina la lista delle priorità.',
+      eyebrow: 'Para clínicas dentales',
+      h1: 'Nunca más pierdas una llamada de urgencia.',
+      body: 'Ambrogio distingue si es dolor agudo o una limpieza de rutina, agenda citas, gestiona recordatorios semestrales y cada mañana te entrega la lista de prioridades.',
     },
     icon: '/assets/site-images/ambrogio/svg/06-vertical-dental.svg',
     pains: [
       {
-        title: 'Reception sotto pressione',
-        body: 'Le segretarie passano metà del tempo al telefono. Ambrogio prende il primo step e libera l’umano per il valore aggiunto.',
+        title: 'Recepción bajo presión',
+        body: 'El equipo pasa la mitad del tiempo al teléfono. Ambrogio da el primer paso y libera a las personas para el valor humano.',
       },
       {
-        title: 'Richiami che si dimenticano',
-        body: 'Igiene semestrale, controlli post-cura, ortodonzia. Ambrogio ricorda tutto e ricontatta al momento giusto.',
+        title: 'Recordatorios que se olvidan',
+        body: 'Higiene semestral, controles post-tratamiento, ortodoncia. Ambrogio lo recuerda todo y contacta en el momento correcto.',
       },
       {
-        title: 'Urgenze fuori orario',
-        body: 'Mal di denti la sera. Festivi. Sabato pomeriggio. Ambrogio risponde, qualifica l’urgenza e ti contatta solo quando serve.',
+        title: 'Urgencias fuera de horario',
+        body: 'Dolor de noche. Festivos. Sábado por la tarde. Ambrogio responde, califica la urgencia y te avisa solo cuando hace falta.',
       },
     ],
     scenarios: [
       {
-        title: 'Igiene semestrale',
-        body: '“Buongiorno, è ora della pulizia di Anna.” Ambrogio legge l’ultima visita, propone 3 slot, conferma su Google Calendar.',
+        title: 'Higiene semestral',
+        body: '“Buenos días, le toca la limpieza a Ana.” Ambrogio lee la última visita, propone 3 horarios y confirma en Google Calendar.',
       },
       {
-        title: 'Mal di denti acuto',
-        body: '“Forte dolore, lato destro, da stamattina.” Ambrogio chiede dolore 1-10, qualifica, escalation immediata se >7.',
+        title: 'Dolor dental agudo',
+        body: '“Mucho dolor, lado derecho, desde esta mañana.” Ambrogio pregunta escala 1-10, califica y escala de inmediato si es >7.',
       },
       {
-        title: 'Preventivo ortodonzia',
-        body: '“Quanto costa l’apparecchio?” Ambrogio raccoglie info pre-anamnesi, fissa visita conoscitiva con materiali pronti.',
+        title: 'Presupuesto de ortodoncia',
+        body: '“¿Cuánto cuesta el aparato?” Ambrogio recopila datos previos, agenda visita de valoración con todo listo.',
       },
     ],
-    metric: { value: '24/7', label: 'Risponde e prenota anche fuori orario' },
+    metric: { value: '24/7', label: 'Responde y reserva también fuera de horario' },
     relatedBlogSlug: null,
   },
   beauty: {
     slug: 'beauty',
-    title: 'Centri estetici e SPA',
-    metaTitle: 'AI Receptionist Centri Estetici e SPA',
+    title: 'Centros de estética y SPA',
+    metaTitle: 'Recepción AI para centros de estética y SPA',
     metaDescription:
-      'AI receptionist per centri estetici, parrucchieri e SPA. Trattamenti, pacchetti, gift card.',
-    serviceType: 'AI Reception per Centri Estetici',
+      'Recepción AI para centros de estética, peluquerías y SPA. Tratamientos, paquetes y tarjetas regalo.',
+    serviceType: 'Recepción AI para centros de estética',
     hero: {
-      eyebrow: 'Per centri estetici e SPA',
-      h1: 'Ogni trattamento ha il suo prezzo, il suo tempo, la sua materia. Ambrogio li conosce.',
-      body: 'Manicure, pedicure, ceretta, massaggi, depilazione laser, trattamenti viso. Ambrogio gestisce listini complessi, pacchetti, gift card. E parla il linguaggio caldo del tuo brand.',
+      eyebrow: 'Para centros de estética y SPA',
+      h1: 'Cada tratamiento tiene su precio, su tiempo y su material. Ambrogio los conoce.',
+      body: 'Manicura, pedicura, depilación, masajes, láser, facial. Ambrogio maneja tarifarios complejos, paquetes y tarjetas regalo. Y habla con el tono cálido de tu marca.',
     },
     icon: '/assets/site-images/ambrogio/svg/07-vertical-beauty.svg',
     pains: [
       {
-        title: 'Listino complesso',
-        body: 'Decine di trattamenti con tempi, materiali e operatori dedicati. Ambrogio sa chi fa cosa e quanto costa.',
+        title: 'Tarifario complejo',
+        body: 'Decenas de tratamientos con tiempos, materiales y especialistas. Ambrogio sabe quién hace qué y cuánto cuesta.',
       },
       {
-        title: 'Pacchetti e gift card',
-        body: 'Vendi pacchetti? Gift card? Promo stagionali? Ambrogio conosce le condizioni e applica le regole giuste.',
+        title: 'Paquetes y tarjetas regalo',
+        body: '¿Vendes paquetes? ¿Tarjetas regalo? ¿Promos de temporada? Ambrogio conoce las condiciones y aplica las reglas correctas.',
       },
       {
-        title: 'No-show da incubo',
-        body: 'Reminder via WhatsApp 24h prima riducono i no-show del 70%. Ambrogio li manda automatici.',
+        title: 'Inasistencias',
+        body: 'Recordatorios por WhatsApp 24 h antes reducen los no-show hasta un 70 %. Ambrogio los envía automáticamente.',
       },
     ],
     scenarios: [
       {
-        title: 'Pacchetto trattamento viso',
-        body: '“Vorrei iniziare il pacchetto pulizia profonda.” Ambrogio propone 4 slot a settimana per 4 settimane, gestisce calendario.',
+        title: 'Paquete facial',
+        body: '“Quiero empezar el paquete de limpieza profunda.” Ambrogio propone 4 horarios semanales por 4 semanas y gestiona la agenda.',
       },
       {
-        title: 'Gift card di Natale',
-        body: '“Posso comprare una gift da 80€?” Ambrogio raccoglie dati, manda link Stripe, genera codice univoco.',
+        title: 'Tarjeta regalo navideña',
+        body: '“¿Puedo comprar una tarjeta de 80 €?” Ambrogio recopila datos, envía enlace de Stripe y genera un código único.',
       },
       {
-        title: 'Promo stagionale',
-        body: '“È ancora valida la promo abbronzante?” Ambrogio controlla scadenze, condizioni, e prenota.',
+        title: 'Promo de temporada',
+        body: '“¿Sigue vigente la promo de bronceado?” Ambrogio revisa fechas y condiciones, y reserva.',
       },
     ],
-    metric: { value: 'Auto', label: 'Promemoria prima di ogni appuntamento' },
+    metric: { value: 'Auto', label: 'Recordatorio antes de cada cita' },
     relatedBlogSlug: null,
   },
   fitness: {
     slug: 'fitness',
-    title: 'Palestre e personal trainer',
-    metaTitle: 'AI Receptionist Palestre e Personal Trainer',
+    title: 'Gimnasios y entrenadores personales',
+    metaTitle: 'Recepción AI para gimnasios y entrenadores',
     metaDescription:
-      'AI receptionist per palestre, studi pilates, personal trainer. Lezioni, slot PT, abbonamenti.',
-    serviceType: 'AI Reception per Palestre e PT',
+      'Recepción AI para gimnasios, estudios de pilates y personal trainers. Clases, slots de PT y membresías.',
+    serviceType: 'Recepción AI para gimnasios y PT',
     hero: {
-      eyebrow: 'Per palestre e personal trainer',
-      h1: 'Lezioni piene. Abbandoni in calo. Tu più tempo per allenare.',
-      body: 'Ambrogio gestisce lezioni di gruppo, slot di personal training, lista d’attesa, abbonamenti. Manda i reminder che fanno la differenza tra venire e saltare.',
+      eyebrow: 'Para gimnasios y personal trainers',
+      h1: 'Clases llenas. Menos bajas. Más tiempo para entrenar.',
+      body: 'Ambrogio gestiona clases grupales, slots de entrenamiento personal, listas de espera y membresías. Envía los recordatorios que marcan la diferencia entre asistir o faltar.',
     },
     icon: '/assets/site-images/ambrogio/svg/08-vertical-fitness.svg',
     pains: [
       {
-        title: 'Lezioni a numero chiuso',
-        body: 'Pilates, yoga, spinning. Posti limitati, lista d’attesa dinamica, no-show. Ambrogio gestisce tutto come un dispatcher.',
+        title: 'Clases con cupo limitado',
+        body: 'Pilates, yoga, spinning. Plazas limitadas, lista de espera dinámica, no-shows. Ambrogio lo coordina como un dispatcher.',
       },
       {
-        title: 'Slot PT',
-        body: 'Ogni trainer ha il suo calendario. Ambrogio rispetta disponibilità, evita sovrapposizioni, propone alternative.',
+        title: 'Slots de PT',
+        body: 'Cada entrenador tiene su calendario. Ambrogio respeta disponibilidad, evita solapes y propone alternativas.',
       },
       {
-        title: 'Abbonamenti che decadono',
-        body: 'Ambrogio manda promemoria di rinnovo prima della scadenza. Calo abbandoni misurabile.',
+        title: 'Membresías por vencer',
+        body: 'Ambrogio envía recordatorios de renovación antes del vencimiento. Las bajas bajan de forma medible.',
       },
     ],
     scenarios: [
       {
-        title: 'Prenotazione lezione',
-        body: '“Pilates martedì alle 19?” Ambrogio controlla disponibilità, conferma, manda reminder 2h prima.',
+        title: 'Reserva de clase',
+        body: '“¿Pilates el martes a las 19?” Ambrogio revisa cupo, confirma y manda recordatorio 2 h antes.',
       },
       {
-        title: 'Lista d’attesa',
-        body: '“Pieno? Avvisami se si libera.” Ambrogio mette in lista, contatta automaticamente alla disdetta.',
+        title: 'Lista de espera',
+        body: '“¿Lleno? Avísame si se libera.” Ambrogio apunta en lista y contacta automáticamente si hay cancelación.',
       },
       {
-        title: 'Slot PT ricorrente',
-        body: '“Vorrei i lunedì alle 18 con Marco.” Ambrogio crea slot ricorrenti su Google Calendar di Marco.',
+        title: 'Slot recurrente de PT',
+        body: '“Quiero los lunes a las 18 con Marco.” Ambrogio crea slots recurrentes en el Google Calendar de Marco.',
       },
     ],
-    metric: { value: 'Live', label: 'Posti e disponibilità sempre aggiornati' },
+    metric: { value: 'Live', label: 'Cupos y disponibilidad siempre actualizados' },
     relatedBlogSlug: null,
   },
   professional: {
     slug: 'professional',
-    title: 'Studi professionali',
-    metaTitle: 'AI Receptionist Studi Professionali',
+    title: 'Negocios profesionales',
+    metaTitle: 'Recepción AI para negocios profesionales',
     metaDescription:
-      'AI receptionist per avvocati, commercialisti, consulenti. Qualifica lead, fissa incontri.',
-    serviceType: 'AI Reception per Studi Professionali',
+      'Recepción AI para abogados, contadores y consultores. Califica leads y agenda reuniones.',
+    serviceType: 'Recepción AI para negocios profesionales',
     hero: {
-      eyebrow: 'Per studi professionali',
-      h1: 'Solo gli incontri che valgono. Solo i clienti giusti.',
-      body: 'Avvocati, commercialisti, consulenti. Ambrogio qualifica le richieste, raccoglie il pre-briefing, e fissa solo gli incontri con chi è realmente interessato.',
+      eyebrow: 'Para negocios profesionales',
+      h1: 'Solo reuniones que valen. Solo clientes adecuados.',
+      body: 'Abogados, contadores, consultores. Ambrogio califica solicitudes, recopila el briefing previo y agenda solo reuniones con quien realmente está interesado.',
     },
     icon: '/assets/site-images/ambrogio/svg/09-vertical-professional-office.svg',
     pains: [
       {
-        title: 'Lead non qualificati',
-        body: 'Tante chiamate, pochi clienti. Ambrogio chiede subito le info che contano e filtra prima di prendere il tuo tempo.',
+        title: 'Leads sin calificar',
+        body: 'Muchas llamadas, pocos clientes. Ambrogio pide de entrada la información clave y filtra antes de ocupar tu tiempo.',
       },
       {
-        title: 'Pre-briefing assente',
-        body: 'Arrivi in riunione senza sapere il caso. Ambrogio raccoglie il contesto e te lo manda 30min prima.',
+        title: 'Sin briefing previo',
+        body: 'Llegas a la reunión sin contexto del caso. Ambrogio recopila el contexto y te lo envía 30 min antes.',
       },
       {
-        title: 'Confidentiality',
-        body: 'I dati restano in EU, redatti nei log, criptati a riposo. DPA pronto per ogni cliente che lo richiede.',
+        title: 'Confidencialidad',
+        body: 'Los datos permanecen en la UE, enmascarados en logs y cifrados en reposo. DPA listo para cada cliente que lo pida.',
       },
     ],
     scenarios: [
       {
-        title: 'Nuovo cliente avvocato',
-        body: '“Ho un problema di lavoro.” Ambrogio chiede settore, urgenza, tipo problema, prima udienza, manda pre-briefing.',
+        title: 'Nuevo cliente — abogado',
+        body: '“Tengo un problema laboral.” Ambrogio pregunta sector, urgencia, tipo de caso, primera audiencia y envía el briefing.',
       },
       {
-        title: 'Commercialista — partita IVA',
-        body: '“Vorrei aprire una P.IVA.” Ambrogio chiede tipo attività, regime fiscale presunto, fattura elettronica, fissa call.',
+        title: 'Contador — alta fiscal',
+        body: '“Quiero abrir mi actividad.” Ambrogio pregunta tipo de negocio, régimen fiscal y agenda la llamada.',
       },
       {
-        title: 'Consulente — rinnovo contratto',
-        body: '“Vorrei parlare del rinnovo.” Ambrogio identifica cliente, recupera storico, fissa incontro con context.',
+        title: 'Consultor — renovación',
+        body: '“Quiero hablar de la renovación.” Ambrogio identifica al cliente, recupera historial y fija reunión con contexto.',
       },
     ],
-    metric: { value: 'Filtro', label: 'Qualifica la richiesta prima del contatto' },
+    metric: { value: 'Filtro', label: 'Califica la solicitud antes del contacto' },
     relatedBlogSlug: null,
   },
 };

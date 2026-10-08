@@ -10,16 +10,16 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Centro assistenza',
+  title: 'Centro de ayuda',
   description:
-    'Trova guide passo-passo, FAQ e contatti diretti per setup WhatsApp, Google Calendar, fatturazione SDI e GDPR della tua reception AI Italia.',
+    'Guías paso a paso, FAQ y contacto directo para configurar WhatsApp, Google Calendar, facturación y GDPR de tu recepción AI.',
   alternates: { canonical: '/help' },
   openGraph: {
-    title: 'Centro assistenza Ambrogio.ai',
-    description: 'Guide pratiche, FAQ e contatti diretti per la tua reception AI Italia.',
+    title: 'Centro de ayuda Ambrogio.ai',
+    description: 'Guías prácticas, FAQ y contacto directo para tu recepción AI.',
     url: '/help',
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
@@ -35,43 +35,43 @@ interface HelpTopic {
 
 const TOPICS: ReadonlyArray<HelpTopic> = [
   {
-    title: 'Setup e onboarding',
+    title: 'Configuración e incorporación',
     items: [
       {
-        label: 'Come collegare il numero WhatsApp Business',
+        label: 'Cómo conectar el número de WhatsApp Business',
         slug: 'come-collegare-il-numero-whatsapp-business',
       },
-      { label: 'Come autorizzare Google Calendar', slug: 'come-autorizzare-google-calendar' },
-      { label: 'Caricare il listino servizi', slug: 'caricare-il-listino-servizi' },
-      { label: 'Configurare gli orari di apertura', slug: 'configurare-gli-orari-di-apertura' },
+      { label: 'Cómo autorizar Google Calendar', slug: 'come-autorizzare-google-calendar' },
+      { label: 'Cargar el tarifario de servicios', slug: 'caricare-il-listino-servizi' },
+      { label: 'Configurar horarios de apertura', slug: 'configurare-gli-orari-di-apertura' },
     ],
   },
   {
-    title: 'Conversazioni',
+    title: 'Conversaciones',
     items: [
-      { label: 'Come funziona il filtro AI', slug: 'come-funziona-il-filtro-ai' },
-      { label: 'Quando interviene un umano', slug: 'quando-interviene-un-umano' },
-      { label: 'Gestire vocali e media', slug: 'gestire-vocali-e-media' },
-      { label: 'Risposte rapide preconfezionate', slug: 'risposte-rapide-preconfezionate' },
+      { label: 'Cómo funciona el filtro AI', slug: 'come-funziona-il-filtro-ai' },
+      { label: 'Cuándo interviene un humano', slug: 'quando-interviene-un-umano' },
+      { label: 'Gestionar audios y multimedia', slug: 'gestire-vocali-e-media' },
+      { label: 'Respuestas rápidas predefinidas', slug: 'risposte-rapide-preconfezionate' },
     ],
   },
   {
-    title: 'Calendario e booking',
+    title: 'Calendario y reservas',
     items: [
-      { label: 'Come Ambrogio prenota appuntamenti', slug: 'come-ambrogio-prenota-appuntamenti' },
-      { label: 'Gestire conflitti calendario', slug: 'gestire-conflitti-calendario' },
-      { label: 'Reminder automatici', slug: 'reminder-automatici' },
-      { label: 'Gestire le disdette', slug: 'gestire-le-disdette' },
+      { label: 'Cómo Ambrogio reserva citas', slug: 'come-ambrogio-prenota-appuntamenti' },
+      { label: 'Gestionar conflictos de calendario', slug: 'gestire-conflitti-calendario' },
+      { label: 'Recordatorios automáticos', slug: 'reminder-automatici' },
+      { label: 'Gestionar cancelaciones', slug: 'gestire-le-disdette' },
     ],
   },
   {
-    title: 'Account e fatturazione',
+    title: 'Cuenta y facturación',
     items: [
-      { label: 'Cambiare piano', slug: 'cambiare-piano' },
-      { label: 'Scaricare fatture elettroniche SDI', slug: 'scaricare-fatture-elettroniche-sdi' },
-      { label: 'Aggiornare dati P.IVA', slug: 'aggiornare-dati-piva' },
-      { label: 'Esportare i miei dati (GDPR)', slug: 'esportare-i-miei-dati-gdpr' },
-      { label: 'Cancellare account', slug: 'cancellare-account' },
+      { label: 'Cambiar de plan', slug: 'cambiare-piano' },
+      { label: 'Descargar facturas electrónicas', slug: 'scaricare-fatture-elettroniche-sdi' },
+      { label: 'Actualizar datos fiscales', slug: 'aggiornare-dati-piva' },
+      { label: 'Exportar mis datos (GDPR)', slug: 'esportare-i-miei-dati-gdpr' },
+      { label: 'Eliminar cuenta', slug: 'cancellare-account' },
     ],
   },
 ] as const;
@@ -83,14 +83,14 @@ export default async function HelpPage() {
     <>
       <JsonLd
         data={buildBreadcrumbSchema([
-          { name: 'Home', url: '/' },
-          { name: 'Centro assistenza', url: '/help' },
+          { name: 'Inicio', url: '/' },
+          { name: 'Centro de ayuda', url: '/help' },
         ])}
       />
       <JsonLd
         data={buildCollectionPageSchema({
-          name: 'Centro assistenza Ambrogio.ai',
-          description: 'Guide pratiche, FAQ e tutorial per usare Ambrogio.',
+          name: 'Centro de ayuda Ambrogio.ai',
+          description: 'Guías prácticas, FAQ y tutoriales para usar Ambrogio.',
           url: '/help',
           hasPart: allItems.map((it) => ({
             name: it.label,
@@ -106,25 +106,25 @@ export default async function HelpPage() {
               className="stack stack-4 text-center"
               style={{ maxWidth: '720px', margin: '0 auto var(--space-12)' }}
             >
-              <span className="badge">Centro assistenza</span>
-              <h1 className="display text-balance">Come possiamo aiutarti?</h1>
+              <span className="badge">Centro de ayuda</span>
+              <h1 className="display text-balance">¿Cómo podemos ayudarte?</h1>
               <p className="lead text-pretty" style={{ margin: '0 auto' }}>
-                Guide, FAQ e canali diretti. Risposta entro 4 ore lavorative per Starter, 1 ora per
-                Professional, immediata per Agency.
+                Guías, FAQ y canales directos. Respuesta en 4 horas hábiles para Starter, 1 hora para
+                Professional, inmediata para Agency.
               </p>
               <div className="row" style={{ justifyContent: 'center', gap: 'var(--space-3)' }}>
                 <label htmlFor="help-search" className="sr-only">
-                  Cerca nel centro assistenza
+                  Buscar en el centro de ayuda
                 </label>
                 <input
                   id="help-search"
                   type="search"
-                  placeholder="Cerca una guida o domanda"
+                  placeholder="Busca una guía o pregunta"
                   className="input"
                   style={{ maxWidth: '420px' }}
                 />
                 <button type="button" className="btn btn-primary">
-                  Cerca
+                  Buscar
                 </button>
               </div>
             </div>
@@ -172,20 +172,20 @@ export default async function HelpPage() {
               className="stack stack-6 text-center"
               style={{ maxWidth: '640px', margin: '0 auto' }}
             >
-              <h2>Non hai trovato quello che cercavi?</h2>
+              <h2>¿No encontraste lo que buscabas?</h2>
               <p className="muted text-pretty">
-                Contattaci direttamente. Rispondiamo entro 4 ore lavorative.
+                Contáctanos directamente. Respondemos en 4 horas hábiles.
               </p>
               <div className="row" style={{ justifyContent: 'center', gap: 'var(--space-3)' }}>
                 <Link href="/contact" className="btn btn-primary btn-lg">
-                  Apri un ticket
+                  Abrir un ticket
                 </Link>
                 <Link href="/status" className="btn btn-secondary btn-lg">
-                  Status del servizio
+                  Estado del servicio
                 </Link>
               </div>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                Email diretta:{' '}
+                Correo directo:{' '}
                 <a href="mailto:support@ambrogio.ai" className="btn-link">
                   support@ambrogio.ai
                 </a>

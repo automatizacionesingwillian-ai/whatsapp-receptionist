@@ -11,7 +11,7 @@ import { createUsageLimitsService } from '@/server/usage/limits';
 import type { UsageMetricSnapshot, UsagePlanKey } from '@/server/usage/limits';
 
 export const metadata: Metadata = {
-  title: 'Panoramica · Ambrogio.ai',
+  title: 'Resumen · Ambrogio.ai',
 };
 
 const RECENT_CONVERSATIONS_LIMIT = 8;
@@ -31,9 +31,9 @@ const CHANNEL_LABELS: Record<ConversationChannel, string> = {
 };
 
 const STATUS_PRESENTATION = {
-  active: { label: 'Attiva', badge: 'badge-success' },
-  escalated: { label: 'Da gestire', badge: 'badge-warm' },
-  closed: { label: 'Chiusa', badge: 'badge-neutral' },
+  active: { label: 'Activa', badge: 'badge-success' },
+  escalated: { label: 'Por atender', badge: 'badge-warm' },
+  closed: { label: 'Cerrada', badge: 'badge-neutral' },
   spam: { label: 'Spam', badge: 'badge-danger' },
 } as const;
 
@@ -57,50 +57,50 @@ export default async function DashboardPage() {
     <>
       <div className="dashboard-header">
         <div className="stack stack-2">
-          <span className="eyebrow">Panoramica</span>
-          <h1>{displayName ?? 'La tua attività'}</h1>
+          <span className="eyebrow">Resumen</span>
+          <h1>{displayName ?? 'Tu negocio'}</h1>
           <p className="muted">
-            Piano {PLAN_LABELS[usage.plan]} · periodo {formatMetricMonth(usage.metricMonth)}
+            Plan {PLAN_LABELS[usage.plan]} · periodo {formatMetricMonth(usage.metricMonth)}
           </p>
         </div>
         <div className="row" style={{ gap: 'var(--space-3)' }}>
           <Link href="/conversations" className="btn btn-secondary">
-            Vedi conversazioni
+            Ver conversaciones
           </Link>
           <Link href="/calendar" className="btn btn-primary">
-            Vai al calendario
+            Ir al calendario
           </Link>
         </div>
       </div>
 
       <div className="kpi-grid">
         <article className="kpi">
-          <span className="kpi-label">Conversazioni nel mese</span>
+          <span className="kpi-label">Conversaciones del mes</span>
           <span className="kpi-value">{formatNumber(usage.conversations.used)}</span>
           <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            su {formatNumber(usage.conversations.limit)} incluse nel piano
+            de {formatNumber(usage.conversations.limit)} incluidas en el plan
           </span>
         </article>
 
         <article className="kpi">
-          <span className="kpi-label">Messaggi scambiati</span>
+          <span className="kpi-label">Mensajes intercambiados</span>
           <span className="kpi-value">{formatNumber(usage.messages.used)}</span>
           <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            Totale del mese, in entrata e in uscita
+            Total del mes, entrantes y salientes
           </span>
         </article>
 
         <article className="kpi">
-          <span className="kpi-label">Vocali trascritti</span>
+          <span className="kpi-label">Audios transcritos</span>
           <span className="kpi-value">{formatNumber(usage.voiceMessages.used)}</span>
           <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            su {formatNumber(usage.voiceMessages.limit)} inclusi nel piano
+            de {formatNumber(usage.voiceMessages.limit)} incluidos en el plan
           </span>
         </article>
 
         <article className="kpi">
-          <span className="kpi-label">Risposte automatiche</span>
-          <span className="kpi-value">{usage.autoReplyAllowed ? 'Attive' : 'Sospese'}</span>
+          <span className="kpi-label">Respuestas automáticas</span>
+          <span className="kpi-value">{usage.autoReplyAllowed ? 'Activas' : 'Suspendidas'}</span>
           <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
             {describeAutoReply(usage.autoReplyAllowed, usage.blockReason)}
           </span>
@@ -110,23 +110,23 @@ export default async function DashboardPage() {
       <div className="dashboard-content-grid">
         <section className="card stack stack-4">
           <div className="row-between">
-            <h2 style={{ fontSize: 'var(--text-xl)' }}>Conversazioni recenti</h2>
+            <h2 style={{ fontSize: 'var(--text-xl)' }}>Conversaciones recientes</h2>
             {conversations.length > 0 ? (
               <Link href="/conversations" className="btn-link">
-                Tutte →
+                Todas →
               </Link>
             ) : null}
           </div>
 
           {conversations.length === 0 ? (
             <div className="empty-state">
-              <p className="empty-state-title">Nessuna conversazione, per ora</p>
+              <p className="empty-state-title">Aún no hay conversaciones</p>
               <p className="empty-state-text">
-                Ambrogio risponde solo dopo che hai collegato il numero WhatsApp della tua attività.
-                Finché il collegamento non è attivo, qui non arriva nulla.
+                Ambrogio responde solo después de que conectes el número de WhatsApp de tu negocio.
+                Mientras la conexión no esté activa, aquí no aparece nada.
               </p>
               <Link href="/settings/whatsapp" className="btn btn-primary">
-                Collega WhatsApp
+                Conectar WhatsApp
               </Link>
             </div>
           ) : (
@@ -142,7 +142,7 @@ export default async function DashboardPage() {
 
         <aside className="stack stack-4">
           <div className="card stack stack-3">
-            <span className="eyebrow">Consumo del piano</span>
+            <span className="eyebrow">Uso del plan</span>
             <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 700 }}>
               {formatNumber(usage.conversations.used)}
               <span className="muted" style={{ fontSize: 'var(--text-base)' }}>
@@ -150,40 +150,40 @@ export default async function DashboardPage() {
               </span>
             </p>
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-              Conversazioni del mese sul piano {PLAN_LABELS[usage.plan]}.
+              Conversaciones del mes en el plan {PLAN_LABELS[usage.plan]}.
             </p>
-            <UsageMeter label="Conversazioni del mese" metric={usage.conversations} />
+            <UsageMeter label="Conversaciones del mes" metric={usage.conversations} />
 
             <div className="stack stack-2" style={{ marginTop: 'var(--space-2)' }}>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                Vocali: {formatNumber(usage.voiceMessages.used)}/
+                Audios: {formatNumber(usage.voiceMessages.used)}/
                 {formatNumber(usage.voiceMessages.limit)}
               </p>
-              <UsageMeter label="Vocali del mese" metric={usage.voiceMessages} />
+              <UsageMeter label="Audios del mes" metric={usage.voiceMessages} />
             </div>
           </div>
 
           {usage.blockReason !== null ? (
             <div className="card stack stack-3">
-              <span className="eyebrow">Limite raggiunto</span>
+              <span className="eyebrow">Límite alcanzado</span>
               <p style={{ fontSize: 'var(--text-sm)' }}>
                 {usage.blockReason === 'conversations_exceeded'
-                  ? 'Hai esaurito le conversazioni incluse nel piano: Ambrogio ha smesso di rispondere in automatico fino al rinnovo del mese.'
-                  : 'Hai esaurito i vocali inclusi nel piano: i messaggi audio non vengono più trascritti fino al rinnovo del mese.'}
+                  ? 'Agotaste las conversaciones incluidas en el plan: Ambrogio dejó de responder automáticamente hasta la renovación del mes.'
+                  : 'Agotaste los audios incluidos en el plan: los mensajes de voz ya no se transcriben hasta la renovación del mes.'}
               </p>
               <Link href="/billing" className="btn btn-primary btn-sm">
-                Cambia piano
+                Cambiar plan
               </Link>
             </div>
           ) : usage.softWarning ? (
             <div className="card stack stack-3">
-              <span className="eyebrow">Soglia in avvicinamento</span>
+              <span className="eyebrow">Umbral cercano</span>
               <p style={{ fontSize: 'var(--text-sm)' }}>
-                Hai superato l&apos;80% di una delle soglie incluse nel piano. Al 100% le risposte
-                automatiche si fermano fino al rinnovo del mese.
+                Superaste el 80% de uno de los límites incluidos en el plan. Al 100% las respuestas
+                automáticas se detienen hasta la renovación del mes.
               </p>
               <Link href="/billing" className="btn btn-secondary btn-sm">
-                Vedi il piano
+                Ver el plan
               </Link>
             </div>
           ) : null}
@@ -216,7 +216,7 @@ function ConversationRow({
         </p>
         <p className="muted activity-row-detail">
           {CHANNEL_LABELS[conversation.channel]} ·{' '}
-          {conversation.aiEnabled ? 'gestita da Ambrogio' : 'gestita da un operatore'}
+          {conversation.aiEnabled ? 'atendida por Ambrogio' : 'atendida por un operador'}
         </p>
       </div>
       <span className={`badge ${presentation.badge}`}>{presentation.label}</span>
@@ -238,7 +238,7 @@ function UsageMeter({ label, metric }: Readonly<{ label: string; metric: UsageMe
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={metric.percent}
-      aria-valuetext={`${metric.percent}% del limite`}
+      aria-valuetext={`${metric.percent}% del límite`}
       style={{
         height: 6,
         borderRadius: 'var(--radius-full)',
@@ -275,26 +275,26 @@ function describeAutoReply(
   blockReason: 'conversations_exceeded' | 'voice_exceeded' | null,
 ): string {
   if (allowed) {
-    return 'Ambrogio risponde entro i limiti del piano';
+    return 'Ambrogio responde dentro de los límites del plan';
   }
 
   return blockReason === 'voice_exceeded'
-    ? 'Limite vocali esaurito fino al rinnovo del mese'
-    : 'Limite conversazioni esaurito fino al rinnovo del mese';
+    ? 'Límite de audios agotado hasta la renovación del mes'
+    : 'Límite de conversaciones agotado hasta la renovación del mes';
 }
 
 function formatNumber(value: number): string {
-  return new Intl.NumberFormat('it-IT').format(value);
+  return new Intl.NumberFormat('es-419').format(value);
 }
 
 function formatMetricMonth(metricMonth: string): string {
   const date = new Date(`${metricMonth}T00:00:00.000Z`);
 
   if (Number.isNaN(date.getTime())) {
-    return 'non disponibile';
+    return 'no disponible';
   }
 
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat('es-419', {
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC',
@@ -314,12 +314,12 @@ function formatTimestampParts(
   const zone = timezone !== null ? { timeZone: timezone } : {};
 
   return {
-    date: new Intl.DateTimeFormat('it-IT', {
+    date: new Intl.DateTimeFormat('es-419', {
       day: '2-digit',
       month: '2-digit',
       ...zone,
     }).format(date),
-    time: new Intl.DateTimeFormat('it-IT', {
+    time: new Intl.DateTimeFormat('es-419', {
       hour: '2-digit',
       minute: '2-digit',
       ...zone,

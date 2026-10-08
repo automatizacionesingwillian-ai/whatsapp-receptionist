@@ -10,7 +10,7 @@ import { logger } from '@/lib/logging/logger';
 import { createWhatsAppProvisioningService } from '@/server/whatsapp/provisioning';
 
 export const metadata: Metadata = {
-  title: 'WhatsApp Business · Impostazioni · Ambrogio.ai',
+  title: 'WhatsApp Business · Configuración · Ambrogio.ai',
 };
 
 // Lo stato dipende dalla sessione: non deve finire in cache statica.
@@ -42,14 +42,14 @@ export default async function WhatsAppSettingsPage() {
         <div className="stack stack-2">
           <span className="eyebrow">
             <Link href="/settings" className="btn-link">
-              Impostazioni
+              Configuración
             </Link>{' '}
-            / Integrazioni
+            / Integraciones
           </span>
           <h1>WhatsApp Business</h1>
           <p className="muted">
-            Collega il numero del tuo studio: da quel momento Ambrogio legge e risponde ai messaggi
-            in arrivo su questo canale.
+            Conecta el número de tu negocio: a partir de entonces Ambrogio lee y responde los mensajes
+            entrantes en este canal.
           </p>
         </div>
       </div>
@@ -61,18 +61,18 @@ export default async function WhatsAppSettingsPage() {
         />
       ) : (
         <section className="card stack stack-3">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Stato non leggibile</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Estado no legible</h2>
           <p className="muted">
-            Non siamo riusciti a recuperare la configurazione del canale. Non significa che il
-            numero sia stato scollegato: è solo la lettura ad aver fallito. Ricarica tra poco, e se
-            il problema resta scrivici dalla pagina contatti.
+            No pudimos recuperar la configuración del canal. No significa que el
+            número se haya desconectado: solo falló la lectura. Recarga en un momento y, si
+            el problema continúa, escríbenos desde la página de contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/whatsapp" className="btn btn-secondary btn-sm">
-              Riprova
+              Reintentar
             </Link>
             <Link href="/contact" className="btn btn-ghost btn-sm">
-              Contatta il supporto
+              Contactar soporte
             </Link>
           </div>
         </section>

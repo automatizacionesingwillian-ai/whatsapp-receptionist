@@ -8,7 +8,7 @@ import { logger } from '@/lib/logging/logger';
 import { createTenantSettingsService } from '@/server/settings/tenant-settings';
 
 export const metadata: Metadata = {
-  title: 'Servizi e listino · Impostazioni · Ambrogio.ai',
+  title: 'Servicios y tarifario · Configuración · Ambrogio.ai',
 };
 
 // Il listino dipende dalla sessione: non deve finire in cache statica.
@@ -52,14 +52,14 @@ export default async function ServicesSettingsPage() {
         <div className="stack stack-2">
           <span className="eyebrow">
             <Link href="/settings" className="btn-link">
-              Impostazioni
+              Configuración
             </Link>{' '}
-            / Studio
+            / Negocio
           </span>
-          <h1>Servizi e listino</h1>
+          <h1>Servicios y tarifario</h1>
           <p className="muted">
-            Cosa offri, quanto dura e quanto costa. Ambrogio propone solo i servizi attivi e riserva
-            in agenda esattamente la durata indicata.
+            Qué ofreces, cuánto dura y cuánto cuesta. Ambrogio solo propone servicios activos y reserva
+            en la agenda exactamente la duración indicada.
           </p>
         </div>
       </div>
@@ -71,18 +71,18 @@ export default async function ServicesSettingsPage() {
         />
       ) : (
         <section className="card stack stack-3">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Listino non leggibile</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Tarifario no legible</h2>
           <p className="muted">
-            Non siamo riusciti a recuperare i servizi salvati. Non significa che siano stati persi:
-            è la lettura ad aver fallito. Ricarica tra poco, e se il problema resta scrivici dalla
-            pagina contatti.
+            No pudimos recuperar los servicios guardados. No significa que se hayan perdido:
+            solo falló la lectura. Recarga en un momento y, si el problema continúa, escríbenos desde
+            la página de contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/services" className="btn btn-secondary btn-sm">
-              Riprova
+              Reintentar
             </Link>
             <Link href="/contact" className="btn btn-ghost btn-sm">
-              Contatta il supporto
+              Contactar soporte
             </Link>
           </div>
         </section>

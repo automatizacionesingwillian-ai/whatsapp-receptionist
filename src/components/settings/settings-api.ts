@@ -19,15 +19,15 @@ export type ApiResult<T> =
  * stessa condizione deve leggersi allo stesso modo in tutta l'app.
  */
 const MESSAGE_BY_CODE: Readonly<Record<string, string>> = {
-  rate_limited: 'Troppi tentativi ravvicinati. Riprova tra qualche minuto.',
-  bad_request: 'Alcuni dati non sono validi. Controlla i campi e riprova.',
-  unauthorized: 'Sessione non valida. Effettua di nuovo l’accesso.',
-  forbidden: 'Non hai i permessi per completare questa operazione.',
-  not_found: 'Risorsa non trovata: forse è stata modificata da un altro accesso.',
-  conflict: 'Esiste già un elemento con questi dati.',
-  network_error: 'Connessione non riuscita. Controlla la rete e riprova.',
-  invalid_response: 'Il server ha risposto in un formato che non riconosciamo. Ricarica la pagina.',
-  upstream_error: 'Il servizio non è raggiungibile in questo momento. Riprova tra poco.',
+  rate_limited: 'Demasiados intentos seguidos. Vuelve a intentarlo en unos minutos.',
+  bad_request: 'Algunos datos no son válidos. Revisa los campos e inténtalo de nuevo.',
+  unauthorized: 'Sesión no válida. Inicia sesión de nuevo.',
+  forbidden: 'No tienes permisos para completar esta operación.',
+  not_found: 'Recurso no encontrado: quizá fue modificado desde otra sesión.',
+  conflict: 'Ya existe un elemento con estos datos.',
+  network_error: 'No se pudo conectar. Revisa tu red e inténtalo de nuevo.',
+  invalid_response: 'El servidor respondió en un formato que no reconocemos. Recarga la página.',
+  upstream_error: 'El servicio no está disponible en este momento. Inténtalo de nuevo pronto.',
 };
 
 /** Esegue una chiamata di `api-client` restituendo l'esito invece di lanciarlo. */

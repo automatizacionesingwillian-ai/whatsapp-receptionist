@@ -16,16 +16,16 @@ import { CUSTOMER_SERVICE_WINDOW_MS } from '@/server/conversations/operator-mess
 import { createWhatsAppOptOutService } from '@/server/whatsapp/opt-outs';
 
 export const metadata: Metadata = {
-  title: 'Conversazione · Ambrogio.ai',
+  title: 'Conversación · Ambrogio.ai',
 };
 
 // `listMessages` accetta al massimo 200 messaggi per conversazione.
 const MESSAGE_LIMIT = 200;
 
 const STATUS_LABELS: Record<ConversationStatus, { label: string; badge: string }> = {
-  active: { label: 'Attiva', badge: 'badge' },
-  escalated: { label: 'Escalation', badge: 'badge badge-danger' },
-  closed: { label: 'Chiusa', badge: 'badge badge-neutral' },
+  active: { label: 'Activa', badge: 'badge' },
+  escalated: { label: 'Escalada', badge: 'badge badge-danger' },
+  closed: { label: 'Cerrada', badge: 'badge badge-neutral' },
   spam: { label: 'Spam', badge: 'badge badge-warm' },
 };
 
@@ -53,7 +53,7 @@ const SENDER_STYLES: Record<
     border: '1px solid var(--color-accent-soft)',
   },
   human: {
-    label: 'Operatore',
+    label: 'Operador',
     align: 'flex-end',
     background: 'var(--color-surface)',
     border: '1px solid var(--color-accent)',
@@ -68,11 +68,11 @@ const SENDER_STYLES: Record<
 
 const DELIVERY_LABELS: Record<ConversationMessage['status'], string | null> = {
   received: null,
-  pending: 'in coda',
-  sent: 'inviato',
-  delivered: 'consegnato',
-  read: 'letto',
-  failed: 'invio fallito',
+  pending: 'en cola',
+  sent: 'enviado',
+  delivered: 'entregado',
+  read: 'leído',
+  failed: 'envío fallido',
 };
 
 export default async function ConversationDetailPage({
@@ -106,17 +106,17 @@ export default async function ConversationDetailPage({
       <>
         <BackLink />
         <div className="card card-padded stack stack-3" role="alert">
-          <h1 style={{ fontSize: 'var(--text-xl)' }}>Non riusciamo ad aprire la conversazione</h1>
+          <h1 style={{ fontSize: 'var(--text-xl)' }}>No podemos abrir la conversación</h1>
           <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            Il servizio non ha risposto. Ricarica la pagina: se il problema resta, controlla lo
-            stato del sistema.
+            El servicio no respondió. Recarga la página: si el problema continúa, revisa el
+            estado del sistema.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href={`/conversations/${conversationId}`} className="btn btn-secondary btn-sm">
-              Riprova
+              Reintentar
             </Link>
             <Link href="/status" className="btn btn-ghost btn-sm">
-              Stato del servizio
+              Estado del servicio
             </Link>
           </div>
         </div>
@@ -151,15 +151,15 @@ export default async function ConversationDetailPage({
 
       <div className="dashboard-header">
         <div className="stack stack-2">
-          <span className="eyebrow">Conversazione</span>
+          <span className="eyebrow">Conversación</span>
           <h1>{conversation.customerName ?? conversation.customerIdentifier}</h1>
           <div className="row" style={{ gap: 'var(--space-2)', flexWrap: 'wrap' }}>
             <span className="badge badge-neutral">{CHANNEL_LABELS[conversation.channel]}</span>
             <span className={statusConfig.badge}>{statusConfig.label}</span>
             {conversation.aiEnabled ? (
-              <span className="badge">AI attiva</span>
+              <span className="badge">IA activa</span>
             ) : (
-              <span className="badge badge-warm">Solo operatore</span>
+              <span className="badge badge-warm">Solo operador</span>
             )}
             {optedOut === true ? (
               <span className="badge badge-danger">Consenso revocato</span>
@@ -172,7 +172,7 @@ export default async function ConversationDetailPage({
 
         <div className="stack stack-2" style={{ textAlign: 'right' }}>
           <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-            Ultimo messaggio
+            Último mensaje
           </span>
           <time dateTime={conversation.lastMessageAt} style={{ fontWeight: 600 }}>
             {formatDateTime(conversation.lastMessageAt)}
@@ -189,43 +189,43 @@ export default async function ConversationDetailPage({
             borderColor: isWindowOpen ? 'var(--color-success)' : 'var(--color-warning)',
           }}
         >
-          <span className="eyebrow">Finestra di servizio WhatsApp</span>
+          <span className="eyebrow">Ventana de servicio de WhatsApp</span>
           {isWindowKnown ? (
             <p style={{ fontSize: 'var(--text-sm)' }}>
               {isWindowOpen ? (
                 <>
-                  Aperta fino al{' '}
-                  <strong>{formatDateTime(new Date(windowExpiresAt).toISOString())}</strong>. Entro
-                  questo orario puoi scrivere un messaggio libero.
+                  Abierta hasta el{' '}
+                  <strong>{formatDateTime(new Date(windowExpiresAt).toISOString())}</strong>. Hasta
+                  entonces puedes escribir un mensaje libre.
                 </>
               ) : (
                 <>
-                  Chiusa dal{' '}
-                  <strong>{formatDateTime(new Date(windowExpiresAt).toISOString())}</strong>. Fuori
-                  dalle 24 ore WhatsApp consente solo template approvati, non ancora supportati:
-                  potrai rispondere quando il cliente scriverà di nuovo.
+                  Cerrada desde el{' '}
+                  <strong>{formatDateTime(new Date(windowExpiresAt).toISOString())}</strong>. Fuera
+                  de las 24 horas WhatsApp solo permite plantillas aprobadas, aún no compatibles:
+                  podrás responder cuando el cliente escriba de nuevo.
                 </>
               )}
             </p>
           ) : (
-            <p style={{ fontSize: 'var(--text-sm)' }}>Scadenza della finestra non disponibile.</p>
+            <p style={{ fontSize: 'var(--text-sm)' }}>Vencimiento de la ventana no disponible.</p>
           )}
           {optedOut === true ? (
             <p style={{ fontSize: 'var(--text-sm)' }}>
-              Il cliente ha revocato il consenso: nessun messaggio può essergli inviato finché non
-              lo ripristina scrivendo di nuovo.
+              El cliente revocó el consentimiento: no se le puede enviar ningún mensaje hasta que
+              lo restablezca escribiendo de nuevo.
             </p>
           ) : null}
         </div>
       ) : null}
 
-      <section className="card card-padded stack stack-4" aria-label="Cronologia messaggi">
+      <section className="card card-padded stack stack-4" aria-label="Historial de mensajes">
         {messages.length === 0 ? (
           <div className="empty-state">
-            <p className="empty-state-title">Nessun messaggio in archivio</p>
+            <p className="empty-state-title">Ningún mensaje en el archivo</p>
             <p className="empty-state-text">
-              La conversazione esiste ma non ha ancora messaggi salvati. Se il cliente ha appena
-              scritto, ricarica tra qualche istante.
+              La conversación existe pero aún no tiene mensajes guardados. Si el cliente acaba de
+              escribir, recarga en unos instantes.
             </p>
           </div>
         ) : (
@@ -237,16 +237,16 @@ export default async function ConversationDetailPage({
         )}
 
         {messages.length === MESSAGE_LIMIT ? (
-          <p className="helper">Mostriamo i primi {MESSAGE_LIMIT} messaggi della conversazione.</p>
+          <p className="helper">Mostramos los primeros {MESSAGE_LIMIT} mensajes de la conversación.</p>
         ) : null}
       </section>
 
       <section
         className="stack stack-3"
         style={{ marginTop: 'var(--space-6)' }}
-        aria-label="Risposta operatore"
+        aria-label="Respuesta del operador"
       >
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Rispondi come operatore</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Responder como operador</h2>
         <OperatorReplyForm conversationId={conversation.id} disabledReason={disabledReason} />
       </section>
     </>
@@ -257,7 +257,7 @@ function BackLink() {
   return (
     <p style={{ marginBottom: 'var(--space-4)' }}>
       <Link href="/conversations" className="btn-link">
-        ← Torna all’inbox
+        ← Volver al inbox
       </Link>
     </p>
   );
@@ -324,7 +324,7 @@ function MessageBubble({ message }: { message: ConversationMessage }) {
           <p style={{ fontSize: 'var(--text-sm)', whiteSpace: 'pre-wrap' }}>{body.text}</p>
         ) : (
           <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            Contenuto testuale non disponibile.
+            Contenido de texto no disponible.
           </p>
         )}
 
@@ -342,7 +342,7 @@ function MessageBubble({ message }: { message: ConversationMessage }) {
                   rel="noreferrer noopener"
                   style={{ fontSize: 'var(--text-xs)' }}
                 >
-                  Allegato {index + 1}
+                  Adjunto {index + 1}
                 </a>
               </li>
             ))}
@@ -366,7 +366,7 @@ function readBody(message: ConversationMessage): { text: string | null; label: s
   }
 
   if (message.messageType !== 'text') {
-    return { text: null, label: `Messaggio di tipo ${message.messageType}` };
+    return { text: null, label: `Mensaje de tipo ${message.messageType}` };
   }
 
   return { text: null, label: null };
@@ -378,7 +378,7 @@ function formatVoiceLabel(message: ConversationMessage): string {
       ? ` · ${Math.round(message.audioDurationSecs)}s`
       : '';
 
-  return `Trascrizione vocale${duration}`;
+  return `Transcripción de voz${duration}`;
 }
 
 function resolveDisabledReason(input: {
@@ -388,19 +388,19 @@ function resolveDisabledReason(input: {
   isWindowOpen: boolean;
 }): string | null {
   if (!input.isAdmin) {
-    return 'Solo owner e admin possono inviare messaggi manuali.';
+    return 'Solo los perfiles owner y admin pueden enviar mensajes manuales.';
   }
 
   if (input.channel !== 'whatsapp') {
-    return 'L’invio manuale è disponibile solo sulle conversazioni WhatsApp.';
+    return 'El envío manual solo está disponible en conversaciones de WhatsApp.';
   }
 
   if (input.optedOut === true) {
-    return 'Il cliente ha revocato il consenso: non è possibile inviargli messaggi.';
+    return 'El cliente revocó el consentimiento: no es posible enviarle mensajes.';
   }
 
   if (!input.isWindowOpen) {
-    return 'La finestra di servizio 24 ore è chiusa. Potrai rispondere dopo un nuovo messaggio del cliente.';
+    return 'La ventana de servicio de 24 horas está cerrada. Podrás responder después de un nuevo mensaje del cliente.';
   }
 
   return null;
@@ -426,10 +426,10 @@ function formatDateTime(iso: string): string {
   const timestamp = Date.parse(iso);
 
   if (Number.isNaN(timestamp)) {
-    return 'data non disponibile';
+    return 'fecha no disponible';
   }
 
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat('es-419', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',

@@ -60,7 +60,7 @@ export default function TermsPage() {
       <h2>6. Pagamenti e fatturazione</h2>
       <ul>
         <li>Pagamento mensile o annuale via Stripe.</li>
-        <li>Fatturazione elettronica SDI inclusa.</li>
+        <li>Facturación elettronica SDI inclusa.</li>
         <li>Mancato pagamento → sospensione servizio dopo 14 giorni di solleciti.</li>
       </ul>
 

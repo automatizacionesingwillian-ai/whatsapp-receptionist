@@ -16,7 +16,7 @@ const RetentionBodySchema = z
   .strict();
 
 /**
- * Applica la retention dichiarata nella privacy policy.
+ * Applicare la retention dichiarata nella privacy policy.
  *
  * `dryRun` esiste perché la prima esecuzione su dati reali è irreversibile:
  * conviene poter osservare quante righe verrebbero cancellate prima di

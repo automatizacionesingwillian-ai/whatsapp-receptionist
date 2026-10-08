@@ -301,7 +301,7 @@ const TENANTS_DETAILS: Record<string, TenantDetail> = {
 };
 
 const STATUS_BADGE = {
-  active: { label: 'Attivo', class: 'badge-success' },
+  active: { label: 'Activo', class: 'badge-success' },
   trial: { label: 'Trial', class: 'badge-warm' },
   suspended: { label: 'Sospeso', class: 'badge-danger' },
   cancelled: { label: 'Cancellato', class: 'badge-neutral' },
@@ -444,7 +444,7 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
         <h2 style={{ fontSize: 'var(--text-xl)' }}>Usage · Maggio 2026</h2>
         <div className="kpi-grid" style={{ marginBottom: 0 }}>
           <UsageCard
-            label="Conversazioni AI"
+            label="Conversaciones AI"
             value={tenant.usage.aiConversations.value}
             limit={tenant.usage.aiConversations.limit}
           />

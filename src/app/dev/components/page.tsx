@@ -109,7 +109,7 @@ export default function ComponentsPreviewPage() {
         <Section title="KPI">
           <div className="kpi-grid">
             <article className="kpi">
-              <span className="kpi-label">Conversazioni</span>
+              <span className="kpi-label">Conversaciones</span>
               <span className="kpi-value">1.247</span>
               <span className="kpi-trend kpi-trend-up">↑ +12%</span>
             </article>

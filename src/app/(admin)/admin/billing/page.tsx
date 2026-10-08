@@ -26,7 +26,7 @@ export default function AdminBillingPage() {
       </header>
 
       <div className="card card-padded stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Non ancora collegato ai dati reali</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado ai dati reali</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
           Questa schermata mostrava MRR, ARR, numero di clienti paganti, churn e storico a sei mesi
           come se fossero misurati. Erano valori scritti a mano: sono stati rimossi.

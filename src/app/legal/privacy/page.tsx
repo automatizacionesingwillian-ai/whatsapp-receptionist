@@ -54,7 +54,7 @@ export default function PrivacyPage() {
           elettronica SDI, conservazione 10 anni.
         </li>
         <li>
-          <strong>Sicurezza e prevenzione abusi</strong> (Art. 6.1.f — interesse legittimo): rate
+          <strong>Seguridad e prevenzione abusi</strong> (Art. 6.1.f — interesse legittimo): rate
           limiting, audit log, fraud detection.
         </li>
         <li>
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
       <h2>5. Conservazione</h2>
       <ul>
         <li>Dati account: per tutta la durata del rapporto + 12 mesi.</li>
-        <li>Conversazioni: 24 mesi rolling, salvo richieste legali.</li>
+        <li>Conversaciones: 24 mesi rolling, salvo richieste legali.</li>
         <li>Vocali audio: 90 giorni dalla trascrizione.</li>
         <li>Dati fiscali (fatture): 10 anni come da normativa italiana.</li>
         <li>Log tecnici: 12 mesi.</li>
@@ -111,7 +111,7 @@ export default function PrivacyPage() {
         WhatsApp), usa la sezione &quot;Customers&quot; della dashboard.
       </p>
 
-      <h2>7. Sicurezza tecnica</h2>
+      <h2>7. Seguridad tecnica</h2>
       <ul>
         <li>Crittografia in transito (TLS 1.3) e a riposo (AES-256).</li>
         <li>Multi-tenancy con Row-Level Security su ogni tabella.</li>

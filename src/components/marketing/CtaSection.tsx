@@ -19,7 +19,7 @@ export function CtaSection() {
               color: 'var(--color-accent-fg)',
             }}
           >
-            Beta Italia · Posti limitati
+            Beta LATAM · Cupos limitados
           </span>
           <h2
             id="cta-heading"
@@ -31,7 +31,7 @@ export function CtaSection() {
               margin: '0 auto',
             }}
           >
-            Spegni il telefono. Lavora meglio. Guadagna di più.
+            Apaga el teléfono. Trabaja mejor. Gana más.
           </h2>
           <p
             className="lead text-pretty"
@@ -41,8 +41,8 @@ export function CtaSection() {
               margin: '0 auto',
             }}
           >
-            I primi 50 studi ricevono onboarding co-gestito gratuito (€500 di valore) e prezzo beta
-            congelato per 12 mesi.
+            Los primeros 50 negocios reciben onboarding co-gestionado gratis (€500 de valor) y precio
+            beta congelado por 12 meses.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)', justifyContent: 'center' }}>
             <Link
@@ -53,7 +53,7 @@ export function CtaSection() {
                 color: 'var(--color-accent)',
               }}
             >
-              Richiedi accesso beta
+              Solicitar acceso beta
               <span aria-hidden="true">→</span>
             </Link>
             <Link
@@ -65,7 +65,7 @@ export function CtaSection() {
                 borderColor: 'var(--color-accent-fg)',
               }}
             >
-              Vedi i piani
+              Ver planes
             </Link>
           </div>
         </div>

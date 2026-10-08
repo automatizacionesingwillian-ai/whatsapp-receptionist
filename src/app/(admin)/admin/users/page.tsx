@@ -24,7 +24,7 @@ export default function AdminUsersPage() {
       </header>
 
       <div className="card card-padded stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Non ancora collegato ai dati reali</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado ai dati reali</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
           I dati di esempio sono stati rimossi. Questa vista legge dati personali di utenti
           appartenenti a tenant diversi: oltre al servizio cross-tenant serve decidere quali campi

@@ -480,7 +480,7 @@ function variablesForAppointment(context: AppointmentNotificationContext): Recor
 }
 
 function formatAppointmentDate(date: Date, timezone: string): string {
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat('es-419', {
     dateStyle: 'full',
     timeStyle: 'short',
     timeZone: timezone || 'Europe/Rome',

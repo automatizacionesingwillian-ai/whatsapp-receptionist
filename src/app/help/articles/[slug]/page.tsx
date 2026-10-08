@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = ARTICLES[slug];
   if (!article) {
     return {
-      title: 'Articolo non trovato',
+      title: 'Artículo no encontrado',
       robots: { index: false, follow: false },
     };
   }
@@ -30,11 +30,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: article.description,
     alternates: { canonical: `/help/articles/${article.slug}` },
     openGraph: {
-      title: `${article.title} · Centro assistenza Ambrogio.ai`,
+      title: `${article.title} · Centro de ayuda Ambrogio.ai`,
       description: article.description,
       type: 'article',
       url: `/help/articles/${article.slug}`,
-      locale: 'it_IT',
+      locale: 'es_419',
     },
   };
 }
@@ -64,7 +64,7 @@ export default async function HelpArticlePage({ params }: PageProps) {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Centro assistenza', url: '/help' },
+          { name: 'Centro de ayuda', url: '/help' },
           { name: article.title, url: `/help/articles/${article.slug}` },
         ])}
       />
@@ -74,7 +74,7 @@ export default async function HelpArticlePage({ params }: PageProps) {
           <div className="container-narrow stack stack-6">
             <div className="stack stack-3">
               <Link href="/help" className="btn-link" style={{ fontSize: 'var(--text-sm)' }}>
-                ← Centro assistenza
+                ← Centro de ayuda
               </Link>
               <span className="badge badge-neutral">{article.category}</span>
               <h1 className="text-balance">{article.title}</h1>
@@ -95,7 +95,7 @@ export default async function HelpArticlePage({ params }: PageProps) {
             {relatedArticles.length > 0 && (
               <section className="stack stack-3" aria-labelledby="related-heading">
                 <h2 id="related-heading" style={{ fontSize: 'var(--text-lg)' }}>
-                  Articoli correlati
+                  Artículos relacionados
                 </h2>
                 <ul
                   style={{
@@ -125,9 +125,9 @@ export default async function HelpArticlePage({ params }: PageProps) {
               className="card stack stack-3"
               style={{ background: 'var(--color-surface-sunken)' }}
             >
-              <h3 style={{ fontSize: 'var(--text-lg)' }}>Non hai trovato risposta?</h3>
+              <h3 style={{ fontSize: 'var(--text-lg)' }}>¿No encontraste respuesta?</h3>
               <Link href="/contact" className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
-                Contattaci →
+                Contáctanos →
               </Link>
             </div>
           </div>

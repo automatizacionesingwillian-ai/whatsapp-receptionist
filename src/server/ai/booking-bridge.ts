@@ -1537,7 +1537,7 @@ function formatAppointmentStart(appointment: PendingAppointmentReference): strin
   const serviceName = appointment.serviceName ?? 'appuntamento';
   const customerLabel = appointment.customerName ? ` per ${appointment.customerName}` : '';
 
-  return `${serviceName}${customerLabel} ${new Intl.DateTimeFormat('it-IT', {
+  return `${serviceName}${customerLabel} ${new Intl.DateTimeFormat('es-419', {
     weekday: 'long',
     day: '2-digit',
     month: 'long',
@@ -1548,7 +1548,7 @@ function formatAppointmentStart(appointment: PendingAppointmentReference): strin
 }
 
 function formatSlotStart(slot: PendingBookingSlot): string {
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat('es-419', {
     weekday: 'long',
     day: '2-digit',
     month: 'long',

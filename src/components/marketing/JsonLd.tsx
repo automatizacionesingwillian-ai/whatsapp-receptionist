@@ -12,6 +12,8 @@ export async function JsonLd({ data }: Readonly<{ data: object }>) {
     <script
       type="application/ld+json"
       nonce={nonce}
+      // Los navegadores quitan `nonce` del DOM tras aplicar CSP → mismatch SSR/client.
+      suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
   );
@@ -34,11 +36,11 @@ export const organizationSchema = {
   },
   image: `${SITE_URL}/opengraph-image`,
   description:
-    'Reception AI sempre attiva per studi e PMI italiane. WhatsApp, voce, prenotazioni automatiche.',
+    'Recepción AI siempre activa para negocios y PyMEs. WhatsApp, voz, reservas automáticas.',
   email: 'hello@ambrogio.ai',
   foundingDate: '2026-04-24',
   foundingLocation: { '@type': 'Country', name: 'Italia' },
-  areaServed: { '@type': 'Country', name: 'Italia' },
+  areaServed: { '@type': 'Place', name: 'América Latina y Unión Europea' },
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'IT',
@@ -51,24 +53,24 @@ export const organizationSchema = {
       contactType: 'customer support',
       email: 'support@ambrogio.ai',
       areaServed: 'IT',
-      availableLanguage: ['Italian', 'English'],
+      availableLanguage: ['Spanish', 'English', 'Italian'],
     },
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
       email: 'hello@ambrogio.ai',
       areaServed: 'IT',
-      availableLanguage: ['Italian', 'English'],
+      availableLanguage: ['Spanish', 'English', 'Italian'],
     },
     {
       '@type': 'ContactPoint',
       contactType: 'data protection officer',
       email: 'dpo@ambrogio.ai',
       areaServed: 'EU',
-      availableLanguage: ['Italian', 'English'],
+      availableLanguage: ['Spanish', 'English', 'Italian'],
     },
   ],
-  knowsLanguage: ['it', 'en'],
+  knowsLanguage: ['es', 'en', 'it'],
   sameAs: ['https://twitter.com/ambrogio_ai', 'https://linkedin.com/company/ambrogio-ai'],
 } as const;
 
@@ -81,7 +83,7 @@ export const softwareApplicationSchema = {
   operatingSystem: 'Web',
   url: SITE_URL,
   description:
-    'AI Receptionist per studi e PMI italiane. WhatsApp, voce, prenotazioni automatiche, calendario sincronizzato.',
+    'Recepcionista AI para negocios y PyMEs. WhatsApp, voz, reservas automáticas, calendario sincronizado.',
   offers: {
     '@type': 'AggregateOffer',
     priceCurrency: 'EUR',
@@ -93,7 +95,7 @@ export const softwareApplicationSchema = {
   // Nessun `aggregateRating`: va pubblicato solo a fronte di recensioni reali e
   // verificabili. Dichiararlo senza recensioni viola le policy sui dati
   // strutturati di Google e configura una pratica commerciale ingannevole.
-  inLanguage: 'it-IT',
+  inLanguage: 'es-419',
   publisher: { '@id': `${SITE_URL}#organization` },
 } as const;
 

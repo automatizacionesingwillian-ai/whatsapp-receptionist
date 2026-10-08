@@ -9,7 +9,7 @@ const ROW_PLACEHOLDERS = ['row-1', 'row-2', 'row-3', 'row-4'] as const;
 export default function DashboardLoading() {
   return (
     <div role="status" aria-live="polite" aria-busy="true">
-      <span className="sr-only">Caricamento dei dati in corso</span>
+      <span className="sr-only">Cargando datos</span>
 
       <div className="dashboard-header" aria-hidden="true">
         <div className="stack stack-2" style={{ flex: 1 }}>

@@ -78,7 +78,7 @@ export default function DpaPage() {
         }}
       >
         <strong>DPA firmabile:</strong> versione PDF disponibile dalla dashboard, sezione{' '}
-        <em>Account &gt; Sicurezza &gt; DPA</em>. Contattaci per stipula formale via PEC.
+        <em>Account &gt; Seguridad &gt; DPA</em>. Contáctanos per stipula formale via PEC.
       </p>
     </LegalPageLayout>
   );

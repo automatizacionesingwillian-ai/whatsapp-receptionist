@@ -1,6 +1,6 @@
 /**
  * Schema.org builders helpers.
- * Tutti i builder ritornano oggetti serializzabili JSON pronti per essere
+ * Todos i builder ritornano oggetti serializzabili JSON pronti per essere
  * incollati in <script type="application/ld+json"> via il componente JsonLd.
  *
  * Convenzione: tutti gli URL relativi vengono normalizzati con SITE_URL come
@@ -63,7 +63,7 @@ export function buildServiceSchema(input: ServiceSchemaInput): Record<string, un
     url: absoluteUrl(input.url),
     areaServed: { '@type': 'Country', name: input.areaServed ?? 'Italia' },
     provider: { '@id': `${SITE_URL}#organization` },
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
   };
 }
 
@@ -79,7 +79,7 @@ export function buildProductOffersSchema(plans: ReadonlyArray<PlanOffer>): Recor
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: 'Ambrogio.ai',
-    description: 'AI Receptionist per studi e PMI italiane.',
+    description: 'Recepcionista AI para negocios y PyMEs.',
     brand: { '@id': `${SITE_URL}#organization` },
     offers: plans.map((plan) => ({
       '@type': 'Offer',
@@ -133,7 +133,7 @@ export function buildHowToSchema(params: {
     '@type': 'HowTo',
     name: params.name,
     description: params.description,
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     step: params.steps.map((step, index) => ({
       '@type': 'HowToStep',
       position: index + 1,
@@ -159,7 +159,7 @@ export function buildArticleSchema(input: ArticleSchemaInput): Record<string, un
     description: input.description,
     datePublished: input.datePublished,
     url: absoluteUrl(input.url),
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     author: { '@id': `${SITE_URL}#organization` },
     publisher: { '@id': `${SITE_URL}#organization` },
     isPartOf: { '@id': `${SITE_URL}#website` },
@@ -203,7 +203,7 @@ export function buildCollectionPageSchema(input: CollectionPageInput): Record<st
     name: input.name,
     description: input.description,
     url: absoluteUrl(input.url),
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     isPartOf: { '@id': `${SITE_URL}#website` },
     ...(input.hasPart && input.hasPart.length > 0
       ? {

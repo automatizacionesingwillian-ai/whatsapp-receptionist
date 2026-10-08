@@ -1104,7 +1104,7 @@ function normalizeTimezone(value: string): string {
   const normalized = normalizeRequiredText(value, 'Timezone', 80);
 
   try {
-    new Intl.DateTimeFormat('it-IT', { timeZone: normalized });
+    new Intl.DateTimeFormat('es-419', { timeZone: normalized });
   } catch (error) {
     throw new AppError('bad_request', 'Timezone is invalid', {
       cause: error,

@@ -80,23 +80,23 @@ export function validateServiceDraft(draft: ServiceDraft): ServiceValidation {
   const price = parsePriceToCents(draft.price);
 
   const errors: ServiceFieldErrors = {
-    ...(name.length === 0 ? { name: 'Il nome del servizio è obbligatorio.' } : {}),
+    ...(name.length === 0 ? { name: 'El nombre del servicio es obligatorio.' } : {}),
     ...(name.length > MAX_NAME_LENGTH
-      ? { name: `Il nome non può superare ${MAX_NAME_LENGTH} caratteri.` }
+      ? { name: `El nombre no puede superar ${MAX_NAME_LENGTH} caracteres.` }
       : {}),
     ...(description.length > MAX_DESCRIPTION_LENGTH
-      ? { description: `La descrizione non può superare ${MAX_DESCRIPTION_LENGTH} caratteri.` }
+      ? { description: `La descripción no puede superar ${MAX_DESCRIPTION_LENGTH} caracteres.` }
       : {}),
     ...(duration === null
       ? {
-          durationMinutes: `La durata deve essere un numero intero di minuti tra ${MIN_DURATION_MINUTES} e ${MAX_DURATION_MINUTES}.`,
+          durationMinutes: `La duración debe ser un número entero de minutos entre ${MIN_DURATION_MINUTES} y ${MAX_DURATION_MINUTES}.`,
         }
       : {}),
     ...(price === 'invalid'
-      ? { price: 'Il prezzo deve essere un importo in euro con al massimo due decimali.' }
+      ? { price: 'El precio debe ser un importe en euros con como máximo dos decimales.' }
       : {}),
     ...(typeof price === 'number' && price > MAX_PRICE_CENTS
-      ? { price: 'Il prezzo supera il massimo consentito (10.000 €).' }
+      ? { price: 'El precio supera el máximo permitido (10.000 €).' }
       : {}),
   };
 
@@ -147,7 +147,7 @@ export async function createService(input: {
         method: 'POST',
         body: input.service,
       }),
-    'Non siamo riusciti a creare il servizio. Riprova tra poco.',
+    'No pudimos crear el servicio. Inténtalo de nuevo pronto.',
   );
 }
 
@@ -162,7 +162,7 @@ export async function updateService(input: {
         method: 'PATCH',
         body: input.patch,
       }),
-    'Non siamo riusciti a salvare le modifiche. Riprova tra poco.',
+    'No pudimos guardar los cambios. Inténtalo de nuevo pronto.',
   );
 }
 
@@ -179,7 +179,7 @@ export async function archiveService(input: {
         schema: ServiceSchema,
         method: 'DELETE',
       }),
-    'Non siamo riusciti ad archiviare il servizio. Riprova tra poco.',
+    'No pudimos archivar el servicio. Inténtalo de nuevo pronto.',
   );
 }
 
@@ -238,11 +238,11 @@ export function centsToPriceInput(cents: number | null): string {
 
 export function formatPrice(cents: number | null): string {
   if (cents === null) {
-    return 'Prezzo non indicato';
+    return 'Precio no indicado';
   }
 
   // La divisione serve solo alla formattazione: il dato persistito resta intero.
-  return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(cents / 100);
+  return new Intl.NumberFormat('es-419', { style: 'currency', currency: 'EUR' }).format(cents / 100);
 }
 
 export function formatDuration(minutes: number): string {

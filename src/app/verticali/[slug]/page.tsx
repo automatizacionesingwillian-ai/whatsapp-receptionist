@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const data = VERTICALS_DATA[slug];
   if (!data) {
     return {
-      title: 'Verticale non trovato',
+      title: 'Vertical no encontrado',
       robots: { index: false, follow: false },
     };
   }
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: data.metaDescription,
       url: `/verticali/${data.slug}`,
       type: 'website',
-      locale: 'it_IT',
+      locale: 'es_419',
     },
     alternates: { canonical: `/verticali/${data.slug}` },
   };
@@ -60,13 +60,13 @@ export default async function VerticalPage({ params }: PageProps) {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Verticali', url: '/verticali' },
+          { name: 'Verticales', url: '/verticali' },
           { name: data.title, url: `/verticali/${data.slug}` },
         ])}
       />
       <JsonLd
         data={buildServiceSchema({
-          name: `Ambrogio.ai per ${data.title}`,
+          name: `Ambrogio.ai para ${data.title}`,
           serviceType: data.serviceType,
           description: data.metaDescription,
           url: `/verticali/${data.slug}`,
@@ -74,8 +74,8 @@ export default async function VerticalPage({ params }: PageProps) {
       />
       <JsonLd
         data={buildHowToSchema({
-          name: `Come funziona Ambrogio.ai per ${data.title}`,
-          description: `Tre scenari tipici gestiti automaticamente da Ambrogio.ai per ${data.title}.`,
+          name: `Cómo funciona Ambrogio.ai para ${data.title}`,
+          description: `Tres escenarios típicos gestionados automáticamente por Ambrogio.ai para ${data.title}.`,
           steps: data.scenarios.map((s) => ({ name: s.title, text: s.body })),
         })}
       />
@@ -91,13 +91,13 @@ export default async function VerticalPage({ params }: PageProps) {
               <p className="lead text-pretty">{data.hero.body}</p>
               <div className="row" style={{ gap: 'var(--space-3)' }}>
                 <Link href={`/register?vertical=${data.slug}`} className="btn btn-primary btn-lg">
-                  Prova per il tuo studio
+                  Probar para tu negocio
                 </Link>
                 <Link
                   href={`/pricing?ref=vertical-${data.slug}`}
                   className="btn btn-secondary btn-lg"
                 >
-                  Vedi piani
+                  Ver planes
                 </Link>
               </div>
               <div
@@ -109,7 +109,7 @@ export default async function VerticalPage({ params }: PageProps) {
                   maxWidth: '320px',
                 }}
               >
-                <span className="eyebrow">Risultato medio</span>
+                <span className="eyebrow">Resultado típico</span>
                 <p
                   style={{
                     fontFamily: 'var(--font-display)',
@@ -127,7 +127,7 @@ export default async function VerticalPage({ params }: PageProps) {
             <div style={{ position: 'relative', minHeight: '320px' }}>
               <Image
                 src={data.icon}
-                alt={`Illustrazione: AI Receptionist per ${data.title}`}
+                alt={`Ilustración: recepción AI para ${data.title}`}
                 width={520}
                 height={420}
                 loading="lazy"
@@ -140,8 +140,8 @@ export default async function VerticalPage({ params }: PageProps) {
         <section className="section section-divider" aria-labelledby="pains-heading">
           <div className="container stack stack-12">
             <div className="stack stack-3" style={{ maxWidth: '52ch' }}>
-              <span className="eyebrow">I problemi che risolve</span>
-              <h2 id="pains-heading">Tre dolori reali, tre risposte concrete.</h2>
+              <span className="eyebrow">Problemas que resuelve</span>
+              <h2 id="pains-heading">Tres dolores reales, tres respuestas concretas.</h2>
             </div>
             <div className="feature-grid">
               {data.pains.map((p) => (
@@ -161,8 +161,8 @@ export default async function VerticalPage({ params }: PageProps) {
         >
           <div className="container stack stack-12">
             <div className="stack stack-3" style={{ maxWidth: '52ch' }}>
-              <span className="eyebrow">Conversazioni reali</span>
-              <h2 id="scenarios-heading">Tre scenari tipici, gestiti automaticamente.</h2>
+              <span className="eyebrow">Conversaciones reali</span>
+              <h2 id="scenarios-heading">Tres escenarios típicos, gestionados automáticamente.</h2>
             </div>
             <div
               className="grid"
@@ -197,7 +197,7 @@ export default async function VerticalPage({ params }: PageProps) {
         <section className="section section-divider" aria-labelledby="other-verticals-heading">
           <div className="container stack stack-6">
             <h2 id="other-verticals-heading" style={{ fontSize: 'var(--text-2xl)' }}>
-              Altri verticali coperti
+              Otros verticales cubiertos
             </h2>
             <div
               className="grid"
@@ -222,7 +222,7 @@ export default async function VerticalPage({ params }: PageProps) {
                       marginTop: 'auto',
                     }}
                   >
-                    Scopri →
+                    Descubrir →
                   </span>
                 </Link>
               ))}
@@ -233,7 +233,7 @@ export default async function VerticalPage({ params }: PageProps) {
                 className="btn btn-secondary"
                 style={{ alignSelf: 'flex-start' }}
               >
-                Approfondisci con il case study →
+                Profundizar con el caso de éxito →
               </Link>
             )}
           </div>

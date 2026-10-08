@@ -3,18 +3,18 @@ import Image from 'next/image';
 const STEPS = [
   {
     n: '01',
-    title: 'Connetti i canali',
-    body: 'Numero WhatsApp Business, Google Calendar, Stripe per i pagamenti. 15 minuti per ogni integrazione.',
+    title: 'Conecta los canales',
+    body: 'Número WhatsApp Business, Google Calendar y Stripe para pagos. Unos 15 minutos por integración.',
   },
   {
     n: '02',
-    title: 'Insegna il tuo studio',
-    body: 'Carica il listino, gli orari, le FAQ. Ambrogio impara come parli e capisce le richieste reali.',
+    title: 'Enseña tu negocio',
+    body: 'Carga el listado, horarios y FAQ. Ambrogio aprende cómo hablas y entiende las solicitudes reales.',
   },
   {
     n: '03',
-    title: 'Spegni il telefono',
-    body: 'O lascialo squillare se vuoi: Ambrogio risponde a chi chiede, prenota, conferma. Tu fai il tuo lavoro.',
+    title: 'Apaga el teléfono',
+    body: 'O déjalo sonar si quieres: Ambrogio responde, reserva y confirma. Tú haces tu trabajo.',
   },
 ] as const;
 
@@ -36,13 +36,13 @@ export function HowItWorksSection() {
           }}
         >
           <div className="stack stack-4" style={{ maxWidth: '52ch' }}>
-            <span className="eyebrow">Come funziona</span>
+            <span className="eyebrow">Cómo funciona</span>
             <h2 id="how-heading" className="text-balance">
-              Tre passi. Una giornata. Reception sempre attiva.
+              Tres pasos. Un día. Recepción siempre activa.
             </h2>
             <p className="lead">
-              Onboarding guidato: rispondi a poche domande, carica i tuoi servizi, autorizza Google
-              Calendar. Ambrogio è operativo entro fine giornata.
+              Onboarding guiado: respondes unas preguntas, cargas tus servicios y autorizas Google
+              Calendar. Ambrogio queda operativo el mismo día.
             </p>
           </div>
 
@@ -86,7 +86,7 @@ export function HowItWorksSection() {
           >
             <Image
               src="/assets/site-images/ambrogio/svg/13-onboarding-three-steps.svg"
-              alt="Onboarding in tre step: connetti, insegna, attiva"
+              alt="Onboarding en tres pasos: conectar, enseñar, activar"
               width={720}
               height={360}
               style={{ width: '100%', height: 'auto' }}

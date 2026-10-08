@@ -15,7 +15,7 @@ import { logger } from '@/lib/logging/logger';
  * corrispondente esiste per rendere visibile la divergenza.
  */
 export const RETENTION_POLICY = {
-  /** "Conversazioni: 24 mesi rolling, salvo richieste legali." */
+  /** "Conversaciones: 24 mesi rolling, salvo richieste legali." */
   conversationsMonths: 24,
   /** "Vocali audio: 90 giorni dalla trascrizione." */
   voiceDays: 90,

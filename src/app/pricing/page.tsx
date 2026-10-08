@@ -13,14 +13,14 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Prezzi Reception AI Italia',
+  title: 'Precios Reception AI · Ambrogio.ai',
   description:
-    'Tre piani trasparenti per ogni grandezza di studio. Trial 14 giorni senza carta. Fatturazione elettronica SDI inclusa.',
+    'Tres planes transparentes para cada tamaño de negocio. Prueba de 14 días sin tarjeta. Facturación electrónica incluida.',
   openGraph: {
-    title: 'Prezzi Reception AI Italia · Ambrogio.ai',
-    description: 'Starter €97, Professional €297, Agency €897. Trial 14 giorni senza carta.',
+    title: 'Precios Reception AI · Ambrogio.ai',
+    description: 'Starter €97, Professional €297, Agency €897. Prueba de 14 días sin tarjeta.',
     url: '/pricing',
-    locale: 'it_IT',
+    locale: 'es_419',
     type: 'website',
   },
   alternates: {
@@ -30,36 +30,36 @@ export const metadata: Metadata = {
 
 const FAQ = [
   {
-    q: 'Posso provare gratis?',
-    a: 'Sì. 14 giorni di trial completo senza carta di credito. Cancelli con un click se non ti convince.',
+    q: '¿Puedo probar gratis?',
+    a: 'Sí. 14 días de prueba completa sin tarjeta de crédito. Cancelas con un clic si no te convence.',
   },
   {
-    q: 'Cosa succede se supero il limite di conversazioni?',
-    a: 'Ti avvisiamo quando arrivi al 80%. Puoi attivare il top-up automatico oppure passare al piano superiore — la transizione è istantanea, niente nuovo onboarding.',
+    q: '¿Qué pasa si supero el límite de conversaciones?',
+    a: 'Te avisamos cuando llegues al 80 %. Puedes activar recarga automática o pasar al plan superior: el cambio es instantáneo, sin nuevo onboarding.',
   },
   {
-    q: 'Le fatture sono elettroniche SDI?',
-    a: 'Sì, fatturazione elettronica B2B inclusa in tutti i piani. Ti basterà inserire il tuo Codice Destinatario o PEC durante l’onboarding.',
+    q: '¿Las facturas son electrónicas?',
+    a: 'Sí, facturación electrónica B2B incluida en todos los planes. Solo ingresa tus datos fiscales durante el onboarding.',
   },
   {
-    q: 'I dati dove sono ospitati?',
-    a: 'Tutto in EU (Supabase Frankfurt + Vercel EU). Niente trasferimenti extra-UE per dati di chat e clienti.',
+    q: '¿Dónde se alojan los datos?',
+    a: 'Todo en la UE (Supabase Frankfurt + Vercel EU). Sin transferencias fuera de la UE para datos de chat y clientes.',
   },
   {
-    q: 'Posso cambiare piano in corsa?',
-    a: 'Quando vuoi. L’upgrade è immediato, il downgrade decorre dal ciclo successivo.',
+    q: '¿Puedo cambiar de plan en cualquier momento?',
+    a: 'Cuando quieras. La mejora de plan es inmediata; la reducción aplica desde el siguiente ciclo.',
   },
   {
-    q: 'Cosa significa Agency white-label?',
-    a: 'Brand tuo, dominio tuo, logo tuo. I tuoi clienti vedono solo te. Tu gestisci tutto da un’unica console multi-tenant.',
+    q: '¿Qué significa Agency white-label?',
+    a: 'Tu marca, tu dominio, tu logo. Tus clientes solo te ven a ti. Gestionas todo desde una consola multi-tenant.',
   },
   {
-    q: 'E se Ambrogio sbaglia? Sono coperto?',
-    a: 'Tutte le risposte AI sono tracciate e revisionabili. Sotto soglia di confidenza Ambrogio fa escalation umana automaticamente. SLA con responsabilità definita nei termini di servizio.',
+    q: '¿Y si Ambrogio se equivoca? ¿Estoy cubierto?',
+    a: 'Todas las respuestas de IA quedan registradas y son revisables. Bajo el umbral de confianza, Ambrogio escala a un humano automáticamente. SLA con responsabilidad definida en los términos de servicio.',
   },
   {
-    q: 'I miei clienti capiscono che è un bot?',
-    a: 'Personalizzi tu il tono. Puoi essere trasparente ("Sono Ambrogio, l\'assistente AI") oppure lasciare il nome del tuo studio. La voce ElevenLabs è realistica.',
+    q: '¿Mis clientes entienden que es un bot?',
+    a: 'Tú personalizas el tono. Puedes ser transparente ("Soy Ambrogio, el asistente de IA") o usar el nombre de tu negocio. La voz de ElevenLabs suena natural.',
   },
 ] as const;
 
@@ -67,28 +67,28 @@ const PLAN_OFFERS = [
   {
     name: 'Starter',
     price: '97',
-    description: 'Un solo numero WhatsApp, 1 calendario, 500 conversazioni AI/mese.',
+    description: 'Un solo número de WhatsApp, 1 calendario, 500 conversaciones de IA al mes.',
     url: '/register?plan=starter',
   },
   {
     name: 'Professional',
     price: '297',
-    description: 'Multi-operatore, voce in uscita, integrazioni avanzate, supporto prioritario.',
+    description: 'Multi-operador, voz saliente, integraciones avanzadas, soporte prioritario.',
     url: '/register?plan=professional',
   },
   {
     name: 'Agency',
     price: '897',
-    description: 'Per agenzie e consulenti che gestiscono più clienti finali. White-label.',
+    description: 'Para agencias y consultores que gestionan varios clientes finales. White-label.',
     url: '/contact?plan=agency',
   },
 ] as const;
 
 const VERTICAL_LINKS = [
-  { slug: 'dental', label: 'Reception AI per studi dentistici' },
-  { slug: 'beauty', label: 'Reception AI per centri estetici' },
-  { slug: 'fitness', label: 'Reception AI per palestre e PT' },
-  { slug: 'professional', label: 'Reception AI per studi professionali' },
+  { slug: 'dental', label: 'Reception AI para clínicas dentales' },
+  { slug: 'beauty', label: 'Reception AI para centros de estética' },
+  { slug: 'fitness', label: 'Reception AI para gimnasios y PT' },
+  { slug: 'professional', label: 'Reception AI para negocios profesionales' },
 ] as const;
 
 export default async function PricingPage() {
@@ -98,7 +98,7 @@ export default async function PricingPage() {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Piani e prezzi', url: '/pricing' },
+          { name: 'Planes y precios', url: '/pricing' },
         ])}
       />
       <JsonLd data={buildProductOffersSchema(PLAN_OFFERS)} />
@@ -121,13 +121,13 @@ export default async function PricingPage() {
             className="container stack stack-6 text-center"
             style={{ maxWidth: '720px', margin: '0 auto' }}
           >
-            <span className="badge">Trasparenza totale</span>
+            <span className="badge">Transparencia total</span>
             <h1 className="display text-balance">
-              Prezzi pensati per studi reali, non per startup VC.
+              Precios pensados para negocios reales, no para startups de VC.
             </h1>
             <p className="lead text-pretty" style={{ margin: '0 auto' }}>
-              Nessun moltiplicatore sui token. Nessun upsell aggressivo. Sai esattamente cosa paghi
-              e quanto guadagni in più ogni mese.
+              Sin multiplicadores por tokens. Sin upsell agresivo. Sabes exactamente qué pagas y
+              cuánto ganas de más cada mes.
             </p>
           </div>
         </section>
@@ -137,8 +137,8 @@ export default async function PricingPage() {
         <section className="section section-divider" aria-labelledby="faq-heading">
           <div className="container stack stack-12">
             <div className="stack stack-3" style={{ maxWidth: '52ch' }}>
-              <span className="eyebrow">Domande frequenti</span>
-              <h2 id="faq-heading">Le risposte alle domande più comuni</h2>
+              <span className="eyebrow">Preguntas frecuentes</span>
+              <h2 id="faq-heading">Respuestas a las dudas más comunes</h2>
             </div>
 
             <div
@@ -156,11 +156,11 @@ export default async function PricingPage() {
 
             <div className="card stack stack-3" style={{ background: 'var(--color-surface)' }}>
               <h3 style={{ fontSize: 'var(--text-lg)' }}>
-                Vuoi vedere come funziona nel tuo settore?
+                ¿Quieres ver cómo funciona en tu sector?
               </h3>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                Ogni piano include il modello pre-addestrato sul tuo verticale. Vedi i casi
-                d&apos;uso completi:
+                Cada plan incluye el modelo preentrenado para tu vertical. Mira los casos de uso
+                completos:
               </p>
               <div className="row" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
                 {VERTICAL_LINKS.map((v) => (
@@ -179,13 +179,13 @@ export default async function PricingPage() {
                 alignItems: 'center',
               }}
             >
-              <h3>Hai bisogno di un piano custom?</h3>
+              <h3>¿Necesitas un plan a medida?</h3>
               <p className="muted" style={{ maxWidth: '50ch' }}>
-                Studi grandi, catene, gruppi medico-sanitari, agenzie con più di 10 clienti.
-                Costruiamo insieme un&apos;offerta dedicata.
+                Negoci grandes, cadenas, grupos de salud, agencias con más de 10 clientes.
+                Armemos juntos una oferta dedicada.
               </p>
               <Link href="/contact?plan=enterprise" className="btn btn-primary">
-                Parla con noi
+                Habla con nosotros
               </Link>
             </div>
           </div>

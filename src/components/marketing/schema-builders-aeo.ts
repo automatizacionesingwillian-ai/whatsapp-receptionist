@@ -25,7 +25,7 @@ export function buildQAPageSchema(input: QAPageInput): Record<string, unknown> {
     '@context': 'https://schema.org',
     '@type': 'QAPage',
     '@id': url,
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     isPartOf: { '@id': `${SITE_URL}#website` },
     mainEntity: {
       '@type': 'Question',
@@ -69,7 +69,7 @@ export function buildHowToEnrichedSchema(input: HowToEnrichedInput): Record<stri
     '@type': 'HowTo',
     name: input.name,
     description: input.description,
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     ...(input.totalTime ? { totalTime: input.totalTime } : {}),
     ...(input.tool && input.tool.length > 0
       ? { tool: input.tool.map((t) => ({ '@type': 'HowToTool', name: t })) }
@@ -113,7 +113,7 @@ export function buildDefinedTermSetSchema(input: DefinedTermSetInput): Record<st
     name: input.name,
     description: input.description,
     url: setUrl,
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     publisher: { '@id': `${SITE_URL}#organization` },
     hasDefinedTerm: input.terms.map((term) => ({
       '@type': 'DefinedTerm',
@@ -142,7 +142,7 @@ export function buildReviewSchema(input: ReviewSchemaInput): Record<string, unkn
     '@type': 'Review',
     reviewBody: input.reviewBody,
     datePublished: input.datePublished,
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     author: {
       '@type': 'Person',
       name: input.authorName,
@@ -183,7 +183,7 @@ export function buildEventSchema(input: EventSchemaInput): Record<string, unknow
     name: input.name,
     description: input.description,
     startDate: input.startDate,
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     ...(input.endDate ? { endDate: input.endDate } : {}),
     ...(input.url ? { url: absoluteUrl(input.url) } : {}),
     eventStatus: `https://schema.org/${input.eventStatus ?? 'EventScheduled'}`,
@@ -224,7 +224,7 @@ export function buildWebPageSchema(input: WebPageSchemaInput): Record<string, un
     name: input.name,
     description: input.description,
     url,
-    inLanguage: 'it-IT',
+    inLanguage: 'es-419',
     isPartOf: { '@id': `${SITE_URL}#website` },
     publisher: { '@id': `${SITE_URL}#organization` },
     ...(input.datePublished ? { datePublished: input.datePublished } : {}),

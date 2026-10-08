@@ -8,7 +8,7 @@ import { logger } from '@/lib/logging/logger';
 import { createTenantSettingsService } from '@/server/settings/tenant-settings';
 
 export const metadata: Metadata = {
-  title: 'Orari di apertura · Impostazioni · Ambrogio.ai',
+  title: 'Horarios de apertura · Configuración · Ambrogio.ai',
 };
 
 // Gli orari dipendono dalla sessione: non devono finire in cache statica.
@@ -51,14 +51,14 @@ export default async function BusinessHoursSettingsPage() {
         <div className="stack stack-2">
           <span className="eyebrow">
             <Link href="/settings" className="btn-link">
-              Impostazioni
+              Configuración
             </Link>{' '}
-            / Studio
+            / Negocio
           </span>
-          <h1>Orari di apertura</h1>
+          <h1>Horarios de apertura</h1>
           <p className="muted">
-            Sono i dati con cui Ambrogio calcola la disponibilità. Un errore qui si traduce in
-            appuntamenti fissati quando lo studio è chiuso.
+            Son los datos con los que Ambrogio calcula la disponibilidad. Un error aquí se traduce en
+            citas fijadas cuando el negocio está cerrado.
           </p>
         </div>
       </div>
@@ -70,18 +70,18 @@ export default async function BusinessHoursSettingsPage() {
         />
       ) : (
         <section className="card stack stack-3">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Orari non leggibili</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Horarios no legibles</h2>
           <p className="muted">
-            Non siamo riusciti a recuperare gli orari salvati. Non significa che siano stati persi:
-            è la lettura ad aver fallito. Ricarica tra poco, e se il problema resta scrivici dalla
-            pagina contatti.
+            No pudimos recuperar los horarios guardados. No significa que se hayan perdido:
+            solo falló la lectura. Recarga en un momento y, si el problema continúa, escríbenos desde
+            la página de contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/business-hours" className="btn btn-secondary btn-sm">
-              Riprova
+              Reintentar
             </Link>
             <Link href="/contact" className="btn btn-ghost btn-sm">
-              Contatta il supporto
+              Contactar soporte
             </Link>
           </div>
         </section>

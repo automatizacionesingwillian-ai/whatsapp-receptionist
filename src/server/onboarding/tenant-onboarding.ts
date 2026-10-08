@@ -75,7 +75,7 @@ type CreateTenantBundleInput = {
     address: string | null;
     phone: string | null;
     email: string | null;
-    defaultLocale: 'it-IT';
+    defaultLocale: 'es-419';
     aiDisclosureEnabled: true;
     autoReplyEnabled: false;
     voiceMessagesEnabled: true;
@@ -311,7 +311,7 @@ function normalizeOnboardingPayload(input: {
       slug: makeTenantSlug(tenantName),
       billingEmail,
       country: 'IT',
-      timezone: normalizeTimezone(input.payload.timezone ?? 'Europe/Rome'),
+      timezone: normalizeTimezone(input.payload.timezone ?? 'America/Bogota'),
       businessType: normalizeNullableText(input.payload.businessType, 'Business type', 80),
       trialEndsAt: addDays(input.now, 14).toISOString(),
     },
@@ -326,7 +326,7 @@ function normalizeOnboardingPayload(input: {
       address: normalizeNullableText(input.payload.address, 'Address', 240),
       phone: normalizeNullableText(input.payload.phone, 'Phone', 40),
       email: normalizeNullableEmail(input.payload.email ?? billingEmail, 'Studio email'),
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
       aiDisclosureEnabled: true,
       autoReplyEnabled: false,
       voiceMessagesEnabled: true,
@@ -357,7 +357,7 @@ function normalizeServices(
       ? services
       : [
           {
-            name: 'Prima visita',
+            name: 'Primera visita',
             durationMinutes: 30,
             active: true,
           },
@@ -505,7 +505,7 @@ function normalizeTimezone(value: string): string {
   const normalized = normalizeRequiredText(value, 'Timezone', 80);
 
   try {
-    new Intl.DateTimeFormat('it-IT', { timeZone: normalized });
+    new Intl.DateTimeFormat('es-419', { timeZone: normalized });
   } catch (error) {
     throw new AppError('bad_request', 'Timezone is invalid', {
       cause: error,

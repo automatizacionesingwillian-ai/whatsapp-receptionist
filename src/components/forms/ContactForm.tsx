@@ -4,17 +4,17 @@ import { FormFeedback } from '@/components/forms/FormFeedback';
 import { useApiForm } from '@/components/forms/useApiForm';
 
 const TOPICS = [
-  { value: 'sales', label: 'Voglio provare Ambrogio' },
-  { value: 'support', label: 'Ho bisogno di supporto' },
-  { value: 'agency', label: "Sono un'agenzia / partner" },
-  { value: 'press', label: 'Stampa / media' },
-  { value: 'other', label: 'Altro' },
+  { value: 'sales', label: 'Quiero probar Ambrogio' },
+  { value: 'support', label: 'Necesito soporte' },
+  { value: 'agency', label: 'Soy agencia / partner' },
+  { value: 'press', label: 'Prensa / medios' },
+  { value: 'other', label: 'Otro' },
 ] as const;
 
 export function ContactForm() {
   const { state, onSubmit } = useApiForm({
     endpoint: '/api/contact',
-    successMessage: 'Messaggio inviato. Ti rispondiamo entro un giorno lavorativo.',
+    successMessage: 'Mensaje enviado. Te respondemos en un día hábil.',
     buildBody: (formData) => ({
       name: String(formData.get('name') ?? ''),
       email: String(formData.get('email') ?? ''),
@@ -42,7 +42,7 @@ export function ContactForm() {
       >
         <div className="field">
           <label htmlFor="name" className="label">
-            Nome
+            Nombre
           </label>
           <input
             id="name"
@@ -52,13 +52,13 @@ export function ContactForm() {
             maxLength={120}
             autoComplete="name"
             className="input"
-            placeholder="Mario Rossi"
+            placeholder="María García"
             disabled={isSubmitting}
           />
         </div>
         <div className="field">
           <label htmlFor="email" className="label">
-            Email
+            Correo electrónico
           </label>
           <input
             id="email"
@@ -68,7 +68,7 @@ export function ContactForm() {
             maxLength={254}
             autoComplete="email"
             className="input"
-            placeholder="mario@studio.it"
+            placeholder="maria@negocio.com"
             disabled={isSubmitting}
           />
         </div>
@@ -76,7 +76,7 @@ export function ContactForm() {
 
       <div className="field">
         <label htmlFor="company" className="label">
-          Studio o azienda
+          Negocio
         </label>
         <input
           id="company"
@@ -91,7 +91,7 @@ export function ContactForm() {
 
       <div className="field">
         <label htmlFor="topic" className="label">
-          Di cosa vuoi parlare?
+          ¿De qué quieres hablar?
         </label>
         <select
           id="topic"
@@ -102,7 +102,7 @@ export function ContactForm() {
           disabled={isSubmitting}
         >
           <option value="" disabled>
-            Seleziona
+            Selecciona
           </option>
           {TOPICS.map((topic) => (
             <option key={topic.value} value={topic.value}>
@@ -114,7 +114,7 @@ export function ContactForm() {
 
       <div className="field">
         <label htmlFor="message" className="label">
-          Messaggio
+          Mensaje
         </label>
         <textarea
           id="message"
@@ -123,7 +123,7 @@ export function ContactForm() {
           maxLength={5000}
           rows={6}
           className="textarea"
-          placeholder="Raccontaci."
+          placeholder="Cuéntanos."
           disabled={isSubmitting}
         />
       </div>
@@ -135,16 +135,16 @@ export function ContactForm() {
           className="muted"
           style={{ fontSize: 'var(--text-sm)', lineHeight: 1.5 }}
         >
-          Acconsento al trattamento dei dati per finalità di contatto come descritto nella{' '}
+          Acepto el tratamiento de datos para contacto según la{' '}
           <a href="/legal/privacy" className="btn-link">
-            privacy policy
+            política de privacidad
           </a>
           .
         </label>
       </div>
 
       <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting}>
-        {isSubmitting ? 'Invio in corso…' : 'Invia messaggio'}
+        {isSubmitting ? 'Enviando…' : 'Enviar mensaje'}
       </button>
     </form>
   );

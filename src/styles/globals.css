@@ -986,10 +986,16 @@ p {
   color: var(--color-text);
 }
 
-.sidebar-link[aria-current='page'] {
+.sidebar-link[aria-current='page'],
+.sidebar-link-active {
   background: var(--color-accent-soft);
   color: var(--color-accent);
   font-weight: 600;
+}
+
+.sidebar-link-active:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
 }
 
 .dashboard-main {

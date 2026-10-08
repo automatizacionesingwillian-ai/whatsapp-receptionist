@@ -7,6 +7,8 @@ export type ApiFormStatus = 'idle' | 'submitting' | 'success' | 'error';
 export interface ApiFormState {
   readonly status: ApiFormStatus;
   readonly message: string | null;
+  /** Payload `data` della risposta API in caso di successo. */
+  readonly data?: unknown;
 }
 
 interface ApiErrorEnvelope {
@@ -41,17 +43,17 @@ export interface UseApiFormOptions {
  * adatto a un utente finale.
  */
 const MESSAGE_BY_CODE: Record<string, string> = {
-  rate_limited: 'Troppi tentativi ravvicinati. Riprova tra qualche minuto.',
-  bad_request: 'Alcuni dati non sono validi. Controlla i campi e riprova.',
-  validation_error: 'Alcuni dati non sono validi. Controlla i campi e riprova.',
-  unauthorized: 'Sessione non valida. Effettua di nuovo l’accesso.',
-  forbidden: 'Non hai i permessi per completare questa operazione.',
-  not_found: 'Risorsa non trovata.',
-  conflict: 'Esiste già un account con questi dati.',
+  rate_limited: 'Demasiados intentos seguidos. Vuelve a intentarlo en unos minutos.',
+  bad_request: 'Algunos datos no son válidos. Revisa los campos e inténtalo de nuevo.',
+  validation_error: 'Algunos datos no son válidos. Revisa los campos e inténtalo de nuevo.',
+  unauthorized: 'Sesión no válida. Inicia sesión de nuevo.',
+  forbidden: 'No tienes permiso para completar esta acción.',
+  not_found: 'Recurso no encontrado.',
+  conflict: 'Ya existe una cuenta con estos datos.',
 };
 
 const FALLBACK_MESSAGE =
-  'Si è verificato un errore imprevisto. Riprova, e se persiste scrivici da /contact.';
+  'Ocurrió un error inesperado. Inténtalo de nuevo y, si persiste, escríbenos desde /contact.';
 
 function defaultBuildBody(formData: FormData): Record<string, string> {
   const body: Record<string, string> = {};
@@ -79,7 +81,7 @@ function messageFor(payload: unknown, httpStatus: number): string {
   }
 
   if (httpStatus >= 500) {
-    return 'Il servizio non è raggiungibile in questo momento. Riprova tra poco.';
+    return 'El servicio no está disponible en este momento. Vuelve a intentarlo pronto.';
   }
 
   return FALLBACK_MESSAGE;
@@ -121,7 +123,7 @@ export function useApiForm(options: UseApiFormOptions): {
         // Fallimento di rete: nessuna risposta, quindi nessun envelope da leggere.
         setState({
           status: 'error',
-          message: 'Connessione non riuscita. Controlla la rete e riprova.',
+          message: 'No se pudo conectar. Revisa tu red e inténtalo de nuevo.',
         });
         return;
       }
@@ -145,7 +147,18 @@ export function useApiForm(options: UseApiFormOptions): {
         return;
       }
 
-      setState({ status: 'success', message: options.successMessage });
+      const successData =
+        payload !== null &&
+        typeof payload === 'object' &&
+        'data' in (payload as ApiSuccessEnvelope)
+          ? (payload as ApiSuccessEnvelope).data
+          : undefined;
+
+      if (successData !== undefined) {
+        setState({ status: 'success', message: options.successMessage, data: successData });
+      } else {
+        setState({ status: 'success', message: options.successMessage });
+      }
     },
     [options],
   );

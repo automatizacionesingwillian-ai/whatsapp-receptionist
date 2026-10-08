@@ -10,12 +10,12 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Documentazione tecnica',
+  title: 'Documentación tecnica',
   description:
     'Guide tecniche, integrazioni, webhook e API reference per Ambrogio.ai. Tutto per sviluppatori e agenzie.',
   alternates: { canonical: '/docs' },
   openGraph: {
-    title: 'Documentazione Ambrogio.ai',
+    title: 'Documentación Ambrogio.ai',
     description: 'Guide tecniche, integrazioni e API reference per sviluppatori.',
     url: '/docs',
     type: 'website',
@@ -65,7 +65,7 @@ const SECTIONS: ReadonlyArray<DocSection> = [
     title: 'Account e GDPR',
     items: [
       { label: 'Cambio piano', href: '/help/articles/cambiare-piano' },
-      { label: 'Fatturazione SDI', href: '/help/articles/scaricare-fatture-elettroniche-sdi' },
+      { label: 'Facturación SDI', href: '/help/articles/scaricare-fatture-elettroniche-sdi' },
       { label: 'Esportazione dati GDPR', href: '/help/articles/esportare-i-miei-dati-gdpr' },
       { label: 'Cancellazione account', href: '/help/articles/cancellare-account' },
     ],
@@ -80,12 +80,12 @@ export default function DocsPage() {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Documentazione', url: '/docs' },
+          { name: 'Documentación', url: '/docs' },
         ])}
       />
       <JsonLd
         data={buildCollectionPageSchema({
-          name: 'Documentazione Ambrogio.ai',
+          name: 'Documentación Ambrogio.ai',
           description: 'Guide tecniche, integrazioni e API reference.',
           url: '/docs',
           hasPart: allItems.map((it) => ({ name: it.label, url: it.href })),
@@ -99,7 +99,7 @@ export default function DocsPage() {
               className="stack stack-4"
               style={{ maxWidth: '720px', marginBottom: 'var(--space-12)' }}
             >
-              <span className="badge">Documentazione</span>
+              <span className="badge">Documentación</span>
               <h1 className="display text-balance">
                 Tutto quello che serve per integrare Ambrogio.
               </h1>
@@ -156,7 +156,7 @@ export default function DocsPage() {
               </p>
               <div className="row" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
                 <Link href="/help" className="btn btn-secondary">
-                  Centro assistenza
+                  Centro de ayuda
                 </Link>
                 <Link href="/contact?topic=docs" className="btn btn-primary">
                   Richiedi accesso anticipato

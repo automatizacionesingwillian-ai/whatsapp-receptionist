@@ -23,7 +23,7 @@ export default function GlobalError({ error, reset }: Readonly<ErrorPageProps>) 
     // Inject noindex meta + custom title for crawlers that may still pick up
     // this rendered output. Cleaned up on unmount to avoid leaking state.
     const previousTitle = document.title;
-    document.title = 'Errore · Ambrogio.ai';
+    document.title = 'Error · Ambrogio.ai';
 
     const robotsMeta = document.createElement('meta');
     robotsMeta.setAttribute('name', 'robots');
@@ -60,26 +60,26 @@ export default function GlobalError({ error, reset }: Readonly<ErrorPageProps>) 
           ⚠
         </span>
         <div className="stack stack-3" style={{ alignItems: 'center' }}>
-          <h1 className="text-balance">Qualcosa è andato storto.</h1>
+          <h1 className="text-balance">Algo salió mal.</h1>
           <p className="lead text-pretty">
-            Abbiamo già ricevuto la segnalazione e ci stiamo lavorando. Nel frattempo, prova a
-            ricaricare. Se persiste, scrivici dal centro assistenza.
+            Ya recibimos el reporte y estamos trabajando en ello. Mientras tanto, intenta recargar
+            la página. Si persiste, escríbenos desde el centro de ayuda.
           </p>
           {error.digest ? (
             <p className="muted mono" style={{ fontSize: 'var(--text-xs)' }}>
-              Riferimento errore: {error.digest}
+              Referencia del error: {error.digest}
             </p>
           ) : null}
         </div>
         <div className="row" style={{ gap: 'var(--space-3)', justifyContent: 'center' }}>
           <button type="button" onClick={reset} className="btn btn-primary btn-lg">
-            Riprova
+            Reintentar
           </button>
           <Link href="/" className="btn btn-secondary btn-lg">
-            Torna alla home
+            Volver al inicio
           </Link>
           <Link href="/help" className="btn btn-ghost btn-lg">
-            Contattaci
+            Contáctanos
           </Link>
         </div>
       </div>

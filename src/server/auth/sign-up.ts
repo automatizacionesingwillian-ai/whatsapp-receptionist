@@ -139,15 +139,19 @@ export class SupabaseSignUpRepository implements SignUpRepository {
 }
 
 export function createSignUpService(): SignUpService {
-  // Chi arriva dalla registrazione non ha ancora un tenant configurato:
-  // il magic link deve portarlo all'onboarding, non alla dashboard vuota.
-  const redirectTo = `${env.NEXT_PUBLIC_APP_URL}/auth/callback?next=%2Fonboarding`;
+  // Stesso callback del login: senza claim tenant il callback manda a /onboarding.
+  // Evitiamo `?next=/onboarding` perché Supabase, al redirect PKCE, sostituisce
+  // spesso l'intera query string con `?code=...`.
+  const redirectTo = `${env.NEXT_PUBLIC_APP_URL}/auth/callback`;
   const sender: MagicLinkSender = {
     async send(input) {
       const supabase = createSupabaseAdminClient();
       const { error } = await supabase.auth.signInWithOtp({
         email: input.email,
-        options: { emailRedirectTo: input.redirectTo },
+        options: {
+          emailRedirectTo: input.redirectTo,
+          shouldCreateUser: true,
+        },
       });
       return { error: error ?? null };
     },

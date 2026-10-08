@@ -11,47 +11,51 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Verticali · Settori coperti da Ambrogio.ai',
+  title: 'Verticales · Sectores de Ambrogio.ai',
   description:
-    'Studi dentistici, centri estetici, palestre, studi professionali. Una reception AI tarata sul tuo settore con prompt e flussi dedicati.',
+    'Clínicas dentales, centros de estética, gimnasios y negocios profesionales. Recepción AI ajustada a tu sector con prompts y flujos dedicados.',
   alternates: { canonical: '/verticali' },
   openGraph: {
-    title: 'Verticali coperti da Ambrogio.ai',
-    description: 'Quattro settori, una piattaforma. Reception AI tarata sul tuo mestiere.',
+    title: 'Verticales cubiertos por Ambrogio.ai',
+    description: 'Cuatro sectores, una plataforma. Recepción AI ajustada a tu oficio.',
     url: '/verticali',
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
 const VERTICALS = [
   {
     slug: 'dental',
-    title: 'Studi dentistici',
-    body: 'Igiene, urgenze, controlli, ortodonzia. Ambrogio capisce la differenza tra mal di denti e una richiesta di preventivo.',
+    title: 'Clínicas dentales',
+    body: 'Higiene, urgencias, controles, ortodoncia. Ambrogio distingue dolor agudo de una solicitud de presupuesto.',
     icon: '/assets/site-images/ambrogio/svg/06-vertical-dental.svg',
-    benefits: ['Filtra le urgenze vere', 'Richiami semestrali automatici', 'Pre-anamnesi via chat'],
+    benefits: [
+      'Filtra urgencias reales',
+      'Recordatorios semestrales automáticos',
+      'Pre-anamnesis por chat',
+    ],
   },
   {
     slug: 'beauty',
-    title: 'Centri estetici e SPA',
-    body: 'Trattamenti, pacchetti, gift card. Ogni servizio ha il suo tempo, il suo costo, il suo materiale.',
+    title: 'Centros de estética y SPA',
+    body: 'Tratamientos, paquetes, tarjetas regalo. Cada servicio tiene su tiempo, costo y material.',
     icon: '/assets/site-images/ambrogio/svg/07-vertical-beauty.svg',
-    benefits: ['Listino dinamico', 'Promozioni stagionali', 'Gift card e abbonamenti'],
+    benefits: ['Tarifario dinámico', 'Promociones de temporada', 'Tarjetas regalo y membresías'],
   },
   {
     slug: 'fitness',
-    title: 'Palestre e personal trainer',
-    body: 'Lezioni di gruppo, slot PT, abbonamenti, corsi a numero chiuso. Riduce gli abbandoni con reminder umani.',
+    title: 'Gimnasios y entrenadores personales',
+    body: 'Clases grupales, slots de PT, membresías, cupos limitados. Reduce bajas con recordatorios humanos.',
     icon: '/assets/site-images/ambrogio/svg/08-vertical-fitness.svg',
-    benefits: ['Calendario lezioni', 'Lista d’attesa intelligente', 'Reminder pre-lezione'],
+    benefits: ['Calendario de clases', 'Lista de espera inteligente', 'Recordatorio pre-clase'],
   },
   {
     slug: 'professional',
-    title: 'Studi professionali',
-    body: 'Avvocati, commercialisti, consulenti. Filtra le richieste, qualifica i lead, fissa solo gli incontri che valgono.',
+    title: 'Negocios profesionales',
+    body: 'Abogados, contadores, consultores. Filtra solicitudes, califica leads y agenda solo reuniones que valen.',
     icon: '/assets/site-images/ambrogio/svg/09-vertical-professional-office.svg',
-    benefits: ['Qualifica lead', 'Pre-briefing automatico', 'Confidentiality first'],
+    benefits: ['Calificación de leads', 'Briefing automático', 'Confidencialidad primero'],
   },
 ] as const;
 
@@ -61,13 +65,13 @@ export default async function VerticalsIndexPage() {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Verticali', url: '/verticali' },
+          { name: 'Verticales', url: '/verticali' },
         ])}
       />
       <JsonLd
         data={buildCollectionPageSchema({
-          name: 'Verticali coperti da Ambrogio.ai',
-          description: 'Quattro settori, prompt e flussi dedicati per ognuno.',
+          name: 'Verticales cubiertos por Ambrogio.ai',
+          description: 'Cuatro sectores, prompts y flujos dedicados para cada uno.',
           url: '/verticali',
           hasPart: VERTICALS.map((v) => ({ name: v.title, url: `/verticali/${v.slug}` })),
         })}
@@ -86,13 +90,13 @@ export default async function VerticalsIndexPage() {
               className="stack stack-4 text-center"
               style={{ maxWidth: '720px', margin: '0 auto var(--space-12)' }}
             >
-              <span className="badge">4 verticali, 1 piattaforma</span>
+              <span className="badge">4 verticales, 1 plataforma</span>
               <h1 className="display text-balance">
-                Ogni settore parla la sua lingua. Ambrogio la conosce.
+                Cada sector habla su idioma. Ambrogio lo conoce.
               </h1>
               <p className="lead text-pretty" style={{ margin: '0 auto' }}>
-                Niente AI generica. Modelli, prompt e flussi tarati su come si parla davvero in ogni
-                mestiere.
+                Nada de IA genérica. Modelos, prompts y flujos ajustados a cómo se habla de verdad en
+                cada oficio.
               </p>
             </div>
 
@@ -146,7 +150,7 @@ export default async function VerticalsIndexPage() {
                       fontWeight: 600,
                     }}
                   >
-                    Vedi caso d&apos;uso completo <span aria-hidden="true">→</span>
+                    Ver caso de uso completo <span aria-hidden="true">→</span>
                   </span>
                 </Link>
               ))}

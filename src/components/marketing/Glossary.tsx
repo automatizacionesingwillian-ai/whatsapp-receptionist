@@ -13,9 +13,9 @@ interface GlossaryProps {
  */
 export async function Glossary({ hostUrl = '/help' }: Readonly<GlossaryProps>) {
   const schema = buildDefinedTermSetSchema({
-    name: 'Glossario Ambrogio.ai',
+    name: 'Glosario Ambrogio.ai',
     description:
-      'Definizioni canoniche dei concetti di dominio rilevanti per AI Receptionist, WhatsApp Cloud API, multi-tenant SaaS, GDPR e fatturazione elettronica italiana.',
+      'Definiciones canónicas de conceptos de dominio para recepcionista AI, WhatsApp Cloud API, SaaS multi-tenant, GDPR y facturación electrónica.',
     url: hostUrl,
     terms: GLOSSARY_TERMS.map((t) => ({
       name: t.name,

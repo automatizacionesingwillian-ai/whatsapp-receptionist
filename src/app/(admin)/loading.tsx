@@ -10,7 +10,7 @@ export default function AdminLoading() {
     <div className="stack stack-8" role="status" aria-live="polite" aria-busy="true">
       <div className="stack stack-2">
         <span className="badge badge-warm">Cross-tenant</span>
-        <h1 style={{ opacity: 0.5 }}>Caricamento…</h1>
+        <h1 style={{ opacity: 0.5 }}>Cargando…</h1>
         <p className="muted">Interrogazione di database e provider esterni in corso.</p>
       </div>
 
