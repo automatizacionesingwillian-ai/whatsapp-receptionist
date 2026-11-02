@@ -1,5 +1,11 @@
 # Ambrogio.ai Agent Memory
 
+## 2026-11-02 — Audit prod + repo público para Hobby Vercel — Cursor
+
+- Parches: `next@15.5.28`, `zod@^4.6.6`, overrides `sharp@^0.35.5` y `source-map-js@^1.2.2`.
+- `npm audit --omit=dev --audit-level=high` → 0 vulns.
+- Repo GitHub pasado a **público** para que Hobby deje desplegar (no admite colaboradores en repos privados).
+
 ## 2026-11-02 — Italiano residual → español LATAM (UI + negocio) — Cursor
 
 - Admin shell/loading, auth callback, conversaciones, billing, errores API/AI/WhatsApp, watchdog emails, STT `es`, assets SVG marketing.

@@ -41,7 +41,8 @@ ancora adottato:
 | Pacchetto | Motivo |
 |---|---|
 | `postcss` | Path traversal e lettura arbitraria di file via `sourceMappingURL` |
-| `sharp` | CVE ereditate da libvips (CVE-2026-33327/33328/35590/35591) |
+| `sharp` | CVE ereditate da libvips / librsvg (CVE-2026-96889) |
+| `source-map-js` | DoS del event loop via offset di sezioni source-map |
 | `ws` | Divulgazione di memoria non inizializzata + DoS per esaurimento memoria |
 | `js-yaml` | DoS a complessità quadratica sulle merge key |
 | `vite` | Bypass di `server.fs.deny` su path alternativi Windows |
