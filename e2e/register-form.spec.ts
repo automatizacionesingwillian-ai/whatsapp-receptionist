@@ -24,9 +24,9 @@ const SIGN_UP_ROUTE = '**/api/auth/sign-up';
 const FEEDBACK = '#register-form-errors';
 
 async function fillRegisterForm(page: Page, email: string): Promise<void> {
-  await page.getByLabel('Nome studio o azienda', { exact: true }).fill('Studio E2E');
-  await page.getByLabel('Email di lavoro', { exact: true }).fill(email);
-  await page.getByLabel('Settore', { exact: true }).selectOption('dental');
+  await page.getByLabel('Nombre del negocio', { exact: true }).fill('Studio E2E');
+  await page.getByLabel('Correo de trabajo', { exact: true }).fill(email);
+  await page.getByLabel('Sector', { exact: true }).selectOption('dental');
 }
 
 test.describe('Registrazione', () => {
@@ -41,9 +41,9 @@ test.describe('Registrazione', () => {
     await expect(feedback).toHaveText('');
 
     await fillRegisterForm(page, 'e2e-success@example.com');
-    await page.getByRole('button', { name: 'Crea account' }).click();
+    await page.getByRole('button', { name: 'Crear cuenta' }).click();
 
-    await expect(feedback).toContainText('Account creato');
+    await expect(feedback).toContainText('Cuenta creada');
     // Il feedback esce dallo stato "solo per screen reader" e diventa visibile.
     await expect(feedback).not.toHaveClass(/sr-only/);
     // Nessuna navigazione: si resta sulla pagina che ha inviato il form.
@@ -72,10 +72,10 @@ test.describe('Registrazione', () => {
     await gotoOk(page, '/register');
 
     await fillRegisterForm(page, 'e2e-error@example.com');
-    await page.getByRole('button', { name: 'Crea account' }).click();
+    await page.getByRole('button', { name: 'Crear cuenta' }).click();
 
     const feedback = page.locator(FEEDBACK);
-    await expect(feedback).toContainText('Troppi tentativi ravvicinati');
+    await expect(feedback).toContainText('Demasiados intentos seguidos');
     await expect(feedback).toHaveAttribute('role', 'alert');
     await expect(page).toHaveURL(/\/register$/);
 
@@ -107,7 +107,7 @@ test.describe('Registrazione', () => {
     );
 
     await fillRegisterForm(page, 'e2e-real@example.com');
-    await page.getByRole('button', { name: 'Crea account' }).click();
+    await page.getByRole('button', { name: 'Crear cuenta' }).click();
 
     const response = await responsePromise;
     expect(response.status(), 'la route deve esistere e accettare POST').not.toBe(404);

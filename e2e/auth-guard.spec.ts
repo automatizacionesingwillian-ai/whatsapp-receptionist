@@ -38,8 +38,9 @@ const ADMIN_PATHS = [
  * Sono sottostringhe semplici, quindi vengono trovate sia nel markup HTML sia
  * nel payload RSC serializzato.
  */
-const DASHBOARD_SHELL_MARKER = 'Navigazione dashboard';
+const DASHBOARD_SHELL_MARKER = 'Navegación del panel';
 const ADMIN_SHELL_MARKER = 'Esci da admin';
+const LOGIN_BUTTON = 'Enviar enlace de acceso';
 
 const LOGIN_URL = /\/login(\?.*)?$/;
 
@@ -49,7 +50,7 @@ test.describe('Area tenant protetta', () => {
       await page.goto(path);
 
       await expect(page).toHaveURL(LOGIN_URL);
-      await expect(page.getByRole('button', { name: 'Invia link di accesso' })).toBeVisible();
+      await expect(page.getByRole('button', { name: LOGIN_BUTTON })).toBeVisible();
       await expect(page.getByLabel(DASHBOARD_SHELL_MARKER)).toHaveCount(0);
     });
   }
@@ -61,7 +62,7 @@ test.describe('Pannello admin protetto', () => {
       await page.goto(path);
 
       await expect(page).toHaveURL(LOGIN_URL);
-      await expect(page.getByRole('button', { name: 'Invia link di accesso' })).toBeVisible();
+      await expect(page.getByRole('button', { name: LOGIN_BUTTON })).toBeVisible();
       await expect(page.getByRole('link', { name: new RegExp(ADMIN_SHELL_MARKER) })).toHaveCount(0);
     });
   }

@@ -15,20 +15,20 @@ test.describe('Landing e navigazione principale', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page.getByRole('banner')).toBeVisible();
-    await expect(page.getByRole('navigation', { name: 'Navigazione principale' })).toBeVisible();
+    await expect(page.getByRole('navigation', { name: 'Navegación principal' })).toBeVisible();
   });
 
   test('il menu principale raggiunge le pagine dichiarate', async ({ page }) => {
     await gotoOk(page, '/');
 
-    const mainNav = page.getByRole('navigation', { name: 'Navigazione principale' });
+    const mainNav = page.getByRole('navigation', { name: 'Navegación principal' });
 
-    await mainNav.getByRole('link', { name: 'Piani' }).click();
+    await mainNav.getByRole('link', { name: 'Planes' }).click();
     await expect(page).toHaveURL(/\/pricing$/);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
     await page.goBack();
-    await mainNav.getByRole('link', { name: 'Verticali' }).click();
+    await mainNav.getByRole('link', { name: 'Verticales' }).click();
     await expect(page).toHaveURL(/\/verticali$/);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
@@ -42,14 +42,14 @@ test.describe('Landing e navigazione principale', () => {
     await gotoOk(page, '/');
     const header = page.getByRole('banner');
 
-    await header.getByRole('link', { name: 'Prova gratis' }).click();
+    await header.getByRole('link', { name: 'Prueba gratis' }).click();
     await expect(page).toHaveURL(/\/register$/);
-    await expect(page.getByRole('button', { name: 'Crea account' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Crear cuenta' })).toBeVisible();
 
     await gotoOk(page, '/');
-    await header.getByRole('link', { name: 'Accedi' }).click();
+    await header.getByRole('link', { name: 'Iniciar sesión' }).click();
     await expect(page).toHaveURL(/\/login$/);
-    await expect(page.getByRole('button', { name: 'Invia link di accesso' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Enviar enlace de acceso' })).toBeVisible();
   });
 
   test('il logo riporta alla home da una pagina interna', async ({ page }) => {
@@ -60,6 +60,6 @@ test.describe('Landing e navigazione principale', () => {
       .getByRole('link', { name: /Ambrogio\.ai/ })
       .click();
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.getByRole('navigation', { name: 'Navigazione principale' })).toBeVisible();
+    await expect(page.getByRole('navigation', { name: 'Navegación principal' })).toBeVisible();
   });
 });

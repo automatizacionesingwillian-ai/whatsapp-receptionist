@@ -28,16 +28,16 @@ interface ContactInput {
 }
 
 async function fillContactForm(page: Page, input: ContactInput): Promise<void> {
-  await page.getByLabel('Nome', { exact: true }).fill('Mario Rossi');
-  await page.getByLabel('Email', { exact: true }).fill(input.email);
+  await page.getByLabel('Nombre', { exact: true }).fill('Mario Rossi');
+  await page.getByLabel('Correo electrónico', { exact: true }).fill(input.email);
   if (input.company !== null) {
-    await page.getByLabel('Studio o azienda', { exact: true }).fill(input.company);
+    await page.getByLabel('Negocio', { exact: true }).fill(input.company);
   }
-  await page.getByLabel('Di cosa vuoi parlare?', { exact: true }).selectOption('sales');
+  await page.getByLabel('¿De qué quieres hablar?', { exact: true }).selectOption('sales');
   await page
-    .getByLabel('Messaggio', { exact: true })
-    .fill('Vorrei provare Ambrogio nel mio studio.');
-  await page.getByLabel(/Acconsento al trattamento dei dati/).check();
+    .getByLabel('Mensaje', { exact: true })
+    .fill('Quiero probar Ambrogio en mi negocio.');
+  await page.getByLabel(/Acepto el tratamiento de datos/).check();
 }
 
 test.describe('Form di contatto', () => {
@@ -52,9 +52,9 @@ test.describe('Form di contatto', () => {
     await expect(feedback).toHaveText('');
 
     await fillContactForm(page, { email: 'e2e-contact@example.com', company: null });
-    await page.getByRole('button', { name: 'Invia messaggio' }).click();
+    await page.getByRole('button', { name: 'Enviar mensaje' }).click();
 
-    await expect(feedback).toContainText('Messaggio inviato');
+    await expect(feedback).toContainText('Mensaje enviado');
     await expect(feedback).not.toHaveClass(/sr-only/);
     await expect(page).toHaveURL(/\/contact$/);
 
@@ -69,7 +69,7 @@ test.describe('Form di contatto', () => {
       // Campo lasciato vuoto: lo schema accetta `null`, non la stringa vuota.
       company: null,
       topic: 'sales',
-      message: 'Vorrei provare Ambrogio nel mio studio.',
+      message: 'Quiero probar Ambrogio en mi negocio.',
       // Checkbox: booleano `true`, non la stringa "on" di un form nativo.
       consent: true,
     });
@@ -83,9 +83,9 @@ test.describe('Form di contatto', () => {
 
     await gotoOk(page, '/contact');
     await fillContactForm(page, { email: 'e2e-company@example.com', company: 'Studio Rossi' });
-    await page.getByRole('button', { name: 'Invia messaggio' }).click();
+    await page.getByRole('button', { name: 'Enviar mensaje' }).click();
 
-    await expect(page.locator(FEEDBACK)).toContainText('Messaggio inviato');
+    await expect(page.locator(FEEDBACK)).toContainText('Mensaje enviado');
     expect(capture.first().jsonBody).toMatchObject({ company: 'Studio Rossi' });
   });
 
@@ -97,10 +97,10 @@ test.describe('Form di contatto', () => {
 
     await gotoOk(page, '/contact');
     await fillContactForm(page, { email: 'e2e-fail@example.com', company: null });
-    await page.getByRole('button', { name: 'Invia messaggio' }).click();
+    await page.getByRole('button', { name: 'Enviar mensaje' }).click();
 
     const feedback = page.locator(FEEDBACK);
-    await expect(feedback).toContainText('Il servizio non è raggiungibile');
+    await expect(feedback).toContainText('El servicio no está disponible');
     await expect(feedback).toHaveAttribute('role', 'alert');
     await expect(page).toHaveURL(/\/contact$/);
   });
@@ -120,7 +120,7 @@ test.describe('Form di contatto', () => {
     );
 
     await fillContactForm(page, { email: 'e2e-real@example.com', company: null });
-    await page.getByRole('button', { name: 'Invia messaggio' }).click();
+    await page.getByRole('button', { name: 'Enviar mensaje' }).click();
 
     const response = await responsePromise;
     expect(response.status(), 'la route deve esistere e accettare POST').not.toBe(404);
