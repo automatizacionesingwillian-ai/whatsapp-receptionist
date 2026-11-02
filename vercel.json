@@ -3,12 +3,24 @@
   "regions": ["fra1"],
   "crons": [
     {
+      "path": "/api/internal/jobs/gdpr-hard-delete",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/internal/jobs/data-retention",
+      "schedule": "30 3 * * *"
+    },
+    {
       "path": "/api/internal/jobs/whatsapp-outbox",
-      "schedule": "* * * * *"
+      "schedule": "0 4 * * *"
     },
     {
       "path": "/api/internal/jobs/whatsapp-voice",
-      "schedule": "* * * * *"
+      "schedule": "15 4 * * *"
+    },
+    {
+      "path": "/api/internal/jobs/health-watchdog",
+      "schedule": "0 5 * * *"
     },
     {
       "path": "/api/internal/jobs/whatsapp-template-sync",
@@ -16,19 +28,7 @@
     },
     {
       "path": "/api/internal/jobs/appointment-reminders",
-      "schedule": "*/5 * * * *"
-    },
-    {
-      "path": "/api/internal/jobs/gdpr-hard-delete",
-      "schedule": "0 3 * * *"
-    },
-    {
-      "path": "/api/internal/jobs/health-watchdog",
-      "schedule": "*/15 * * * *"
-    },
-    {
-      "path": "/api/internal/jobs/data-retention",
-      "schedule": "30 3 * * *"
+      "schedule": "0 8 * * *"
     }
   ]
 }

@@ -1,5 +1,11 @@
 # Ambrogio.ai Agent Memory
 
+## 2026-11-02 — Crons Vercel compatibles con Hobby — Cursor
+
+- Ajustado `vercel.json`: schedules `* * * * *`, `*/5` y `*/15` fallaban el deploy en Hobby (máx. 1 ejecución/día).
+- Todos los jobs internos quedaron en cron diario (UTC), espaciados 03:00–08:00.
+- Para outbox/voice/reminders en near-realtime hace falta plan Pro (mín. 1/min).
+
 ## 2026-10-30 — Migración WhatsApp → Meta Cloud API (sin 360dialog) — Cursor
 
 - Conector: Graph API Bearer + `/{phone-number-id}/messages`; provider `whatsapp_cloud`; media/templates Meta; webhook `X-Hub-Signature-256` + verify token.
