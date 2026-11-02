@@ -47,7 +47,7 @@ const WEEKDAY_LABELS = [
   'Sábado',
 ] as const;
 
-/** Ordine di lettura italiano: la settimana inizia da lunedì. */
+/** Orden de lectura LATAM: la semana empieza el lunes. */
 export const WEEKDAY_DISPLAY_ORDER: readonly number[] = [1, 2, 3, 4, 5, 6, 0];
 
 const TIME_PATTERN = /^([01]\d|2[0-3]):[0-5]\d$/;
@@ -57,7 +57,7 @@ export function weekdayLabel(weekday: number): string {
 }
 
 /**
- * Costruisce le sette righe editabili a partire dagli orari salvati.
+ * Construye las siete filas editables a partir de los horarios guardados.
  *
  * Se un giorno ha solo fasce disattivate, le sue ore restano visibili con il
  * giorno marcato chiuso: sono dati reali, non un default inventato, e servono
@@ -84,11 +84,11 @@ export function toDayDrafts(hours: readonly BusinessHourView[]): readonly DayDra
 }
 
 /**
- * Fasce che l'editor non mostra.
+ * Rangos que el editor no muestra.
  *
- * Il modello dati ammette più fasce per giorno (es. pausa pranzo), questa
- * schermata ne gestisce una sola. Salvare cancellerebbe le altre senza che
- * l'utente lo sappia: il conteggio serve ad avvisarlo prima.
+ * El modelo de datos admite varios rangos por día (p. ej. pausa de comida); esta
+ * pantalla gestiona solo uno. Guardar borraría los demás sin que el usuario lo
+ * sepa: el conteo sirve para avisarlo antes.
  */
 export function countHiddenRanges(hours: readonly BusinessHourView[]): number {
   const seen = new Set<number>();
@@ -113,10 +113,10 @@ export function validateDayDrafts(drafts: readonly DayDraft[]): readonly DayIssu
 /**
  * Body del PUT.
  *
- * I giorni chiusi vengono omessi invece di essere inviati con `active: false`:
- * l'API valida comunque `opensAt < closesAt` su ogni riga, quindi tenerli
- * significherebbe inventare un orario per un giorno in cui lo studio è chiuso.
- * Assenza di fasce e fascia disattivata producono la stessa disponibilità.
+ * Los días cerrados se omiten en lugar de enviarse con `active: false`:
+ * la API igual valida `opensAt < closesAt` en cada fila, así que incluirlos
+ * inventaría un horario para un día en que el estudio está cerrado.
+ * Ausencia de franjas y franja desactivada producen la misma disponibilidad.
  */
 export function buildBusinessHoursPayload(drafts: readonly DayDraft[]): {
   readonly hours: readonly {

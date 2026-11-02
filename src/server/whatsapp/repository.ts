@@ -268,7 +268,7 @@ export class SupabaseWhatsAppWebhookRepository implements WhatsAppWebhookReposit
     const direct = await this.supabase
       .from('integrations')
       .select('id, tenant_id')
-      .eq('provider', 'whatsapp_360dialog')
+      .in('provider', ['whatsapp_cloud', 'whatsapp_360dialog'])
       .eq('status', 'active')
       .eq('external_account_id', phoneNumberId)
       .maybeSingle();
@@ -287,7 +287,7 @@ export class SupabaseWhatsAppWebhookRepository implements WhatsAppWebhookReposit
     const fallback = await this.supabase
       .from('integrations')
       .select('id, tenant_id')
-      .eq('provider', 'whatsapp_360dialog')
+      .in('provider', ['whatsapp_cloud', 'whatsapp_360dialog'])
       .eq('status', 'active')
       .contains('config', { phone_number_id: phoneNumberId })
       .maybeSingle();
@@ -436,7 +436,7 @@ export class SupabaseWhatsAppWebhookRepository implements WhatsAppWebhookReposit
       assistantName: (data?.assistant_name as string | undefined) ?? 'Ambrogio',
       aiDisclosureEnabled: (data?.ai_disclosure_enabled as boolean | undefined) ?? true,
       autoReplyEnabled: (data?.auto_reply_enabled as boolean | undefined) ?? false,
-      defaultLocale: (data?.default_locale as string | undefined) ?? 'it-IT',
+      defaultLocale: (data?.default_locale as string | undefined) ?? 'es-419',
     };
   }
 

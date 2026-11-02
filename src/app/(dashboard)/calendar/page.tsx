@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const DAYS_AHEAD = 14;
 const DAY_MS = 24 * 60 * 60 * 1000;
 const FETCH_LIMIT = 300;
-const DEFAULT_TIMEZONE = 'Europe/Rome';
+const DEFAULT_TIMEZONE = 'America/Mexico_City';
 
 const STATUS_CONFIG: Record<AppointmentStatus, { readonly label: string; readonly badge: string }> =
   {

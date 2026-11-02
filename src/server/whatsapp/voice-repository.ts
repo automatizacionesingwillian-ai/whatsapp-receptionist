@@ -194,7 +194,7 @@ export class SupabaseWhatsAppVoiceRepository implements WhatsAppVoiceRepository 
       transcriptText: row.transcript_text,
       transcriptLanguage: row.transcript_language,
       transcriptLanguageProbability: getOptionalNumber(transcript.languageProbability),
-      provider: 'whatsapp_360dialog',
+      provider: 'whatsapp_cloud',
       whatsappMessageId: getOptionalString(payload.whatsappMessageId),
       phoneNumberId: getOptionalString(payload.phoneNumberId),
       displayPhoneNumber: getOptionalString(payload.displayPhoneNumber),

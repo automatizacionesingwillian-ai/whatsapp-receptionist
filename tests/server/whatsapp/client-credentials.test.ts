@@ -14,7 +14,7 @@ import type {
 } from '@/server/whatsapp/outbox-repository';
 
 const ENCRYPTION_KEY = 'test-secret-with-at-least-32-characters';
-const API_URL = 'https://waba-v2.360dialog.io';
+const API_URL = 'https://graph.facebook.com/v21.0';
 const now = new Date('2026-04-25T08:00:00.000Z');
 
 describe('credenziali WhatsApp per tenant', () => {
@@ -22,10 +22,10 @@ describe('credenziali WhatsApp per tenant', () => {
     process.env.INTEGRATION_CREDENTIALS_ENCRYPTION_KEY = ENCRYPTION_KEY;
   });
 
-  it('invia il job di ogni tenant con la chiave di quel tenant', async () => {
+  it('invia il job di ogni tenant con il token di quel tenant', async () => {
     const store = new FakeCredentialsStore({
-      tenant_a: 'key_tenant_a',
-      tenant_b: 'key_tenant_b',
+      tenant_a: { accessToken: 'token_tenant_a', phoneNumberId: 'phone_a' },
+      tenant_b: { accessToken: 'token_tenant_b', phoneNumberId: 'phone_b' },
     });
     const provider = new RecordingWhatsAppProvider();
     const repository = new FakeOutboxRepository([
@@ -38,14 +38,24 @@ describe('credenziali WhatsApp per tenant', () => {
 
     expect(result.sentJobs).toBe(2);
     expect(provider.requests).toEqual([
-      { apiKey: 'key_tenant_a', to: '393330000001' },
-      { apiKey: 'key_tenant_b', to: '393330000002' },
+      {
+        accessToken: 'token_tenant_a',
+        to: '393330000001',
+        url: `${API_URL}/phone_a/messages`,
+      },
+      {
+        accessToken: 'token_tenant_b',
+        to: '393330000002',
+        url: `${API_URL}/phone_b/messages`,
+      },
     ]);
     expect(store.tenantIds).toEqual(['tenant_a', 'tenant_b']);
   });
 
   it('non decifra di nuovo la credenziale per i job successivi dello stesso tenant', async () => {
-    const store = new FakeCredentialsStore({ tenant_a: 'key_tenant_a' });
+    const store = new FakeCredentialsStore({
+      tenant_a: { accessToken: 'token_tenant_a', phoneNumberId: 'phone_a' },
+    });
     const provider = new RecordingWhatsAppProvider();
     const repository = new FakeOutboxRepository([
       outboxJob({ id: 'job_1', tenantId: 'tenant_a' }),
@@ -57,16 +67,18 @@ describe('credenziali WhatsApp per tenant', () => {
     const result = await worker.processReadyJobs({ now });
 
     expect(result.sentJobs).toBe(3);
-    expect(provider.requests.map((request) => request.apiKey)).toEqual([
-      'key_tenant_a',
-      'key_tenant_a',
-      'key_tenant_a',
+    expect(provider.requests.map((request) => request.accessToken)).toEqual([
+      'token_tenant_a',
+      'token_tenant_a',
+      'token_tenant_a',
     ]);
     expect(store.tenantIds).toEqual(['tenant_a']);
   });
 
   it('rilegge la credenziale quando la voce in cache è scaduta', async () => {
-    const store = new FakeCredentialsStore({ tenant_a: 'key_tenant_a' });
+    const store = new FakeCredentialsStore({
+      tenant_a: { accessToken: 'token_tenant_a', phoneNumberId: 'phone_a' },
+    });
     let clock = 1_000;
     const resolver = new TenantWhatsAppCredentialsResolver(store, {
       ttlMs: 60_000,
@@ -85,11 +97,13 @@ describe('credenziali WhatsApp per tenant', () => {
     expect(store.tenantIds).toEqual(['tenant_a', 'tenant_a']);
   });
 
-  it('ricade sulla chiave globale con un warning quando il tenant non ha integrazione', async () => {
+  it('ricade sul token globale con un warning quando il tenant non ha integrazione', async () => {
     const store = new FakeCredentialsStore({});
     const warnings: Array<{ context: Record<string, unknown>; message: string }> = [];
     const resolver = new TenantWhatsAppCredentialsResolver(store, {
-      globalApiKey: 'legacy_global_key',
+      globalAccessToken: 'legacy_global_token',
+      globalPhoneNumberId: 'phone_global',
+      globalWabaId: 'waba_global',
       logger: {
         warn: (context, message) => {
           warnings.push({ context, message });
@@ -99,7 +113,12 @@ describe('credenziali WhatsApp per tenant', () => {
 
     const credentials = await resolver.resolve('tenant_senza_integrazione');
 
-    expect(credentials).toEqual({ apiKey: 'legacy_global_key', source: 'global' });
+    expect(credentials).toEqual({
+      accessToken: 'legacy_global_token',
+      phoneNumberId: 'phone_global',
+      wabaId: 'waba_global',
+      source: 'global',
+    });
     expect(warnings).toHaveLength(1);
     expect(warnings[0]?.context).toMatchObject({
       tenantId: 'tenant_senza_integrazione',
@@ -107,11 +126,18 @@ describe('credenziali WhatsApp per tenant', () => {
     });
   });
 
-  it('non ricade sulla chiave globale quando il tenant ha una propria credenziale', async () => {
-    const store = new FakeCredentialsStore({ tenant_a: 'key_tenant_a' });
+  it('non ricade sul token globale quando il tenant ha una propria credenziale', async () => {
+    const store = new FakeCredentialsStore({
+      tenant_a: {
+        accessToken: 'token_tenant_a',
+        phoneNumberId: 'phone_a',
+        wabaId: 'waba_a',
+      },
+    });
     const warnings: string[] = [];
     const resolver = new TenantWhatsAppCredentialsResolver(store, {
-      globalApiKey: 'legacy_global_key',
+      globalAccessToken: 'legacy_global_token',
+      globalPhoneNumberId: 'phone_global',
       logger: {
         warn: (_context, message) => {
           warnings.push(message);
@@ -120,7 +146,9 @@ describe('credenziali WhatsApp per tenant', () => {
     });
 
     expect(await resolver.resolve('tenant_a')).toEqual({
-      apiKey: 'key_tenant_a',
+      accessToken: 'token_tenant_a',
+      phoneNumberId: 'phone_a',
+      wabaId: 'waba_a',
       source: 'tenant',
     });
     expect(warnings).toEqual([]);
@@ -128,18 +156,21 @@ describe('credenziali WhatsApp per tenant', () => {
 
   it('fallisce quando non esiste né la credenziale del tenant né quella globale', async () => {
     const resolver = new TenantWhatsAppCredentialsResolver(new FakeCredentialsStore({}), {
-      globalApiKey: '',
+      globalAccessToken: '',
+      globalPhoneNumberId: '',
     });
 
     await expect(resolver.resolve('tenant_a')).rejects.toBeInstanceOf(AppError);
   });
 
   it('scarta la credenziale in cache quando il provider la rifiuta', async () => {
-    const store = new FakeCredentialsStore({ tenant_a: 'key_tenant_a' });
+    const store = new FakeCredentialsStore({
+      tenant_a: { accessToken: 'token_tenant_a', phoneNumberId: 'phone_a' },
+    });
     const resolver = new TenantWhatsAppCredentialsResolver(store);
     const senders = new TenantWhatsAppMessageSenderResolver(resolver, {
       apiUrl: API_URL,
-      fetcher: async () => Response.json({ error: { message: 'Invalid key' } }, { status: 401 }),
+      fetcher: async () => Response.json({ error: { message: 'Invalid token' } }, { status: 401 }),
     });
 
     const sender = await senders.resolveSender('tenant_a');
@@ -182,31 +213,55 @@ function outboxJob(overrides: Partial<ClaimedWhatsAppOutboxJob> = {}): ClaimedWh
   };
 }
 
+type TenantIntegrationSeed = {
+  accessToken: string;
+  phoneNumberId: string;
+  wabaId?: string;
+};
+
 /** Registra i tenantId richiesti: senza filtro per tenant il test fallisce. */
 class FakeCredentialsStore implements WhatsAppCredentialsStore {
   readonly tenantIds: string[] = [];
 
-  constructor(private readonly apiKeysByTenant: Record<string, string>) {}
+  constructor(private readonly integrationsByTenant: Record<string, TenantIntegrationSeed>) {}
 
-  async findActiveCredentials(tenantId: string): Promise<Record<string, unknown> | null> {
+  async findActiveIntegration(tenantId: string): Promise<{
+    credentials: Record<string, unknown>;
+    phoneNumberId: string | null;
+    wabaId: string | null;
+  } | null> {
     this.tenantIds.push(tenantId);
 
-    const apiKey = this.apiKeysByTenant[tenantId];
+    const integration = this.integrationsByTenant[tenantId];
 
-    return apiKey ? { api_key_encrypted: encryptSecret(apiKey) } : null;
+    if (!integration) {
+      return null;
+    }
+
+    return {
+      credentials: {
+        access_token_encrypted: encryptSecret(integration.accessToken),
+      },
+      phoneNumberId: integration.phoneNumberId,
+      wabaId: integration.wabaId ?? null,
+    };
   }
 }
 
-/** Registra la chiave inviata al provider per ogni richiesta HTTP. */
+/** Registra il Bearer token inviato al provider per ogni richiesta HTTP. */
 class RecordingWhatsAppProvider {
-  readonly requests: Array<{ apiKey: string | null; to: unknown }> = [];
+  readonly requests: Array<{ accessToken: string | null; to: unknown; url: string }> = [];
 
   readonly fetcher = async (url: string | URL | Request, init?: RequestInit): Promise<Response> => {
     const body: unknown = JSON.parse(String(init?.body ?? '{}'));
+    const authorization = new Headers(init?.headers).get('Authorization');
 
     this.requests.push({
-      apiKey: new Headers(init?.headers).get('D360-API-KEY'),
+      accessToken: authorization?.startsWith('Bearer ')
+        ? authorization.slice('Bearer '.length)
+        : null,
       to: typeof body === 'object' && body !== null && 'to' in body ? body.to : null,
+      url: url.toString(),
     });
 
     return Response.json({ messages: [{ id: `wamid.${this.requests.length}` }] }, { status: 201 });

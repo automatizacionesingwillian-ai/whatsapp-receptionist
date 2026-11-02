@@ -133,7 +133,7 @@ describe('WhatsAppWebhookService.processPayload (usageLimits hook)', () => {
   });
 });
 
-function textPayload(messageId: string, body = 'Vorrei prenotare domani') {
+function textPayload(messageId: string, body = 'Quiero reservar mañana') {
   return WhatsAppWebhookPayloadSchema.parse({
     object: 'whatsapp_business_account',
     entry: [
@@ -256,7 +256,7 @@ class MinimalRepo implements WhatsAppWebhookRepository {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: false,
       autoReplyEnabled: false,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     };
   }
 

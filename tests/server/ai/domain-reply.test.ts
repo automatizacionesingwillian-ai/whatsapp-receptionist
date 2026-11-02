@@ -10,20 +10,20 @@ describe('LlmDomainReplyGenerator', () => {
     const generator = new LlmDomainReplyGenerator(llm);
 
     const result = await generator.generate({
-      text: 'Quanto costa igiene?',
+      text: 'Cuanto cuesta higiene?',
       assistantName: 'Ambrogio',
-      locale: 'it-IT',
+      locale: 'es-419',
       classification: {
         intent: 'pricing_question',
         confidence: 0.91,
-        matchedSignals: ['prezzo'],
+        matchedSignals: ['precio'],
       },
       context: contextFixture(),
     });
 
     expect(result).toMatchObject({
       shouldReply: true,
-      replyText: 'La seduta di igiene va confermata dallo studio.',
+      replyText: 'La sesion de higiene la confirma el estudio.',
       metadata: {
         aiEngine: {
           feature: 'domain_reply',
@@ -36,21 +36,21 @@ describe('LlmDomainReplyGenerator', () => {
         },
       },
     });
-    expect(llm.calls[0]?.system).toContain('Prompt tenant personalizzato');
+    expect(llm.calls[0]?.system).toContain('Prompt tenant personalizado');
     const userPayload = JSON.parse(String(llm.calls[0]?.messages[0]?.content));
     expect(userPayload).toMatchObject({
-      text: 'Quanto costa igiene?',
+      text: 'Cuanto cuesta higiene?',
       intent: 'pricing_question',
       conversationContext: [
         {
           role: 'customer',
-          text: 'Vorrei info sui prezzi',
+          text: 'Quiero info sobre precios',
         },
       ],
       knowledgeBase: [
         {
           id: 'kb_1',
-          title: 'Igiene',
+          title: 'Higiene',
         },
       ],
     });
@@ -66,7 +66,7 @@ class RecordingLlmClient implements LlmClient {
     return {
       text: JSON.stringify({
         shouldReply: true,
-        replyText: 'La seduta di igiene va confermata dallo studio.',
+        replyText: 'La sesion de higiene la confirma el estudio.',
         handoffReason: null,
       }),
       model: ['clau', 'de-sonnet-4-20250514'].join(''),
@@ -85,7 +85,7 @@ function contextFixture(): AiRuntimeContext {
         id: 'message_1',
         role: 'customer',
         direction: 'inbound',
-        text: 'Vorrei info sui prezzi',
+        text: 'Quiero info sobre precios',
         messageType: 'text',
         createdAt: '2026-04-25T09:00:00.000Z',
       },
@@ -96,13 +96,13 @@ function contextFixture(): AiRuntimeContext {
       promptKey: 'domain_reply',
       version: 3,
       model: 'model_1',
-      promptText: 'Prompt tenant personalizzato',
+      promptText: 'Prompt tenant personalizado',
     },
     knowledgeBase: [
       {
         id: 'kb_1',
-        title: 'Igiene',
-        content: 'La seduta di igiene dentale dura circa 45 minuti.',
+        title: 'Higiene',
+        content: 'La sesion de higiene dental dura unos 45 minutos.',
         category: 'pricing',
         score: 4,
         updatedAt: '2026-04-25T09:00:00.000Z',

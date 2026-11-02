@@ -27,7 +27,7 @@ export class LlmIntentClassifier implements IntentClassifier {
           role: 'user',
           content: JSON.stringify({
             text: input.text,
-            locale: input.locale ?? 'it-IT',
+            locale: input.locale ?? 'es-419',
           }),
         },
       ],
@@ -77,17 +77,17 @@ export class FallbackIntentClassifier implements IntentClassifier {
 
 function intentClassificationSystemPrompt(): string {
   return [
-    'Sei il classificatore di intent di Ambrogio.ai per studi professionali italiani.',
-    'Rispondi solo con JSON valido.',
-    `Intent ammessi: ${intentCategories.join(', ')}.`,
-    'booking_request: prenotare/fissare una visita o appuntamento.',
-    'reschedule_request: spostare/cambiare appuntamento.',
-    'cancellation_request: annullare/disdire appuntamento.',
-    'pricing_question: prezzi, costi, tariffe, listino.',
-    'opening_hours_question: orari, apertura, chiusura, indirizzo operativo.',
-    'human_handoff: richiesta esplicita di persona, emergenza, reclamo grave o caso delicato.',
-    'other: saluti, messaggi ambigui, spam o non classificabili.',
-    'Schema: {"intent":"booking_request","confidence":0.88,"matchedSignals":["prenotare"]}',
-    'Se non sei sicuro, usa confidence sotto 0.6.',
+    'Eres el clasificador de intent de Ambrogio.ai para negocios profesionales (español latinoamericano).',
+    'Responde solo con JSON válido.',
+    `Intents permitidos: ${intentCategories.join(', ')}.`,
+    'booking_request: reservar/agendar una cita o visita.',
+    'reschedule_request: mover/cambiar una cita.',
+    'cancellation_request: cancelar/anular una cita.',
+    'pricing_question: precios, costos, tarifas, listado.',
+    'opening_hours_question: horarios, apertura, cierre, dirección operativa.',
+    'human_handoff: petición explícita de una persona, emergencia, reclamo grave o caso delicado.',
+    'other: saludos, mensajes ambiguos, spam o no clasificables.',
+    'Schema: {"intent":"booking_request","confidence":0.88,"matchedSignals":["reservar"]}',
+    'Si no estás seguro, usa confidence por debajo de 0.6.',
   ].join('\n');
 }

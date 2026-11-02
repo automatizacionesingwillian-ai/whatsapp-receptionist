@@ -10,7 +10,7 @@ describe('intent eval fixtures', () => {
     for (const fixture of fixtures) {
       const classification = await classifier.classify({
         text: fixture.text,
-        locale: 'it-IT',
+        locale: 'es-419',
       });
 
       expect(classification.intent, fixture.text).toBe(fixture.expectedIntent);

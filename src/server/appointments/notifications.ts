@@ -473,7 +473,7 @@ function queuedAtColumnForNotification(
 function variablesForAppointment(context: AppointmentNotificationContext): Record<string, string> {
   return {
     customerName: context.customerName,
-    serviceName: context.serviceName ?? 'appuntamento',
+    serviceName: context.serviceName ?? 'cita',
     scheduledAt: formatAppointmentDate(context.scheduledAt, context.timezone),
     studioName: context.studioName,
   };
@@ -483,7 +483,7 @@ function formatAppointmentDate(date: Date, timezone: string): string {
   return new Intl.DateTimeFormat('es-419', {
     dateStyle: 'full',
     timeStyle: 'short',
-    timeZone: timezone || 'Europe/Rome',
+    timeZone: timezone || 'America/Mexico_City',
   }).format(date);
 }
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { AppError } from '@/lib/errors/app-error';
 import {
-  Dialog360WhatsAppTemplateClient,
+  MetaCloudWhatsAppTemplateClient,
   WhatsAppTemplateSyncService,
   extractTemplateItems,
   normalizeTemplate,
@@ -12,13 +12,16 @@ import {
 } from '@/server/whatsapp/template-sync';
 
 const now = new Date('2026-04-25T10:00:00.000Z');
+const API_URL = 'https://graph.facebook.com/v21.0';
+const WABA_ID = 'waba_123';
 
-describe('Dialog360WhatsAppTemplateClient', () => {
-  it('fetches templates from the 360dialog template endpoint', async () => {
+describe('MetaCloudWhatsAppTemplateClient', () => {
+  it('fetches templates from the Meta Cloud message_templates endpoint', async () => {
     const requests: Array<{ url: string; init: RequestInit }> = [];
-    const client = new Dialog360WhatsAppTemplateClient({
-      apiUrl: 'https://waba-v2.360dialog.io',
-      apiKey: 'test_api_key',
+    const client = new MetaCloudWhatsAppTemplateClient({
+      apiUrl: API_URL,
+      accessToken: 'test_access_token',
+      wabaId: WABA_ID,
       fetcher: async (url, init) => {
         requests.push({ url: url.toString(), init: init ?? {} });
 
@@ -27,18 +30,17 @@ describe('Dialog360WhatsAppTemplateClient', () => {
     });
 
     await expect(client.listTemplates()).resolves.toEqual({ data: [] });
-    expect(requests[0]?.url).toBe(
-      'https://waba-v2.360dialog.io/v1/configs/templates?limit=1000&sort=name',
-    );
+    expect(requests[0]?.url).toBe(`${API_URL}/${WABA_ID}/message_templates?limit=1000`);
     expect(requests[0]?.init.headers).toMatchObject({
-      'D360-API-KEY': 'test_api_key',
+      Authorization: 'Bearer test_access_token',
     });
   });
 
   it('raises upstream errors when template fetch fails', async () => {
-    const client = new Dialog360WhatsAppTemplateClient({
-      apiUrl: 'https://waba-v2.360dialog.io',
-      apiKey: 'test_api_key',
+    const client = new MetaCloudWhatsAppTemplateClient({
+      apiUrl: API_URL,
+      accessToken: 'test_access_token',
+      wabaId: WABA_ID,
       fetcher: async () => Response.json({ error: { message: 'Down' } }, { status: 503 }),
     });
 
@@ -57,7 +59,7 @@ describe('WhatsAppTemplateSyncService', () => {
           category: 'UTILITY',
           status: 'APPROVED',
           quality_rating: 'GREEN',
-          components: [{ type: 'BODY', text: 'Ciao {{1}}' }],
+          components: [{ type: 'BODY', text: 'Hola {{1}}' }],
         },
         {
           id: '124',
@@ -99,7 +101,7 @@ describe('WhatsAppTemplateSyncService', () => {
           category: 'utility',
           status: 'approved',
           qualityRating: 'GREEN',
-          components: [{ type: 'BODY', text: 'Ciao {{1}}' }],
+          components: [{ type: 'BODY', text: 'Hola {{1}}' }],
         },
         {
           externalId: '124',

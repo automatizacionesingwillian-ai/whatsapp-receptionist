@@ -6,16 +6,16 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 import { type HealthStatus, overallStatus, runHealthChecks } from '@/lib/health/checks';
 
 export const metadata: Metadata = {
-  title: 'Estado del servicio · Dipendenze in tempo reale',
+  title: 'Estado del servicio · Dependencias en tiempo real',
   description:
-    'Stato in tempo reale delle dipendenze Ambrogio.ai: database, rate limiting, motore AI e fatturazione. Misurato a ogni richiesta, non dichiarato.',
+    'Estado en tiempo real de las dependencias de Ambrogio.ai: base de datos, rate limiting, motor AI y facturación. Medido en cada solicitud, no declarado.',
   alternates: { canonical: '/status' },
   openGraph: {
     title: 'Estado del servicio · Ambrogio.ai',
-    description: 'Stato in tempo reale delle dipendenze di sistema.',
+    description: 'Estado en tiempo real de las dependencias del sistema.',
     url: '/status',
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
@@ -27,8 +27,8 @@ export const revalidate = 60;
 
 const STATUS_PRESENTATION: Record<HealthStatus, { label: string; color: string }> = {
   ok: { label: 'Operativo', color: 'var(--color-success)' },
-  degraded: { label: 'Performance ridotte', color: 'var(--color-warning)' },
-  down: { label: 'Non raggiungibile', color: 'var(--color-danger)' },
+  degraded: { label: 'Rendimiento reducido', color: 'var(--color-warning)' },
+  down: { label: 'No alcanzable', color: 'var(--color-danger)' },
 };
 
 const OVERALL_PRESENTATION: Record<
@@ -36,17 +36,17 @@ const OVERALL_PRESENTATION: Record<
   { label: string; background: string; color: string }
 > = {
   ok: {
-    label: 'Tutte le dipendenze rispondono',
+    label: 'Todas las dependencias responden',
     background: 'var(--color-success-soft)',
     color: 'var(--color-success)',
   },
   degraded: {
-    label: 'Performance ridotte su alcune dipendenze',
+    label: 'Rendimiento reducido en algunas dependencias',
     background: 'var(--color-warning-soft)',
     color: 'var(--color-warning)',
   },
   down: {
-    label: 'Una o più dipendenze non rispondono',
+    label: 'Una o más dependencias no responden',
     background: 'var(--color-danger-soft)',
     color: 'var(--color-danger)',
   },
@@ -72,7 +72,7 @@ export default async function StatusPage() {
               className="stack stack-4 text-center"
               style={{ maxWidth: '720px', margin: '0 auto var(--space-12)' }}
             >
-              <span className="eyebrow">Status pubblico</span>
+              <span className="eyebrow">Status público</span>
               <h1 className="display text-balance">Estado del servicio Ambrogio.ai</h1>
               <div
                 style={{
@@ -93,10 +93,10 @@ export default async function StatusPage() {
                 {overall.label}
               </div>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                Rilevazione:{' '}
-                {new Date().toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' })}
+                Detección:{' '}
+                {new Date().toLocaleString('es-419', { dateStyle: 'short', timeStyle: 'short' })}
                 {' · '}
-                aggiornata al massimo ogni 60s
+                actualizada como máximo cada 60s
               </p>
             </div>
 
@@ -108,7 +108,7 @@ export default async function StatusPage() {
                   background: 'var(--color-surface-sunken)',
                 }}
               >
-                <h2 style={{ fontSize: 'var(--text-lg)' }}>Dipendenze</h2>
+                <h2 style={{ fontSize: 'var(--text-lg)' }}>Dependencias</h2>
               </header>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {checks.map((check, index) => {
@@ -149,18 +149,17 @@ export default async function StatusPage() {
         <section className="section section-divider">
           <div className="container">
             <div className="stack stack-4" style={{ maxWidth: '720px', margin: '0 auto' }}>
-              <h2>Come leggere questa pagina</h2>
+              <h2>Cómo leer esta página</h2>
               <p style={{ color: 'var(--color-text-secondary)' }}>
-                Ogni riga è una probe reale eseguita al caricamento della pagina verso il provider
-                indicato, con la latenza effettivamente misurata. Non pubblichiamo percentuali di
-                uptime storico: non abbiamo ancora un sistema di monitoraggio continuo che le
-                produca, e riportare numeri che non misuriamo sarebbe un&apos;affermazione priva di
-                riscontro.
+                Cada fila es una sonda real ejecutada al cargar la página hacia el proveedor
+                indicado, con la latencia efectivamente medida. No publicamos porcentajes de uptime
+                histórico: aún no tenemos un sistema de monitoreo continuo que los produzca, y
+                reportar números que no medimos sería una afirmación sin respaldo.
               </p>
               <p style={{ color: 'var(--color-text-secondary)' }}>
-                Lo stesso dato è disponibile in formato macchina su{' '}
-                <code className="mono">/api/health/deep</code>, utilizzabile come endpoint di
-                monitoraggio esterno.
+                El mismo dato está disponible en formato máquina en{' '}
+                <code className="mono">/api/health/deep</code>, usable como endpoint de monitoreo
+                externo.
               </p>
             </div>
           </div>

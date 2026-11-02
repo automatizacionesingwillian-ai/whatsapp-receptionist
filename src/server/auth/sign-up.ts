@@ -121,8 +121,8 @@ export class SupabaseSignUpRepository implements SignUpRepository {
         business_type: input.businessType,
         status: 'suspended',
         plan: 'trial',
-        country: 'IT',
-        timezone: 'Europe/Rome',
+        country: 'MX',
+        timezone: 'America/Mexico_City',
       })
       .select('id')
       .single();

@@ -10,16 +10,16 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Documentación tecnica',
+  title: 'Documentación técnica',
   description:
-    'Guide tecniche, integrazioni, webhook e API reference per Ambrogio.ai. Tutto per sviluppatori e agenzie.',
+    'Guías técnicas, integraciones, webhooks y API reference de Ambrogio.ai. Todo para desarrolladores y agencias.',
   alternates: { canonical: '/docs' },
   openGraph: {
     title: 'Documentación Ambrogio.ai',
-    description: 'Guide tecniche, integrazioni e API reference per sviluppatori.',
+    description: 'Guías técnicas, integraciones y API reference para desarrolladores.',
     url: '/docs',
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
@@ -35,39 +35,42 @@ interface DocSection {
 
 const SECTIONS: ReadonlyArray<DocSection> = [
   {
-    title: 'Guide rapide',
+    title: 'Guías rápidas',
     items: [
       {
-        label: 'Setup numero WhatsApp Business',
+        label: 'Setup del número de WhatsApp Business',
         href: '/help/articles/come-collegare-il-numero-whatsapp-business',
       },
       {
-        label: 'Connessione Google Calendar',
+        label: 'Conexión de Google Calendar',
         href: '/help/articles/come-autorizzare-google-calendar',
       },
-      { label: 'Caricamento listino servizi', href: '/help/articles/caricare-il-listino-servizi' },
-      { label: 'Configurazione orari', href: '/help/articles/configurare-gli-orari-di-apertura' },
+      { label: 'Carga del tarifario de servicios', href: '/help/articles/caricare-il-listino-servizi' },
+      {
+        label: 'Configuración de horarios',
+        href: '/help/articles/configurare-gli-orari-di-apertura',
+      },
     ],
   },
   {
-    title: 'AI e booking',
+    title: 'AI y reservas',
     items: [
-      { label: 'Filtro AI e classificazione', href: '/help/articles/come-funziona-il-filtro-ai' },
-      { label: 'Quando interviene un umano', href: '/help/articles/quando-interviene-un-umano' },
+      { label: 'Filtro AI y clasificación', href: '/help/articles/come-funziona-il-filtro-ai' },
+      { label: 'Cuándo interviene un humano', href: '/help/articles/quando-interviene-un-umano' },
       {
-        label: 'Prenotazione appuntamenti',
+        label: 'Reserva de citas',
         href: '/help/articles/come-ambrogio-prenota-appuntamenti',
       },
-      { label: 'Reminder automatici', href: '/help/articles/reminder-automatici' },
+      { label: 'Recordatorios automáticos', href: '/help/articles/reminder-automatici' },
     ],
   },
   {
-    title: 'Account e GDPR',
+    title: 'Cuenta y GDPR',
     items: [
-      { label: 'Cambio piano', href: '/help/articles/cambiare-piano' },
-      { label: 'Facturación SDI', href: '/help/articles/scaricare-fatture-elettroniche-sdi' },
-      { label: 'Esportazione dati GDPR', href: '/help/articles/esportare-i-miei-dati-gdpr' },
-      { label: 'Cancellazione account', href: '/help/articles/cancellare-account' },
+      { label: 'Cambio de plan', href: '/help/articles/cambiare-piano' },
+      { label: 'Facturación electrónica', href: '/help/articles/scaricare-fatture-elettroniche-sdi' },
+      { label: 'Exportación de datos GDPR', href: '/help/articles/esportare-i-miei-dati-gdpr' },
+      { label: 'Eliminación de cuenta', href: '/help/articles/cancellare-account' },
     ],
   },
 ];
@@ -86,7 +89,7 @@ export default function DocsPage() {
       <JsonLd
         data={buildCollectionPageSchema({
           name: 'Documentación Ambrogio.ai',
-          description: 'Guide tecniche, integrazioni e API reference.',
+          description: 'Guías técnicas, integraciones y API reference.',
           url: '/docs',
           hasPart: allItems.map((it) => ({ name: it.label, url: it.href })),
         })}
@@ -101,11 +104,11 @@ export default function DocsPage() {
             >
               <span className="badge">Documentación</span>
               <h1 className="display text-balance">
-                Tutto quello che serve per integrare Ambrogio.
+                Todo lo que necesitas para integrar Ambrogio.
               </h1>
               <p className="lead text-pretty">
-                Guide pratiche, esempi di codice e best practice. Per studi che vogliono capire come
-                funziona Ambrogio sotto il cofano.
+                Guías prácticas, ejemplos de código y best practices. Para estudios que quieren
+                entender cómo funciona Ambrogio bajo el capó.
               </p>
             </div>
 
@@ -149,17 +152,17 @@ export default function DocsPage() {
                 alignItems: 'center',
               }}
             >
-              <h3>API Reference (in arrivo)</h3>
+              <h3>API Reference (próximamente)</h3>
               <p className="muted" style={{ maxWidth: '50ch' }}>
-                La documentazione API completa con webhook, SDK e esempi sarà disponibile per i
-                clienti Professional e Agency entro Q3 2026.
+                La documentación completa de la API con webhooks, SDK y ejemplos estará disponible
+                para clientes Professional y Agency en el Q3 2026.
               </p>
               <div className="row" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
                 <Link href="/help" className="btn btn-secondary">
                   Centro de ayuda
                 </Link>
                 <Link href="/contact?topic=docs" className="btn btn-primary">
-                  Richiedi accesso anticipato
+                  Solicitar acceso anticipado
                 </Link>
               </div>
             </div>

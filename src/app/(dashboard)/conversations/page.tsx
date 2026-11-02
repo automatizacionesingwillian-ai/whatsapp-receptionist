@@ -350,6 +350,6 @@ function formatRelative(iso: string, now: number): string {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
-    timeZone: 'Europe/Rome',
+    timeZone: 'America/Mexico_City',
   }).format(new Date(timestamp));
 }

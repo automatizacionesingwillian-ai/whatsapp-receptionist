@@ -6,17 +6,16 @@ export const metadata: Metadata = {
 };
 
 /*
- * Questa pagina mostrava voci di audit log inventate (export GDPR,
- * cancellazioni, accessi) con date e attori fittizi.
+ * Esta página mostraba entradas de audit log inventadas (export GDPR,
+ * eliminaciones, accesos) con fechas y actores ficticios.
  *
- * È il caso più grave fra le schermate admin che mostravano dati finti: un
- * registro di audit serve a dimostrare cosa è successo davvero, in sede di
- * verifica o di contestazione. Un registro che mostra voci fabbricate non è
- * una schermata incompleta, è un documento falso — e la tabella `audit_log`
- * reale esiste già e viene scritta dagli endpoint GDPR, quindi la finzione
- * copriva dati veri.
+ * Es el caso más grave entre las pantallas admin con datos falsos: un registro
+ * de audit sirve para demostrar qué ocurrió de verdad, en una verificación o
+ * una controversia. Un registro con entradas fabricadas no es una pantalla
+ * incompleta, es un documento falso — y la tabla `audit_log` real ya existe y
+ * la escriben los endpoints GDPR, así que la ficción ocultaba datos verdaderos.
  *
- * Il markup precedente resta nella history di git.
+ * El markup anterior permanece en el historial de git.
  */
 export default function AdminAuditPage() {
   return (
@@ -24,21 +23,20 @@ export default function AdminAuditPage() {
       <header className="stack stack-2">
         <span className="eyebrow">Admin</span>
         <h1>Audit log</h1>
-        <p className="muted">Registro delle azioni sui dati personali.</p>
+        <p className="muted">Registro de acciones sobre datos personales.</p>
       </header>
 
       <div className="card card-padded stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado al registro reale</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado al registro real</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          Le voci mostrate erano di esempio e sono state rimosse. La tabella{' '}
-          <code className="mono">audit_log</code> esiste ed è realmente popolata dagli endpoint GDPR
-          (Art. 15 e Art. 17): questa schermata va collegata a quei dati, non riempita di
-          segnaposto, perché un registro di audit ha valore solo se riporta ciò che è accaduto
-          davvero.
+          Las entradas de ejemplo se eliminaron. La tabla{' '}
+          <code className="mono">audit_log</code> existe y la pueblan de verdad los endpoints GDPR
+          (Arts. 15 y 17): esta pantalla debe conectarse a esos datos, no rellenarse con
+          placeholders, porque un registro de audit solo vale si refleja lo que ocurrió de verdad.
         </p>
         <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-          Fonte autorevole nel frattempo: la tabella <code className="mono">audit_log</code> nel
-          progetto Supabase.
+          Fuente autoritativa mientras tanto: la tabla <code className="mono">audit_log</code> en el
+          proyecto Supabase.
         </p>
       </div>
     </div>

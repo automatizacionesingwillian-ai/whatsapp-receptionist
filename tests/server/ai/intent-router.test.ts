@@ -5,27 +5,27 @@ import { RuleBasedIntentClassifier } from '@/server/ai/intent-router';
 import type { DomainReplyGenerator, DomainReplyInput } from '@/server/ai/domain-reply';
 
 describe('RuleBasedIntentClassifier', () => {
-  it('classifies common Italian receptionist intents', async () => {
+  it('classifies common Spanish LATAM receptionist intents', async () => {
     const classifier = new RuleBasedIntentClassifier();
 
     await expect(
-      classifier.classify({ text: 'Vorrei prenotare una visita domani' }),
+      classifier.classify({ text: 'Quiero reservar una visita mañana' }),
     ).resolves.toMatchObject({
       intent: 'booking_request',
     });
 
     await expect(
-      classifier.classify({ text: "Posso spostare l'appuntamento?" }),
+      classifier.classify({ text: 'Puedo mover la cita?' }),
     ).resolves.toMatchObject({
       intent: 'reschedule_request',
     });
 
-    await expect(classifier.classify({ text: 'Annulla appuntamento' })).resolves.toMatchObject({
+    await expect(classifier.classify({ text: 'Cancela cita' })).resolves.toMatchObject({
       intent: 'cancellation_request',
     });
 
     await expect(
-      classifier.classify({ text: 'Quanto costa la prima consulenza?' }),
+      classifier.classify({ text: 'Cuanto cuesta la primera consulta?' }),
     ).resolves.toMatchObject({
       intent: 'pricing_question',
     });
@@ -37,35 +37,35 @@ describe('ReplyOrchestrator', () => {
     const orchestrator = new ReplyOrchestrator();
 
     const reply = await orchestrator.createReply({
-      text: 'Vorrei fissare un appuntamento',
+      text: 'Quiero agendar una cita',
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
-      locale: 'it-IT',
+      locale: 'es-419',
     });
 
     expect(reply.shouldReply).toBe(true);
     expect(reply.classification.intent).toBe('booking_request');
-    expect(reply.replyText).toContain('sono Ambrogio');
+    expect(reply.replyText).toContain('soy Ambrogio');
   });
 
   it('uses a configured domain reply generator before falling back', async () => {
     const generator = new FakeDomainReplyGenerator(
-      'Certo, posso aiutarti con informazioni e appuntamenti.',
+      'Claro, puedo ayudarte con información y citas.',
     );
     const orchestrator = new ReplyOrchestrator(new RuleBasedIntentClassifier(), generator);
 
     const reply = await orchestrator.createReply({
-      text: 'Ciao, vorrei qualche informazione',
+      text: 'Hola, quiero algo de información',
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
-      locale: 'it-IT',
+      locale: 'es-419',
     });
 
     expect(generator.calls[0]).toMatchObject({
-      text: 'Ciao, vorrei qualche informazione',
+      text: 'Hola, quiero algo de información',
     });
-    expect(reply.replyText).toContain('sono Ambrogio');
-    expect(reply.replyText).toContain('posso aiutarti');
+    expect(reply.replyText).toContain('soy Ambrogio');
+    expect(reply.replyText).toContain('puedo ayudarte');
     expect(reply.metadata).toMatchObject({
       aiEngine: {
         provider: 'fake',

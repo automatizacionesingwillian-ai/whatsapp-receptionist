@@ -50,8 +50,8 @@ const intentRules: IntentRule[] = [
     confidence: 0.89,
     minMatches: 2,
     signals: [
-      /\b(spostare|sposto|cambiare|cambio|modificare|rimandare|anticipare)\b/,
-      /\b(appuntamento|prenotazione|visita)\b/,
+      /\b(mover|reagendar|reprogramar|cambiar|posponer|adelantar)\b/,
+      /\b(cita|turno|reserva|reservacion|visita)\b/,
     ],
   },
   {
@@ -59,31 +59,33 @@ const intentRules: IntentRule[] = [
     confidence: 0.9,
     minMatches: 2,
     signals: [
-      /\b(cancellare|annullare|annulla|disdire|cancello|annullo|disdico)\b/,
-      /\b(appuntamento|prenotazione|visita)\b/,
+      /\b(cancelar|cancela|anular|anula)\b/,
+      /\b(cita|turno|reserva|reservacion|visita)\b/,
     ],
   },
   {
     intent: 'pricing_question',
     confidence: 0.82,
-    signals: [/\b(prezzo|costo|costa|tariffa|listino|quanto viene)\b/],
+    signals: [/\b(precio|costo|cuanto cuesta|cuanto vale|tarifario|lista de precios)\b/],
   },
   {
     intent: 'opening_hours_question',
     confidence: 0.82,
-    signals: [/\b(orari|aperti|aperto|chiusi|chiuso|quando aprite)\b/],
+    signals: [/\b(horarios|abiertos|abierto|cerrados|cerrado|cuando abren|a que hora)\b/],
   },
   {
     intent: 'human_handoff',
     confidence: 0.86,
-    signals: [/\b(operatore|persona|umano|segreteria|assistente reale|richiamatemi)\b/],
+    signals: [
+      /\b(operador|persona|humano|recepcion|secretaria|asesor|llameme|llamenme)\b/,
+    ],
   },
   {
     intent: 'booking_request',
     confidence: 0.88,
     signals: [
-      /\b(prenotare|prenoto|fissare|appuntamento|visita|disponibilita|posto)\b/,
-      /\b(domani|oggi|settimana|orario|data|quando|slot)\b/,
+      /\b(reservar|reserva|agendar|cita|turno|visita|disponibilidad)\b/,
+      /\b(manana|hoy|semana|horario|fecha|cuando|slot)\b/,
     ],
   },
 ];

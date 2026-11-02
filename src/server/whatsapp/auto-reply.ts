@@ -551,7 +551,7 @@ function withDisclosure(
     return body;
   }
 
-  return `Ciao, sono ${input.assistantName}, l'assistente AI dello studio. ${body}`;
+  return `Hola, soy ${input.assistantName}, el asistente de IA del negocio. ${body}`;
 }
 
 function containsSensitiveHandoffSignal(text: string): boolean {
@@ -565,10 +565,10 @@ function containsSensitiveHandoffSignal(text: string): boolean {
 }
 
 const sensitiveHandoffSignals = [
-  /\b(emergenza|urgente|urgenza|pronto soccorso|ambulanza|112|118)\b/,
-  /\b(dolore forte|sanguina|sangue|non respiro|svenuto|svenuta)\b/,
-  /\b(suicidio|suicidarmi|farmi del male|violenza|minaccia)\b/,
-  /\b(avvocato|denuncia|querela|causa legale|tribunale)\b/,
+  /\b(emergenza|urgente|urgenza|pronto soccorso|ambulanza|112|118|emergencia|urgencia|ambulancia|911)\b/,
+  /\b(dolore forte|sanguina|sangue|non respiro|svenuto|svenuta|dolor fuerte|sangra|sangre|no respiro|desmayado|desmayada)\b/,
+  /\b(suicidio|suicidarmi|farmi del male|violenza|minaccia|matarme|hacerme dano|violencia|amenaza)\b/,
+  /\b(avvocato|denuncia|querela|causa legale|tribunale|abogado|demanda|juicio)\b/,
 ];
 
 function normalizeForMatching(text: string): string {

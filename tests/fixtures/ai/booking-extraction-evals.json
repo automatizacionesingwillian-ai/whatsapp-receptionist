@@ -1,9 +1,9 @@
 [
   {
-    "text": "Vorrei prenotare una igiene domani pomeriggio",
+    "text": "Quiero reservar una higiene mañana por la tarde",
     "expected": {
-      "serviceQuery": "igiene",
-      "dateLabel": "domani",
+      "serviceQuery": "higiene",
+      "dateLabel": "manana",
       "from": "2026-04-28T13:00:00.000Z",
       "to": "2026-04-28T18:00:00.000Z",
       "dayPart": "afternoon",
@@ -13,7 +13,7 @@
     }
   },
   {
-    "text": "Annulla quello delle 15",
+    "text": "Cancela esa a las 15",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -26,10 +26,10 @@
     }
   },
   {
-    "text": "Sposta quello di domani",
+    "text": "Mueve esa de mañana",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "domani",
+      "dateLabel": "manana",
       "from": "2026-04-28T00:00:00.000Z",
       "to": "2026-04-29T00:00:00.000Z",
       "dayPart": "any",
@@ -39,7 +39,7 @@
     }
   },
   {
-    "text": "Annulla la visita di Mario",
+    "text": "Cancela la visita de Mario",
     "expected": {
       "serviceQuery": "visita",
       "dateLabel": null,
@@ -52,10 +52,10 @@
     }
   },
   {
-    "text": "Sposta la visita di Mario a venerdi mattina",
+    "text": "Mueve la visita de Mario al viernes por la mañana",
     "expected": {
       "serviceQuery": "visita",
-      "dateLabel": "venerdi",
+      "dateLabel": "viernes",
       "from": "2026-05-01T08:00:00.000Z",
       "to": "2026-05-01T13:00:00.000Z",
       "dayPart": "morning",
@@ -65,7 +65,7 @@
     }
   },
   {
-    "text": "Sono Mario Rossi, vorrei una visita. Il numero e 333 111 2233",
+    "text": "Soy Mario Rossi, quiero una visita. El numero es 333 111 2233",
     "expected": {
       "serviceQuery": "visita",
       "dateLabel": null,
@@ -78,10 +78,10 @@
     }
   },
   {
-    "text": "Hai posto giovedi dopo le 18 per prima visita?",
+    "text": "Tienen lugar el jueves despues de las 18 para primera visita?",
     "expected": {
-      "serviceQuery": "prima visita",
-      "dateLabel": "giovedi",
+      "serviceQuery": "primera visita",
+      "dateLabel": "jueves",
       "from": "2026-04-30T18:00:00.000Z",
       "to": "2026-04-30T21:00:00.000Z",
       "dayPart": "after_hour",
@@ -91,9 +91,9 @@
     }
   },
   {
-    "text": "Vorrei prenotare un controllo entro le 11",
+    "text": "Quiero reservar un control antes de las 11",
     "expected": {
-      "serviceQuery": "controllo",
+      "serviceQuery": "control",
       "dateLabel": null,
       "from": null,
       "to": null,
@@ -103,11 +103,10 @@
       "customerName": null
     }
   },
-
   {
-    "text": "Vorrei un controllo alle 3 del pomeriggio",
+    "text": "Quiero un control a las 3 de la tarde",
     "expected": {
-      "serviceQuery": "controllo",
+      "serviceQuery": "control",
       "dateLabel": null,
       "from": null,
       "to": null,
@@ -118,7 +117,7 @@
     }
   },
   {
-    "text": "Alle 8 di mattina",
+    "text": "A las 8 de la manana",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -131,10 +130,10 @@
     }
   },
   {
-    "text": "Domani alle 11 di sera",
+    "text": "Mañana a las 11 de la noche",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "domani",
+      "dateLabel": "manana",
       "from": "2026-04-28T23:00:00.000Z",
       "to": "2026-04-29T00:00:00.000Z",
       "dayPart": "exact_hour",
@@ -144,10 +143,10 @@
     }
   },
   {
-    "text": "Sabato pomeriggio verso le 5",
+    "text": "Sabado por la tarde alrededor de las 5",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "sabato",
+      "dateLabel": "sabado",
       "from": "2026-05-02T17:00:00.000Z",
       "to": "2026-05-02T18:00:00.000Z",
       "dayPart": "exact_hour",
@@ -157,10 +156,10 @@
     }
   },
   {
-    "text": "Dopodomani verso le 4",
+    "text": "Pasado mañana alrededor de las 4",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "dopodomani",
+      "dateLabel": "pasado manana",
       "from": "2026-04-29T16:00:00.000Z",
       "to": "2026-04-29T17:00:00.000Z",
       "dayPart": "exact_hour",
@@ -170,7 +169,7 @@
     }
   },
   {
-    "text": "Posso passare a mezzogiorno?",
+    "text": "Puedo pasar a mediodia?",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -182,9 +181,8 @@
       "customerName": null
     }
   },
-
   {
-    "text": "Va bene le 15:30",
+    "text": "Me parece bien a las 15:30",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -197,10 +195,10 @@
     }
   },
   {
-    "text": "Lunedi alle 16.45",
+    "text": "Lunes a las 16.45",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "lunedi",
+      "dateLabel": "lunes",
       "from": "2026-05-04T16:45:00.000Z",
       "to": "2026-05-04T17:45:00.000Z",
       "dayPart": "exact_hour",
@@ -210,10 +208,10 @@
     }
   },
   {
-    "text": "Venerdi alle 10 e un quarto",
+    "text": "Viernes a las 10 y un cuarto",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "venerdi",
+      "dateLabel": "viernes",
       "from": "2026-05-01T10:15:00.000Z",
       "to": "2026-05-01T11:15:00.000Z",
       "dayPart": "exact_hour",
@@ -223,10 +221,10 @@
     }
   },
   {
-    "text": "Domani alle 3 meno un quarto",
+    "text": "Mañana a las 3 menos un cuarto",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "domani",
+      "dateLabel": "manana",
       "from": "2026-04-28T14:45:00.000Z",
       "to": "2026-04-28T15:45:00.000Z",
       "dayPart": "exact_hour",
@@ -235,12 +233,11 @@
       "customerName": null
     }
   },
-
   {
-    "text": "Buongiorno, avete posto il 15 maggio?",
+    "text": "Buenos dias, tienen lugar el 15 de mayo?",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "15 maggio",
+      "dateLabel": "15 mayo",
       "from": "2026-05-15T00:00:00.000Z",
       "to": "2026-05-16T00:00:00.000Z",
       "dayPart": "any",
@@ -250,10 +247,10 @@
     }
   },
   {
-    "text": "Prenotiamo per il 15/05",
+    "text": "Reservamos para el 15/05",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "15 maggio",
+      "dateLabel": "15 mayo",
       "from": "2026-05-15T00:00:00.000Z",
       "to": "2026-05-16T00:00:00.000Z",
       "dayPart": "any",
@@ -263,10 +260,10 @@
     }
   },
   {
-    "text": "Ci vediamo il 15/05/2027",
+    "text": "Nos vemos el 15/05/2027",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "15 maggio",
+      "dateLabel": "15 mayo",
       "from": "2027-05-15T00:00:00.000Z",
       "to": "2027-05-16T00:00:00.000Z",
       "dayPart": "any",
@@ -276,7 +273,7 @@
     }
   },
   {
-    "text": "Il 3 marzo va bene?",
+    "text": "El 3 de marzo esta bien?",
     "expected": {
       "serviceQuery": null,
       "dateLabel": "3 marzo",
@@ -289,10 +286,10 @@
     }
   },
   {
-    "text": "Mi va bene il 2 giugno alle 10:45",
+    "text": "Me parece bien el 2 de junio a las 10:45",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "2 giugno",
+      "dateLabel": "2 junio",
       "from": "2026-06-02T10:45:00.000Z",
       "to": "2026-06-02T11:45:00.000Z",
       "dayPart": "exact_hour",
@@ -302,10 +299,10 @@
     }
   },
   {
-    "text": "Il 3 alle 9 e mezza",
+    "text": "El 3 a las 9 y media",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "3 maggio",
+      "dateLabel": "3 mayo",
       "from": "2026-05-03T09:30:00.000Z",
       "to": "2026-05-03T10:30:00.000Z",
       "dayPart": "exact_hour",
@@ -314,12 +311,11 @@
       "customerName": null
     }
   },
-
   {
-    "text": "Tra tre giorni sarebbe perfetto",
+    "text": "En tres dias seria perfecto",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "tra 3 giorni",
+      "dateLabel": "en 3 dias",
       "from": "2026-04-30T00:00:00.000Z",
       "to": "2026-05-01T00:00:00.000Z",
       "dayPart": "any",
@@ -329,10 +325,10 @@
     }
   },
   {
-    "text": "Fra una settimana per il controllo",
+    "text": "En una semana para el control",
     "expected": {
-      "serviceQuery": "controllo",
-      "dateLabel": "tra 1 settimana",
+      "serviceQuery": "control",
+      "dateLabel": "en 1 semana",
       "from": "2026-05-04T00:00:00.000Z",
       "to": "2026-05-05T00:00:00.000Z",
       "dayPart": "any",
@@ -342,10 +338,10 @@
     }
   },
   {
-    "text": "Settimana prossima",
+    "text": "Proxima semana",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "settimana prossima",
+      "dateLabel": "proxima semana",
       "from": "2026-05-04T00:00:00.000Z",
       "to": "2026-05-11T00:00:00.000Z",
       "dayPart": "any",
@@ -355,10 +351,10 @@
     }
   },
   {
-    "text": "Lunedi prossimo di mattina",
+    "text": "Lunes proximo por la manana",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "lunedi",
+      "dateLabel": "lunes",
       "from": "2026-05-04T08:00:00.000Z",
       "to": "2026-05-04T13:00:00.000Z",
       "dayPart": "morning",
@@ -368,10 +364,10 @@
     }
   },
   {
-    "text": "Dopo domani mattina",
+    "text": "Pasado mañana por la manana",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "dopodomani",
+      "dateLabel": "pasado manana",
       "from": "2026-04-29T08:00:00.000Z",
       "to": "2026-04-29T13:00:00.000Z",
       "dayPart": "morning",
@@ -380,12 +376,11 @@
       "customerName": null
     }
   },
-
   {
-    "text": "Domani pomerigio",
+    "text": "Mañana por la tarde",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "domani",
+      "dateLabel": "manana",
       "from": "2026-04-28T13:00:00.000Z",
       "to": "2026-04-28T18:00:00.000Z",
       "dayPart": "afternoon",
@@ -395,10 +390,10 @@
     }
   },
   {
-    "text": "Venerdi matina alle 9",
+    "text": "Viernes por la manana a las 9",
     "expected": {
       "serviceQuery": null,
-      "dateLabel": "venerdi",
+      "dateLabel": "viernes",
       "from": "2026-05-01T09:00:00.000Z",
       "to": "2026-05-01T10:00:00.000Z",
       "dayPart": "exact_hour",
@@ -407,9 +402,8 @@
       "customerName": null
     }
   },
-
   {
-    "text": "Appuntamento il 29 febbraio",
+    "text": "Cita el 29 de febrero",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -422,7 +416,7 @@
     }
   },
   {
-    "text": "Il 31 febbraio alle 10",
+    "text": "El 31 de febrero a las 10",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -435,9 +429,9 @@
     }
   },
   {
-    "text": "Quanto costa una pulizia dei denti?",
+    "text": "Cuanto cuesta una limpieza dental?",
     "expected": {
-      "serviceQuery": "pulizia",
+      "serviceQuery": "limpieza",
       "dateLabel": null,
       "from": null,
       "to": null,
@@ -448,9 +442,9 @@
     }
   },
   {
-    "text": "Il trattamento costa 15/20 euro?",
+    "text": "El tratamiento cuesta 15/20 euros?",
     "expected": {
-      "serviceQuery": "trattamento",
+      "serviceQuery": "tratamiento",
       "dateLabel": null,
       "from": null,
       "to": null,
@@ -461,7 +455,7 @@
     }
   },
   {
-    "text": "Avete il numero 3331112233?",
+    "text": "Tienen el numero 3331112233?",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -474,7 +468,7 @@
     }
   },
   {
-    "text": "Ho 3 figli, fate sconti?",
+    "text": "Tengo 3 hijos, hacen descuentos?",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -487,7 +481,7 @@
     }
   },
   {
-    "text": "Buongiorno, siete aperti?",
+    "text": "Buenos dias, estan abiertos?",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -500,7 +494,7 @@
     }
   },
   {
-    "text": "Vorrei sapere i prezzi",
+    "text": "Quiero saber los precios",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -513,7 +507,7 @@
     }
   },
   {
-    "text": "Grazie mille!",
+    "text": "Muchas gracias!",
     "expected": {
       "serviceQuery": null,
       "dateLabel": null,
@@ -522,6 +516,32 @@
       "dayPart": "any",
       "startHour": null,
       "endHour": null,
+      "customerName": null
+    }
+  },
+  {
+    "text": "Soy Ana Lopez, quiero una consulta. El numero es 333 111 2233",
+    "expected": {
+      "serviceQuery": "consulta",
+      "dateLabel": null,
+      "from": null,
+      "to": null,
+      "dayPart": "any",
+      "startHour": null,
+      "endHour": null,
+      "customerName": "Ana Lopez"
+    }
+  },
+  {
+    "text": "Para el 15 de mayo a las 16",
+    "expected": {
+      "serviceQuery": null,
+      "dateLabel": "15 mayo",
+      "from": "2026-05-15T16:00:00.000Z",
+      "to": "2026-05-15T17:00:00.000Z",
+      "dayPart": "exact_hour",
+      "startHour": 16,
+      "endHour": 17,
       "customerName": null
     }
   }

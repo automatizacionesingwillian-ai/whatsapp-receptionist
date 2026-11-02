@@ -1,12 +1,12 @@
 /**
- * Facturación elettronica SDI tramite Fatture in Cloud API.
+ * Facturación electrónica (SDI / Fatture in Cloud API).
  *
  * Required env:
  * - FATTURE_IN_CLOUD_API_TOKEN
  * - FATTURE_IN_CLOUD_COMPANY_ID
  * - FATTURE_IN_CLOUD_BASE_URL (default: https://api-v2.fattureincloud.it)
  *
- * Riferimento API: https://developers.fattureincloud.it/api-reference
+ * API reference: https://developers.fattureincloud.it/api-reference
  *
  * Pattern factory consistente con il resto del codebase.
  */

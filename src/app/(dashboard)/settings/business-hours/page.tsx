@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Horarios de apertura · Configuración · Ambrogio.ai',
 };
 
-// Gli orari dipendono dalla sessione: non devono finire in cache statica.
+// Los horarios dependen de la sesión: no deben cachearse de forma estática.
 export const dynamic = 'force-dynamic';
 
 type LoadResult =
@@ -36,7 +36,7 @@ async function loadHours(session: AuthSession): Promise<LoadResult> {
     };
   } catch (error) {
     // Il layout ha già garantito la sessione: un errore qui viene dal datastore.
-    logger.error({ err: error, tenantId: session.tenantId }, 'Lettura orari di apertura fallita');
+    logger.error({ err: error, tenantId: session.tenantId }, 'Failed to read business hours');
     return { ok: false };
   }
 }

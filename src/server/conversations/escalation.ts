@@ -141,21 +141,21 @@ export type EscalationServiceDependencies = {
 // ---------- Testi ----------
 
 const REASON_LABELS: Record<EscalationReason, string> = {
-  sensitive_handoff: 'Messaggio con segnali sensibili (emergenza, salute, legale o sicurezza)',
-  empty_voice_transcript: 'Messaggio vocale non trascrivibile',
-  low_voice_transcript_confidence: 'Trascrizione del messaggio vocale poco affidabile',
-  human_handoff_intent: 'Il cliente ha chiesto di parlare con una persona',
+  sensitive_handoff: 'Mensaje con señales sensibles (emergencia, salud, legal o seguridad)',
+  empty_voice_transcript: 'Nota de voz no transcribible',
+  low_voice_transcript_confidence: 'Transcripción de la nota de voz poco confiable',
+  human_handoff_intent: 'El cliente pidió hablar con una persona',
 };
 
 const CUSTOMER_NOTICES: Record<EscalationReason, string> = {
   sensitive_handoff:
-    'Ho letto il tuo messaggio e ho avvisato subito una persona dello studio: ti ricontatta appena possibile. Se si tratta di un’emergenza medica chiama il 112.',
+    'Leí tu mensaje y avisé de inmediato a una persona del negocio: te contactará lo antes posible. Si es una emergencia médica, llama al 911.',
   empty_voice_transcript:
-    'Non sono riuscito ad ascoltare il tuo messaggio vocale. Ho avvisato una persona dello studio: ti ricontatta appena possibile.',
+    'No pude escuchar tu nota de voz. Avisé a una persona del negocio: te contactará lo antes posible.',
   low_voice_transcript_confidence:
-    'Non sono riuscito a capire bene il tuo messaggio vocale. Ho avvisato una persona dello studio: ti ricontatta appena possibile.',
+    'No pude entender bien tu nota de voz. Avisé a una persona del negocio: te contactará lo antes posible.',
   human_handoff_intent:
-    'Ho passato la tua richiesta a una persona dello studio: ti ricontatta appena possibile.',
+    'Pasé tu solicitud a una persona del negocio: te contactará lo antes posible.',
 };
 
 const EMAIL_SUBJECT_MAX_LENGTH = 200;
@@ -406,34 +406,34 @@ export function buildEscalationEmail(input: EscalationEmailInput): {
   );
 
   const text = [
-    'Una conversazione WhatsApp e stata passata a un operatore umano.',
+    'Una conversación de WhatsApp pasó a un operador humano.',
     '',
     `Motivo: ${label}`,
     `Cliente: ${customer}`,
-    `Messaggio ricevuto: ${receivedAt}`,
+    `Mensaje recibido: ${receivedAt}`,
     '',
-    excerpt.length > 0 ? `"${excerpt}"` : '(nessun testo disponibile)',
+    excerpt.length > 0 ? `"${excerpt}"` : '(sin texto disponible)',
     '',
     statusLine,
     '',
-    `Apri la conversazione: ${input.conversationUrl}`,
+    `Abrir la conversación: ${input.conversationUrl}`,
     '',
-    'La conversazione e ora in stato Escalation nella dashboard Ambrogio.ai.',
+    'La conversación está ahora en estado Escalada en el panel de Ambrogio.ai.',
   ].join('\n');
 
   const html = [
-    `<p><strong>Una conversazione WhatsApp e stata passata a un operatore umano.</strong></p>`,
+    `<p><strong>Una conversación de WhatsApp pasó a un operador humano.</strong></p>`,
     `<table cellpadding="6" cellspacing="0" style="border-collapse:collapse;font-size:14px;margin:16px 0;">`,
     `<tr><td style="color:${BRAND_MUTED};">Motivo:</td><td>${escapeHtml(label)}</td></tr>`,
     `<tr><td style="color:${BRAND_MUTED};">Cliente:</td><td><strong>${escapeHtml(customer)}</strong></td></tr>`,
-    `<tr><td style="color:${BRAND_MUTED};">Ricevuto:</td><td>${escapeHtml(receivedAt)}</td></tr>`,
+    `<tr><td style="color:${BRAND_MUTED};">Recibido:</td><td>${escapeHtml(receivedAt)}</td></tr>`,
     `</table>`,
     `<blockquote style="margin:0 0 16px;padding:12px 16px;border-left:3px solid ${BRAND_TEAL};background:#f3f7f5;">${
-      excerpt.length > 0 ? escapeHtml(excerpt) : '<em>nessun testo disponibile</em>'
+      excerpt.length > 0 ? escapeHtml(excerpt) : '<em>sin texto disponible</em>'
     }</blockquote>`,
     `<p>${escapeHtml(statusLine)}</p>`,
-    `<p><a href="${escapeHtml(input.conversationUrl)}" style="display:inline-block;padding:12px 24px;background:${BRAND_TEAL};color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">Apri la conversazione</a></p>`,
-    `<p style="color:${BRAND_MUTED};font-size:13px;">La conversazione e ora in stato Escalation nella dashboard Ambrogio.ai.</p>`,
+    `<p><a href="${escapeHtml(input.conversationUrl)}" style="display:inline-block;padding:12px 24px;background:${BRAND_TEAL};color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">Abrir la conversación</a></p>`,
+    `<p style="color:${BRAND_MUTED};font-size:13px;">La conversación está ahora en estado Escalada en el panel de Ambrogio.ai.</p>`,
   ].join('\n');
 
   return { to: input.to, subject, text, html };
@@ -441,26 +441,26 @@ export function buildEscalationEmail(input: EscalationEmailInput): {
 
 function describeCustomerStatus(input: { aiReplied: boolean; customerNotified: boolean }): string {
   if (input.aiReplied) {
-    return 'L assistente AI ha gia risposto al cliente su questo messaggio.';
+    return 'El asistente de IA ya respondió al cliente sobre este mensaje.';
   }
 
   if (input.customerNotified) {
-    return 'Al cliente e stato inviato un avviso che una persona lo ricontattera al piu presto.';
+    return 'Se envió al cliente un aviso de que una persona lo contactará lo antes posible.';
   }
 
-  return 'ATTENZIONE: il cliente non ha ricevuto nessuna risposta. Ricontattalo tu al piu presto.';
+  return 'ATENCIÓN: el cliente no recibió ninguna respuesta. Contáctalo tú lo antes posible.';
 }
 
 function shortReason(reason: EscalationReason): string {
   switch (reason) {
     case 'sensitive_handoff':
-      return 'messaggio sensibile';
+      return 'mensaje sensible';
     case 'empty_voice_transcript':
-      return 'vocale non trascrivibile';
+      return 'nota de voz no transcribible';
     case 'low_voice_transcript_confidence':
-      return 'vocale poco chiaro';
+      return 'nota de voz poco clara';
     case 'human_handoff_intent':
-      return 'richiesta operatore';
+      return 'pide operador';
   }
 }
 
@@ -548,7 +548,7 @@ export class SupabaseEscalationRepository implements EscalationRepository {
     return {
       studioName: (config.data?.studio_name as string | undefined) ?? tenantName,
       escalationEmail: (config.data?.human_escalation_email as string | null | undefined) ?? null,
-      timezone: (tenant.data?.timezone as string | undefined) ?? 'Europe/Rome',
+      timezone: (tenant.data?.timezone as string | undefined) ?? 'America/Mexico_City',
     };
   }
 }

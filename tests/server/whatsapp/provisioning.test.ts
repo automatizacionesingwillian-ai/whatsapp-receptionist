@@ -39,11 +39,17 @@ function createFakeRepository(seed: Row[] = []) {
         ? rows.find((row) => row.id === input.existingId)
         : undefined;
 
+      const config = {
+        phone_number_id: input.phoneNumberId,
+        ...(input.wabaId ? { waba_id: input.wabaId } : {}),
+      };
+
       if (existing) {
         existing.external_account_id = input.phoneNumberId;
         existing.external_display_id = input.displayPhoneNumber || null;
         existing.status = 'active';
         existing.credentials = input.credentials;
+        existing.config = config;
         return existing;
       }
 
@@ -55,7 +61,7 @@ function createFakeRepository(seed: Row[] = []) {
         external_display_id: input.displayPhoneNumber || null,
         status: 'active',
         credentials: input.credentials,
-        config: { phone_number_id: input.phoneNumberId },
+        config,
         created_at: '2026-07-27T08:00:00.000Z',
       };
       rows.push(created);
@@ -98,13 +104,34 @@ describe('WhatsAppProvisioningService', () => {
       phoneNumberId: 'phone_123',
       displayPhoneNumber: '+39 02 1234567',
       apiKey: 'super_secret_api_key',
+      wabaId: 'waba_456',
     });
 
     expect(status.connected).toBe(true);
     expect(status.phoneNumberId).toBe('phone_123');
+    expect(status.wabaId).toBe('waba_456');
     // È la colonna interrogata da `resolveTenantByPhoneNumberId`.
     expect(rows[0]?.external_account_id).toBe('phone_123');
     expect(rows[0]?.status).toBe('active');
+    expect(rows[0]?.config).toMatchObject({
+      phone_number_id: 'phone_123',
+      waba_id: 'waba_456',
+    });
+  });
+
+  it('include wabaId nello stato di connessione quando presente', async () => {
+    const { repository } = createFakeRepository([
+      activeRow({
+        tenant_id: 'tenant_a',
+        config: { phone_number_id: 'phone_123', waba_id: 'waba_existing' },
+      }),
+    ]);
+    const service = createWhatsAppProvisioningService(repository);
+
+    const status = await service.getStatus('tenant_a');
+
+    expect(status.connected).toBe(true);
+    expect(status.wabaId).toBe('waba_existing');
   });
 
   it('non restituisce mai la API key e la salva cifrata', async () => {
@@ -195,6 +222,7 @@ describe('WhatsAppProvisioningService', () => {
 
     expect(status.connected).toBe(false);
     expect(status.hasApiKey).toBe(false);
+    expect(status.wabaId).toBeNull();
   });
 
   it('revoca il collegamento senza cancellare la riga, preservando lo storico', async () => {

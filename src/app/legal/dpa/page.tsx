@@ -5,68 +5,69 @@ import { LegalPageLayout } from '@/components/marketing/LegalPageLayout';
 export const metadata: Metadata = {
   title: 'Data Processing Agreement',
   description:
-    'DPA Ambrogio.ai conforme Art. 28 GDPR. Hosting EU, sub-processori dichiarati, audit log immutabile, breach notification 24h.',
+    'DPA de Ambrogio.ai conforme al Art. 28 GDPR. Hosting en la UE, subencargados declarados, audit log inmutable, notificación de brechas en 24 h.',
   alternates: { canonical: '/legal/dpa' },
 };
 
 export default function DpaPage() {
   return (
-    <LegalPageLayout title="Data Processing Agreement (DPA)" lastUpdated="8 maggio 2026">
+    <LegalPageLayout title="Data Processing Agreement (DPA)" lastUpdated="8 de mayo de 2026">
       <p>
-        Il presente accordo regola il trattamento dei dati personali ai sensi dell&apos;Art. 28 GDPR
-        tra Ambrogio.ai (Responsabile del trattamento) e il Tenant (Titolare).
+        El presente acuerdo regula el tratamiento de datos personales conforme al Art. 28 GDPR
+        entre Ambrogio.ai (encargado del tratamiento) y el Tenant (responsable).
       </p>
 
-      <h2>1. Oggetto del trattamento</h2>
+      <h2>1. Objeto del tratamiento</h2>
       <p>
-        Ambrogio.ai elabora i dati personali degli Utenti finali del Tenant esclusivamente per
-        l&apos;erogazione del Servizio.
+        Ambrogio.ai trata los datos personales de los Usuarios finales del Tenant exclusivamente
+        para la prestación del Servicio.
       </p>
 
-      <h2>2. Categorie di dati</h2>
+      <h2>2. Categorías de datos</h2>
       <ul>
-        <li>Dati di contatto: nome, telefono, email.</li>
-        <li>Contenuto messaggi: testo e vocali.</li>
-        <li>Dati transazionali: appuntamenti, prenotazioni, pagamenti.</li>
+        <li>Datos de contacto: nombre, teléfono, email.</li>
+        <li>Contenido de mensajes: texto y audios.</li>
+        <li>Datos transaccionales: citas, reservas, pagos.</li>
       </ul>
 
-      <h2>3. Misure tecniche e organizzative</h2>
+      <h2>3. Medidas técnicas y organizativas</h2>
       <ul>
-        <li>TLS 1.3 in transito, AES-256 a riposo.</li>
-        <li>Multi-tenancy con RLS Postgres.</li>
-        <li>Audit log immutabile.</li>
-        <li>Backup criptati EU, retention 30 giorni.</li>
-        <li>Disaster recovery RTO 4h, RPO 1h.</li>
+        <li>TLS 1.3 en tránsito, AES-256 en reposo.</li>
+        <li>Multi-tenancy con RLS de Postgres.</li>
+        <li>Audit log inmutable.</li>
+        <li>Backups cifrados en la UE, retención 30 días.</li>
+        <li>Disaster recovery RTO 4 h, RPO 1 h.</li>
       </ul>
 
-      <h2>4. Sub-processori</h2>
+      <h2>4. Subencargados</h2>
       <p>
-        Lista aggiornata in <a href="/legal/sub-processors">/legal/sub-processors</a>. Notifica
-        scritta 30 giorni prima di aggiunte.
+        Lista actualizada en <a href="/legal/sub-processors">/legal/sub-processors</a>. Notificación
+        escrita 30 días antes de altas.
       </p>
 
-      <h2>5. Diritti degli interessati</h2>
+      <h2>5. Derechos de los interesados</h2>
       <p>
-        Ambrogio.ai assiste il Titolare nell&apos;adempimento delle richieste degli Interessati
-        (Art. 15-22 GDPR) tramite gli endpoint di export e delete disponibili in dashboard.
+        Ambrogio.ai asiste al Responsable en el cumplimiento de las solicitudes de los Interesados
+        (Arts. 15-22 GDPR) mediante los endpoints de exportación y eliminación disponibles en el
+        panel.
       </p>
 
-      <h2>6. Data breach</h2>
+      <h2>6. Brecha de datos</h2>
       <p>
-        Notifica al Titolare entro 24 ore dalla scoperta. Notifica al Garante a cura del Titolare
-        entro 72 ore.
+        Notificación al Responsable dentro de las 24 horas desde el descubrimiento. La notificación
+        a la autoridad competente corresponde al Responsable dentro de las 72 horas cuando aplique.
       </p>
 
-      <h2>7. Audit</h2>
+      <h2>7. Auditoría</h2>
       <p>
-        Il Titolare può richiedere audit annuali con preavviso di 30 giorni. Costi a carico del
-        Titolare salvo diversa accordo.
+        El Responsable puede solicitar auditorías anuales con 30 días de preaviso. Los costos
+        corren a cargo del Responsable salvo acuerdo distinto.
       </p>
 
-      <h2>8. Termine</h2>
+      <h2>8. Vigencia</h2>
       <p>
-        Alla cessazione del rapporto, restituzione o cancellazione dei dati entro 30 giorni
-        (configurabile dal Tenant).
+        Al cesar la relación, devolución o eliminación de los datos en un máximo de 30 días
+        (configurable por el Tenant).
       </p>
 
       <p
@@ -77,8 +78,8 @@ export default function DpaPage() {
           fontSize: 'var(--text-sm)',
         }}
       >
-        <strong>DPA firmabile:</strong> versione PDF disponibile dalla dashboard, sezione{' '}
-        <em>Account &gt; Seguridad &gt; DPA</em>. Contáctanos per stipula formale via PEC.
+        <strong>DPA firmable:</strong> versión PDF disponible desde el panel, sección{' '}
+        <em>Cuenta &gt; Seguridad &gt; DPA</em>. Contáctanos para formalizarlo.
       </p>
     </LegalPageLayout>
   );

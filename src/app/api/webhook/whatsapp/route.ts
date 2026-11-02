@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { jsonHandler } from '@/lib/api/json';
 import { env } from '@/lib/env';
 import { enforceWhatsAppWebhookRateLimit } from '@/lib/rate-limit';
-import { assertWhatsAppWebhookSecret } from '@/lib/whatsapp/webhook-security';
+import { assertWhatsAppWebhookAuthenticity } from '@/lib/whatsapp/webhook-security';
 import { createWhatsAppWebhookService } from '@/server/whatsapp/service';
 import { WhatsAppWebhookPayloadSchema } from '@/types/whatsapp';
 
@@ -22,10 +22,12 @@ export function GET(request: NextRequest): NextResponse {
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   return jsonHandler(async (context) => {
-    assertWhatsAppWebhookSecret(request.headers);
+    // Meta firma el body crudo: hay que leer texto antes de parsear JSON.
+    const rawBody = await request.text();
+    assertWhatsAppWebhookAuthenticity({ rawBody, headers: request.headers });
     await enforceWhatsAppWebhookRateLimit(request.headers);
 
-    const payload = WhatsAppWebhookPayloadSchema.parse(await request.json());
+    const payload = WhatsAppWebhookPayloadSchema.parse(JSON.parse(rawBody) as unknown);
     const service = createWhatsAppWebhookService();
 
     return service.processPayload(payload, {

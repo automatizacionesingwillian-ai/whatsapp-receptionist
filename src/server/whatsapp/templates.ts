@@ -12,34 +12,34 @@ const whatsappTemplateDefinitions = {
   appointment_confirmation: {
     name: 'appointment_confirmation',
     category: 'utility',
-    defaultLanguageCode: 'it',
+    defaultLanguageCode: 'es',
     requiredVariables: ['customerName', 'serviceName', 'scheduledAt', 'studioName'],
     renderPreview: (variables: TemplateVariables) =>
-      `Conferma appuntamento per ${variables.customerName}: ${variables.serviceName} il ${variables.scheduledAt} presso ${variables.studioName}.`,
+      `Confirmación de cita para ${variables.customerName}: ${variables.serviceName} el ${variables.scheduledAt} en ${variables.studioName}.`,
   },
   appointment_reminder_24h: {
     name: 'appointment_reminder_24h',
     category: 'utility',
-    defaultLanguageCode: 'it',
+    defaultLanguageCode: 'es',
     requiredVariables: ['customerName', 'scheduledAt', 'studioName'],
     renderPreview: (variables: TemplateVariables) =>
-      `Promemoria per ${variables.customerName}: appuntamento ${variables.scheduledAt} presso ${variables.studioName}.`,
+      `Recordatorio para ${variables.customerName}: cita ${variables.scheduledAt} en ${variables.studioName}.`,
   },
   appointment_reminder_1h: {
     name: 'appointment_reminder_1h',
     category: 'utility',
-    defaultLanguageCode: 'it',
+    defaultLanguageCode: 'es',
     requiredVariables: ['customerName', 'scheduledAt', 'studioName'],
     renderPreview: (variables: TemplateVariables) =>
-      `Promemoria per ${variables.customerName}: appuntamento tra poco, ${variables.scheduledAt}, presso ${variables.studioName}.`,
+      `Recordatorio para ${variables.customerName}: cita en breve, ${variables.scheduledAt}, en ${variables.studioName}.`,
   },
   appointment_cancellation: {
     name: 'appointment_cancellation',
     category: 'utility',
-    defaultLanguageCode: 'it',
+    defaultLanguageCode: 'es',
     requiredVariables: ['customerName', 'scheduledAt', 'studioName'],
     renderPreview: (variables: TemplateVariables) =>
-      `Avviso per ${variables.customerName}: appuntamento del ${variables.scheduledAt} presso ${variables.studioName} annullato.`,
+      `Aviso de cancelación para ${variables.customerName}: la cita del ${variables.scheduledAt} en ${variables.studioName} fue cancelada.`,
   },
 } as const;
 
@@ -212,7 +212,7 @@ export class SupabaseWhatsAppTemplateMessageRepository implements WhatsAppTempla
       .from('whatsapp_message_templates')
       .select('id, name, language_code, category')
       .eq('tenant_id', input.tenantId)
-      .eq('provider', 'whatsapp_360dialog')
+      .in('provider', ['whatsapp_cloud', 'whatsapp_360dialog'])
       .eq('name', input.name)
       .eq('language_code', input.languageCode)
       .eq('status', 'approved')

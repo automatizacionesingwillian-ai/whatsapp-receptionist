@@ -61,7 +61,7 @@ export function buildServiceSchema(input: ServiceSchemaInput): Record<string, un
     serviceType: input.serviceType,
     description: input.description,
     url: absoluteUrl(input.url),
-    areaServed: { '@type': 'Country', name: input.areaServed ?? 'Italia' },
+    areaServed: { '@type': 'Country', name: input.areaServed ?? 'México' },
     provider: { '@id': `${SITE_URL}#organization` },
     inLanguage: 'es-419',
   };
@@ -185,7 +185,7 @@ export function buildPersonSchema(input: PersonSchemaInput): Record<string, unkn
     ...(input.url ? { url: input.url } : {}),
     ...(input.description ? { description: input.description } : {}),
     ...(input.sameAs && input.sameAs.length > 0 ? { sameAs: [...input.sameAs] } : {}),
-    knowsLanguage: ['it', 'en'],
+    knowsLanguage: ['es', 'en'],
   };
 }
 

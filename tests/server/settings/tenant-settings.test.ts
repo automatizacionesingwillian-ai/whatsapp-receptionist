@@ -410,7 +410,7 @@ function configRecord(overrides: Partial<TenantConfigSettings> = {}): TenantConf
     address: 'Via Roma 1',
     phone: '+3902123456',
     email: 'studio@example.it',
-    defaultLocale: 'it-IT',
+    defaultLocale: 'es-419',
     aiDisclosureEnabled: true,
     autoReplyEnabled: false,
     voiceMessagesEnabled: true,

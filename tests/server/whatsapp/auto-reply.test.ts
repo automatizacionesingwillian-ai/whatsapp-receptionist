@@ -33,7 +33,7 @@ describe('WhatsAppAutoReplyService', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
     const service = new WhatsAppAutoReplyService(repository, {
       autoReplyEnabled: true,
@@ -41,7 +41,7 @@ describe('WhatsAppAutoReplyService', () => {
 
     const result = await service.handleInboundMessage({
       ...baseInput(),
-      text: 'Vorrei prenotare una visita domani mattina',
+      text: 'Quiero reservar una visita mañana por la mañana',
       transcriptLanguageProbability: 0.98,
     });
 
@@ -61,7 +61,7 @@ describe('WhatsAppAutoReplyService', () => {
     expect(repository.outboxJobs[0]?.payload).toMatchObject({
       type: 'text',
       text: {
-        body: expect.stringContaining('sono Ambrogio'),
+        body: expect.stringContaining('soy Ambrogio'),
       },
       metadata: {
         inboundSource: 'voice_transcript',
@@ -75,7 +75,7 @@ describe('WhatsAppAutoReplyService', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
     const service = new WhatsAppAutoReplyService(repository, {
       autoReplyEnabled: true,
@@ -84,7 +84,7 @@ describe('WhatsAppAutoReplyService', () => {
 
     const result = await service.handleInboundMessage({
       ...baseInput(),
-      text: 'prenotare domani',
+      text: 'reservar mañana',
       transcriptLanguageProbability: 0.32,
     });
 
@@ -112,7 +112,7 @@ describe('WhatsAppAutoReplyService', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: false,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
     const service = new WhatsAppAutoReplyService(repository, {
       autoReplyEnabled: true,
@@ -124,7 +124,7 @@ describe('WhatsAppAutoReplyService', () => {
 
     const result = await service.handleInboundMessage({
       ...baseInput(),
-      text: 'Quanto costa una visita?',
+      text: 'Cuanto cuesta una visita?',
       source: 'text',
       transcriptLanguageProbability: null,
     });
@@ -165,11 +165,11 @@ function baseInput() {
     customerIdentifier: '393331112233',
     occurredAt,
     source: 'voice_transcript' as const,
-    provider: 'whatsapp_360dialog' as const,
+    provider: 'whatsapp_cloud' as const,
     whatsappMessageId: 'wamid.audio',
     phoneNumberId: 'phone_123',
     displayPhoneNumber: '390212345678',
-    transcriptLanguage: 'it',
+    transcriptLanguage: 'es',
     existingMetadata: {
       whatsappVoice: {
         mediaId: 'media_audio_1',
@@ -196,7 +196,7 @@ class FakeAutoReplyRepository implements WhatsAppAutoReplyRepository {
         assistantName: 'Ambrogio',
         aiDisclosureEnabled: true,
         autoReplyEnabled: false,
-        defaultLocale: 'it-IT',
+        defaultLocale: 'es-419',
       }
     );
   }
@@ -246,7 +246,7 @@ class FakeLlmClassifier implements IntentClassifier {
     return {
       intent: 'pricing_question',
       confidence: 0.91,
-      matchedSignals: ['prezzo'],
+      matchedSignals: ['precio'],
       aiUsage: {
         provider: 'anthropic',
         feature: 'intent_classifier',

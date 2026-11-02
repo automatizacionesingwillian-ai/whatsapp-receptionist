@@ -1,38 +1,38 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Utenti · Admin',
+  title: 'Usuarios · Admin',
   robots: { index: false, follow: false },
 };
 
 /*
- * Questa pagina elencava utenti inventati (email, tenant di appartenenza,
- * ruolo, ultimo accesso) presentati come reali. Il markup precedente resta
- * nella history di git.
+ * Esta página listaba usuarios inventados (email, tenant de pertenencia,
+ * rol, último acceso) presentados como reales. El markup anterior permanece
+ * en el historial de git.
  *
- * Come per l'elenco tenant, la lettura cross-tenant richiede un servizio
- * dedicato con test di isolamento: qui si leggerebbero dati personali di
- * utenti di tenant diversi, quindi è anche una superficie GDPR.
+ * Como con el listado de tenants, la lectura cross-tenant requiere un servicio
+ * dedicado con tests de aislamiento: aquí se leerían datos personales de
+ * usuarios de tenants distintos, así que también es una superficie GDPR.
  */
 export default function AdminUsersPage() {
   return (
     <div className="stack stack-6">
       <header className="stack stack-2">
         <span className="eyebrow">Admin</span>
-        <h1>Utenti</h1>
-        <p className="muted">Utenti registrati su tutti i tenant.</p>
+        <h1>Usuarios</h1>
+        <p className="muted">Usuarios registrados en todos los tenants.</p>
       </header>
 
       <div className="card card-padded stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado ai dati reali</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado a datos reales</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          I dati di esempio sono stati rimossi. Questa vista legge dati personali di utenti
-          appartenenti a tenant diversi: oltre al servizio cross-tenant serve decidere quali campi
-          un super-admin debba effettivamente vedere, e registrare l&apos;accesso su{' '}
-          <code className="mono">audit_log</code> come già avviene per gli endpoint GDPR.
+          Se eliminaron los datos de ejemplo. Esta vista lee datos personales de usuarios de
+          tenants distintos: además del servicio cross-tenant hay que decidir qué campos debe ver
+          un super-admin, y registrar el acceso en <code className="mono">audit_log</code> como ya
+          ocurre con los endpoints GDPR.
         </p>
         <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-          Fonte autorevole nel frattempo: la sezione Authentication del progetto Supabase.
+          Fuente autoritativa mientras tanto: la sección Authentication del proyecto Supabase.
         </p>
       </div>
     </div>

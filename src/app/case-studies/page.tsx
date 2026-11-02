@@ -6,37 +6,37 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Case study · Programma pilota',
+  title: 'Casos de estudio · Programa piloto',
   description:
-    'Nessun case study pubblicato: Ambrogio.ai è in beta. Pubblicheremo risultati solo quando saranno misurati e validati dal cliente.',
+    'Ningún caso de estudio publicado: Ambrogio.ai está en beta. Publicaremos resultados solo cuando estén medidos y validados por el cliente.',
   alternates: { canonical: '/case-studies' },
   openGraph: {
-    title: 'Case study Ambrogio.ai · Programma pilota',
-    description: 'Risultati pubblicati solo quando misurati e validati dal cliente.',
+    title: 'Casos de estudio Ambrogio.ai · Programa piloto',
+    description: 'Resultados publicados solo cuando estén medidos y validados por el cliente.',
     url: '/case-studies',
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
 /*
- * Questa pagina non espone `CollectionPage` con `hasPart`: non esistono ancora
- * case study da elencare, e dichiarare a Google elementi inesistenti è una
- * violazione delle policy sui dati strutturati.
+ * Esta página no expone `CollectionPage` con `hasPart`: aún no hay casos de
+ * estudio que listar, y declarar a Google elementos inexistentes viola las
+ * políticas de datos estructurados.
  */
 
 const COMMITMENTS = [
   {
-    title: 'Metriche misurate, non stimate',
-    body: 'Confronto tra i 90 giorni precedenti e i 90 successivi all’attivazione, sui dati del gestionale del cliente, non su nostre proiezioni.',
+    title: 'Métricas medidas, no estimadas',
+    body: 'Comparación entre los 90 días previos y los 90 posteriores a la activación, con datos del sistema del cliente, no con nuestras proyecciones.',
   },
   {
-    title: 'Validazione firmata dal cliente',
-    body: 'Nessun numero viene pubblicato senza approvazione esplicita e scritta di chi lo ha generato, con nome e ruolo verificabili.',
+    title: 'Validación firmada por el cliente',
+    body: 'Ningún número se publica sin aprobación explícita y por escrito de quien lo generó, con nombre y rol verificables.',
   },
   {
-    title: 'Metodo dichiarato per intero',
-    body: 'Pubblichiamo periodo, dimensione del campione e cosa non è attribuibile ad Ambrogio. Un numero senza metodo non è una prova.',
+    title: 'Método declarado por completo',
+    body: 'Publicamos periodo, tamaño de la muestra y qué no es atribuible a Ambrogio. Un número sin método no es una prueba.',
   },
 ] as const;
 
@@ -46,7 +46,7 @@ export default function CaseStudiesPage() {
       <JsonLd
         data={buildBreadcrumbSchema([
           { name: 'Home', url: '/' },
-          { name: 'Case study', url: '/case-studies' },
+          { name: 'Casos de estudio', url: '/case-studies' },
         ])}
       />
       <SiteHeader />
@@ -57,12 +57,12 @@ export default function CaseStudiesPage() {
               className="stack stack-4"
               style={{ maxWidth: '720px', marginBottom: 'var(--space-12)' }}
             >
-              <span className="badge">Case study</span>
-              <h1 className="display text-balance">Nessun case study pubblicato. Non ancora.</h1>
+              <span className="badge">Casos de estudio</span>
+              <h1 className="display text-balance">Ningún caso de estudio publicado. Todavía no.</h1>
               <p className="lead text-pretty">
-                Ambrogio.ai è in beta con i primi studi pilota. Non abbiamo ancora risultati
-                misurati su un periodo abbastanza lungo da poter essere pubblicati come prova, e
-                preferiamo dirlo invece di riempire questa pagina di numeri plausibili.
+                Ambrogio.ai está en beta con los primeros estudios piloto. Aún no tenemos resultados
+                medidos en un periodo lo bastante largo como para publicarlos como prueba, y
+                preferimos decirlo en lugar de llenar esta página de números plausibles.
               </p>
             </div>
 
@@ -86,10 +86,10 @@ export default function CaseStudiesPage() {
                 alignItems: 'center',
               }}
             >
-              <h3>Nel frattempo, puoi verificare il prodotto da solo</h3>
+              <h3>Mientras tanto, puedes verificar el producto tú mismo</h3>
               <p className="muted" style={{ maxWidth: '56ch' }}>
-                Il codice è pubblico con licenza MIT: puoi leggerlo, installarlo e provarlo senza
-                chiedere il permesso a nessuno. È la forma di prova che possiamo offrire oggi.
+                El código es público con licencia MIT: puedes leerlo, instalarlo y probarlo sin
+                pedir permiso a nadie. Es la forma de prueba que podemos ofrecer hoy.
               </p>
               <div className="row" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
                 <a
@@ -97,10 +97,10 @@ export default function CaseStudiesPage() {
                   className="btn btn-primary"
                   rel="noreferrer"
                 >
-                  Vedi il codice su GitHub
+                  Ver el código en GitHub
                 </a>
                 <Link href="/contact" className="btn btn-secondary">
-                  Partecipa al programma pilota
+                  Participar en el programa piloto
                 </Link>
               </div>
             </div>

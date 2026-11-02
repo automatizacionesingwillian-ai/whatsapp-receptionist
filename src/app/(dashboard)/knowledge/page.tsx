@@ -277,7 +277,7 @@ const DATE_FORMATTER = new Intl.DateTimeFormat('es-419', {
   year: 'numeric',
   hour: '2-digit',
   minute: '2-digit',
-  timeZone: 'Europe/Rome',
+  timeZone: 'America/Mexico_City',
 });
 
 function formatDate(value: string): string {

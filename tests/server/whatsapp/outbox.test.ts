@@ -104,13 +104,13 @@ describe('WhatsAppOutboxWorker', () => {
           type: 'template',
           template: {
             name: 'appointment_reminder_24h',
-            languageCode: 'it',
+            languageCode: 'es',
             components: [
               {
                 type: 'body',
                 parameters: [
                   { type: 'text', text: 'Mario' },
-                  { type: 'text', text: 'domani alle 10:00' },
+                  { type: 'text', text: 'mañana a las 10:00' },
                 ],
               },
             ],
@@ -128,13 +128,13 @@ describe('WhatsAppOutboxWorker', () => {
     expect(sender.sentTemplates[0]).toEqual({
       to: '393331112233',
       name: 'appointment_reminder_24h',
-      languageCode: 'it',
+      languageCode: 'es',
       components: [
         {
           type: 'body',
           parameters: [
             { type: 'text', text: 'Mario' },
-            { type: 'text', text: 'domani alle 10:00' },
+            { type: 'text', text: 'mañana a las 10:00' },
           ],
         },
       ],
@@ -160,13 +160,13 @@ describe('WhatsAppOutboxWorker', () => {
           type: 'template',
           template: {
             name: 'appointment_cancellation',
-            languageCode: 'it',
+            languageCode: 'es',
             components: [
               {
                 type: 'body',
                 parameters: [
                   { type: 'text', text: 'Mario' },
-                  { type: 'text', text: 'visita di domani' },
+                  { type: 'text', text: 'visita de mañana' },
                 ],
               },
             ],
@@ -190,7 +190,7 @@ describe('WhatsAppOutboxWorker', () => {
     expect(sender.sentTemplates[0]).toMatchObject({
       to: '393331112233',
       name: 'appointment_cancellation',
-      languageCode: 'it',
+      languageCode: 'es',
     });
     expect(repository.deadLetters[0]).toMatchObject({
       jobId: 'job_text',

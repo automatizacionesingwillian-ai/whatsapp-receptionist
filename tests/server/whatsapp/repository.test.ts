@@ -17,6 +17,7 @@ interface FluentBuilder {
   update: (...args: unknown[]) => FluentBuilder;
   upsert: (...args: unknown[]) => FluentBuilder;
   eq: (...args: unknown[]) => FluentBuilder;
+  in: (...args: unknown[]) => FluentBuilder;
   contains: (...args: unknown[]) => FluentBuilder;
   single: () => Promise<FromResult>;
   maybeSingle: () => Promise<FromResult>;
@@ -83,6 +84,7 @@ function makeBuilder(table: string): FluentBuilder {
           state.eqCalls.push({ table, column, value });
           return tail;
         },
+        in: () => tail,
         contains: () => tail,
         single: async () => popOrDefault(state.singleQueue),
         maybeSingle: async () => popOrDefault(state.maybeSingleQueue),
@@ -100,6 +102,7 @@ function makeBuilder(table: string): FluentBuilder {
       state.eqCalls.push({ table, column, value });
       return builder;
     },
+    in: () => builder,
     contains: () => builder,
     single: async () => popOrDefault(state.singleQueue),
     maybeSingle: async () => popOrDefault(state.maybeSingleQueue),
@@ -148,7 +151,7 @@ describe('SupabaseWhatsAppWebhookRepository.recordWebhookEvent', () => {
     // Act
     const result = await repo.recordWebhookEvent({
       tenantId: null,
-      provider: 'whatsapp_360dialog',
+      provider: 'whatsapp_cloud',
       eventType: 'message',
       externalId: 'message:wamid.1',
       idempotencyKey: 'idem_1',
@@ -180,7 +183,7 @@ describe('SupabaseWhatsAppWebhookRepository.recordWebhookEvent', () => {
     // Act
     const result = await repo.recordWebhookEvent({
       tenantId: null,
-      provider: 'whatsapp_360dialog',
+      provider: 'whatsapp_cloud',
       eventType: 'message',
       externalId: 'message:wamid.dup',
       idempotencyKey: 'idem_dup',
@@ -203,7 +206,7 @@ describe('SupabaseWhatsAppWebhookRepository.recordWebhookEvent', () => {
     await expect(
       repo.recordWebhookEvent({
         tenantId: null,
-        provider: 'whatsapp_360dialog',
+        provider: 'whatsapp_cloud',
         eventType: 'message',
         externalId: 'm:1',
         idempotencyKey: 'idem',
@@ -344,7 +347,7 @@ describe('SupabaseWhatsAppWebhookRepository.getTenantMessagingConfig', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: false,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
   });
 });

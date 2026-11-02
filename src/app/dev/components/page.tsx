@@ -26,7 +26,7 @@ export default function ComponentsPreviewPage() {
           <span className="badge badge-warm">Dev only</span>
           <h1 className="display">Component Gallery</h1>
           <p className="lead">
-            Tutti i pattern del design system in una sola pagina. Visibile solo in dev.
+            Todos los patrones del design system en una sola página. Visible solo en dev.
           </p>
         </div>
 
@@ -161,12 +161,12 @@ export default function ComponentsPreviewPage() {
             <span aria-hidden="true" style={{ fontSize: 'var(--text-3xl)' }}>
               ◇
             </span>
-            <h3 className="empty-state-title">Niente da mostrare</h3>
+            <h3 className="empty-state-title">Nada que mostrar</h3>
             <p className="empty-state-text">
-              Quando ci saranno conversazioni o appuntamenti li vedrai qui.
+              Cuando haya conversaciones o citas las verás aquí.
             </p>
             <button type="button" className="btn btn-primary btn-sm">
-              Crea il primo
+              Crear el primero
             </button>
           </div>
         </Section>

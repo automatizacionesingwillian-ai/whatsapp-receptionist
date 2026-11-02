@@ -39,38 +39,38 @@ export const organizationSchema = {
     'Recepción AI siempre activa para negocios y PyMEs. WhatsApp, voz, reservas automáticas.',
   email: 'hello@ambrogio.ai',
   foundingDate: '2026-04-24',
-  foundingLocation: { '@type': 'Country', name: 'Italia' },
+  foundingLocation: { '@type': 'Country', name: 'México' },
   areaServed: { '@type': 'Place', name: 'América Latina y Unión Europea' },
   address: {
     '@type': 'PostalAddress',
-    addressCountry: 'IT',
-    addressLocality: 'Roma',
-    addressRegion: 'RM',
+    addressCountry: 'MX',
+    addressLocality: 'Ciudad de México',
+    addressRegion: 'CDMX',
   },
   contactPoint: [
     {
       '@type': 'ContactPoint',
       contactType: 'customer support',
       email: 'support@ambrogio.ai',
-      areaServed: 'IT',
-      availableLanguage: ['Spanish', 'English', 'Italian'],
+      areaServed: 'LATAM',
+      availableLanguage: ['Spanish', 'English'],
     },
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
       email: 'hello@ambrogio.ai',
-      areaServed: 'IT',
-      availableLanguage: ['Spanish', 'English', 'Italian'],
+      areaServed: 'LATAM',
+      availableLanguage: ['Spanish', 'English'],
     },
     {
       '@type': 'ContactPoint',
       contactType: 'data protection officer',
       email: 'dpo@ambrogio.ai',
       areaServed: 'EU',
-      availableLanguage: ['Spanish', 'English', 'Italian'],
+      availableLanguage: ['Spanish', 'English'],
     },
   ],
-  knowsLanguage: ['es', 'en', 'it'],
+  knowsLanguage: ['es', 'en'],
   sameAs: ['https://twitter.com/ambrogio_ai', 'https://linkedin.com/company/ambrogio-ai'],
 } as const;
 
@@ -92,9 +92,9 @@ export const softwareApplicationSchema = {
     offerCount: 3,
     priceValidUntil: '2027-12-31',
   },
-  // Nessun `aggregateRating`: va pubblicato solo a fronte di recensioni reali e
-  // verificabili. Dichiararlo senza recensioni viola le policy sui dati
-  // strutturati di Google e configura una pratica commerciale ingannevole.
+  // Ningún `aggregateRating`: solo se publica ante reseñas reales y
+  // verificables. Declararlo sin reseñas viola las políticas de datos
+  // estructurados de Google y configura una práctica comercial engañosa.
   inLanguage: 'es-419',
   publisher: { '@id': `${SITE_URL}#organization` },
 } as const;

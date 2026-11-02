@@ -9,7 +9,7 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 interface Post {
   slug: string;
   title: string;
-  /** SEO meta title — può essere più conciso del title H1 per stare in <60 char dopo template. */
+  /** SEO meta title — puede ser más conciso que el H1 para caber en <60 char tras el template. */
   seoTitle?: string;
   excerpt: string;
   body: string;
@@ -25,30 +25,32 @@ interface Post {
 const POSTS: Record<string, Post> = {
   'whatsapp-business-vs-360dialog-quando-conviene': {
     slug: 'whatsapp-business-vs-360dialog-quando-conviene',
-    title: 'WhatsApp Cloud API vs 360dialog: quando conviene cosa',
-    seoTitle: 'WhatsApp Cloud API vs 360dialog · Confronto',
-    excerpt: 'Confronto tecnico ed economico tra l’API ufficiale Meta e i BSP italiani più usati.',
-    body: `Quando si integra WhatsApp Business per un SaaS B2B in Italia, le opzioni sono due: Meta WhatsApp Cloud API direttamente, oppure passare per un BSP (Business Solution Provider) come 360dialog.\n\nMeta Cloud API: economico, controllo totale, supporto solo via documentazione. Ideale se hai un team tecnico.\n\n360dialog: prezzo più alto, supporto in italiano, onboarding facilitato, fattura italiana. Ideale per agenzie che gestiscono molti clienti.\n\nIl breakeven economico è intorno ai 50.000 messaggi/mese. Sotto, conviene 360dialog. Sopra, conviene Cloud API diretto.`,
-    date: '2 maggio 2026',
+    title: 'WhatsApp Cloud API vs 360dialog: cuándo conviene cada uno',
+    seoTitle: 'WhatsApp Cloud API vs 360dialog · Comparativa',
+    excerpt:
+      'Comparativa técnica y económica entre la API oficial de Meta y los BSP más usados en LATAM.',
+    body: `Cuando integras WhatsApp Business para un SaaS B2B en Latinoamérica, las opciones son dos: Meta WhatsApp Cloud API de forma directa, o pasar por un BSP (Business Solution Provider) como 360dialog.\n\nMeta Cloud API: económico, control total, soporte solo vía documentación. Ideal si tienes un equipo técnico.\n\n360dialog: precio más alto, onboarding asistido, soporte operativo y facturación vía BSP. Ideal para agencias que gestionan muchos clientes.\n\nEl punto de equilibrio económico está alrededor de 50.000 mensajes/mes. Por debajo, suele convenir 360dialog. Por encima, conviene Cloud API directo.`,
+    date: '2 de mayo de 2026',
     isoDate: '2026-05-02',
     readTime: '8 min',
-    category: 'Guida',
+    category: 'Guía',
     relatedVerticalSlug: null,
     relatedVerticalLabel: null,
     relatedPostSlugs: ['gdpr-receptionist-ai-dpa-template'],
   },
   'gdpr-receptionist-ai-dpa-template': {
     slug: 'gdpr-receptionist-ai-dpa-template',
-    title: 'GDPR e receptionist AI: il DPA che serve davvero',
-    seoTitle: 'GDPR e DPA per AI Receptionist',
-    excerpt: 'Cosa deve contenere un DPA per essere utile in caso di audit. Template scaricabile.',
-    body: `Il Data Processing Agreement (DPA) è obbligatorio quando un service provider tratta dati personali per conto del titolare. Per un AI receptionist questo è particolarmente sensibile perché si processano conversazioni intere, vocali, e potenzialmente dati sanitari.\n\nUn DPA solido deve specificare: categorie di dati, finalità, durata, sub-processori, misure tecniche, procedura data breach, diritti degli interessati.\n\nAmbrogio.ai fornisce un DPA pre-compilato con: hosting EU (Supabase Frankfurt), retention 24 mesi, audit log immutabile, endpoint Art. 15/17 self-service, sub-processori dichiarati pubblicamente.`,
-    date: '28 aprile 2026',
+    title: 'GDPR y recepción AI: el DPA que realmente necesitas',
+    seoTitle: 'GDPR y DPA para AI Receptionist',
+    excerpt:
+      'Qué debe incluir un DPA para ser útil en una auditoría. Plantilla descargable.',
+    body: `El Data Processing Agreement (DPA) es obligatorio cuando un proveedor de servicios trata datos personales por cuenta del responsable. Para una recepción AI es especialmente sensible porque se procesan conversaciones completas, notas de voz y, potencialmente, datos de salud.\n\nUn DPA sólido debe especificar: categorías de datos, finalidades, duración, subencargados, medidas técnicas, procedimiento ante brechas y derechos de los interesados.\n\nAmbrogio.ai ofrece un DPA precompilado con: hosting en la UE (Supabase Frankfurt), retención 24 meses, audit log inmutable, endpoints Art. 15/17 self-service y subencargados declarados públicamente.`,
+    date: '28 de abril de 2026',
     isoDate: '2026-04-28',
     readTime: '12 min',
     category: 'GDPR',
     relatedVerticalSlug: 'professional',
-    relatedVerticalLabel: 'Ambrogio per studi professionali',
+    relatedVerticalLabel: 'Ambrogio para estudios profesionales',
     relatedPostSlugs: ['whatsapp-business-vs-360dialog-quando-conviene'],
   },
 };
@@ -66,7 +68,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = POSTS[slug];
   if (!post) {
     return {
-      title: 'Articolo non trovato',
+      title: 'Artículo no encontrado',
       robots: { index: false, follow: false },
     };
   }
@@ -79,7 +81,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'article',
       publishedTime: post.isoDate,
       url: `/blog/${post.slug}`,
-      locale: 'it_IT',
+      locale: 'es_419',
     },
     alternates: { canonical: `/blog/${post.slug}` },
   };
@@ -120,12 +122,12 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="container-narrow stack stack-6">
             <div className="stack stack-3">
               <Link href="/blog" className="btn-link" style={{ fontSize: 'var(--text-sm)' }}>
-                ← Tutti gli articoli
+                ← Todos los artículos
               </Link>
               <span className="badge badge-neutral">{post.category}</span>
               <h1 className="text-balance">{post.title}</h1>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                {post.date} · {post.readTime} di lettura
+                {post.date} · {post.readTime} de lectura
               </p>
             </div>
             <hr className="divider" />
@@ -146,7 +148,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 className="card stack stack-3"
                 style={{ background: 'var(--color-surface-sunken)' }}
               >
-                <span className="eyebrow">Verticale correlato</span>
+                <span className="eyebrow">Vertical relacionado</span>
                 <Link
                   href={`/verticali/${post.relatedVerticalSlug}`}
                   className="btn btn-secondary"
@@ -160,7 +162,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {relatedPosts.length > 0 && (
               <section className="stack stack-4" aria-labelledby="related-posts-heading">
                 <h2 id="related-posts-heading" style={{ fontSize: 'var(--text-xl)' }}>
-                  Continua a leggere
+                  Sigue leyendo
                 </h2>
                 <div
                   className="grid"
@@ -183,7 +185,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                           marginTop: 'auto',
                         }}
                       >
-                        Leggi →
+                        Leer →
                       </span>
                     </Link>
                   ))}
@@ -193,18 +195,18 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <div className="card stack stack-3" style={{ background: 'var(--color-accent-soft)' }}>
               <h3 style={{ fontSize: 'var(--text-lg)' }}>
-                Vuoi i risultati di{' '}
-                {post.category.toLowerCase() === 'case study' ? 'questo studio' : 'questa guida'}?
+                ¿Quieres los resultados de{' '}
+                {post.category.toLowerCase() === 'case study' ? 'este estudio' : 'esta guía'}?
               </h3>
               <p style={{ fontSize: 'var(--text-sm)' }}>
-                Inizia la prova di 14 giorni gratis. Setup in 24h.
+                Empieza la prueba de 14 días gratis. Setup en 24 h.
               </p>
               <Link
                 href="/register"
                 className="btn btn-primary"
                 style={{ alignSelf: 'flex-start' }}
               >
-                Inizia gratis →
+                Empieza gratis →
               </Link>
             </div>
           </div>

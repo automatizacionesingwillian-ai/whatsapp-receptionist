@@ -39,7 +39,7 @@ describe('OperatorMessagesService.sendMessage', () => {
     const result = await service.sendMessage({
       session: ownerSession(),
       conversationId: CONVERSATION_ID,
-      content: '  Ciao Mario, confermo l appuntamento  ',
+      content: '  Hola Mario, confirmo la cita  ',
       ipAddress: '203.0.113.10',
       userAgent: 'Vitest',
       now: NOW,
@@ -52,7 +52,7 @@ describe('OperatorMessagesService.sendMessage', () => {
       expect.objectContaining({
         tenantId: TENANT_ID,
         conversationId: CONVERSATION_ID,
-        content: 'Ciao Mario, confermo l appuntamento',
+        content: 'Hola Mario, confirmo la cita',
         metadata: expect.objectContaining({
           source: 'manual_operator',
         }),
@@ -65,7 +65,7 @@ describe('OperatorMessagesService.sendMessage', () => {
         recipientIdentifier: '393331112233',
         payload: expect.objectContaining({
           type: 'text',
-          text: { body: 'Ciao Mario, confermo l appuntamento' },
+          text: { body: 'Hola Mario, confirmo la cita' },
           metadata: expect.objectContaining({
             source: 'manual_operator',
             conversationId: CONVERSATION_ID,

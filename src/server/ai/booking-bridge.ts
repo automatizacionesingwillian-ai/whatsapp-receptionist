@@ -193,7 +193,7 @@ export class BookingBridgeService {
       return {
         handled: true,
         replyText:
-          'Posso aiutarti a prenotare, ma lo studio non ha ancora configurato i servizi. Segno la richiesta al team.',
+          'Puedo ayudarte a reservar, pero el negocio aún no ha configurado los servicios. Dejo la solicitud al equipo.',
         metadata: {
           bookingBridge: {
             action: 'no_services_configured',
@@ -207,7 +207,7 @@ export class BookingBridgeService {
     if (!selectedService && services.length > 1) {
       return {
         handled: true,
-        replyText: `Certo, ti aiuto a prenotare. Quale servizio ti interessa?\n\n${services
+        replyText: `Claro, te ayudo a reservar. ¿Qué servicio te interesa?\n\n${services
           .slice(0, 6)
           .map((service, index) => `${index + 1}. ${service.name}`)
           .join('\n')}`,
@@ -247,7 +247,7 @@ export class BookingBridgeService {
 
       return {
         handled: true,
-        replyText: `Ho controllato ${service.name}, ma non vedo slot liberi nei prossimi giorni. Segno la richiesta al team cosi puo' proporti un orario manualmente.`,
+        replyText: `Revisé ${service.name}, pero no veo horarios libres en los próximos días. Dejo la solicitud al equipo para que te ofrezca un horario manualmente.`,
         metadata: {
           bookingBridge: {
             action: 'no_slots_available',
@@ -276,9 +276,9 @@ export class BookingBridgeService {
 
     return {
       handled: true,
-      replyText: `Ho trovato questi slot per ${service.name}:\n\n${formatSlotList(
+      replyText: `Encontré estos horarios para ${service.name}:\n\n${formatSlotList(
         pendingSlots,
-      )}\n\nRispondimi con "confermo 1", "confermo 2" o "confermo 3".`,
+      )}\n\nRespóndeme con "confirmo 1", "confirmo 2" o "confirmo 3".`,
       metadata: {
         bookingBridge: {
           action: 'slots_proposed',
@@ -304,7 +304,7 @@ export class BookingBridgeService {
       return {
         handled: true,
         replyText:
-          'Quegli slot sono scaduti. Ricontrollo la disponibilita: scrivimi di nuovo quale servizio vuoi prenotare.',
+          'Esos horarios ya vencieron. Vuelvo a revisar la disponibilidad: escríbeme de nuevo qué servicio quieres reservar.',
         metadata: {
           bookingBridge: {
             action: 'slot_state_expired',
@@ -346,9 +346,9 @@ export class BookingBridgeService {
 
       return {
         handled: true,
-        replyText: `Perfetto, ho prenotato ${slot.serviceName} per ${formatSlotStart(
+        replyText: `Perfecto, reservé ${slot.serviceName} para ${formatSlotStart(
           slot,
-        )}. Riceverai anche la conferma WhatsApp dello studio.`,
+        )}. También recibirás la confirmación por WhatsApp del negocio.`,
         metadata: {
           bookingBridge: {
             action: 'appointment_created',
@@ -368,7 +368,7 @@ export class BookingBridgeService {
         return {
           handled: true,
           replyText:
-            'Mi spiace, quello slot non risulta piu disponibile. Scrivimi di nuovo il servizio e controllo altri orari.',
+            'Lo siento, ese horario ya no está disponible. Escríbeme de nuevo el servicio y reviso otros horarios.',
           metadata: {
             bookingBridge: {
               action: 'slot_conflict',
@@ -398,8 +398,8 @@ export class BookingBridgeService {
         handled: true,
         replyText:
           state.status === 'slots_proposed'
-            ? 'Quegli slot sono scaduti. Ricontrollo la disponibilita: scrivimi di nuovo quale servizio vuoi prenotare.'
-            : 'La scelta precedente e scaduta. Scrivimi di nuovo cosa vuoi fare e ricontrollo tutto.',
+            ? 'Esos horarios ya vencieron. Vuelvo a revisar la disponibilidad: escríbeme de nuevo qué servicio quieres reservar.'
+            : 'La elección anterior venció. Escríbeme de nuevo qué quieres hacer y lo reviso todo.',
         metadata: {
           bookingBridge: {
             action:
@@ -430,7 +430,7 @@ export class BookingBridgeService {
       if (selectedIndex === null) {
         return {
           handled: true,
-          replyText: 'Dimmi il numero dell appuntamento che vuoi spostare, per esempio "sposta 1".',
+          replyText: 'Dime el número de la cita que quieres mover, por ejemplo "mueve 1".',
           metadata: {
             bookingBridge: {
               action: 'reschedule_appointment_selection_repeated',
@@ -460,7 +460,7 @@ export class BookingBridgeService {
       const selectedSlotIndex = selectProposedSlotIndex(input.text, {
         status: 'slots_proposed',
         serviceId: state.appointment.serviceId ?? '',
-        serviceName: state.appointment.serviceName ?? 'appuntamento',
+        serviceName: state.appointment.serviceName ?? 'cita',
         slots: state.slots,
         proposedAt: state.proposedAt,
         expiresAt: state.expiresAt,
@@ -469,7 +469,7 @@ export class BookingBridgeService {
       if (selectedSlotIndex === null) {
         return {
           handled: true,
-          replyText: 'Dimmi quale nuovo slot vuoi confermare, per esempio "confermo 1".',
+          replyText: 'Dime qué nuevo horario quieres confirmar, por ejemplo "confirmo 1".',
           metadata: {
             bookingBridge: {
               action: 'reschedule_slot_selection_repeated',
@@ -486,7 +486,7 @@ export class BookingBridgeService {
     if (selectedIndex === null) {
       return {
         handled: true,
-        replyText: 'Dimmi il numero dell appuntamento che vuoi annullare, per esempio "annulla 1".',
+        replyText: 'Dime el número de la cita que quieres cancelar, por ejemplo "cancela 1".',
         metadata: {
           bookingBridge: {
             action: 'cancellation_selection_repeated',
@@ -528,7 +528,7 @@ export class BookingBridgeService {
       return {
         handled: true,
         replyText:
-          'Non trovo appuntamenti futuri collegati a questo numero. Mandami giorno e orario dell appuntamento che vuoi spostare, cosi lo faccio verificare dal team.',
+          'No encuentro citas futuras vinculadas a este número. Envíame el día y la hora de la cita que quieres mover, así lo revisa el equipo.',
         metadata: {
           bookingBridge: {
             action: 'reschedule_no_appointments_found',
@@ -554,7 +554,7 @@ export class BookingBridgeService {
 
       return {
         handled: true,
-        replyText: `Ho trovato piu appuntamenti. Quale vuoi spostare?\n\n${formatAppointmentList(
+        replyText: `Encontré varias citas. ¿Cuál quieres mover?\n\n${formatAppointmentList(
           appointments,
         )}`,
         metadata: {
@@ -589,9 +589,9 @@ export class BookingBridgeService {
 
       return {
         handled: true,
-        replyText: `Ho trovato ${formatAppointmentStart(
+        replyText: `Encontré ${formatAppointmentStart(
           appointment,
-        )}. Per quale giorno o fascia oraria vuoi spostarlo?`,
+        )}. ¿Para qué día o franja horaria quieres moverla?`,
         metadata: {
           bookingBridge: {
             action: 'reschedule_date_requested',
@@ -666,7 +666,7 @@ export class BookingBridgeService {
       return {
         handled: true,
         replyText:
-          'Ho trovato l appuntamento, ma non riesco a collegarlo a un servizio configurato. Segno la richiesta al team per spostarlo manualmente.',
+          'Encontré la cita, pero no puedo vincularla a un servicio configurado. Dejo la solicitud al equipo para moverla manualmente.',
         metadata: {
           bookingBridge: {
             action: 'reschedule_missing_service',
@@ -691,7 +691,7 @@ export class BookingBridgeService {
       return {
         handled: true,
         replyText:
-          'Certo. Dimmi il nuovo giorno o la fascia oraria che preferisci, per esempio "domani pomeriggio".',
+          'Claro. Dime el nuevo día o la franja horaria que prefieres, por ejemplo "mañana por la tarde".',
         metadata: {
           bookingBridge: {
             action: 'reschedule_date_requested',
@@ -718,7 +718,7 @@ export class BookingBridgeService {
       return {
         handled: true,
         replyText:
-          'Non vedo slot liberi in quella fascia. Dimmi un altro giorno o orario e ricontrollo.',
+          'No veo horarios libres en esa franja. Dime otro día u hora y lo vuelvo a revisar.',
         metadata: {
           bookingBridge: {
             action: 'reschedule_no_slots_available',
@@ -744,9 +744,9 @@ export class BookingBridgeService {
 
     return {
       handled: true,
-      replyText: `Posso spostarlo in uno di questi slot:\n\n${formatSlotList(
+      replyText: `Puedo moverla a uno de estos horarios:\n\n${formatSlotList(
         slots,
-      )}\n\nRispondimi con "confermo 1", "confermo 2" o "confermo 3".`,
+      )}\n\nRespóndeme con "confirmo 1", "confirmo 2" o "confirmo 3".`,
       metadata: {
         bookingBridge: {
           action: 'reschedule_slots_proposed',
@@ -793,9 +793,9 @@ export class BookingBridgeService {
 
       return {
         handled: true,
-        replyText: `Perfetto, ho spostato l appuntamento a ${formatSlotStart(
+        replyText: `Perfecto, moví la cita a ${formatSlotStart(
           slot,
-        )}. Riceverai anche la nuova conferma WhatsApp dello studio.`,
+        )}. También recibirás la nueva confirmación por WhatsApp del negocio.`,
         metadata: {
           bookingBridge: {
             action: 'appointment_rescheduled',
@@ -814,7 +814,7 @@ export class BookingBridgeService {
         return {
           handled: true,
           replyText:
-            'Mi spiace, quello slot non risulta piu disponibile. Dimmi un altro giorno o orario e ricontrollo.',
+            'Lo siento, ese horario ya no está disponible. Dime otro día u hora y lo vuelvo a revisar.',
           metadata: {
             bookingBridge: {
               action: 'reschedule_slot_conflict',
@@ -843,7 +843,7 @@ export class BookingBridgeService {
       return {
         handled: true,
         replyText:
-          'Non trovo appuntamenti futuri collegati a questo numero. Mandami giorno e orario dell appuntamento da annullare, cosi lo faccio verificare dal team.',
+          'No encuentro citas futuras vinculadas a este número. Envíame el día y la hora de la cita a cancelar, así lo revisa el equipo.',
         metadata: {
           bookingBridge: {
             action: 'cancellation_no_appointments_found',
@@ -867,7 +867,7 @@ export class BookingBridgeService {
 
       return {
         handled: true,
-        replyText: `Ho trovato piu appuntamenti. Quale vuoi annullare?\n\n${formatAppointmentList(
+        replyText: `Encontré varias citas. ¿Cuál quieres cancelar?\n\n${formatAppointmentList(
           appointments,
         )}`,
         metadata: {
@@ -912,9 +912,9 @@ export class BookingBridgeService {
 
     return {
       handled: true,
-      replyText: `Va bene, ho annullato l appuntamento ${formatAppointmentStart(
+      replyText: `De acuerdo, cancelé la cita ${formatAppointmentStart(
         appointment,
-      )}. Riceverai anche la conferma WhatsApp dello studio.`,
+      )}. También recibirás la confirmación por WhatsApp del negocio.`,
       metadata: {
         bookingBridge: {
           action: 'appointment_cancelled',
@@ -960,7 +960,7 @@ export class SupabaseBookingBridgeRepository implements BookingBridgeRepository 
       throw toRepositoryError('Failed to read tenant timezone', error);
     }
 
-    return (data?.timezone as string | undefined) || 'Europe/Rome';
+    return (data?.timezone as string | undefined) || 'America/Mexico_City';
   }
 
   async listActiveServices(tenantId: string): Promise<BookingServiceOption[]> {
@@ -1298,7 +1298,7 @@ function appointmentMatchesTimePreference(
 ): boolean {
   const parts = zonedHourParts(
     new Date(appointment.scheduledAt),
-    appointment.timezone || timezone || 'Europe/Rome',
+    appointment.timezone || timezone || 'America/Mexico_City',
   );
   const localHour = parts.hour + parts.minute / 60;
   const startHour = request.timePreference.startHour ?? 0;
@@ -1410,7 +1410,7 @@ function shouldPrepareRescheduleSlots(text: string, request: StructuredBookingRe
 function isLikelyAppointmentLookupOnly(text: string): boolean {
   const normalized = normalizeForMatching(text);
 
-  return /\b(quello|quella|appuntamento|prenotazione|visita|seduta|lezione)\s+(?:di|del|della|delle|alle|ore)\b/.test(
+  return /\b(esa|ese|cita|turno|reserva|reservacion|visita)\s+(?:de|del|de la|de las|a las)\b/.test(
     normalized,
   );
 }
@@ -1418,7 +1418,7 @@ function isLikelyAppointmentLookupOnly(text: string): boolean {
 function hasExplicitRescheduleTarget(text: string): boolean {
   const normalized = normalizeForMatching(text);
 
-  return /\b(?:a|ad|al|alla|alle|per)\s+(?:oggi|domani|dopodomani|lunedi|martedi|mercoledi|giovedi|venerdi|sabato|domenica|mattina|mattino|pomeriggio|sera|ore|le|\d{1,2})\b/.test(
+  return /\b(?:para|el|la|a las)\s+(?:hoy|manana|pasado manana|lunes|martes|miercoles|jueves|viernes|sabado|domingo|tarde|noche|\d{1,2})\b/.test(
     normalized,
   );
 }
@@ -1428,7 +1428,7 @@ function splitSourceAndTargetDateReference(
 ): { sourceText: string; targetText: string } | null {
   const normalized = normalizeForMatching(text);
   const match = normalized.match(
-    /\b(?:quello|quella|appuntamento|prenotazione|visita|seduta|lezione)\s+(?:di|del|della)\s+(oggi|domani|dopodomani|lunedi|martedi|mercoledi|giovedi|venerdi|sabato|domenica)\s+(?:a|ad|al|alla|alle|per)\s+(.+)$/,
+    /\b(?:esa|ese|cita|turno|reserva|visita)\s+(?:de|del|de la)\s+(hoy|manana|pasado manana|lunes|martes|miercoles|jueves|viernes|sabado|domingo)\s+(?:para|a las)\s+(.+)$/,
   );
   const sourceText = match?.[1]?.trim();
   const targetText = match?.[2]?.trim();
@@ -1446,21 +1446,21 @@ function selectProposedSlotIndex(
 ): number | null {
   const normalized = normalizeForMatching(text);
   const hasConfirmationSignal =
-    /\b(confermo|ok|va bene|perfetto|prendo|prenota|blocca|si|sì)\b/.test(normalized);
+    /\b(confirmo|ok|de acuerdo|perfecto|reservo|reserva|bloquea|si|sí)\b/.test(normalized);
 
   if (!hasConfirmationSignal) {
     return null;
   }
 
-  if (/\b(1|primo|prima)\b/.test(normalized)) {
+  if (/\b(1|primero|primera)\b/.test(normalized)) {
     return 0;
   }
 
-  if (/\b(2|secondo|seconda)\b/.test(normalized)) {
+  if (/\b(2|segundo|segunda)\b/.test(normalized)) {
     return 1;
   }
 
-  if (/\b(3|terzo|terza)\b/.test(normalized)) {
+  if (/\b(3|tercero|tercera)\b/.test(normalized)) {
     return 2;
   }
 
@@ -1474,19 +1474,19 @@ function selectNumberedOptionIndex(text: string, count: number): number | null {
     return null;
   }
 
-  if (/\b(1|primo|prima)\b/.test(normalized)) {
+  if (/\b(1|primero|primera)\b/.test(normalized)) {
     return 0;
   }
 
-  if (count >= 2 && /\b(2|secondo|seconda)\b/.test(normalized)) {
+  if (count >= 2 && /\b(2|segundo|segunda)\b/.test(normalized)) {
     return 1;
   }
 
-  if (count >= 3 && /\b(3|terzo|terza)\b/.test(normalized)) {
+  if (count >= 3 && /\b(3|tercero|tercera)\b/.test(normalized)) {
     return 2;
   }
 
-  if (count >= 4 && /\b(4|quarto|quarta)\b/.test(normalized)) {
+  if (count >= 4 && /\b(4|cuarto|cuarta)\b/.test(normalized)) {
     return 3;
   }
 
@@ -1494,7 +1494,7 @@ function selectNumberedOptionIndex(text: string, count: number): number | null {
     return 4;
   }
 
-  return count === 1 && /\b(si|sì|ok|va bene|confermo)\b/.test(normalized) ? 0 : null;
+  return count === 1 && /\b(si|sí|ok|de acuerdo|confirmo)\b/.test(normalized) ? 0 : null;
 }
 
 function toPendingSlot(slot: BookingSlot): PendingBookingSlot {
@@ -1534,8 +1534,8 @@ function formatAppointmentList(appointments: PendingAppointmentReference[]): str
 }
 
 function formatAppointmentStart(appointment: PendingAppointmentReference): string {
-  const serviceName = appointment.serviceName ?? 'appuntamento';
-  const customerLabel = appointment.customerName ? ` per ${appointment.customerName}` : '';
+  const serviceName = appointment.serviceName ?? 'cita';
+  const customerLabel = appointment.customerName ? ` para ${appointment.customerName}` : '';
 
   return `${serviceName}${customerLabel} ${new Intl.DateTimeFormat('es-419', {
     weekday: 'long',
@@ -1543,7 +1543,7 @@ function formatAppointmentStart(appointment: PendingAppointmentReference): strin
     month: 'long',
     hour: '2-digit',
     minute: '2-digit',
-    timeZone: appointment.timezone || 'Europe/Rome',
+    timeZone: appointment.timezone || 'America/Mexico_City',
   }).format(new Date(appointment.scheduledAt))}`;
 }
 
@@ -1554,7 +1554,7 @@ function formatSlotStart(slot: PendingBookingSlot): string {
     month: 'long',
     hour: '2-digit',
     minute: '2-digit',
-    timeZone: slot.timezone || 'Europe/Rome',
+    timeZone: slot.timezone || 'America/Mexico_City',
   }).format(new Date(slot.start));
 }
 

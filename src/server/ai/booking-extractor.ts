@@ -42,61 +42,126 @@ export interface BookingRequestExtractor {
   extract(input: BookingExtractionInput): Promise<StructuredBookingRequest>;
 }
 
-const defaultTimezone = 'Europe/Rome';
+const defaultTimezone = 'America/Mexico_City';
 
-const weekdayNames = 'domenica lunedi martedi mercoledi giovedi venerdi sabato'.split(' ');
+/** Nombres de día → índice JS (0=domingo). Solo español LATAM. */
+const weekdayByName: Record<string, number> = {
+  domingo: 0,
+  lunes: 1,
+  martes: 2,
+  miercoles: 3,
+  jueves: 4,
+  viernes: 5,
+  sabado: 6,
+};
 
-const monthLabels =
-  'gennaio febbraio marzo aprile maggio giugno luglio agosto settembre ottobre novembre dicembre'.split(
+const monthLabelsEs =
+  'enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre'.split(
     ' ',
   );
 
-const monthAbbreviations = 'gen feb mar apr mag giu lug ago set ott nov dic'.split(' ');
+const monthByName: Record<string, number> = {
+  ...Object.fromEntries(monthLabelsEs.map((name, index) => [name, index + 1])),
+  ene: 1,
+  feb: 2,
+  mar: 3,
+  abr: 4,
+  may: 5,
+  jun: 6,
+  jul: 7,
+  ago: 8,
+  sep: 9,
+  set: 9,
+  setiembre: 9,
+  oct: 10,
+  nov: 11,
+  dic: 12,
+};
 
-const monthByName: Record<string, number> = Object.fromEntries<number>([
-  ...monthLabels.map((name, index): [string, number] => [name, index + 1]),
-  ...monthAbbreviations.map((name, index): [string, number] => [name, index + 1]),
-  ['sett', 9],
-]);
-
-const hourWords = 'una due tre quattro cinque sei sette otto nove dieci undici dodici'.split(' ');
+const hourWordsEs = 'una dos tres cuatro cinco seis siete ocho nueve diez once doce'.split(' ');
 
 const hourByWord: Record<string, number> = Object.fromEntries<number>([
-  ...hourWords.map((word, index): [string, number] => [word, index + 1]),
-  ["un'", 1],
+  ...hourWordsEs.map((word, index): [string, number] => [word, index + 1]),
   ['uno', 1],
-  ['mezzogiorno', 12],
-  ['mezzanotte', 0],
+  ['mediodia', 12],
+  ['medianoche', 0],
 ]);
 
 const minuteByWord: Record<string, number> = {
-  mezza: 30,
-  mezzo: 30,
-  trenta: 30,
-  'un quarto': 15,
-  quindici: 15,
-  'tre quarti': 45,
-  quarantacinque: 45,
-  quaranta: 40,
-  venti: 20,
-  dieci: 10,
-  cinque: 5,
+  media: 30,
+  treinta: 30,
+  'un cuarto': 15,
+  quince: 15,
+  'tres cuartos': 45,
+  cuarenta: 40,
+  veinte: 20,
+  diez: 10,
+  cinco: 5,
 };
 
-const countByWord: Record<string, number> = { ...hourByWord, un: 1, quindici: 15 };
+const countByWord: Record<string, number> = {
+  ...hourByWord,
+  un: 1,
+  quince: 15,
+};
 
-const blockedCustomerNames = new Set(
-  'appuntamento, prenotazione, visita, prima visita, controllo, igiene, pulizia, consulenza, trattamento, seduta, lezione, pilates, oggi, domani, dopodomani, mattina, mattino, pomeriggio, sera, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica'.split(
-    ', ',
-  ),
-);
+const blockedCustomerNames = new Set([
+  'cita',
+  'turno',
+  'reserva',
+  'reservacion',
+  'visita',
+  'primera visita',
+  'control',
+  'higiene',
+  'limpieza',
+  'consulta',
+  'tratamiento',
+  'sesion',
+  'clase',
+  'pilates',
+  'hoy',
+  'manana',
+  'pasado manana',
+  'lunes',
+  'martes',
+  'miercoles',
+  'jueves',
+  'viernes',
+  'sabado',
+  'domingo',
+  'tarde',
+  'noche',
+  ...monthLabelsEs,
+]);
 
-// Gli articoli sono indispensabili: senza, "per il 15 maggio" produceva il finto nome "il".
-const customerNameStopTokens = new Set(
-  'a, ad, al, alle, allo, alla, per, di, del, della, delle, il, lo, la, le, i, gli, un, uno, una, oggi, domani, dopodomani, mattina, mattino, pomeriggio, sera, stamattina, stasera, lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica'.split(
-    ', ',
-  ),
-);
+// Sin artículos, "para el 15 de mayo" producía el falso nombre "el".
+const customerNameStopTokens = new Set([
+  'a',
+  'al',
+  'para',
+  'de',
+  'del',
+  'el',
+  'la',
+  'los',
+  'las',
+  'un',
+  'una',
+  'hoy',
+  'manana',
+  'pasado',
+  'tarde',
+  'noche',
+  'lunes',
+  'martes',
+  'miercoles',
+  'jueves',
+  'viernes',
+  'sabado',
+  'domingo',
+  ...monthLabelsEs,
+]);
 
 type DayPartMarker = 'morning' | 'afternoon' | 'evening';
 
@@ -111,51 +176,50 @@ type LocalDate = {
   day: number;
 };
 
-const hourPattern = String.raw`(?<hour>\d{1,2}|mezzogiorno|mezzanotte|undici|dodici|quattro|cinque|dieci|sette|nove|otto|due|tre|sei|una|un'|uno)`;
+const hourPattern = String.raw`(?<hour>\d{1,2}|mediodia|medianoche|once|doce|cuatro|cinco|diez|siete|nueve|ocho|dos|tres|seis|una|uno)`;
 
-const minutePattern = String.raw`(?:\s*[:.](?<minutes>\d{2})|\s+e\s+(?<minuteWord>mezza|mezzo|tre quarti|un quarto|quarantacinque|quaranta|quindici|trenta|venti|dieci|cinque|\d{1,2})|\s+meno\s+(?<lessWord>un quarto|quindici|dieci|cinque|\d{1,2}))?`;
+const minutePattern = String.raw`(?:\s*[:.](?<minutes>\d{2})|\s+y\s+(?<minuteWord>media|tres cuartos|un cuarto|cuarenta|quince|treinta|veinte|diez|cinco|\d{1,2})|\s+menos\s+(?<lessWord>un cuarto|quince|diez|cinco|\d{1,2}))?`;
 
 const afterHourRegex = new RegExp(
-  String.raw`\b(?:a partire dalle|a partire dall'|da dopo le|dopo le|dopo|dalle|dall')\s*` +
+  String.raw`\b(?:despues de las|despues de la|a partir de las|a partir de la)\s*` +
     hourPattern +
     minutePattern,
 );
 
 const beforeHourRegex = new RegExp(
-  String.raw`\b(?:prima|entro)\s+(?:delle|dell'|le|l')\s*` + hourPattern + minutePattern,
+  String.raw`\b(?:antes|antes de)\s+(?:las|la|de las|de la)?\s*` + hourPattern + minutePattern,
 );
 
 const exactHourRegex = new RegExp(
-  String.raw`\b(?:intorno alle|verso le|verso l'|verso|per le|sulle|sull'|alle|all'|allo|delle|dell'|ore|le|l')\s*` +
-    hourPattern +
-    minutePattern,
+  String.raw`\b(?:a las|a la|como a las|alrededor de las)\s*` + hourPattern + minutePattern,
 );
 
-const bareNoonRegex = /\b(?<hour>mezzogiorno|mezzanotte)\b/;
+const bareNoonRegex = /\b(?<hour>mediodia|medianoche)\b/;
 
-const morningMarkerRegex =
-  /\b(stamattina|stamane|mattinata|mattina|mattino|matina|mattutin[aeio])\b/;
-const afternoonMarkerRegex = /\b(pomeriggio|pomerigio|pomeriggo|pomeridian[aeio])\b/;
-const eveningMarkerRegex = /\b(stasera|stanotte|serata|serale|sera|nottata|notte)\b/;
+// "mañana" solo = día siguiente. Franja: "por/en la mañana", "esta mañana".
+const morningMarkerRegex = /\b(por la manana|en la manana|esta manana|de la manana)\b/;
+const afternoonMarkerRegex = /\b(por la tarde|en la tarde|esta tarde|de la tarde|tarde)\b/;
+const eveningMarkerRegex = /\b(por la noche|en la noche|esta noche|de la noche|noche)\b/;
 
-const todayRegex = /\b(oggi|stamattina|stamane|stasera|stanotte|in giornata)\b/;
-const tomorrowRegex = /\b(domani|dimani)\b/;
-const afterTomorrowRegex = /\b(dopodomani|dopo domani|dopo-domani)\b/;
-const nextWeekRegex = /\b(settimana prossima|prossima settimana|settimana che viene)\b/;
+const todayRegex = /\b(hoy|esta manana|esta tarde|esta noche)\b/;
+const afterTomorrowRegex = /\b(pasado manana|pasado-manana)\b/;
+const tomorrowRegex =
+  /\b((?<!pasado\s)(?<!esta\s)(?<!por la\s)(?<!en la\s)(?<!de la\s)manana)\b/;
+const nextWeekRegex = /\b(proxima semana|semana que viene|la proxima semana)\b/;
 const relativeDaysRegex =
-  /\b(?:tra|fra)\s+(\d{1,2}|un|una|due|tre|quattro|cinque|sei|sette|dieci|quindici)\s+(giorni|giorno|settimane|settimana)\b/;
+  /\b(?:en|dentro de)\s+(\d{1,2}|un|una|dos|tres|cuatro|cinco|seis|siete|diez|quince)\s+(dias|dia|semanas|semana)\b/;
 
 const monthNameDateRegex = new RegExp(
-  String.raw`\b(\d{1,2})\s*(?:°)?\s*(?:di\s+)?(` +
+  String.raw`\b(\d{1,2})\s*(?:°)?\s*(?:de\s+)?(` +
     Object.keys(monthByName)
       .sort((left, right) => right.length - left.length)
       .join('|') +
-    String.raw`)\b(?:\s+(?:del\s+)?(\d{4}))?`,
+    String.raw`)\b(?:\s+(?:de\s+)?(\d{4}))?`,
 );
 
 const numericDateRegex = /\b(\d{1,2})[/-](\d{1,2})(?:[/-](\d{2,4}))?\b/;
 
-const dayOfMonthRegex = /\b(?:il|l')\s*(\d{1,2})\b(?![:.\d/-])/;
+const dayOfMonthRegex = /\b(?:el|dia|el dia)\s*(\d{1,2})\b(?![:.\d/-])/;
 
 export class RuleBasedBookingRequestExtractor implements BookingRequestExtractor {
   async extract(input: BookingExtractionInput): Promise<StructuredBookingRequest> {
@@ -173,7 +237,7 @@ export class RuleBasedBookingRequestExtractor implements BookingRequestExtractor
     const serviceQuery = extractServiceQuery(normalized, signals);
     const customerPhone = extractPhone(input.text, signals);
     const customerName = extractCustomerName(input.text, signals);
-    const urgency = /\b(urgente|prima possibile|appena possibile|oggi|subito)\b/.test(normalized)
+    const urgency = /\b(urgente|lo antes posible|hoy|ya|rapido)\b/.test(normalized)
       ? 'urgent'
       : 'normal';
 
@@ -230,18 +294,18 @@ function extractDatePreference(input: {
 
   if (todayRegex.test(input.normalized)) {
     input.signals.push('date_today');
-    return windowFor(today, 'oggi');
+    return windowFor(today, 'hoy');
   }
 
-  // "dopo domani" contiene "domani": va valutato prima, altrimenti scivola su domani.
+  // "pasado mañana" antes que "mañana".
   if (afterTomorrowRegex.test(input.normalized)) {
     input.signals.push('date_after_tomorrow');
-    return windowFor(addLocalDays(today, 2), 'dopodomani');
+    return windowFor(addLocalDays(today, 2), 'pasado manana');
   }
 
   if (tomorrowRegex.test(input.normalized)) {
     input.signals.push('date_tomorrow');
-    return windowFor(addLocalDays(today, 1), 'domani');
+    return windowFor(addLocalDays(today, 1), 'manana');
   }
 
   const relativeDays = matchRelativeDays(input.normalized);
@@ -258,7 +322,7 @@ function extractDatePreference(input: {
     return {
       from: zonedLocalTimeToUtc(start, { hour: 0, minute: 0 }, input.timezone),
       to: zonedLocalTimeToUtc(addLocalDays(start, 7), { hour: 0, minute: 0 }, input.timezone),
-      label: 'settimana prossima',
+      label: 'proxima semana',
     };
   }
 
@@ -276,7 +340,7 @@ function extractDatePreference(input: {
     return null;
   }
 
-  for (const [weekday, weekdayName] of weekdayNames.entries()) {
+  for (const [weekdayName, weekday] of Object.entries(weekdayByName)) {
     if (new RegExp(`\\b${weekdayName}\\b`).test(input.normalized)) {
       input.signals.push(`weekday_${weekdayName}`);
 
@@ -295,8 +359,8 @@ function extractDatePreference(input: {
 }
 
 function extractTimePreference(normalized: string, signals: string[]): BookingTimePreference {
-  // Il marcatore mattina/pomeriggio/sera va letto PRIMA dell'ora: e' cio' che
-  // trasforma "alle 3 del pomeriggio" in 15:00 invece che in 03:00.
+  // El marcador manana/tarde/noche se lee ANTES de la hora: es lo que
+  // transforma "a las 3 de la tarde" en 15:00 en lugar de 03:00.
   const marker = detectDayPartMarker(normalized);
 
   const afterClock = clockFromRegex(afterHourRegex, normalized, marker);
@@ -434,8 +498,8 @@ function parseClock(match: RegExpExecArray, marker: DayPartMarker | null): Local
     return null;
   }
 
-  // "mezzogiorno" e "mezzanotte" sono gia' su base 24h: non vanno riconvertiti.
-  const isAbsolute = rawHour === 'mezzogiorno' || rawHour === 'mezzanotte';
+  // Mediodía / medianoche ya están en base 24h: no reconvertir.
+  const isAbsolute = rawHour === 'mediodia' || rawHour === 'medianoche';
   let hour = isAbsolute ? spokenHour : resolveHour24(spokenHour, marker);
 
   const rawLessWord = groups?.lessWord;
@@ -463,8 +527,7 @@ function resolveHour24(spokenHour: number, marker: DayPartMarker | null): number
     return spokenHour < 12 ? spokenHour + 12 : spokenHour;
   }
 
-  // Senza marcatore esplicito, "alle 4" in una richiesta di appuntamento vuol dire
-  // le 16: nessuno di questi esercizi riceve clienti fra l'una e le sei del mattino.
+  // Sin franja explícita, "a las 4" en una cita suele ser 16:00.
   return spokenHour >= 1 && spokenHour <= 6 ? spokenHour + 12 : spokenHour;
 }
 
@@ -497,9 +560,9 @@ function matchRelativeDays(normalized: string): { days: number; label: string } 
     return null;
   }
 
-  const days = unit.startsWith('settiman') ? count * 7 : count;
+  const days = unit.startsWith('semana') ? count * 7 : count;
 
-  return { days, label: `tra ${count} ${unit}` };
+  return { days, label: `en ${count} ${unit}` };
 }
 
 type ExplicitDateMatch =
@@ -527,7 +590,8 @@ function matchExplicitDate(normalized: string, today: LocalDate): ExplicitDateMa
       ? {
           status: 'resolved',
           localDate,
-          label: explicitDateLabel(localDate),
+          // Conserva el token del mes que escribió el cliente (maggio / mayo).
+          label: `${localDate.day} ${monthName}`,
           signal: 'date_explicit_month',
         }
       : { status: 'invalid' };
@@ -622,7 +686,7 @@ function matchDayOfMonth(normalized: string, today: LocalDate): LocalDate | null
 }
 
 function explicitDateLabel(localDate: LocalDate): string {
-  return `${localDate.day} ${monthLabels[localDate.month - 1] ?? ''}`.trim();
+  return `${localDate.day} ${monthLabelsEs[localDate.month - 1] ?? ''}`.trim();
 }
 
 function normalizeYear(value: number): number {
@@ -631,16 +695,16 @@ function normalizeYear(value: number): number {
 
 function extractServiceQuery(normalized: string, signals: string[]): string | null {
   const knownServiceSignals = [
-    'prima visita',
+    'primera visita',
+    'tratamiento',
+    'consulta',
+    'limpieza',
+    'higiene',
+    'control',
     'visita',
-    'controllo',
-    'igiene',
-    'pulizia',
-    'consulenza',
-    'trattamento',
-    'seduta',
+    'sesion',
     'pilates',
-    'lezione',
+    'clase',
   ];
 
   for (const signal of knownServiceSignals) {
@@ -651,7 +715,7 @@ function extractServiceQuery(normalized: string, signals: string[]): string | nu
   }
 
   const serviceMatch = normalized.match(
-    /\b(?:per|prenotare|fissare)\s+(.+?)(?:\s+(?:oggi|domani|dopodomani|lunedi|martedi|mercoledi|giovedi|venerdi|sabato|domenica|mattina|pomeriggio|sera|alle|dopo|prima)\b|$)/,
+    /\b(?:para|reservar|agendar)\s+(.+?)(?:\s+(?:hoy|manana|pasado manana|lunes|martes|miercoles|jueves|viernes|sabado|domingo|tarde|noche|a las|despues|antes)\b|$)/,
   );
   const candidate = trimServiceCandidate(serviceMatch?.[1]?.trim() ?? '');
 
@@ -663,8 +727,8 @@ function extractServiceQuery(normalized: string, signals: string[]): string | nu
   return null;
 }
 
-// "prenotare per il 15/05" non chiede il servizio "15/05": la coda della frase che
-// contiene la data non deve finire nel serviceQuery.
+// "reservar para el 15/05" no pide el servicio "15/05": la cola con fecha
+// no debe acabar en serviceQuery.
 function trimServiceCandidate(candidate: string): string {
   const tokens = candidate.split(/\s+/);
   const kept: string[] = [];
@@ -692,7 +756,9 @@ function extractPhone(text: string, signals: string[]): string | null {
 }
 
 function extractCustomerName(text: string, signals: string[]): string | null {
-  const match = text.match(/\b(?:sono|mi chiamo|nome)\s+([\p{L}]+(?:\s+[\p{L}]+)?)/iu);
+  const match = text.match(
+    /\b(?:sono|mi chiamo|nome|soy|me llamo|mi nombre es)\s+([\p{L}]+(?:\s+[\p{L}]+)?)/iu,
+  );
 
   if (match?.[1]) {
     signals.push('customer_name');
@@ -710,7 +776,7 @@ function extractCustomerName(text: string, signals: string[]): string | null {
 }
 
 function extractOwnerCustomerName(text: string): string | null {
-  const ownerMatch = text.match(/\b(?:di|per)\s+([\p{L}]+(?:\s+[\p{L}]+){0,3})/iu);
+  const ownerMatch = text.match(/\b(?:di|per|de|del)\s+([\p{L}]+(?:\s+[\p{L}]+){0,3})/iu);
   const rawCandidate = ownerMatch?.[1]?.trim();
 
   if (!rawCandidate) {
@@ -955,7 +1021,10 @@ function numberPart(map: Map<string, string>, key: string): number {
 
 function removeBookingStopwords(value: string): string {
   return value
-    .replace(/\b(un|una|il|la|lo|per|appuntamento|prenotazione|vorrei)\b/g, ' ')
+    .replace(
+      /\b(un|una|el|la|los|las|para|cita|turno|reserva|quiero|quisiera)\b/g,
+      ' ',
+    )
     .replace(/\s+/g, ' ')
     .trim();
 }

@@ -50,7 +50,7 @@ const SETTINGS_GROUPS: readonly SettingsGroup[] = [
     title: 'AI',
     description: 'Personalidad, prompts, base de conocimiento.',
     links: [
-      { href: '/settings/personality', label: 'Tono y personalidad', available: false },
+      { href: '/settings/ai', label: 'Personalidad del asistente', available: true },
       { href: '/settings/knowledge', label: 'Base de conocimiento', available: false },
       { href: '/settings/escalation', label: 'Reglas de escalamiento', available: false },
     ],

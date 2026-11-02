@@ -2,9 +2,15 @@ import { toWhatsAppPayloadRecord } from '@/lib/external-schemas/whatsapp';
 import { createWebhookIdempotencyKey } from '@/lib/whatsapp/webhook-security';
 import type { WhatsAppWebhookPayload } from '@/types/whatsapp';
 
-export const WHATSAPP_PROVIDER = 'whatsapp_360dialog' as const;
+/** Proveedor activo: Meta WhatsApp Cloud API (app única, N negocios). */
+export const WHATSAPP_PROVIDER = 'whatsapp_cloud' as const;
 
-export type WhatsAppProvider = typeof WHATSAPP_PROVIDER;
+/** Lectura legacy: filas creadas cuando el conector era 360dialog. */
+export const WHATSAPP_PROVIDER_LEGACY = 'whatsapp_360dialog' as const;
+
+export const WHATSAPP_PROVIDERS = [WHATSAPP_PROVIDER, WHATSAPP_PROVIDER_LEGACY] as const;
+
+export type WhatsAppProvider = (typeof WHATSAPP_PROVIDERS)[number];
 
 export type WhatsAppWebhookEvent =
   | {

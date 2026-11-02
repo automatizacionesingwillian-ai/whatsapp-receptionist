@@ -10,15 +10,15 @@ describe('LlmIntentClassifier', () => {
         JSON.stringify({
           intent: 'pricing_question',
           confidence: 0.91,
-          matchedSignals: ['prezzo'],
+          matchedSignals: ['precio'],
         }),
       ),
     );
 
-    await expect(classifier.classify({ text: 'Quanto costa una visita?' })).resolves.toMatchObject({
+    await expect(classifier.classify({ text: 'Cuanto cuesta una visita?' })).resolves.toMatchObject({
       intent: 'pricing_question',
       confidence: 0.91,
-      matchedSignals: ['prezzo'],
+      matchedSignals: ['precio'],
       aiUsage: {
         feature: 'intent_classifier',
         costCents: 1,
@@ -38,7 +38,7 @@ describe('LlmIntentClassifier', () => {
       ),
     );
 
-    await expect(classifier.classify({ text: 'forse boh' })).resolves.toMatchObject({
+    await expect(classifier.classify({ text: 'no se pues' })).resolves.toMatchObject({
       intent: 'other',
       confidence: 0.42,
       matchedSignals: ['llm_low_confidence'],
@@ -57,7 +57,7 @@ describe('FallbackIntentClassifier', () => {
     );
 
     await expect(
-      classifier.classify({ text: 'Vorrei prenotare una visita domani' }),
+      classifier.classify({ text: 'Quiero reservar una visita mañana' }),
     ).resolves.toMatchObject({
       intent: 'booking_request',
       matchedSignals: expect.arrayContaining(['llm_fallback_rule_based']),

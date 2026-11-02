@@ -7,11 +7,11 @@ export const contentType = 'image/png';
 
 const POST_META: Record<string, { title: string; category: string }> = {
   'whatsapp-business-vs-360dialog-quando-conviene': {
-    title: 'WhatsApp Cloud API vs 360dialog: quando conviene cosa',
-    category: 'Guida',
+    title: 'WhatsApp Cloud API vs 360dialog: cuándo conviene cada uno',
+    category: 'Guía',
   },
   'gdpr-receptionist-ai-dpa-template': {
-    title: 'GDPR e receptionist AI: il DPA che serve davvero',
+    title: 'GDPR y recepción AI: el DPA que realmente necesitas',
     category: 'GDPR',
   },
 };

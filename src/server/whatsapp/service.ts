@@ -317,7 +317,7 @@ export class WhatsAppWebhookService {
       conversationId: input.conversationId,
       externalId: `opt-out-confirmation:${input.inboundExternalId}`,
       content:
-        'Confermo: non riceverai piu messaggi automatici da Ambrogio su WhatsApp. Per riattivarli, contatta direttamente lo studio.',
+        'Confirmado: ya no recibirás mensajes automáticos de Ambrogio por WhatsApp. Para reactivarlos, contacta directamente al estudio.',
       createdAt: input.occurredAt,
       metadata: {
         source: 'whatsapp_opt_out_confirmation',
@@ -337,7 +337,7 @@ export class WhatsAppWebhookService {
       payload: {
         type: 'text',
         text: {
-          body: 'Confermo: non riceverai piu messaggi automatici da Ambrogio su WhatsApp. Per riattivarli, contatta direttamente lo studio.',
+          body: 'Confirmado: ya no recibirás mensajes automáticos de Ambrogio por WhatsApp. Para reactivarlos, contacta directamente al estudio.',
           previewUrl: false,
         },
         metadata: {
@@ -384,12 +384,12 @@ function isWhatsAppOptOutCommand(text: string): boolean {
     return false;
   }
 
-  if (/\b(appuntamento|prenotazione|visita|orario|sposta|annulla)\b/.test(normalized)) {
+  if (/\b(cita|turno|reserva|visita|horario|reagendar|cancelar)\b/.test(normalized)) {
     return false;
   }
 
   return (
-    /\b(stop|unsubscribe|rimuovimi|cancellami|disiscrivimi)\b/.test(normalized) ||
-    /\b(non scrivetemi|non contattatemi|basta messaggi)\b/.test(normalized)
+    /\b(stop|unsubscribe|eliminame|bajame|darme de baja)\b/.test(normalized) ||
+    /\b(no me escriban|no me contacten|basta de mensajes)\b/.test(normalized)
   );
 }

@@ -1,12 +1,12 @@
 /**
- * Help articles dataset.
- * Estratto in un modulo dedicato per mantenere la pagina <250 righe.
+ * Dataset de artículos de ayuda.
+ * Extraído a un módulo dedicado para mantener la página <250 líneas.
  *
- * Convenzioni:
- * - slug: identico al filename URL, kebab-case puro
- * - description: 110-160 caratteri, ottimizzata per meta description SEO
- * - body: contenuto completo articolo, supporta \n per paragrafi
- * - related: slugs di articoli correlati (deduplicato dal motore di rendering)
+ * Convenciones:
+ * - slug: idéntico al filename URL, kebab-case puro
+ * - description: 110-160 caracteres, optimizada para meta description SEO
+ * - body: contenido completo del artículo; soporta \n para párrafos
+ * - related: slugs de artículos relacionados (deduplicados por el motor de render)
  */
 
 export interface HelpArticle {
@@ -23,8 +23,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'come-collegare-il-numero-whatsapp-business',
     title: 'Cómo conectar el número de WhatsApp Business',
     description:
-      'Setup di WhatsApp Cloud API in 3 step: login Meta Business, selezione numero, verifica webhook. Tempo medio 10 minuti.',
-    body: `Ti serve un account Meta Business Manager attivo e un numero verificato. Dalla dashboard Ambrogio vai su Configuración → WhatsApp e segui i 3 step:\n\n1. Login Meta Business — autorizza l'accesso al tuo account.\n2. Seleziona il numero WhatsApp Business da connettere.\n3. Verifica il webhook: Ambrogio invia un messaggio di test, lo ricevi sul tuo telefono e clicchi conferma.\n\nTempo medio: 10 minuti se hai già il Business Manager. Se non lo hai, il setup di Meta richiede 1-3 giorni di verifica documenti.`,
+      'Setup de WhatsApp Cloud API en 3 pasos: login Meta Business, selección de número, verificación del webhook. Tiempo medio 10 minutos.',
+    body: `Necesitas una cuenta Meta Business Manager activa y un número verificado. Desde el panel de Ambrogio ve a Configuración → WhatsApp y sigue los 3 pasos:\n\n1. Login Meta Business — autoriza el acceso a tu cuenta.\n2. Selecciona el número de WhatsApp Business a conectar.\n3. Verifica el webhook: Ambrogio envía un mensaje de prueba, lo recibes en tu teléfono y confirmas.\n\nTiempo medio: 10 minutos si ya tienes Business Manager. Si no, el setup de Meta puede tomar 1-3 días de verificación de documentos.`,
     category: 'Setup',
     related: ['come-autorizzare-google-calendar', 'caricare-il-listino-servizi'],
   },
@@ -32,8 +32,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'come-autorizzare-google-calendar',
     title: 'Cómo autorizar Google Calendar',
     description:
-      'Connetti il calendario in 2 minuti via OAuth. Ambrogio legge solo disponibilità e crea eventi suoi, non tocca eventi privati.',
-    body: `Vai su Configuración → Calendario → Connetti Google Calendar. Si apre una popup OAuth Google: accedi con l'account che gestisce gli appuntamenti dello studio, accetta i permessi.\n\nAmbrogio richiede solo: leggere disponibilità, creare eventi, modificare/cancellare gli eventi creati da Ambrogio. Non legge gli eventi privati pre-esistenti.\n\nSe hai più calendari, puoi scegliere quale usare per i booking di Ambrogio.`,
+      'Conecta el calendario en 2 minutos vía OAuth. Ambrogio solo lee disponibilidad y crea sus eventos; no toca eventos privados.',
+    body: `Ve a Configuración → Calendario → Conectar Google Calendar. Se abre un popup OAuth de Google: inicia sesión con la cuenta que gestiona las citas del estudio y acepta los permisos.\n\nAmbrogio solo pide: leer disponibilidad, crear eventos, modificar/cancelar los eventos creados por Ambrogio. No lee los eventos privados preexistentes.\n\nSi tienes varios calendarios, puedes elegir cuál usar para las reservas de Ambrogio.`,
     category: 'Setup',
     related: ['come-collegare-il-numero-whatsapp-business', 'configurare-gli-orari-di-apertura'],
   },
@@ -41,8 +41,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'caricare-il-listino-servizi',
     title: 'Cargar el tarifario de servicios',
     description:
-      'Aggiungi servizi con nome, durata, prezzo e operatore preferito. CSV import disponibile. Più sono specifici, meglio Ambrogio capisce.',
-    body: `Da Configuración → Servizi puoi aggiungere ogni servizio con: nome, durata in minuti, prezzo, operatore preferito (opzionale).\n\nPuoi anche importare un CSV. Scarica il template, compilalo, ricaricalo. Ambrogio leggerà i nomi dei servizi e li userà nelle conversazioni.\n\nPiù sono specifici i nomi (es. "Pulizia dei denti" vs "Igiene"), meglio Ambrogio capirà le richieste dei tuoi clienti.`,
+      'Agrega servicios con nombre, duración, precio y operador preferido. Importación CSV disponible. Cuanto más específicos, mejor entiende Ambrogio.',
+    body: `En Configuración → Servicios puedes agregar cada servicio con: nombre, duración en minutos, precio, operador preferido (opcional).\n\nTambién puedes importar un CSV. Descarga la plantilla, complétala y súbela. Ambrogio leerá los nombres de los servicios y los usará en las conversaciones.\n\nCuanto más específicos sean los nombres (ej. "Limpieza dental" vs "Higiene"), mejor entenderá Ambrogio las solicitudes de tus clientes.`,
     category: 'Setup',
     related: ['configurare-gli-orari-di-apertura', 'come-ambrogio-prenota-appuntamenti'],
   },
@@ -50,8 +50,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'configurare-gli-orari-di-apertura',
     title: 'Configurar horarios de apertura',
     description:
-      'Imposta orari per giorno con fino a 3 fasce. Ferie pubbliche italiane gestite automaticamente.',
-    body: `Da Configuración → Orari imposti per ogni giorno della settimana: orario apertura, chiusura, pausa pranzo. Puoi avere fino a 3 fasce orarie per giorno.\n\nAmbrogio rispetta automaticamente: ferie pubbliche italiane, giorni di chiusura straordinari, orari speciali (es. sabato ridotto).\n\nPer le festività personalizzate vai su Configuración → Calendario speciale.`,
+      'Define horarios por día con hasta 3 franjas. Festivos locales gestionados automáticamente.',
+    body: `En Configuración → Horarios defines por cada día de la semana: hora de apertura, cierre y pausa para comer. Puedes tener hasta 3 franjas horarias por día.\n\nAmbrogio respeta automáticamente: festivos locales, días de cierre extraordinario y horarios especiales (ej. sábado reducido).\n\nPara festividades personalizadas ve a Configuración → Calendario especial.`,
     category: 'Setup',
     related: ['caricare-il-listino-servizi', 'come-ambrogio-prenota-appuntamenti'],
   },
@@ -59,8 +59,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'come-funziona-il-filtro-ai',
     title: 'Cómo funciona el filtro AI',
     description:
-      'Tre filtri sequenziali: classificazione intent, validazione sicurezza, routing. Soglia di confidenza regolabile.',
-    body: `Ogni messaggio in arrivo passa per 3 filtri: classificazione intent (booking, info, urgenza, spam), validazione sicurezza (nessuna PII non richiesta), routing (AI risponde direttamente o escala a umano).\n\nLa soglia di escalation è regolabile in Configuración → AI → Confidenza minima. Default: 0.85.`,
+      'Tres filtros secuenciales: clasificación de intent, validación de seguridad, routing. Umbral de confianza ajustable.',
+    body: `Cada mensaje entrante pasa por 3 filtros: clasificación de intent (reserva, info, urgencia, spam), validación de seguridad (sin PII no solicitada) y routing (la AI responde directamente o escala a un humano).\n\nEl umbral de escalación es ajustable en Configuración → AI → Confianza mínima. Por defecto: 0.85.`,
     category: 'AI',
     related: ['quando-interviene-un-umano', 'risposte-rapide-preconfezionate'],
   },
@@ -68,8 +68,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'quando-interviene-un-umano',
     title: 'Cuándo interviene un humano',
     description:
-      'Escalation su confidenza bassa, richiesta esplicita, urgenza, parole chiave critiche. Notifica push + email.',
-    body: `Ambrogio escala a te quando: confidenza AI sotto soglia, richiesta esplicita ("voglio parlare con un umano"), urgenza dichiarata, conversazione aperta da più di 24h, parole chiave critiche (es. "reclamo", "rimborso").\n\nLe escalation arrivano via notifica push e via email. Tempo medio di intervento target: 4 ore lavorative.`,
+      'Escalación por confianza baja, solicitud explícita, urgencia o palabras clave críticas. Notificación push + email.',
+    body: `Ambrogio te escala cuando: la confianza de la AI está bajo el umbral, hay una solicitud explícita ("quiero hablar con una persona"), se declara urgencia, la conversación lleva abierta más de 24 h, o aparecen palabras clave críticas (ej. "reclamo", "reembolso").\n\nLas escalaciones llegan por notificación push y por email. Tiempo medio de intervención objetivo: 4 horas laborables.`,
     category: 'AI',
     related: ['come-funziona-il-filtro-ai', 'gestire-vocali-e-media'],
   },
@@ -77,8 +77,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'gestire-vocali-e-media',
     title: 'Gestionar audios y multimedia',
     description:
-      'Trascrizione automatica vocali via ElevenLabs Speech-to-Text. Audio originale conservato 90 giorni.',
-    body: `Ambrogio trascrive automaticamente i messaggi vocali WhatsApp (ElevenLabs Speech-to-Text). La trascrizione è disponibile sul dettaglio conversazione + audio originale conservato per 90 giorni.\n\nPer le risposte vocali in uscita (Professional+), Ambrogio usa ElevenLabs Text-to-Speech con una voce italiana brand-coerente.`,
+      'Transcripción automática de notas de voz con ElevenLabs Speech-to-Text. Audio original conservado 90 días.',
+    body: `Ambrogio transcribe automáticamente los mensajes de voz de WhatsApp (ElevenLabs Speech-to-Text). La transcripción está disponible en el detalle de la conversación y el audio original se conserva 90 días.\n\nPara las respuestas de voz salientes (Professional+), Ambrogio usa ElevenLabs Text-to-Speech con una voz en español LATAM coherente con la marca.`,
     category: 'AI',
     related: ['come-funziona-il-filtro-ai', 'quando-interviene-un-umano'],
   },
@@ -86,8 +86,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'risposte-rapide-preconfezionate',
     title: 'Respuestas rápidas predefinidas',
     description:
-      'Base de conocimiento con FAQ standard. Formato una FAQ per riga con separatore "::". Ambrogio le usa quando rileva intent.',
-    body: `Da Configuración → Base de conocimiento puoi caricare risposte standard per FAQ comuni: "siete aperti il sabato?", "accettate carte?", "dove siete?". Ambrogio le usa quando rileva l'intent corrispondente.\n\nFormato: una FAQ per riga, separatore "::". Esempio: "Siete aperti il sabato? :: Sì, dalle 9 alle 13."`,
+      'Base de conocimiento con FAQ estándar. Formato: una FAQ por línea con separador "::". Ambrogio las usa al detectar el intent.',
+    body: `En Configuración → Base de conocimiento puedes cargar respuestas estándar para FAQ comunes: "¿abren el sábado?", "¿aceptan tarjetas?", "¿dónde están?". Ambrogio las usa cuando detecta el intent correspondiente.\n\nFormato: una FAQ por línea, separador "::". Ejemplo: "¿Abren el sábado? :: Sí, de 9 a 13."`,
     category: 'AI',
     related: ['come-funziona-il-filtro-ai', 'caricare-il-listino-servizi'],
   },
@@ -95,8 +95,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'come-ambrogio-prenota-appuntamenti',
     title: 'Cómo Ambrogio reserva citas',
     description:
-      '5 step: identifica servizio, controlla disponibilità, propone 3 slot, conferma, crea evento. Notifica push immediata.',
-    body: `Quando un cliente chiede un appuntamento, Ambrogio: (1) identifica il servizio richiesto, (2) controlla disponibilità su Google Calendar, (3) propone 3 slot, (4) conferma su selezione, (5) crea evento.\n\nL'evento contiene: nome cliente, telefono, servizio, eventuali note. Ti arriva notifica push immediata.`,
+      '5 pasos: identifica servicio, revisa disponibilidad, propone 3 horarios, confirma, crea evento. Notificación push inmediata.',
+    body: `Cuando un cliente pide una cita, Ambrogio: (1) identifica el servicio solicitado, (2) revisa disponibilidad en Google Calendar, (3) propone 3 horarios, (4) confirma al seleccionar, (5) crea el evento.\n\nEl evento incluye: nombre del cliente, teléfono, servicio y notas opcionales. Te llega una notificación push inmediata.`,
     category: 'Booking',
     related: ['gestire-conflitti-calendario', 'reminder-automatici'],
   },
@@ -104,8 +104,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'gestire-conflitti-calendario',
     title: 'Gestionar conflictos de calendario',
     description:
-      'Niente sovrapposizioni. Sync ogni 60 secondi. Race condition: primo conferma vince, secondo riceve alternative.',
-    body: `Ambrogio non sovrappone mai due appuntamenti. Se un cliente prenota uno slot già occupato (rare race condition), il primo conferma vince — il secondo riceve "spiacenti, lo slot è appena stato preso, posso proporne altri 3?".\n\nPer modifiche manuali al calendario, Ambrogio si sincronizza ogni 60 secondi.`,
+      'Sin solapamientos. Sync cada 60 segundos. Race condition: el primero que confirma gana; el segundo recibe alternativas.',
+    body: `Ambrogio nunca solapa dos citas. Si un cliente reserva un horario ya ocupado (race condition poco frecuente), el primero que confirma gana — el segundo recibe "lo sentimos, ese horario acaba de tomarse, ¿te propongo otros 3?".\n\nPara cambios manuales en el calendario, Ambrogio se sincroniza cada 60 segundos.`,
     category: 'Booking',
     related: ['come-ambrogio-prenota-appuntamenti', 'gestire-le-disdette'],
   },
@@ -113,8 +113,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'reminder-automatici',
     title: 'Recordatorios automáticos',
     description:
-      'Reminder 24h e 2h prima (configurabile). Cliente conferma con click, riprogramma o cancella. Reminder per servizio.',
-    body: `Ambrogio invia reminder automatici 24h e 2h prima dell'appuntamento (configurabile). Il cliente può confermare con un click, riprogrammare, o cancellare.\n\nReminder configurabile per servizio: alcune visite richiedono preparazione (es. esame ecografico → reminder 48h prima con istruzioni).`,
+      'Recordatorio 24 h y 2 h antes (configurable). El cliente confirma con un clic, reprograma o cancela. Recordatorio por servicio.',
+    body: `Ambrogio envía recordatorios automáticos 24 h y 2 h antes de la cita (configurable). El cliente puede confirmar con un clic, reprogramar o cancelar.\n\nRecordatorio configurable por servicio: algunas visitas requieren preparación (ej. ecografía → recordatorio 48 h antes con instrucciones).`,
     category: 'Booking',
     related: ['come-ambrogio-prenota-appuntamenti', 'gestire-le-disdette'],
   },
@@ -122,8 +122,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'gestire-le-disdette',
     title: 'Gestionar cancelaciones',
     description:
-      'Disdetta via WhatsApp → conferma, cancellazione evento, eventuale nuovo slot proposto. Politica disdette personalizzabile.',
-    body: `Cliente disdice via WhatsApp? Ambrogio: (1) chiede conferma, (2) cancella l'evento Google Calendar, (3) opzionalmente offre nuovo slot, (4) ti notifica.\n\nPolitica disdette personalizzabile: "disdetta libera entro 24h", "penale dopo 24h", "tariffa piena se no-show".`,
+      'Cancelación por WhatsApp → confirmación, borrado del evento y, si aplica, nuevo horario propuesto. Política de cancelación personalizable.',
+    body: `¿El cliente cancela por WhatsApp? Ambrogio: (1) pide confirmación, (2) cancela el evento de Google Calendar, (3) opcionalmente ofrece un nuevo horario, (4) te notifica.\n\nPolítica de cancelación personalizable: "cancelación libre dentro de 24 h", "penalización después de 24 h", "tarifa completa si no-show".`,
     category: 'Booking',
     related: ['gestire-conflitti-calendario', 'reminder-automatici'],
   },
@@ -131,8 +131,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'cambiare-piano',
     title: 'Cambiar de plan',
     description:
-      'Upgrade immediato con fatturazione differenziale, downgrade dal ciclo successivo. Niente lock-in.',
-    body: `Da Configuración → Facturación → Cambia piano. Upgrade è immediato (proprietà differenziale fatturata sul ciclo corrente). Downgrade decorre dal ciclo successivo per coerenza fatturazione.\n\nNessun lock-in: puoi tornare al piano precedente quando vuoi.`,
+      'Upgrade inmediato con facturación diferencial; downgrade desde el ciclo siguiente. Sin lock-in.',
+    body: `En Configuración → Facturación → Cambiar plan. El upgrade es inmediato (la diferencia se factura en el ciclo actual). El downgrade aplica desde el ciclo siguiente para mantener coherencia de facturación.\n\nSin lock-in: puedes volver al plan anterior cuando quieras.`,
     category: 'Account',
     related: ['scaricare-fatture-elettroniche-sdi', 'aggiornare-dati-piva'],
   },
@@ -140,8 +140,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'scaricare-fatture-elettroniche-sdi',
     title: 'Descargar facturas electrónicas',
     description:
-      "Fatture in PDF leggibile + XML SDI + riferimento Stripe. Trasmissione SDI automatica all'emissione.",
-    body: `Da Facturación → Fatture trovi tutte le fatture emesse. Ognuna include: PDF leggibile, XML SDI, riferimento al pagamento Stripe.\n\nLa trasmissione SDI avviene automaticamente al momento dell'emissione. Lo Stato della trasmissione è visibile sotto ogni fattura.`,
+      'Facturas en PDF legible + XML fiscal + referencia Stripe. Emisión electrónica automática al generar la factura.',
+    body: `En Facturación → Facturas encuentras todas las facturas emitidas. Cada una incluye: PDF legible, XML fiscal y referencia al pago de Stripe.\n\nLa emisión electrónica ocurre automáticamente al generar la factura. El estado de la transmisión se ve bajo cada factura.`,
     category: 'Account',
     related: ['cambiare-piano', 'aggiornare-dati-piva'],
   },
@@ -149,8 +149,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'aggiornare-dati-piva',
     title: 'Actualizar datos fiscales',
     description:
-      'Modifica ragione sociale, P.IVA, codice destinatario SDI. Le modifiche valgono per fatture future.',
-    body: `Da Configuración → Dati fatturazione puoi modificare ragione sociale, P.IVA, codice destinatario SDI, indirizzo, codice fiscale.\n\nLe modifiche si applicano alle fatture future. Le fatture già emesse non vengono modificate per coerenza fiscale.`,
+      'Modifica razón social, RFC/NIT, código de facturación electrónica. Los cambios aplican a facturas futuras.',
+    body: `En Configuración → Datos de facturación puedes modificar razón social, RFC/NIT, código de facturación electrónica, dirección e identificación fiscal.\n\nLos cambios se aplican a las facturas futuras. Las facturas ya emitidas no se modifican por coherencia fiscal.`,
     category: 'Account',
     related: ['cambiare-piano', 'scaricare-fatture-elettroniche-sdi'],
   },
@@ -158,8 +158,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'esportare-i-miei-dati-gdpr',
     title: 'Exportar mis datos (GDPR art. 15)',
     description:
-      'Export ZIP con JSON + CSV: account, conversazioni, appuntamenti, fatturazione, audit log. Email entro 24 ore.',
-    body: `Da Configuración → Seguridad → Esporta dati avvii la richiesta di export. Riceverai una email con link sicuro entro 24 ore.\n\nL'export contiene: dati account, conversazioni, appuntamenti, fatturazione, audit log delle tue azioni. Formato: ZIP con JSON strutturato + CSV.`,
+      'Export ZIP con JSON + CSV: cuenta, conversaciones, citas, facturación, audit log. Email en un máximo de 24 horas.',
+    body: `En Configuración → Seguridad → Exportar datos inicias la solicitud de exportación. Recibirás un email con un enlace seguro en un máximo de 24 horas.\n\nLa exportación contiene: datos de la cuenta, conversaciones, citas, facturación y audit log de tus acciones. Formato: ZIP con JSON estructurado + CSV.`,
     category: 'Account',
     related: ['cancellare-account', 'aggiornare-dati-piva'],
   },
@@ -167,8 +167,8 @@ export const ARTICLES: Record<string, HelpArticle> = {
     slug: 'cancellare-account',
     title: 'Eliminar cuenta',
     description:
-      'Cancellazione con grace period 30 giorni. Fatture conservate 10 anni come da legge italiana.',
-    body: `Da Configuración → Seguridad → Cancella account. Dovrai digitare "ELIMINA DEFINITIVAMENTE" come conferma.\n\nEntra in vigore un grace period di 30 giorni: in questo periodo puoi annullare. Dopo i 30 giorni, tutti i tuoi dati vengono cancellati definitivamente (eccetto fatture, conservate 10 anni come da legge italiana).`,
+      'Eliminación con periodo de gracia de 30 días. Las facturas se conservan el tiempo exigido por la normativa fiscal aplicable.',
+    body: `En Configuración → Seguridad → Eliminar cuenta. Deberás escribir "ELIMINAR DEFINITIVAMENTE" como confirmación.\n\nEntra en vigor un periodo de gracia de 30 días: en ese lapso puedes anular la solicitud. Después de los 30 días, todos tus datos se eliminan de forma definitiva (excepto las facturas, conservadas el tiempo exigido por la normativa fiscal aplicable).`,
     category: 'Account',
     related: ['esportare-i-miei-dati-gdpr', 'cambiare-piano'],
   },

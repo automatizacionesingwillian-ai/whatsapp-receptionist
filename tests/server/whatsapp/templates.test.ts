@@ -19,10 +19,10 @@ const now = new Date('2026-04-25T10:00:00.000Z');
 describe('WhatsAppTemplateMessageService', () => {
   it('enqueues approved appointment reminder templates', async () => {
     const repository = new FakeTemplateRepository();
-    repository.approvedTemplates.set(templateKey('tenant_1', 'appointment_reminder_24h', 'it'), {
+    repository.approvedTemplates.set(templateKey('tenant_1', 'appointment_reminder_24h', 'es'), {
       id: 'template_1',
       name: 'appointment_reminder_24h',
-      languageCode: 'it',
+      languageCode: 'es',
       category: 'utility',
     });
     const service = new WhatsAppTemplateMessageService(repository);
@@ -36,7 +36,7 @@ describe('WhatsAppTemplateMessageService', () => {
       createdAt: now,
       variables: {
         customerName: 'Mario Rossi',
-        scheduledAt: 'domani alle 10:00',
+        scheduledAt: 'mañana a las 10:00',
         studioName: 'Studio Ambrogio',
       },
       metadata: {
@@ -50,11 +50,11 @@ describe('WhatsAppTemplateMessageService', () => {
       outboundMessageId: 'outbound_1',
       outboxJobId: 'job_1',
       templateName: 'appointment_reminder_24h',
-      languageCode: 'it',
+      languageCode: 'es',
     });
     expect(repository.outboundMessages[0]).toMatchObject({
       externalId: 'template:appointment_reminder_24h:appointment_123:reminder_24h',
-      content: 'Promemoria per Mario Rossi: appuntamento domani alle 10:00 presso Studio Ambrogio.',
+      content: 'Recordatorio para Mario Rossi: cita mañana a las 10:00 en Studio Ambrogio.',
       metadata: {
         source: 'whatsapp_template',
         templateKey: 'appointment_reminder_24h',
@@ -66,13 +66,13 @@ describe('WhatsAppTemplateMessageService', () => {
       type: 'template',
       template: {
         name: 'appointment_reminder_24h',
-        languageCode: 'it',
+        languageCode: 'es',
         components: [
           {
             type: 'body',
             parameters: [
               { type: 'text', text: 'Mario Rossi' },
-              { type: 'text', text: 'domani alle 10:00' },
+              { type: 'text', text: 'mañana a las 10:00' },
               { type: 'text', text: 'Studio Ambrogio' },
             ],
           },
@@ -101,7 +101,7 @@ describe('WhatsAppTemplateMessageService', () => {
         idempotencyKey: 'appointment_123:confirmation',
         variables: {
           customerName: 'Mario Rossi',
-          scheduledAt: 'domani alle 10:00',
+          scheduledAt: 'mañana a las 10:00',
           studioName: 'Studio Ambrogio',
         },
       }),
@@ -125,7 +125,7 @@ describe('WhatsAppTemplateMessageService', () => {
         idempotencyKey: 'appointment_123:cancellation',
         variables: {
           customerName: 'Mario Rossi',
-          scheduledAt: 'domani alle 10:00',
+          scheduledAt: 'mañana a las 10:00',
           studioName: 'Studio Ambrogio',
         },
       }),
@@ -136,10 +136,10 @@ describe('WhatsAppTemplateMessageService', () => {
 
   it('returns duplicate_outbound when the outbound message already exists', async () => {
     const repository = new FakeTemplateRepository();
-    repository.approvedTemplates.set(templateKey('tenant_1', 'appointment_reminder_1h', 'it'), {
+    repository.approvedTemplates.set(templateKey('tenant_1', 'appointment_reminder_1h', 'es'), {
       id: 'template_2',
       name: 'appointment_reminder_1h',
-      languageCode: 'it',
+      languageCode: 'es',
       category: 'utility',
     });
     repository.duplicateExternalIds.add(
@@ -155,7 +155,7 @@ describe('WhatsAppTemplateMessageService', () => {
       idempotencyKey: 'appointment_123:reminder_1h',
       variables: {
         customerName: 'Mario Rossi',
-        scheduledAt: 'oggi alle 10:00',
+        scheduledAt: 'hoy a las 10:00',
         studioName: 'Studio Ambrogio',
       },
     });

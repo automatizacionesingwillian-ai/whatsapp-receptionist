@@ -83,12 +83,12 @@ const HEALTH_PRESENTATION: Record<
     background: 'var(--color-success-soft)',
   },
   degraded: {
-    label: 'Degradato',
+    label: 'Degradado',
     color: 'var(--color-warning)',
     background: 'var(--color-warning-soft)',
   },
   down: {
-    label: 'Non raggiungibile',
+    label: 'No alcanzable',
     color: 'var(--color-danger)',
     background: 'var(--color-danger-soft)',
   },
@@ -100,10 +100,10 @@ export default async function AdminOverviewPage() {
   const overallKey = overallStatus(checks);
   const overall = HEALTH_PRESENTATION[overallKey];
   const failing = checks.filter((check) => check.status !== 'ok');
-  const measuredAt = new Date().toLocaleString('it-IT', {
+  const measuredAt = new Date().toLocaleString('es-419', {
     dateStyle: 'short',
     timeStyle: 'medium',
-    timeZone: 'Europe/Rome',
+    timeZone: 'America/Mexico_City',
   });
 
   return (
@@ -112,8 +112,8 @@ export default async function AdminOverviewPage() {
         <span className="badge badge-warm">Cross-tenant</span>
         <h1>Sistema Ambrogio.ai</h1>
         <p className="muted">
-          Vista super-admin. I numeri sono conteggi letti dal database al caricamento della pagina,
-          non stime.
+          Vista super-admin. Los números son conteos leídos de la base de datos al cargar la página,
+          no estimaciones.
         </p>
       </div>
 
@@ -122,11 +122,11 @@ export default async function AdminOverviewPage() {
           className="card stack stack-3"
           style={{ background: 'var(--color-danger-soft)', borderColor: 'var(--color-danger)' }}
         >
-          <h2 style={{ fontSize: 'var(--text-lg)' }}>Conteggi non disponibili</h2>
+          <h2 style={{ fontSize: 'var(--text-lg)' }}>Conteos no disponibles</h2>
           <p style={{ fontSize: 'var(--text-sm)' }}>
-            Il database non ha risposto alle query di conteggio, quindi nessun numero viene
-            mostrato. Lo stato delle dipendenze qui sotto indica dove guardare; il dettaglio della
-            configurazione è in{' '}
+            La base de datos no respondió a las consultas de conteo, así que no se muestra ningún
+            número. El estado de las dependencias abajo indica dónde mirar; el detalle de la
+            configuración está en{' '}
             <Link href="/admin/system" className="btn-link">
               Sistema
             </Link>
@@ -137,43 +137,43 @@ export default async function AdminOverviewPage() {
         <>
           <section className="kpi-grid">
             <article className="kpi">
-              <span className="kpi-label">Tenant attivi</span>
-              <span className="kpi-value">{counts.activeTenants.toLocaleString('it-IT')}</span>
+              <span className="kpi-label">Tenants activos</span>
+              <span className="kpi-value">{counts.activeTenants.toLocaleString('es-419')}</span>
               <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-                su {counts.totalTenants.toLocaleString('it-IT')} registrati
+                de {counts.totalTenants.toLocaleString('es-419')} registrados
               </span>
             </article>
             <article className="kpi">
-              <span className="kpi-label">Utenti</span>
-              <span className="kpi-value">{counts.users.toLocaleString('it-IT')}</span>
+              <span className="kpi-label">Usuarios</span>
+              <span className="kpi-value">{counts.users.toLocaleString('es-419')}</span>
               <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-                account collegati a un tenant
+                cuentas vinculadas a un tenant
               </span>
             </article>
             <article className="kpi">
-              <span className="kpi-label">Conversaciones attive 24h</span>
+              <span className="kpi-label">Conversaciones activas 24h</span>
               <span className="kpi-value">
-                {counts.recentConversations.toLocaleString('it-IT')}
+                {counts.recentConversations.toLocaleString('es-419')}
               </span>
               <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-                con almeno un messaggio nelle ultime {CONVERSATION_WINDOW_HOURS} ore
+                con al menos un mensaje en las últimas {CONVERSATION_WINDOW_HOURS} horas
               </span>
             </article>
           </section>
 
           {counts.totalTenants === 0 ? (
             <section className="card stack stack-3">
-              <h2 style={{ fontSize: 'var(--text-lg)' }}>Nessun tenant registrato</h2>
+              <h2 style={{ fontSize: 'var(--text-lg)' }}>Ningún tenant registrado</h2>
               <p style={{ fontSize: 'var(--text-sm)' }}>
-                La piattaforma è configurata ma non ha ancora clienti. Il primo tenant nasce da una
-                registrazione: da lì compaiono conversazioni, code di lavoro e fatturazione.
+                La plataforma está configurada pero aún no tiene clientes. El primer tenant nace de
+                un registro: a partir de ahí aparecen conversaciones, colas de trabajo y facturación.
               </p>
               <div className="row" style={{ gap: 'var(--space-3)' }}>
                 <Link href="/register" className="btn btn-primary">
-                  Apri la registrazione
+                  Abrir el registro
                 </Link>
                 <Link href="/admin/system" className="btn btn-secondary">
-                  Verifica la configurazione
+                  Verificar la configuración
                 </Link>
               </div>
             </section>
@@ -183,9 +183,9 @@ export default async function AdminOverviewPage() {
 
       <section className="card stack stack-4">
         <div className="row-between">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Dipendenze esterne</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Dependencias externas</h2>
           <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-            Misurate alle {measuredAt}
+            Medidas a las {measuredAt}
           </span>
         </div>
 
@@ -214,8 +214,8 @@ export default async function AdminOverviewPage() {
         </ul>
 
         <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-          Ogni riga è una probe reale eseguita al caricamento. Non c&apos;è auto-refresh: ricarica
-          la pagina per una nuova misurazione.
+          Cada fila es una sonda real ejecutada al cargar. No hay auto-refresh: recarga la página
+          para una nueva medición.
         </p>
       </section>
 
@@ -226,8 +226,8 @@ export default async function AdminOverviewPage() {
         >
           <h2 style={{ fontSize: 'var(--text-lg)' }}>
             {failing.length === 1
-              ? '1 dipendenza non risponde come previsto'
-              : `${failing.length} dipendenze non rispondono come previsto`}
+              ? '1 dependencia no responde como se esperaba'
+              : `${failing.length} dependencias no responden como se esperaba`}
           </h2>
           <ul style={{ margin: 0, paddingLeft: 'var(--space-5)', fontSize: 'var(--text-sm)' }}>
             {failing.map((check) => (
@@ -245,7 +245,7 @@ export default async function AdminOverviewPage() {
             ))}
           </ul>
           <p style={{ fontSize: 'var(--text-sm)' }}>
-            Una probe fallita può dipendere da credenziali mancanti: controlla le variabili in{' '}
+            Una sonda fallida puede deberse a credenciales faltantes: revisa las variables en{' '}
             <Link href="/admin/system" className="btn-link">
               Sistema
             </Link>

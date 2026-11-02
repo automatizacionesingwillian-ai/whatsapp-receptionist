@@ -150,19 +150,19 @@ export function createReplyOrchestrator(): ReplyOrchestrator {
 function createReplyBody(intent: IntentClassification['intent']): string | null {
   switch (intent) {
     case 'booking_request':
-      return 'Certo, ti aiuto a prenotare. Indicami servizio, giorno e fascia oraria che preferisci, cosi controllo la disponibilita.';
+      return 'Claro, te ayudo a reservar. Dime el servicio, el día y la franja horaria que prefieres, así reviso la disponibilidad.';
     case 'reschedule_request':
-      return "Certo, posso aiutarti a spostare l'appuntamento. Mandami giorno e orario attuali, poi la nuova fascia che preferisci.";
+      return 'Claro, puedo ayudarte a mover la cita. Envíame el día y la hora actuales, y luego la nueva franja que prefieres.';
     case 'cancellation_request':
-      return "Va bene, posso aiutarti ad annullare. Mandami nome, giorno e orario dell'appuntamento da cancellare.";
+      return 'De acuerdo, puedo ayudarte a cancelar. Envíame el nombre, el día y la hora de la cita a cancelar.';
     case 'pricing_question':
-      return 'Ti aiuto volentieri. Dimmi quale servizio ti interessa e ti rispondo con prezzo, durata e disponibilita.';
+      return 'Con gusto te ayudo. Dime qué servicio te interesa y te respondo con precio, duración y disponibilidad.';
     case 'opening_hours_question':
-      return 'Ti aiuto subito. Dimmi per quale giorno vuoi verificare gli orari o se preferisci prenotare direttamente.';
+      return 'Te ayudo de inmediato. Dime para qué día quieres revisar los horarios o si prefieres reservar directamente.';
     case 'human_handoff':
-      return 'Ho capito. Segno la richiesta per una persona del team e preparo il contesto della conversazione.';
+      return 'Entendido. Dejo la solicitud para una persona del equipo y preparo el contexto de la conversación.';
     case 'other':
-      return 'Grazie per il messaggio. Dimmi pure se vuoi prenotare, modificare un appuntamento o parlare con il team.';
+      return 'Gracias por tu mensaje. Dime si quieres reservar, modificar una cita o hablar con el equipo.';
   }
 }
 
@@ -177,5 +177,5 @@ function withDisclosure(
     return body;
   }
 
-  return `Ciao, sono ${input.assistantName}, l'assistente AI dello studio. ${body}`;
+  return `Hola, soy ${input.assistantName}, el asistente de IA del negocio. ${body}`;
 }

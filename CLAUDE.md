@@ -117,8 +117,10 @@ All configuration is via environment variables. Copy `.env.example` → `.env.lo
 | `UPSTASH_REDIS_REST_URL` | Yes | Upstash Redis URL (rate limiting + queue) |
 | `UPSTASH_REDIS_REST_TOKEN` | Yes | Upstash Redis token |
 | `INTERNAL_JOB_SECRET` | Yes | Auth token for cron job routes (min 32 chars) |
-| `WHATSAPP_API_KEY` | Prod | 360dialog API key |
-| `WHATSAPP_WEBHOOK_HEADER_SECRET` | Prod | Shared secret for webhook verification |
+| `WHATSAPP_API_KEY` | Optional | Meta access token (global fallback; prefer per-tenant) |
+| `WHATSAPP_APP_SECRET` | Prod | Meta App Secret (`X-Hub-Signature-256`) |
+| `WHATSAPP_WEBHOOK_VERIFY_TOKEN` | Prod | Meta webhook verify token |
+| `WHATSAPP_PHONE_NUMBER_ID` | Optional | Global phone number ID for single-number tests |
 | `STRIPE_SECRET_KEY` | Prod | Stripe secret key (`sk_test_...` for dev) |
 | `STRIPE_WEBHOOK_SECRET` | Prod | Stripe webhook signing secret (`whsec_...`) |
 | `ELEVENLABS_API_KEY` | Voice | ElevenLabs key for STT/TTS |

@@ -26,8 +26,8 @@ describe('AiContextProvider', () => {
       version: 2,
     });
     expect(context.conversationMessages.map((message) => message.text)).toEqual([
-      'Buongiorno',
-      'Ciao, sono Ambrogio',
+      'Buenos días',
+      'Hola, soy Ambrogio',
     ]);
     expect(context.knowledgeBase.map((entry) => entry.id)).toEqual(['kb_igiene']);
     expect(context.metadata).toMatchObject({
@@ -88,7 +88,7 @@ class FakeAiContextRepository implements AiContextRepository {
         id: 'message_1',
         role: 'customer',
         direction: 'inbound',
-        text: 'Buongiorno',
+        text: 'Buenos días',
         messageType: 'text',
         createdAt: '2026-04-25T09:00:00.000Z',
       },
@@ -96,7 +96,7 @@ class FakeAiContextRepository implements AiContextRepository {
         id: 'message_2',
         role: 'assistant',
         direction: 'outbound',
-        text: 'Ciao, sono Ambrogio',
+        text: 'Hola, soy Ambrogio',
         messageType: 'text',
         createdAt: '2026-04-25T09:01:00.000Z',
       },

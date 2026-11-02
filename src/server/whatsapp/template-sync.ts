@@ -1,6 +1,7 @@
 import { AppError } from '@/lib/errors/app-error';
 import { env } from '@/lib/env';
 import { createSupabaseAdminClient } from '@/lib/supabase/admin';
+import { WHATSAPP_PROVIDER } from '@/server/whatsapp/webhook-events';
 
 export type SyncedWhatsAppTemplateStatus =
   | 'draft'
@@ -41,32 +42,44 @@ export interface WhatsAppTemplateSyncRepository {
 
 type FetchLike = typeof fetch;
 
-export class Dialog360WhatsAppTemplateClient implements WhatsAppTemplateListClient {
+/**
+ * Lista plantillas desde Graph API:
+ * GET `/{waba-id}/message_templates`
+ */
+export class MetaCloudWhatsAppTemplateClient implements WhatsAppTemplateListClient {
   constructor(
     private readonly config: {
       apiUrl?: string;
-      apiKey?: string;
+      accessToken?: string;
+      wabaId?: string;
       fetcher?: FetchLike;
     } = {},
   ) {}
 
   async listTemplates(): Promise<unknown> {
-    const apiKey = this.config.apiKey ?? env.WHATSAPP_API_KEY;
+    const accessToken = this.config.accessToken ?? env.WHATSAPP_API_KEY;
+    const wabaId = this.config.wabaId ?? env.WHATSAPP_WABA_ID;
 
-    if (!apiKey) {
-      throw new AppError('internal', 'WhatsApp API key is not configured', {
+    if (!accessToken) {
+      throw new AppError('internal', 'WhatsApp access token is not configured', {
         expose: false,
       });
     }
 
-    const url = new URL('/v1/configs/templates', this.config.apiUrl ?? env.WHATSAPP_API_URL);
+    if (!wabaId) {
+      throw new AppError('internal', 'WhatsApp WABA ID is not configured', {
+        expose: false,
+      });
+    }
+
+    const baseUrl = (this.config.apiUrl ?? env.WHATSAPP_API_URL).replace(/\/$/, '');
+    const url = new URL(`${baseUrl}/${encodeURIComponent(wabaId)}/message_templates`);
     url.searchParams.set('limit', '1000');
-    url.searchParams.set('sort', 'name');
 
     const response = await (this.config.fetcher ?? fetch)(url, {
       method: 'GET',
       headers: {
-        'D360-API-KEY': apiKey,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     const rawResponse = await readJsonResponse(response);
@@ -84,6 +97,9 @@ export class Dialog360WhatsAppTemplateClient implements WhatsAppTemplateListClie
     return rawResponse;
   }
 }
+
+/** @deprecated Alias; usar `MetaCloudWhatsAppTemplateClient`. */
+export const Dialog360WhatsAppTemplateClient = MetaCloudWhatsAppTemplateClient;
 
 export class WhatsAppTemplateSyncService {
   constructor(
@@ -127,7 +143,7 @@ export class SupabaseWhatsAppTemplateSyncRepository implements WhatsAppTemplateS
   }): Promise<void> {
     const rows = input.templates.map((template) => ({
       tenant_id: input.tenantId,
-      provider: 'whatsapp_360dialog',
+      provider: WHATSAPP_PROVIDER,
       name: template.name,
       language_code: template.languageCode,
       category: template.category,
@@ -154,16 +170,22 @@ export class SupabaseWhatsAppTemplateSyncRepository implements WhatsAppTemplateS
   }
 }
 
-export function createWhatsAppTemplateSyncService(): WhatsAppTemplateSyncService {
+export function createWhatsAppTemplateSyncService(options?: {
+  accessToken?: string;
+  wabaId?: string;
+}): WhatsAppTemplateSyncService {
   return new WhatsAppTemplateSyncService(
-    new Dialog360WhatsAppTemplateClient(),
+    new MetaCloudWhatsAppTemplateClient({
+      ...(options?.accessToken !== undefined ? { accessToken: options.accessToken } : {}),
+      ...(options?.wabaId !== undefined ? { wabaId: options.wabaId } : {}),
+    }),
     new SupabaseWhatsAppTemplateSyncRepository(),
   );
 }
 
 export function normalizeTemplate(value: Record<string, unknown>): SyncedWhatsAppTemplate | null {
   const name = getString(value.name);
-  const languageCode = getString(value.language_code) ?? getString(value.language) ?? 'it';
+  const languageCode = getString(value.language) ?? getString(value.language_code) ?? 'es';
   const category = normalizeCategory(value.category);
   const status = normalizeStatus(value.status);
 
@@ -176,9 +198,9 @@ export function normalizeTemplate(value: Record<string, unknown>): SyncedWhatsAp
     languageCode,
     category,
     status,
-    externalId: getString(value.external_id) ?? getString(value.id) ?? getString(value.template_id),
+    externalId: getString(value.id) ?? getString(value.external_id) ?? getString(value.template_id),
     qualityRating:
-      getString(value.quality_rating) ?? getString(value.quality) ?? getString(value.quality_score),
+      getString(value.quality_score) ?? getString(value.quality_rating) ?? getString(value.quality),
     components: Array.isArray(value.components) ? value.components : [],
     raw: value,
   };
@@ -218,6 +240,7 @@ function normalizeStatus(value: unknown): SyncedWhatsAppTemplateStatus | null {
     case 'pending':
     case 'submitted':
     case 'in_review':
+    case 'pending_deletion':
       return 'pending';
     case 'rejected':
       return 'rejected';

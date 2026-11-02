@@ -25,7 +25,7 @@ describe('extractWhatsAppWebhookEvents', () => {
                     id: 'wamid.text',
                     timestamp: '1761300000',
                     type: 'text',
-                    text: { body: 'Vorrei prenotare domani' },
+                    text: { body: 'Quiero reservar mañana' },
                   },
                   {
                     from: '393331112233',

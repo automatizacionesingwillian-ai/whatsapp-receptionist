@@ -11,9 +11,8 @@ export type DownloadWhatsAppMediaInput = {
   mediaId: string;
   expectedMimeType?: string | null;
   /**
-   * Tenant proprietario del media. Il media di 360dialog è leggibile solo con
-   * la chiave del numero che lo ha ricevuto: senza tenant si ricade sulla
-   * chiave globale, che funziona solo per i tenant non ancora migrati.
+   * Tenant dueño del media. En Cloud API el media solo se descarga con el
+   * token del WABA que lo recibió.
    */
   tenantId?: string;
 };
@@ -32,11 +31,11 @@ export interface WhatsAppMediaDownloader {
 
 type FetchLike = typeof fetch;
 
-export class Dialog360WhatsAppMediaClient implements WhatsAppMediaDownloader {
+export class MetaCloudWhatsAppMediaClient implements WhatsAppMediaDownloader {
   constructor(
     private readonly config: {
       apiUrl?: string;
-      apiKey?: string;
+      accessToken?: string;
       maxBytes?: number;
       fetcher?: FetchLike;
       credentials?: WhatsAppCredentialsResolver;
@@ -44,8 +43,8 @@ export class Dialog360WhatsAppMediaClient implements WhatsAppMediaDownloader {
   ) {}
 
   async downloadMedia(input: DownloadWhatsAppMediaInput): Promise<DownloadedWhatsAppMedia> {
-    const apiKey = await this.resolveApiKey(input.tenantId);
-    const metadata = await this.fetchMediaMetadata(input.mediaId, apiKey);
+    const accessToken = await this.resolveAccessToken(input.tenantId);
+    const metadata = await this.fetchMediaMetadata(input.mediaId, accessToken);
     const mediaUrl = extractMediaUrl(metadata);
 
     if (!mediaUrl) {
@@ -59,7 +58,7 @@ export class Dialog360WhatsAppMediaClient implements WhatsAppMediaDownloader {
       mediaUrl,
       {
         headers: {
-          'D360-API-KEY': apiKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
       {
@@ -108,37 +107,38 @@ export class Dialog360WhatsAppMediaClient implements WhatsAppMediaDownloader {
     };
   }
 
-  private async resolveApiKey(tenantId: string | undefined): Promise<string> {
-    if (this.config.apiKey) {
-      return this.config.apiKey;
+  private async resolveAccessToken(tenantId: string | undefined): Promise<string> {
+    if (this.config.accessToken) {
+      return this.config.accessToken;
     }
 
     if (tenantId && this.config.credentials) {
-      return (await this.config.credentials.resolve(tenantId)).apiKey;
+      return (await this.config.credentials.resolve(tenantId)).accessToken;
     }
 
-    const globalApiKey = env.WHATSAPP_API_KEY.trim();
+    const globalToken = env.WHATSAPP_API_KEY.trim();
 
-    if (!globalApiKey) {
-      throw new AppError('internal', 'WhatsApp API key is not configured', {
+    if (!globalToken) {
+      throw new AppError('internal', 'WhatsApp access token is not configured', {
         expose: false,
       });
     }
 
     logger.warn(
       { tenantId: tenantId ?? null },
-      'Download media WhatsApp senza credenziali di tenant: fallback alla chiave globale',
+      'WhatsApp media download without tenant credentials: using global Meta token',
     );
 
-    return globalApiKey;
+    return globalToken;
   }
 
-  private async fetchMediaMetadata(mediaId: string, apiKey: string): Promise<unknown> {
+  private async fetchMediaMetadata(mediaId: string, accessToken: string): Promise<unknown> {
+    const baseUrl = (this.config.apiUrl ?? env.WHATSAPP_API_URL).replace(/\/$/, '');
     const response = await fetchWithTimeout(
-      new URL(`/${encodeURIComponent(mediaId)}`, this.config.apiUrl ?? env.WHATSAPP_API_URL),
+      `${baseUrl}/${encodeURIComponent(mediaId)}`,
       {
         headers: {
-          'D360-API-KEY': apiKey,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
       {
@@ -163,10 +163,13 @@ export class Dialog360WhatsAppMediaClient implements WhatsAppMediaDownloader {
   }
 }
 
+/** @deprecated Alias; usar `MetaCloudWhatsAppMediaClient`. */
+export const Dialog360WhatsAppMediaClient = MetaCloudWhatsAppMediaClient;
+
 export function createWhatsAppMediaDownloader(
   credentials: WhatsAppCredentialsResolver = whatsAppCredentialsResolver(),
 ): WhatsAppMediaDownloader {
-  return new Dialog360WhatsAppMediaClient({ credentials });
+  return new MetaCloudWhatsAppMediaClient({ credentials });
 }
 
 export function extensionForMimeType(contentType: string): string {

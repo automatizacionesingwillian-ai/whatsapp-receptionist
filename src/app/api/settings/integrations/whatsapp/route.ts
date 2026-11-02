@@ -14,7 +14,9 @@ const ConnectWhatsAppSchema = z
   .object({
     phoneNumberId: z.string().trim().min(1).max(120),
     displayPhoneNumber: z.string().trim().max(40).default(''),
+    /** Access token de Meta (nombre `apiKey` por compatibilidad del formulario). */
     apiKey: z.string().trim().min(8).max(512),
+    wabaId: z.string().trim().max(120).optional().default(''),
   })
   .strict();
 
@@ -50,6 +52,7 @@ export async function POST(request: NextRequest): Promise<Response> {
       phoneNumberId: parsed.phoneNumberId,
       displayPhoneNumber: parsed.displayPhoneNumber,
       apiKey: parsed.apiKey,
+      wabaId: parsed.wabaId,
     });
   }, request);
 }

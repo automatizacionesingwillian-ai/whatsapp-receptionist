@@ -17,7 +17,7 @@ import { logger } from '@/lib/logging/logger';
 export const RETENTION_POLICY = {
   /** "Conversaciones: 24 mesi rolling, salvo richieste legali." */
   conversationsMonths: 24,
-  /** "Vocali audio: 90 giorni dalla trascrizione." */
+  /** "Audios: 90 días desde la transcripción." */
   voiceDays: 90,
   /** "Log tecnici: 12 mesi." */
   technicalLogsMonths: 12,

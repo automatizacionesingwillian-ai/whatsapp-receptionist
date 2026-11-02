@@ -24,7 +24,7 @@ const TenantSettingsPatchSchema = z
     defaultLocale: z
       .string()
       .trim()
-      .regex(/^[a-z]{2}(?:-[A-Z]{2})?$/)
+      .regex(/^[a-z]{2}(?:-(?:[A-Z]{2}|[0-9]{3}))?$/)
       .optional(),
     aiDisclosureEnabled: z.boolean().optional(),
     autoReplyEnabled: z.boolean().optional(),

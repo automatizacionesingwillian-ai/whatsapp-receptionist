@@ -36,7 +36,7 @@ describe('WhatsAppAutoReplyService usage guard', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
 
     const usageLimits = new UsageLimitsService(
@@ -64,10 +64,10 @@ describe('WhatsAppAutoReplyService usage guard', () => {
       inboundMessageId: 'msg_1',
       inboundExternalId: 'wamid.test',
       customerIdentifier: '393331112233',
-      text: 'Quanto costa una visita?',
+      text: 'Cuanto cuesta una visita?',
       occurredAt,
       source: 'text',
-      provider: 'whatsapp_360dialog',
+      provider: 'whatsapp_cloud',
       whatsappMessageId: 'wamid.test',
       phoneNumberId: '123',
       displayPhoneNumber: '+39 333',
@@ -88,7 +88,7 @@ describe('WhatsAppAutoReplyService usage guard', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
 
     const usageLimits = new UsageLimitsService(
@@ -108,10 +108,10 @@ describe('WhatsAppAutoReplyService usage guard', () => {
       inboundMessageId: 'msg_2',
       inboundExternalId: 'wamid.ok',
       customerIdentifier: '393331112233',
-      text: 'Quanto costa una visita?',
+      text: 'Cuanto cuesta una visita?',
       occurredAt,
       source: 'text',
-      provider: 'whatsapp_360dialog',
+      provider: 'whatsapp_cloud',
       whatsappMessageId: 'wamid.ok',
       phoneNumberId: '123',
       displayPhoneNumber: '+39 333',

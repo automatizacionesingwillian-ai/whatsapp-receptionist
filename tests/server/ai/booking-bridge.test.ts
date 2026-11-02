@@ -25,7 +25,7 @@ describe('BookingBridgeService', () => {
     const repository = new FakeBookingBridgeRepository([
       {
         id: 'service_1',
-        name: 'Prima visita',
+        name: 'Primera visita',
         durationMinutes: 30,
         priceCents: 7000,
       },
@@ -38,7 +38,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Vorrei prenotare una prima visita',
+      text: 'Quiero reservar una primera visita',
     });
 
     expect(reply).toMatchObject({
@@ -50,8 +50,8 @@ describe('BookingBridgeService', () => {
         },
       },
     });
-    expect(reply.replyText).toContain('Ho trovato questi slot');
-    expect(reply.replyText).toContain('confermo 1');
+    expect(reply.replyText).toContain('Encontré estos horarios');
+    expect(reply.replyText).toContain('confirmo 1');
     expect(savedSlots(repository)).toHaveLength(3);
     expect(booking.availabilityCalls[0]).toMatchObject({
       tenantId: 'tenant_1',
@@ -62,7 +62,7 @@ describe('BookingBridgeService', () => {
 
   it('uses extracted date and time preferences when proposing slots', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     const booking = new FakeAppointmentBookingService();
     booking.slots = [
@@ -78,7 +78,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Vorrei prenotare prima visita domani pomeriggio',
+      text: 'Quiero reservar primera visita mañana por la tarde',
     });
 
     expect(booking.availabilityCalls[0]).toMatchObject({
@@ -94,7 +94,7 @@ describe('BookingBridgeService', () => {
       bookingBridge: {
         request: {
           datePreference: {
-            label: 'domani',
+            label: 'manana',
           },
           timePreference: {
             dayPart: 'afternoon',
@@ -106,8 +106,8 @@ describe('BookingBridgeService', () => {
 
   it('asks which service when the request is ambiguous', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
-      serviceOption('service_2', 'Igiene dentale'),
+      serviceOption('service_1', 'Primera visita'),
+      serviceOption('service_2', 'Higiene dental'),
     ]);
     const booking = new FakeAppointmentBookingService();
     const service = new BookingBridgeService(
@@ -117,18 +117,18 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Vorrei prenotare',
+      text: 'Quiero reservar',
     });
 
-    expect(reply.replyText).toContain('Quale servizio ti interessa?');
-    expect(reply.replyText).toContain('Prima visita');
-    expect(reply.replyText).toContain('Igiene dentale');
+    expect(reply.replyText).toContain('¿Qué servicio te interesa?');
+    expect(reply.replyText).toContain('Primera visita');
+    expect(reply.replyText).toContain('Higiene dental');
     expect(booking.availabilityCalls).toHaveLength(0);
   });
 
   it('confirms a previously proposed slot and clears conversation state', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.savedState = stateWithSlots();
     const booking = new FakeAppointmentBookingService();
@@ -139,7 +139,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Confermo 2',
+      text: 'Confirmo 2',
     });
 
     expect(reply).toMatchObject({
@@ -162,12 +162,12 @@ describe('BookingBridgeService', () => {
       sendConfirmation: true,
     });
     expect(repository.cleared).toBe(true);
-    expect(reply.replyText).toContain('Perfetto, ho prenotato');
+    expect(reply.replyText).toContain('Perfecto, reservé');
   });
 
   it('expires stale proposed slots before booking', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.savedState = {
       ...stateWithSlots(),
@@ -181,7 +181,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Confermo 1',
+      text: 'Confirmo 1',
     });
 
     expect(reply.metadata).toMatchObject({
@@ -195,7 +195,7 @@ describe('BookingBridgeService', () => {
 
   it('asks for a target date before rescheduling a single appointment', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [customerAppointment()];
     const booking = new FakeAppointmentBookingService();
@@ -206,7 +206,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Vorrei spostare il mio appuntamento',
+      text: 'Quiero mover mi cita',
       intent: 'reschedule_request',
     });
 
@@ -219,7 +219,7 @@ describe('BookingBridgeService', () => {
         },
       },
     });
-    expect(reply.replyText).toContain('Per quale giorno');
+    expect(reply.replyText).toContain('¿Para qué día');
     expect(repository.savedState).toMatchObject({
       status: 'reschedule_date_requested',
     });
@@ -227,7 +227,7 @@ describe('BookingBridgeService', () => {
 
   it('proposes reschedule slots and confirms the selected new slot', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.savedState = {
       status: 'reschedule_date_requested',
@@ -243,7 +243,7 @@ describe('BookingBridgeService', () => {
 
     const slotsReply = await service.createBookingReply({
       ...baseInput(),
-      text: 'domani mattina',
+      text: 'mañana por la mañana',
       intent: 'booking_request',
     });
 
@@ -268,7 +268,7 @@ describe('BookingBridgeService', () => {
 
     const confirmReply = await service.createBookingReply({
       ...baseInput(),
-      text: 'confermo 2',
+      text: 'confirmo 2',
       intent: 'other',
     });
 
@@ -292,7 +292,7 @@ describe('BookingBridgeService', () => {
 
   it('cancels a single future appointment for the WhatsApp number', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [customerAppointment()];
     const booking = new FakeAppointmentBookingService();
@@ -303,7 +303,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Vorrei annullare il mio appuntamento',
+      text: 'Quiero cancelar mi cita',
       intent: 'cancellation_request',
     });
 
@@ -325,7 +325,7 @@ describe('BookingBridgeService', () => {
 
   it('uses natural appointment hints to cancel the matching time', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [
       customerAppointment({ appointmentId: 'appointment_1' }),
@@ -342,7 +342,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Annulla quello delle 15',
+      text: 'Cancela esa a las 15',
       intent: 'cancellation_request',
     });
 
@@ -359,7 +359,7 @@ describe('BookingBridgeService', () => {
 
   it('uses natural appointment hints to cancel the matching customer name', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [
       customerAppointment({
@@ -380,7 +380,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Annulla la visita di Mario',
+      text: 'Cancela la visita de Mario',
       intent: 'cancellation_request',
     });
 
@@ -397,7 +397,7 @@ describe('BookingBridgeService', () => {
 
   it('uses source-date hints for reschedule lookup before asking the target date', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [
       customerAppointment({
@@ -417,7 +417,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Vorrei spostare quello di domani',
+      text: 'Quiero mover esa de mañana',
       intent: 'reschedule_request',
     });
 
@@ -427,7 +427,7 @@ describe('BookingBridgeService', () => {
         appointmentId: 'appointment_1',
       },
     });
-    expect(reply.replyText).toContain('Per quale giorno');
+    expect(reply.replyText).toContain('¿Para qué día');
     expect(booking.availabilityCalls).toHaveLength(0);
     expect(repository.savedState).toMatchObject({
       status: 'reschedule_date_requested',
@@ -439,7 +439,7 @@ describe('BookingBridgeService', () => {
 
   it('keeps source customer and target date separate during reschedule', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [
       customerAppointment({
@@ -463,7 +463,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Sposta la visita di Mario a venerdi mattina',
+      text: 'Mueve la visita de Mario el viernes por la mañana',
       intent: 'reschedule_request',
     });
 
@@ -473,7 +473,7 @@ describe('BookingBridgeService', () => {
         appointmentId: 'appointment_2',
         request: {
           datePreference: {
-            label: 'venerdi',
+            label: 'viernes',
           },
           timePreference: {
             dayPart: 'morning',
@@ -498,7 +498,7 @@ describe('BookingBridgeService', () => {
 
   it('keeps source date and target date separate during reschedule', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [
       customerAppointment({
@@ -522,7 +522,7 @@ describe('BookingBridgeService', () => {
 
     const reply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Sposta quello di domani a venerdi mattina',
+      text: 'Mueve la cita de manana a las viernes por la manana',
       intent: 'reschedule_request',
     });
 
@@ -532,7 +532,7 @@ describe('BookingBridgeService', () => {
         appointmentId: 'appointment_1',
         request: {
           datePreference: {
-            label: 'venerdi',
+            label: 'viernes',
           },
           timePreference: {
             dayPart: 'morning',
@@ -555,7 +555,7 @@ describe('BookingBridgeService', () => {
 
   it('asks which appointment to cancel when multiple future appointments match', async () => {
     const repository = new FakeBookingBridgeRepository([
-      serviceOption('service_1', 'Prima visita'),
+      serviceOption('service_1', 'Primera visita'),
     ]);
     repository.appointments = [
       customerAppointment({ appointmentId: 'appointment_1' }),
@@ -572,18 +572,18 @@ describe('BookingBridgeService', () => {
 
     const selectionReply = await service.createBookingReply({
       ...baseInput(),
-      text: 'Annulla appuntamento',
+      text: 'Cancela cita',
       intent: 'cancellation_request',
     });
 
-    expect(selectionReply.replyText).toContain('Quale vuoi annullare?');
+    expect(selectionReply.replyText).toContain('¿Cuál quieres cancelar?');
     expect(repository.savedState).toMatchObject({
       status: 'cancellation_selection',
     });
 
     const confirmReply = await service.createBookingReply({
       ...baseInput(),
-      text: 'annulla 2',
+      text: 'cancela 2',
       intent: 'other',
     });
 
@@ -690,7 +690,7 @@ function baseInput() {
     conversationId: 'conversation_1',
     customerIdentifier: '393331112233',
     customerName: null,
-    text: 'Vorrei prenotare',
+    text: 'Quiero reservar',
     occurredAt,
   };
 }
@@ -708,7 +708,7 @@ function stateWithSlots(): ConversationBookingState {
   return {
     status: 'slots_proposed',
     serviceId: 'service_1',
-    serviceName: 'Prima visita',
+    serviceName: 'Primera visita',
     proposedAt: '2026-04-27T07:00:00.000Z',
     expiresAt: '2026-04-27T07:30:00.000Z',
     slots: [
@@ -723,7 +723,7 @@ function slot(start: string, end: string): BookingSlot {
   return {
     tenantId: 'tenant_1',
     serviceId: 'service_1',
-    serviceName: 'Prima visita',
+    serviceName: 'Primera visita',
     start,
     end,
     durationMinutes: 30,
@@ -748,7 +748,7 @@ function customerAppointment(
   return {
     appointmentId: 'appointment_1',
     serviceId: 'service_1',
-    serviceName: 'Prima visita',
+    serviceName: 'Primera visita',
     customerName: 'Mario Rossi',
     scheduledAt: new Date('2026-04-28T09:00:00.000Z'),
     durationMinutes: 30,
@@ -760,7 +760,7 @@ function pendingAppointment() {
   return {
     appointmentId: 'appointment_1',
     serviceId: 'service_1',
-    serviceName: 'Prima visita',
+    serviceName: 'Primera visita',
     customerName: 'Mario Rossi',
     scheduledAt: '2026-04-28T09:00:00.000Z',
     durationMinutes: 30,

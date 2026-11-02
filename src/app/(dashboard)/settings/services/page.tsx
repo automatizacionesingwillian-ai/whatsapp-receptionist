@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Servicios y tarifario · Configuración · Ambrogio.ai',
 };
 
-// Il listino dipende dalla sessione: non deve finire in cache statica.
+// El tarifario depende de la sesión: no debe cachearse de forma estática.
 export const dynamic = 'force-dynamic';
 
 type LoadResult =

@@ -2,29 +2,42 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { AiPromptForm, type AiPromptSettingsView } from '@/components/settings/AiPromptForm';
+import { AutoReplyToggle } from '@/components/settings/AutoReplyToggle';
 import { requireSession, type AuthSession } from '@/lib/auth/session';
 import { logger } from '@/lib/logging/logger';
 import { createAiPromptSettingsService } from '@/server/ai/prompt-settings';
+import { createTenantSettingsService } from '@/server/settings/tenant-settings';
 
 export const metadata: Metadata = {
   title: 'Personalidad AI · Configuración · Ambrogio.ai',
 };
 
-// Lo stato dipende dalla sessione: non deve finire in cache statica.
+// El estado depende de la sesión: no debe cachearse de forma estática.
 export const dynamic = 'force-dynamic';
 
 type LoadResult =
-  | { readonly ok: true; readonly settings: AiPromptSettingsView }
+  | {
+      readonly ok: true;
+      readonly settings: AiPromptSettingsView;
+      readonly autoReplyEnabled: boolean;
+    }
   | { readonly ok: false };
 
 async function loadSettings(session: AuthSession): Promise<LoadResult> {
   try {
-    const settings = await createAiPromptSettingsService().getSettings({ session });
-    return { ok: true, settings };
+    const [settings, snapshot] = await Promise.all([
+      createAiPromptSettingsService().getSettings({ session }),
+      createTenantSettingsService().getSnapshot({ session }),
+    ]);
+    return {
+      ok: true,
+      settings,
+      autoReplyEnabled: snapshot.config.autoReplyEnabled,
+    };
   } catch (error) {
-    // Il layout ha gia' garantito la sessione: un errore qui viene dal datastore.
-    // Meglio una pagina in stato degradato che un 500 sull'intera schermata.
-    logger.error({ err: error, tenantId: session.tenantId }, 'Lettura prompt AI fallita');
+    // El layout ya garantizó la sesión: un error aquí viene del datastore.
+    // Mejor una página degradada que un 500 en toda la pantalla.
+    logger.error({ err: error, tenantId: session.tenantId }, 'Lectura de ajustes AI fallida');
     return { ok: false };
   }
 }
@@ -32,6 +45,7 @@ async function loadSettings(session: AuthSession): Promise<LoadResult> {
 export default async function AiSettingsPage() {
   const session = await requireSession();
   const result = await loadSettings(session);
+  const canManage = session.role === 'owner' || session.role === 'admin';
 
   return (
     <>
@@ -52,10 +66,10 @@ export default async function AiSettingsPage() {
       </div>
 
       {result.ok ? (
-        <AiPromptForm
-          settings={result.settings}
-          canManage={session.role === 'owner' || session.role === 'admin'}
-        />
+        <div className="stack stack-6">
+          <AutoReplyToggle enabled={result.autoReplyEnabled} canManage={canManage} />
+          <AiPromptForm settings={result.settings} canManage={canManage} />
+        </div>
       ) : (
         <section className="card stack stack-3">
           <h2 style={{ fontSize: 'var(--text-xl)' }}>Configuración no legible</h2>

@@ -9,12 +9,12 @@ interface AdminErrorProps {
 }
 
 /**
- * Error boundary del pannello cross-tenant.
+ * Error boundary del panel cross-tenant.
  *
- * Sostituisce l'error boundary globale per le rotte admin: qui il fallimento
- * più probabile non è un bug applicativo ma una dipendenza che non risponde
- * (database o provider esterno). Il messaggio lo dice esplicitamente invece di
- * suggerire che il dato mostrato prima fosse valido.
+ * Sustituye el error boundary global en las rutas admin: aquí el fallo más
+ * probable no es un bug de aplicación sino una dependencia que no responde
+ * (base de datos o proveedor externo). El mensaje lo dice explícitamente en
+ * lugar de sugerir que el dato mostrado antes era válido.
  */
 export default function AdminError({ error, reset }: Readonly<AdminErrorProps>) {
   useEffect(() => {
@@ -28,19 +28,19 @@ export default function AdminError({ error, reset }: Readonly<AdminErrorProps>) 
   return (
     <div className="stack stack-6">
       <div className="stack stack-2">
-        <span className="badge badge-danger">Errore</span>
-        <h1>Pannello non disponibile</h1>
+        <span className="badge badge-danger">Error</span>
+        <h1>Panel no disponible</h1>
         <p className="muted">
-          Il caricamento dei dati cross-tenant è fallito. Nessun valore viene mostrato: preferiamo
-          una pagina vuota a numeri non verificati.
+          Falló la carga de los datos cross-tenant. No se muestra ningún valor: preferimos una
+          página vacía a números no verificados.
         </p>
       </div>
 
       <section className="card stack stack-4">
         <p style={{ fontSize: 'var(--text-sm)' }}>
-          Cause tipiche: database Supabase non raggiungibile, credenziali di servizio non
-          configurate, o timeout di un provider esterno. Lo stato delle singole dipendenze è
-          consultabile anche fuori dal pannello, su <code className="mono">/api/health/deep</code>.
+          Causas típicas: base de datos Supabase no alcanzable, credenciales de servicio no
+          configuradas, o timeout de un proveedor externo. El estado de cada dependencia también
+          se puede consultar fuera del panel en <code className="mono">/api/health/deep</code>.
         </p>
 
         {error.digest ? (
@@ -51,13 +51,13 @@ export default function AdminError({ error, reset }: Readonly<AdminErrorProps>) 
 
         <div className="row" style={{ gap: 'var(--space-3)' }}>
           <button type="button" onClick={reset} className="btn btn-primary">
-            Riprova
+            Reintentar
           </button>
           <Link href="/admin" className="btn btn-secondary">
-            Torna alla overview
+            Volver al overview
           </Link>
           <Link href="/status" className="btn btn-ghost">
-            Stato dipendenze
+            Estado de dependencias
           </Link>
         </div>
       </section>

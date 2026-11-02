@@ -98,17 +98,17 @@ describe('WhatsApp backend booking E2E flow', () => {
     });
 
     await webhook.processPayload(
-      textPayload('wamid.booking.ask', 'Vorrei prenotare una prima visita domani mattina'),
+      textPayload('wamid.booking.ask', 'Quiero reservar una primera visita mañana por la mañana'),
       context,
     );
 
-    expect(lastOutboundText(repository)).toContain('Ho trovato questi slot');
+    expect(lastOutboundText(repository)).toContain('Encontré estos horarios');
     expect(repository.bookingState()).toMatchObject({
       status: 'slots_proposed',
     });
     expect(repository.appointments).toHaveLength(0);
 
-    await webhook.processPayload(textPayload('wamid.booking.confirm', 'confermo 1'), context);
+    await webhook.processPayload(textPayload('wamid.booking.confirm', 'confirmo 1'), context);
 
     expect(repository.appointments).toHaveLength(1);
     expect(repository.appointments[0]).toMatchObject({
@@ -117,19 +117,19 @@ describe('WhatsApp backend booking E2E flow', () => {
       scheduledAt: new Date('2026-04-28T09:00:00.000Z'),
     });
     expect(repository.bookingState()).toBeNull();
-    expect(lastOutboundText(repository)).toContain('ho prenotato');
+    expect(lastOutboundText(repository)).toContain('reservé');
 
     await webhook.processPayload(
-      textPayload('wamid.reschedule.ask', 'Vorrei spostare l appuntamento'),
+      textPayload('wamid.reschedule.ask', 'Quiero mover la cita'),
       context,
     );
 
     expect(repository.bookingState()).toMatchObject({
       status: 'reschedule_date_requested',
     });
-    expect(lastOutboundText(repository)).toContain('Per quale giorno');
+    expect(lastOutboundText(repository)).toContain('¿Para qué día');
 
-    await webhook.processPayload(textPayload('wamid.reschedule.slots', 'domani mattina'), context);
+    await webhook.processPayload(textPayload('wamid.reschedule.slots', 'mañana por la mañana'), context);
 
     expect(repository.bookingState()).toMatchObject({
       status: 'reschedule_slots_proposed',
@@ -138,9 +138,9 @@ describe('WhatsApp backend booking E2E flow', () => {
       excludeAppointmentId: 'appointment_1',
       durationMinutes: 30,
     });
-    expect(lastOutboundText(repository)).toContain('Posso spostarlo');
+    expect(lastOutboundText(repository)).toContain('Puedo moverla');
 
-    await webhook.processPayload(textPayload('wamid.reschedule.confirm', 'confermo 2'), context);
+    await webhook.processPayload(textPayload('wamid.reschedule.confirm', 'confirmo 2'), context);
 
     expect(repository.appointments[0]).toMatchObject({
       appointmentId: 'appointment_1',
@@ -148,15 +148,15 @@ describe('WhatsApp backend booking E2E flow', () => {
       scheduledAt: new Date('2026-04-28T10:00:00.000Z'),
     });
     expect(repository.bookingState()).toBeNull();
-    expect(lastOutboundText(repository)).toContain('ho spostato');
+    expect(lastOutboundText(repository)).toContain('moví la cita');
 
-    await webhook.processPayload(textPayload('wamid.cancel.ask', 'annulla appuntamento'), context);
+    await webhook.processPayload(textPayload('wamid.cancel.ask', 'cancela cita'), context);
 
     expect(repository.appointments[0]).toMatchObject({
       appointmentId: 'appointment_1',
       status: 'cancelled',
     });
-    expect(lastOutboundText(repository)).toContain('ho annullato');
+    expect(lastOutboundText(repository)).toContain('cancelé la cita');
     expect(repository.outboxJobs).toHaveLength(6);
     expect(repository.messageAnalyses.map((item) => item.intent)).toEqual([
       'booking_request',
@@ -188,7 +188,7 @@ describe('WhatsApp backend booking E2E flow', () => {
       repository,
       new InMemoryWhatsAppMediaDownloader(),
       new InMemoryTenantMediaStorage(),
-      new InMemoryVoiceTranscriber('Vorrei prenotare una prima visita domani mattina'),
+      new InMemoryVoiceTranscriber('Quiero reservar una primera visita mañana por la mañana'),
       {
         autoReplyHandler: autoReply,
         sttModel: 'scribe_v2',
@@ -212,15 +212,15 @@ describe('WhatsApp backend booking E2E flow', () => {
       deadLetterJobs: 0,
     });
     expect(repository.messageTranscripts[0]).toMatchObject({
-      transcriptText: 'Vorrei prenotare una prima visita domani mattina',
-      transcriptLanguage: 'it',
+      transcriptText: 'Quiero reservar una primera visita mañana por la mañana',
+      transcriptLanguage: 'es',
       mediaUri: 'supabase://ambrogio-media/tenant_1/voice/message_1/media_audio_1.ogg',
     });
     expect(repository.completedVoiceEvents[0]).toMatchObject({
       voiceEventId: 'voice_event_1',
       audioDurationSecs: 4.2,
     });
-    expect(lastOutboundText(repository)).toContain('Ho trovato questi slot');
+    expect(lastOutboundText(repository)).toContain('Encontré estos horarios');
     expect(repository.bookingState()).toMatchObject({
       status: 'slots_proposed',
     });
@@ -228,14 +228,14 @@ describe('WhatsApp backend booking E2E flow', () => {
       intent: 'booking_request',
     });
 
-    await webhook.processPayload(textPayload('wamid.voice.confirm', 'confermo 1'), context);
+    await webhook.processPayload(textPayload('wamid.voice.confirm', 'confirmo 1'), context);
 
     expect(repository.appointments[0]).toMatchObject({
       appointmentId: 'appointment_1',
       status: 'confirmed',
       scheduledAt: new Date('2026-04-28T09:00:00.000Z'),
     });
-    expect(lastOutboundText(repository)).toContain('ho prenotato');
+    expect(lastOutboundText(repository)).toContain('reservé');
     expect(repository.completedVoiceJobs).toEqual(['voice_job_1']);
   });
 
@@ -257,7 +257,7 @@ describe('WhatsApp backend booking E2E flow', () => {
     });
 
     await webhook.processPayload(
-      textPayload('wamid.opted-out.booking', 'Vorrei prenotare una prima visita domani mattina'),
+      textPayload('wamid.opted-out.booking', 'Quiero reservar una primera visita mañana por la mañana'),
       context,
     );
 
@@ -307,7 +307,7 @@ class InMemoryWhatsAppBookingRepository
         assistantName: 'Ambrogio',
         aiDisclosureEnabled: true,
         autoReplyEnabled: true,
-        defaultLocale: 'it-IT',
+        defaultLocale: 'es-419',
       },
     ],
   ]);
@@ -315,7 +315,7 @@ class InMemoryWhatsAppBookingRepository
   readonly services: BookingServiceOption[] = [
     {
       id: 'service_1',
-      name: 'Prima visita',
+      name: 'Primera visita',
       durationMinutes: 30,
       priceCents: 7000,
     },
@@ -430,7 +430,7 @@ class InMemoryWhatsAppBookingRepository
         assistantName: 'Ambrogio',
         aiDisclosureEnabled: true,
         autoReplyEnabled: false,
-        defaultLocale: 'it-IT',
+        defaultLocale: 'es-419',
       }
     );
   }
@@ -535,7 +535,7 @@ class InMemoryWhatsAppBookingRepository
       transcriptText: transcript?.transcriptText ?? null,
       transcriptLanguage: transcript?.transcriptLanguage ?? null,
       transcriptLanguageProbability: 0.98,
-      provider: 'whatsapp_360dialog',
+      provider: 'whatsapp_cloud',
       whatsappMessageId: metadataString(metadata, 'whatsappMessageId'),
       phoneNumberId: metadataString(metadata, 'phoneNumberId'),
       displayPhoneNumber: metadataString(metadata, 'displayPhoneNumber'),
@@ -711,7 +711,7 @@ class InMemoryAppointmentBookingService {
     this.repository.appointments.push({
       appointmentId,
       serviceId: input.serviceId,
-      serviceName: 'Prima visita',
+      serviceName: 'Primera visita',
       customerName: input.customerName,
       scheduledAt: input.scheduledAt,
       durationMinutes: input.durationMinutes ?? 30,
@@ -906,7 +906,7 @@ class InMemoryVoiceTranscriber implements VoiceTranscriber {
 
     return {
       text: this.transcriptText,
-      languageCode: 'it',
+      languageCode: 'es',
       languageProbability: 0.98,
       audioDurationSecs: 4.2,
     };
@@ -917,7 +917,7 @@ function slot(start: string, end: string): BookingSlot {
   return {
     tenantId,
     serviceId: 'service_1',
-    serviceName: 'Prima visita',
+    serviceName: 'Primera visita',
     start,
     end,
     durationMinutes: 30,

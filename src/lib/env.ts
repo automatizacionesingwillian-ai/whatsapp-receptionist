@@ -39,14 +39,30 @@ const envSchema = z.object({
     .enum(['true', 'false'])
     .default('false')
     .transform((value) => value === 'true'),
+  /**
+   * Access token de Meta (System User o token permanente).
+   * Fallback global solo para un número de prueba; en multi-tenant cada negocio
+   * guarda su token cifrado en `integrations.credentials`.
+   */
   WHATSAPP_API_KEY: z.string().optional().default(''),
-  WHATSAPP_API_URL: optionalUrl.default('https://waba-v2.360dialog.io'),
+  /** Base Graph API, p. ej. https://graph.facebook.com/v21.0 */
+  WHATSAPP_API_URL: optionalUrl.default('https://graph.facebook.com/v21.0'),
+  /** Phone Number ID global de prueba (opcional; multi-tenant usa el del tenant). */
+  WHATSAPP_PHONE_NUMBER_ID: z.string().optional().default(''),
+  /** WABA ID global para sync de plantillas (opcional; multi-tenant usa el del tenant). */
+  WHATSAPP_WABA_ID: z.string().optional().default(''),
+  /** App Secret de la Meta App — firma `X-Hub-Signature-256` del webhook. */
+  WHATSAPP_APP_SECRET: z.string().optional().default(''),
   WHATSAPP_MEDIA_MAX_BYTES: z.coerce
     .number()
     .int()
     .positive()
     .default(25 * 1024 * 1024),
   WHATSAPP_WEBHOOK_VERIFY_TOKEN: z.string().optional().default(''),
+  /**
+   * Fallback de desarrollo si aún no hay App Secret de Meta.
+   * En producción con Cloud API se usa `WHATSAPP_APP_SECRET` + firma Meta.
+   */
   WHATSAPP_WEBHOOK_HEADER_NAME: z.string().default('x-ambrogio-webhook-secret'),
   WHATSAPP_WEBHOOK_HEADER_SECRET: z.string().optional().default(''),
   WHATSAPP_WEBHOOK_RATE_LIMIT_MAX: z.coerce.number().int().positive().default(120),

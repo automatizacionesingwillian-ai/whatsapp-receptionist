@@ -55,7 +55,7 @@ describe('WhatsAppWebhookService', () => {
       failedEvents: 0,
     });
     expect(repository.messages).toHaveLength(1);
-    expect(repository.messages[0]?.content).toBe('Vorrei prenotare domani');
+    expect(repository.messages[0]?.content).toBe('Quiero reservar mañana');
     expect(repository.usageIncrements).toEqual([
       { tenantId: 'tenant_1', metricMonth: '2025-10-01', messagesDelta: 1 },
     ]);
@@ -128,7 +128,7 @@ describe('WhatsAppWebhookService', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
     const service = new WhatsAppWebhookService(repository, {
       autoReplyEnabled: true,
@@ -148,7 +148,7 @@ describe('WhatsAppWebhookService', () => {
     expect(repository.outboxJobs[0]?.payload).toMatchObject({
       type: 'text',
       text: {
-        body: expect.stringContaining('sono Ambrogio'),
+        body: expect.stringContaining('soy Ambrogio'),
       },
     });
     expect(repository.usageIncrements).toEqual([
@@ -172,7 +172,7 @@ describe('WhatsAppWebhookService', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
     repository.optOuts.add('tenant_1:whatsapp:393331112233');
     const service = new WhatsAppWebhookService(repository, {
@@ -223,7 +223,7 @@ describe('WhatsAppWebhookService', () => {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     });
     const service = new WhatsAppWebhookService(repository, {
       autoReplyEnabled: true,
@@ -231,7 +231,7 @@ describe('WhatsAppWebhookService', () => {
 
     await service.processPayload(textPayload('wamid.stop', 'STOP'), context);
     await service.processPayload(
-      textPayload('wamid.cancel-appointment', 'annulla appuntamento'),
+      textPayload('wamid.cancel-appointment', 'cancela cita'),
       context,
     );
 
@@ -252,7 +252,7 @@ describe('WhatsAppWebhookService', () => {
     });
     expect(repository.outboundMessages[0]).toMatchObject({
       externalId: 'opt-out-confirmation:message:wamid.stop',
-      content: expect.stringContaining('non riceverai piu messaggi automatici'),
+      content: expect.stringContaining('ya no recibirás mensajes automáticos'),
       metadata: {
         source: 'whatsapp_opt_out_confirmation',
       },
@@ -267,7 +267,7 @@ describe('WhatsAppWebhookService', () => {
   });
 });
 
-function textPayload(messageId: string, body = 'Vorrei prenotare domani') {
+function textPayload(messageId: string, body = 'Quiero reservar mañana') {
   return WhatsAppWebhookPayloadSchema.parse({
     object: 'whatsapp_business_account',
     entry: [
@@ -433,7 +433,7 @@ class FakeWhatsAppWebhookRepository implements WhatsAppWebhookRepository {
         assistantName: 'Ambrogio',
         aiDisclosureEnabled: true,
         autoReplyEnabled: false,
-        defaultLocale: 'it-IT',
+        defaultLocale: 'es-419',
       }
     );
   }

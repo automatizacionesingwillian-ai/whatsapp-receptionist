@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'WhatsApp Business · Configuración · Ambrogio.ai',
 };
 
-// Lo stato dipende dalla sessione: non deve finire in cache statica.
+// El estado depende de la sesión: no debe cachearse de forma estática.
 export const dynamic = 'force-dynamic';
 
 type LoadResult =
@@ -48,8 +48,8 @@ export default async function WhatsAppSettingsPage() {
           </span>
           <h1>WhatsApp Business</h1>
           <p className="muted">
-            Conecta el número de tu negocio: a partir de entonces Ambrogio lee y responde los mensajes
-            entrantes en este canal.
+            Conecta el Phone number ID y el access token de tu app de Meta. Una sola app puede
+            servir varios negocios: cada tenant usa su propio número.
           </p>
         </div>
       </div>

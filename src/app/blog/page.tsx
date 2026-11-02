@@ -10,33 +10,34 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Blog · Reception AI che funziona davvero',
+  title: 'Blog · Recepción AI que de verdad funciona',
   description:
-    'Case study, guide tecniche, opinioni. Niente fluff marketing — solo cose utili a chi gestisce davvero un business in Italia.',
+    'Casos de estudio, guías técnicas y opiniones. Sin fluff de marketing: solo lo útil para quien gestiona un negocio en LATAM.',
   alternates: { canonical: '/blog' },
   openGraph: {
     title: 'Blog · Ambrogio.ai',
-    description: 'Case study, guide tecniche, opinioni. Solo cose utili.',
+    description: 'Casos de estudio, guías técnicas y opiniones. Solo lo útil.',
     url: '/blog',
     type: 'website',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
 const POSTS = [
   {
     slug: 'whatsapp-business-vs-360dialog-quando-conviene',
-    title: 'WhatsApp Cloud API vs 360dialog: quando conviene cosa',
-    excerpt: 'Confronto tecnico ed economico tra l’API ufficiale Meta e i BSP italiani più usati.',
-    date: '2 maggio 2026',
+    title: 'WhatsApp Cloud API vs 360dialog: cuándo conviene cada uno',
+    excerpt:
+      'Comparativa técnica y económica entre la API oficial de Meta y los BSP más usados en LATAM.',
+    date: '2 de mayo de 2026',
     readTime: '8 min',
-    category: 'Guida',
+    category: 'Guía',
   },
   {
     slug: 'gdpr-receptionist-ai-dpa-template',
-    title: 'GDPR e receptionist AI: il DPA che serve davvero',
-    excerpt: 'Cosa deve contenere un DPA per essere utile in caso di audit. Template scaricabile.',
-    date: '28 aprile 2026',
+    title: 'GDPR y recepción AI: el DPA que realmente necesitas',
+    excerpt: 'Qué debe incluir un DPA para ser útil en una auditoría. Plantilla descargable.',
+    date: '28 de abril de 2026',
     readTime: '12 min',
     category: 'GDPR',
   },
@@ -54,7 +55,8 @@ export default async function BlogPage() {
       <JsonLd
         data={buildCollectionPageSchema({
           name: 'Blog Ambrogio.ai',
-          description: 'Case study, guide tecniche e opinioni dal mondo reception AI italiana.',
+          description:
+            'Casos de estudio, guías técnicas y opiniones del mundo de la recepción AI en LATAM.',
           url: '/blog',
           hasPart: POSTS.map((p) => ({ name: p.title, url: `/blog/${p.slug}` })),
         })}
@@ -69,11 +71,11 @@ export default async function BlogPage() {
             >
               <span className="badge">Blog</span>
               <h1 className="display text-balance">
-                Storie di studi che hanno smesso di perdere chiamate.
+                Historias de estudios que dejaron de perder llamadas.
               </h1>
               <p className="lead text-pretty">
-                Case study, guide tecniche, opinioni. Niente fluff marketing — solo cose utili a chi
-                gestisce davvero un business.
+                Casos de estudio, guías técnicas y opiniones. Sin fluff de marketing: solo lo útil
+                para quien gestiona de verdad un negocio.
               </p>
             </div>
 
@@ -106,7 +108,7 @@ export default async function BlogPage() {
                       marginTop: 'auto',
                     }}
                   >
-                    Leggi articolo <span aria-hidden="true">&rarr;</span>
+                    Leer artículo <span aria-hidden="true">&rarr;</span>
                   </span>
                 </Link>
               ))}

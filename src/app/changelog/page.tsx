@@ -10,9 +10,9 @@ import { SiteFooter } from '@/components/marketing/SiteFooter';
 import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
-  title: 'Changelog · Aggiornamenti Ambrogio.ai',
+  title: 'Changelog · Actualizaciones Ambrogio.ai',
   description:
-    'Segui in tempo reale gli aggiornamenti di Ambrogio.ai: nuove funzionalità, miglioramenti, fix di sicurezza e feed RSS.',
+    'Sigue en tiempo real las actualizaciones de Ambrogio.ai: nuevas funciones, mejoras, fixes de seguridad y feed RSS.',
   alternates: {
     canonical: '/changelog',
     types: { 'application/rss+xml': '/changelog/feed.xml' },
@@ -29,45 +29,45 @@ interface ChangelogEntry {
 
 const ENTRIES: ChangelogEntry[] = [
   {
-    date: '8 maggio 2026',
+    date: '8 de mayo de 2026',
     version: 'v0.1.0',
     category: 'feature',
-    title: 'Lancio beta privata · v0.1.0',
-    body: 'Ambrogio.ai entra in beta privata. Includono: WhatsApp + voice + Google Calendar + Stripe billing + fatturazione SDI elettronica.',
+    title: 'Lanzamiento beta privada · v0.1.0',
+    body: 'Ambrogio.ai entra en beta privada. Incluye: WhatsApp + voice + Google Calendar + Stripe billing + facturación electrónica.',
   },
   {
-    date: '5 maggio 2026',
+    date: '5 de mayo de 2026',
     version: '—',
     category: 'security',
-    title: 'CSP nonce-based + GDPR Art.15/17',
-    body: 'Hardening completo: CSP per-request nonce, COEP/COOP/CORP, endpoint export e delete dati GDPR, rate limiting Upstash su tutti gli endpoint sensibili.',
+    title: 'CSP con nonce + GDPR Arts. 15/17',
+    body: 'Hardening completo: CSP con nonce por request, COEP/COOP/CORP, endpoints de exportación y eliminación GDPR, rate limiting Upstash en todos los endpoints sensibles.',
   },
   {
-    date: '2 maggio 2026',
+    date: '2 de mayo de 2026',
     version: '—',
     category: 'improvement',
     title: 'TypeScript strict + exactOptionalPropertyTypes',
-    body: 'Tooling DX: ESLint 9 + Prettier + Husky pre-commit, Stripe webhook con discriminant guards type-safe.',
+    body: 'Tooling DX: ESLint 9 + Prettier + Husky pre-commit, webhook de Stripe con discriminant guards type-safe.',
   },
   {
-    date: '27 aprile 2026',
+    date: '27 de abril de 2026',
     version: '—',
     category: 'feature',
     title: 'AI booking extractor v1',
-    body: 'Estrazione strutturata di intent, servizio, data/ora, urgenza dalle conversazioni WhatsApp. Eval set deterministico.',
+    body: 'Extracción estructurada de intent, servicio, fecha/hora y urgencia desde conversaciones de WhatsApp. Eval set determinístico.',
   },
   {
-    date: '24 aprile 2026',
+    date: '24 de abril de 2026',
     version: '—',
     category: 'feature',
     title: 'Backend MVP scaffolding',
-    body: 'Setup iniziale Next 15 + Supabase con RLS, auth multi-tenant, webhook Stripe e WhatsApp con signature verification.',
+    body: 'Setup inicial Next 15 + Supabase con RLS, auth multi-tenant, webhooks de Stripe y WhatsApp con verificación de firma.',
   },
 ];
 
 const CATEGORY_BADGE = {
-  feature: { label: 'Nuovo', class: 'badge' },
-  improvement: { label: 'Miglioria', class: 'badge-warm' },
+  feature: { label: 'Nuevo', class: 'badge' },
+  improvement: { label: 'Mejora', class: 'badge-warm' },
   fix: { label: 'Fix', class: 'badge-success' },
   security: { label: 'Seguridad', class: 'badge-danger' },
 } as const;
@@ -85,15 +85,15 @@ export default async function ChangelogPage() {
         data={buildWebPageSchema({
           type: 'CollectionPage',
           name: 'Changelog · Ambrogio.ai',
-          description: 'Aggiornamenti, nuove funzionalità e fix di Ambrogio.ai.',
+          description: 'Actualizaciones, nuevas funciones y fixes de Ambrogio.ai.',
           url: '/changelog',
         })}
       />
       <JsonLd
         data={buildEventSchema({
-          name: 'Lancio beta privata Ambrogio.ai',
+          name: 'Lanzamiento beta privada Ambrogio.ai',
           description:
-            'Ambrogio.ai entra in beta privata con il primo cliente pilota. Include: WhatsApp + voice + Google Calendar + Stripe billing + fatturazione SDI elettronica.',
+            'Ambrogio.ai entra en beta privada con el primer cliente piloto. Incluye: WhatsApp + voice + Google Calendar + Stripe billing + facturación electrónica.',
           startDate: '2026-05-08',
           url: '/changelog',
           eventStatus: 'EventScheduled',
@@ -106,10 +106,10 @@ export default async function ChangelogPage() {
           <div className="container-narrow">
             <div className="stack stack-4" style={{ marginBottom: 'var(--space-12)' }}>
               <span className="eyebrow">Changelog</span>
-              <h1 className="display text-balance">Cosa è cambiato</h1>
+              <h1 className="display text-balance">Qué cambió</h1>
               <p className="lead text-pretty">
-                Aggiornamenti, miglioramenti e correzioni. Aggiornato in tempo reale dal team
-                tecnico.
+                Actualizaciones, mejoras y correcciones. Actualizado en tiempo real por el equipo
+                técnico.
               </p>
             </div>
 
@@ -168,7 +168,7 @@ export default async function ChangelogPage() {
               }}
             >
               <p style={{ fontSize: 'var(--text-sm)' }}>
-                <strong>Iscriviti al feed RSS</strong> per ricevere aggiornamenti automatici:{' '}
+                <strong>Suscríbete al feed RSS</strong> para recibir actualizaciones automáticas:{' '}
                 <a href="/changelog/feed.xml" className="btn-link">
                   /changelog/feed.xml
                 </a>

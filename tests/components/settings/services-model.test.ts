@@ -317,7 +317,7 @@ describe('service requests', () => {
 
     expect(result).toEqual({
       ok: false,
-      message: 'Non siamo riusciti a creare il servizio. Riprova tra poco.',
+      message: 'No pudimos crear el servicio. Inténtalo de nuevo pronto.',
     });
   });
 });

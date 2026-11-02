@@ -1,5 +1,38 @@
 # Ambrogio.ai Agent Memory
 
+## 2026-10-30 — Migración WhatsApp → Meta Cloud API (sin 360dialog) — Cursor
+
+- Conector: Graph API Bearer + `/{phone-number-id}/messages`; provider `whatsapp_cloud`; media/templates Meta; webhook `X-Hub-Signature-256` + verify token.
+- Multi-tenant: 1 Meta App → N negocios vía `phone_number_id` + token/WABA por tenant en `/settings/whatsapp`.
+- Env: `WHATSAPP_APP_SECRET`, `WHATSAPP_PHONE_NUMBER_ID`, `WHATSAPP_WABA_ID`; URL default `https://graph.facebook.com/v21.0`.
+- Guía: `docs/setup/META-WHATSAPP-CLOUD.es.md`.
+- Tests WhatsApp + webhook-security: 108 passed.
+- **Pendiente del usuario (Meta):**
+  1. App Secret + verify token en `.env.local` / Vercel
+  2. Webhook callback `https://<dominio>/api/webhook/whatsapp` suscrito a `messages`
+  3. Token permanente (System User) + Phone number ID + WABA
+  4. Conectar tenant en `/settings/whatsapp`
+  5. Crear/aprobar plantillas ES en WhatsApp Manager (`appointment_*`)
+- Después: UI Google Calendar. Sin commit.
+
+## 2026-10-30 — UI marketing/admin/legal restante IT → es-419 — Cursor
+
+- Traducidos a español LATAM: about, help, blog, admin, legal, etc.
+
+## 2026-10-30 — Purga italiano + toggle auto-reply es-419 — Cursor
+
+- IA/runtime ES; toggle auto-reply en `/settings/ai`.
+
+## 2026-10-30 — Fallbacks runtime IT → es-419 / Mexico City — Cursor
+
+- Fallbacks timezone `Europe/Rome` → `America/Mexico_City` y locale `it-IT` → `es-419` en TS runtime.
+- Plantillas WhatsApp `es` + preview ES; opt-out/emails/JsonLd sin italiano.
+- PATCH locale regex acepta `es-419`.
+
+## 2026-10-30 — IA en español es-419 — Cursor (superseded: bilingual purge)
+
+- Primera pasada a español; la entrada de arriba elimina el residual bilingüe IT.
+
 ## 2026-10-08 — Auditoría UI es-419 (horarios + panel) — Cursor
 
 - Horarios: días Lunes–Domingo, Abre/Cierra/Cerrado; breadcrumbs `/ Negocio`.

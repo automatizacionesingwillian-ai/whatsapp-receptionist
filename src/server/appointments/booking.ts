@@ -862,7 +862,7 @@ export class SupabaseAppointmentBookingRepository implements AppointmentBookingR
 
     return {
       tenantId: input.tenantId,
-      timezone: tenantRow.timezone || 'Europe/Rome',
+      timezone: tenantRow.timezone || 'America/Mexico_City',
       studioName: configRow?.studio_name ?? 'Studio',
       address: configRow?.address ?? null,
       bookingMinLeadMinutes: configRow?.booking_min_lead_minutes ?? 120,
@@ -1258,13 +1258,13 @@ function appointmentDescription(
   context: BookingServiceContext,
 ): string {
   const lines = [
-    `Prenotazione creata da Ambrogio.ai`,
-    `Servizio: ${context.service.name}`,
+    `Reserva creada por Ambrogio.ai`,
+    `Servicio: ${context.service.name}`,
     `Cliente: ${input.customerName}`,
   ];
 
   if (input.customerPhone) {
-    lines.push(`Telefono: ${input.customerPhone}`);
+    lines.push(`Teléfono: ${input.customerPhone}`);
   }
 
   if (input.notes) {

@@ -66,7 +66,9 @@ export default function ContactPage() {
                   color: 'var(--color-text-secondary)',
                 }}
               >
-                <strong style={{ color: 'var(--color-text)' }}>Ambrogio.ai · Roma, Italia</strong>
+                <strong style={{ color: 'var(--color-text)' }}>
+                  Ambrogio.ai · Ciudad de México, México
+                </strong>
                 <p>
                   <strong>Ventas y partnerships:</strong>{' '}
                   <a href="mailto:hello@ambrogio.ai" className="btn-link">

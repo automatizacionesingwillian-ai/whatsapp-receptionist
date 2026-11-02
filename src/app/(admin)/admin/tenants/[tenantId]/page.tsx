@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { requireSuperAdmin } from '@/lib/auth/super-admin';
 
 export const metadata: Metadata = {
-  title: 'Dettaglio tenant · Admin',
+  title: 'Detalle del tenant · Admin',
   robots: { index: false, follow: false },
 };
 
@@ -72,63 +72,63 @@ interface TenantDetail {
 const TENANTS_DETAILS: Record<string, TenantDetail> = {
   t1: {
     id: 't1',
-    name: 'Studio Dentistico Rossi',
+    name: 'Clínica Dental Ruiz',
     vertical: 'dental',
     status: 'active',
     account: {
-      legalName: 'Studio Dentistico Rossi S.r.l.',
-      pIva: 'IT04382910158',
+      legalName: 'Clínica Dental Ruiz S.A. de C.V.',
+      pIva: 'CDR850214AB3',
       sdiCode: 'M5UXCR1',
-      address: 'Via Garibaldi 14, 20121 Milano (MI)',
-      contactEmail: 'amministrazione@studiorossi.it',
-      ownerName: 'Dott. Marco Rossi',
-      ownerEmail: 'm.rossi@studiorossi.it',
+      address: 'Av. Insurgentes Sur 1458, 03920 Ciudad de México, CDMX',
+      contactEmail: 'administracion@clinicaruiz.mx',
+      ownerName: 'Dr. Marco Ruiz',
+      ownerEmail: 'm.ruiz@clinicaruiz.mx',
     },
     plan: {
       name: 'Professional',
-      mrr: '€297',
+      mrr: 'MXN $5,970',
       nextInvoiceDate: '12/06/2026',
-      nextInvoiceAmount: '€362,34 (IVA inclusa)',
+      nextInvoiceAmount: 'MXN $6,925.20 (IVA incluido)',
       paymentMethod: 'Visa •••• 4242',
       stripeCustomerId: 'cus_PqZxK2eR8nFkQp',
     },
     usage: {
       aiConversations: { value: '847', limit: '2.000' },
       voiceMinutes: { value: '124 min', limit: '300 min' },
-      bookings: { value: '92', limit: 'illimitato' },
+      bookings: { value: '92', limit: 'ilimitado' },
     },
     integrations: {
-      whatsapp: { connected: true, phone: '+39 02 8765 4321' },
-      googleCalendar: { connected: true, account: 'agenda@studiorossi.it' },
-      elevenlabs: { connected: true, voice: 'Giulia (it-IT, calda)' },
-      fattureInCloud: { connected: true, companyName: 'Studio Rossi S.r.l.' },
+      whatsapp: { connected: true, phone: '+52 55 8765 4321' },
+      googleCalendar: { connected: true, account: 'agenda@clinicaruiz.mx' },
+      elevenlabs: { connected: true, voice: 'Sofía (es-419, cálida)' },
+      fattureInCloud: { connected: true, companyName: 'Clínica Ruiz S.A. de C.V.' },
     },
     team: [
       {
         id: 'u_001',
-        email: 'm.rossi@studiorossi.it',
-        fullName: 'Marco Rossi',
+        email: 'm.ruiz@clinicaruiz.mx',
+        fullName: 'Marco Ruiz',
         role: 'owner',
         lastLogin: '08/05/2026 09:14',
       },
       {
         id: 'u_002',
-        email: 'reception@studiorossi.it',
-        fullName: 'Anna Bianchi',
+        email: 'recepcion@clinicaruiz.mx',
+        fullName: 'Ana Blanco',
         role: 'admin',
         lastLogin: '08/05/2026 08:32',
       },
       {
         id: 'u_003',
-        email: 'dr.verdi@studiorossi.it',
-        fullName: 'Laura Verdi',
+        email: 'dra.verde@clinicaruiz.mx',
+        fullName: 'Laura Verde',
         role: 'member',
         lastLogin: '07/05/2026 19:48',
       },
       {
         id: 'u_004',
-        email: 'igiene@studiorossi.it',
-        fullName: 'Sara Ferri',
+        email: 'higiene@clinicaruiz.mx',
+        fullName: 'Sara Ferrer',
         role: 'member',
         lastLogin: '06/05/2026 14:22',
       },
@@ -137,19 +137,19 @@ const TENANTS_DETAILS: Record<string, TenantDetail> = {
       {
         ts: '08/05/2026 09:14',
         action: 'login',
-        target: 'sessione web',
-        user: 'm.rossi@studiorossi.it',
+        target: 'sesión web',
+        user: 'm.ruiz@clinicaruiz.mx',
       },
       {
         ts: '08/05/2026 08:42',
         action: 'settings_change',
-        target: 'orari apertura · venerdì',
-        user: 'reception@studiorossi.it',
+        target: 'horarios de apertura · viernes',
+        user: 'recepcion@clinicaruiz.mx',
       },
       {
         ts: '07/05/2026 19:48',
         action: 'booking_created',
-        target: 'appuntamento · pulizia · 14/05',
+        target: 'cita · limpieza · 14/05',
         user: 'AI agent',
       },
       {
@@ -161,62 +161,62 @@ const TENANTS_DETAILS: Record<string, TenantDetail> = {
       {
         ts: '06/05/2026 11:03',
         action: 'kb_update',
-        target: 'FAQ · prezzi pulizia',
-        user: 'm.rossi@studiorossi.it',
+        target: 'FAQ · precios limpieza',
+        user: 'm.ruiz@clinicaruiz.mx',
       },
       {
         ts: '05/05/2026 22:18',
         action: 'voice_reply_sent',
-        target: 'conversazione #4128',
+        target: 'conversación #4128',
         user: 'AI agent',
       },
       {
         ts: '05/05/2026 14:30',
         action: 'billing_event',
-        target: 'fattura SDI #2026-042 emessa',
+        target: 'factura #2026-042 emitida',
         user: 'sistema',
       },
       {
         ts: '04/05/2026 17:55',
         action: 'team_invite',
-        target: 'igiene@studiorossi.it · role=member',
-        user: 'm.rossi@studiorossi.it',
+        target: 'higiene@clinicaruiz.mx · role=member',
+        user: 'm.ruiz@clinicaruiz.mx',
       },
       {
         ts: '03/05/2026 10:22',
         action: 'gdpr_export',
-        target: 'export dati paziente · CF MRZL85...',
-        user: 'reception@studiorossi.it',
+        target: 'exportación datos paciente · ID MRZL85...',
+        user: 'recepcion@clinicaruiz.mx',
       },
       {
         ts: '02/05/2026 09:01',
         action: 'login',
-        target: 'sessione web',
-        user: 'm.rossi@studiorossi.it',
+        target: 'sesión web',
+        user: 'm.ruiz@clinicaruiz.mx',
       },
     ],
     created: '12/04/2026',
   },
   t2: {
     id: 't2',
-    name: 'Beauty Center Roma',
+    name: 'Beauty Center CDMX',
     vertical: 'beauty',
     status: 'active',
     account: {
-      legalName: 'Beauty Center Roma S.r.l.s.',
-      pIva: 'IT15782039004',
+      legalName: 'Beauty Center CDMX S.A. de C.V.',
+      pIva: 'BCC910315XY9',
       sdiCode: 'KRRH6B9',
-      address: 'Via del Corso 121, 00186 Roma (RM)',
-      contactEmail: 'info@beautyromacenter.it',
-      ownerName: 'Giulia Esposito',
-      ownerEmail: 'g.esposito@beautyromacenter.it',
+      address: 'Av. Reforma 222, 06600 Ciudad de México, CDMX',
+      contactEmail: 'info@beautycdmx.mx',
+      ownerName: 'Julia Espinosa',
+      ownerEmail: 'j.espinosa@beautycdmx.mx',
     },
     plan: {
       name: 'Starter',
-      mrr: '€97',
+      mrr: 'MXN $1,970',
       nextInvoiceDate: '01/06/2026',
-      nextInvoiceAmount: '€118,34 (IVA inclusa)',
-      paymentMethod: 'SEPA •••• 8821',
+      nextInvoiceAmount: 'MXN $2,285.20 (IVA incluido)',
+      paymentMethod: 'Visa •••• 8821',
       stripeCustomerId: 'cus_OnL7qR2vN8eKpX',
     },
     usage: {
@@ -225,23 +225,23 @@ const TENANTS_DETAILS: Record<string, TenantDetail> = {
       bookings: { value: '47', limit: '100' },
     },
     integrations: {
-      whatsapp: { connected: true, phone: '+39 06 4567 8910' },
-      googleCalendar: { connected: true, account: 'prenotazioni@beautyromacenter.it' },
+      whatsapp: { connected: true, phone: '+52 55 4567 8910' },
+      googleCalendar: { connected: true, account: 'reservas@beautycdmx.mx' },
       elevenlabs: { connected: false, voice: null },
       fattureInCloud: { connected: false, companyName: null },
     },
     team: [
       {
         id: 'u_011',
-        email: 'g.esposito@beautyromacenter.it',
-        fullName: 'Giulia Esposito',
+        email: 'j.espinosa@beautycdmx.mx',
+        fullName: 'Julia Espinosa',
         role: 'owner',
         lastLogin: '08/05/2026 11:02',
       },
       {
         id: 'u_012',
-        email: 'reception@beautyromacenter.it',
-        fullName: 'Martina Lupo',
+        email: 'recepcion@beautycdmx.mx',
+        fullName: 'Martina Luna',
         role: 'admin',
         lastLogin: '08/05/2026 10:15',
       },
@@ -250,14 +250,14 @@ const TENANTS_DETAILS: Record<string, TenantDetail> = {
       {
         ts: '08/05/2026 11:02',
         action: 'login',
-        target: 'sessione web',
-        user: 'g.esposito@beautyromacenter.it',
+        target: 'sesión web',
+        user: 'j.espinosa@beautycdmx.mx',
       },
       {
         ts: '08/05/2026 10:15',
         action: 'settings_change',
-        target: 'risposta automatica · weekend',
-        user: 'reception@beautyromacenter.it',
+        target: 'respuesta automática · fin de semana',
+        user: 'recepcion@beautycdmx.mx',
       },
       {
         ts: '07/05/2026 18:33',
@@ -268,32 +268,32 @@ const TENANTS_DETAILS: Record<string, TenantDetail> = {
       {
         ts: '06/05/2026 09:48',
         action: 'kb_update',
-        target: 'listino trattamenti viso',
-        user: 'g.esposito@beautyromacenter.it',
+        target: 'tarifario tratamientos faciales',
+        user: 'j.espinosa@beautycdmx.mx',
       },
       {
         ts: '05/05/2026 12:00',
         action: 'plan_change_requested',
         target: 'upgrade Starter → Professional',
-        user: 'g.esposito@beautyromacenter.it',
+        user: 'j.espinosa@beautycdmx.mx',
       },
       {
         ts: '04/05/2026 19:22',
         action: 'login',
-        target: 'sessione mobile',
-        user: 'g.esposito@beautyromacenter.it',
+        target: 'sesión móvil',
+        user: 'j.espinosa@beautycdmx.mx',
       },
       {
         ts: '03/05/2026 14:11',
         action: 'voice_reply_sent',
-        target: 'conversazione #882',
+        target: 'conversación #882',
         user: 'AI agent',
       },
       {
         ts: '02/05/2026 08:55',
         action: 'integration_connected',
         target: 'Google Calendar',
-        user: 'g.esposito@beautyromacenter.it',
+        user: 'j.espinosa@beautycdmx.mx',
       },
     ],
     created: '01/04/2026',
@@ -303,8 +303,8 @@ const TENANTS_DETAILS: Record<string, TenantDetail> = {
 const STATUS_BADGE = {
   active: { label: 'Activo', class: 'badge-success' },
   trial: { label: 'Trial', class: 'badge-warm' },
-  suspended: { label: 'Sospeso', class: 'badge-danger' },
-  cancelled: { label: 'Cancellato', class: 'badge-neutral' },
+  suspended: { label: 'Suspendido', class: 'badge-danger' },
+  cancelled: { label: 'Cancelado', class: 'badge-neutral' },
 } as const;
 
 const ROLE_BADGE = {
@@ -315,16 +315,16 @@ const ROLE_BADGE = {
 
 const ACTION_LABELS: Record<string, string> = {
   login: 'Login',
-  settings_change: 'Settings change',
-  booking_created: 'Booking created',
-  integration_refresh: 'Integration refresh',
-  integration_connected: 'Integration connected',
-  kb_update: 'KB update',
-  voice_reply_sent: 'Voice reply sent',
-  billing_event: 'Billing event',
-  team_invite: 'Team invite',
-  gdpr_export: 'GDPR export',
-  plan_change_requested: 'Plan change requested',
+  settings_change: 'Cambio de configuración',
+  booking_created: 'Cita creada',
+  integration_refresh: 'Refresh de integración',
+  integration_connected: 'Integración conectada',
+  kb_update: 'Actualización KB',
+  voice_reply_sent: 'Respuesta de voz enviada',
+  billing_event: 'Evento de facturación',
+  team_invite: 'Invitación al equipo',
+  gdpr_export: 'Exportación GDPR',
+  plan_change_requested: 'Cambio de plan solicitado',
 };
 
 interface PageProps {
@@ -351,7 +351,7 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
     <div className="stack stack-8">
       <div className="stack stack-3">
         <Link href="/admin/tenants" className="btn-link" style={{ fontSize: 'var(--text-sm)' }}>
-          ← Tutti i tenant
+          ← Todos los tenants
         </Link>
         <div className="row-between">
           <div className="stack stack-2">
@@ -362,15 +362,15 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
             </div>
             <h1>{tenant.name}</h1>
             <span className="mono muted" style={{ fontSize: 'var(--text-sm)' }}>
-              {tenant.id} · iscritto il {tenant.created}
+              {tenant.id} · inscrito el {tenant.created}
             </span>
           </div>
           <div className="row" style={{ gap: 'var(--space-2)' }}>
             <button type="button" className="btn btn-secondary">
-              Vedi log completi
+              Ver logs completos
             </button>
             <button type="button" className="btn btn-secondary">
-              Gestisci billing
+              Gestionar facturación
             </button>
             <button
               type="button"
@@ -381,7 +381,7 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
                 borderColor: 'oklch(85% 0.06 27)',
               }}
             >
-              Sospendi tenant
+              Suspender tenant
             </button>
           </div>
         </div>
@@ -395,7 +395,7 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
         }}
       >
         <section className="card stack stack-4">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Account</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Cuenta</h2>
           <dl
             style={{
               display: 'grid',
@@ -406,11 +406,11 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
               margin: 0,
             }}
           >
-            <DtRow label="Ragione sociale" value={tenant.account.legalName} />
-            <DtRow label="P.IVA" value={tenant.account.pIva} mono />
-            <DtRow label="Codice SDI" value={tenant.account.sdiCode} mono />
-            <DtRow label="Indirizzo" value={tenant.account.address} />
-            <DtRow label="Email principale" value={tenant.account.contactEmail} />
+            <DtRow label="Razón social" value={tenant.account.legalName} />
+            <DtRow label="RFC" value={tenant.account.pIva} mono />
+            <DtRow label="Código fiscal" value={tenant.account.sdiCode} mono />
+            <DtRow label="Dirección" value={tenant.account.address} />
+            <DtRow label="Email principal" value={tenant.account.contactEmail} />
             <DtRow
               label="Owner"
               value={`${tenant.account.ownerName} · ${tenant.account.ownerEmail}`}
@@ -430,18 +430,18 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
               margin: 0,
             }}
           >
-            <DtRow label="Piano corrente" value={tenant.plan.name} />
+            <DtRow label="Plan actual" value={tenant.plan.name} />
             <DtRow label="MRR" value={tenant.plan.mrr} bold />
-            <DtRow label="Prossima fattura" value={tenant.plan.nextInvoiceDate} />
-            <DtRow label="Importo" value={tenant.plan.nextInvoiceAmount} />
-            <DtRow label="Pagamento" value={tenant.plan.paymentMethod} mono />
+            <DtRow label="Próxima factura" value={tenant.plan.nextInvoiceDate} />
+            <DtRow label="Importe" value={tenant.plan.nextInvoiceAmount} />
+            <DtRow label="Pago" value={tenant.plan.paymentMethod} mono />
             <DtRow label="Customer Stripe" value={tenant.plan.stripeCustomerId} mono />
           </dl>
         </section>
       </div>
 
       <section className="card stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-xl)' }}>Usage · Maggio 2026</h2>
+        <h2 style={{ fontSize: 'var(--text-xl)' }}>Uso · Mayo 2026</h2>
         <div className="kpi-grid" style={{ marginBottom: 0 }}>
           <UsageCard
             label="Conversaciones AI"
@@ -449,12 +449,12 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
             limit={tenant.usage.aiConversations.limit}
           />
           <UsageCard
-            label="Vocali trascritti"
+            label="Audios transcritos"
             value={tenant.usage.voiceMinutes.value}
             limit={tenant.usage.voiceMinutes.limit}
           />
           <UsageCard
-            label="Booking creati"
+            label="Citas creadas"
             value={tenant.usage.bookings.value}
             limit={tenant.usage.bookings.limit}
           />
@@ -462,7 +462,7 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
       </section>
 
       <section className="card stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-xl)' }}>Integrazioni</h2>
+        <h2 style={{ fontSize: 'var(--text-xl)' }}>Integraciones</h2>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="stack stack-2">
           <IntegrationRow
             name="WhatsApp Cloud API"
@@ -480,7 +480,7 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
             detail={tenant.integrations.elevenlabs.voice}
           />
           <IntegrationRow
-            name="Fatture in Cloud"
+            name="Facturación electrónica"
             connected={tenant.integrations.fattureInCloud.connected}
             detail={tenant.integrations.fattureInCloud.companyName}
           />
@@ -489,9 +489,9 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
 
       <section className="card stack stack-4">
         <div className="row-between">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Team ({tenant.team.length})</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Equipo ({tenant.team.length})</h2>
           <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-            Mostra max 5 utenti più recenti
+            Muestra máx. 5 usuarios más recientes
           </span>
         </div>
         <div style={{ overflowX: 'auto' }}>
@@ -508,10 +508,10 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
                   borderBottom: '2px solid var(--color-border)',
                 }}
               >
-                <Th>Utente</Th>
+                <Th>Usuario</Th>
                 <Th>Email</Th>
-                <Th>Ruolo</Th>
-                <Th>Ultimo accesso</Th>
+                <Th>Rol</Th>
+                <Th>Último acceso</Th>
               </tr>
             </thead>
             <tbody>
@@ -541,13 +541,13 @@ export default async function AdminTenantDetailPage({ params }: PageProps) {
 
       <section className="card stack stack-4">
         <div className="row-between">
-          <h2 style={{ fontSize: 'var(--text-xl)' }}>Audit recente</h2>
+          <h2 style={{ fontSize: 'var(--text-xl)' }}>Audit reciente</h2>
           <Link
             href={`/admin/audit?tenant=${tenant.id}`}
             className="btn-link"
             style={{ fontSize: 'var(--text-sm)' }}
           >
-            Vedi audit completo →
+            Ver audit completo →
           </Link>
         </div>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="stack stack-2">
@@ -623,7 +623,7 @@ function UsageCard({
       <span className="kpi-label">{label}</span>
       <span className="kpi-value">{value}</span>
       <span className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-        su {limit} inclusi
+        de {limit} incluidos
       </span>
     </article>
   );
@@ -653,7 +653,7 @@ function IntegrationRow({
         className={`badge ${connected ? 'badge-success' : 'badge-neutral'}`}
         style={{ justifySelf: 'end' }}
       >
-        {connected ? 'Connesso' : 'Non connesso'}
+        {connected ? 'Conectado' : 'No conectado'}
       </span>
     </li>
   );

@@ -114,7 +114,7 @@ export default async function VerticalOpengraphImage({ params }: Props): Promise
             lineHeight: 1.4,
           }}
         >
-          WhatsApp, voce, prenotazioni automatiche. Setup in 24h.
+          WhatsApp, voz, reservas automáticas. Setup en 24 h.
         </div>
       </div>
 

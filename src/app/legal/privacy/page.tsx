@@ -3,149 +3,154 @@ import type { Metadata } from 'next';
 import { LegalPageLayout } from '@/components/marketing/LegalPageLayout';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
+  title: 'Política de privacidad',
   description:
-    'Privacy policy Ambrogio.ai conforme GDPR. Hosting EU, redact PII automatico, retention 24 mesi, diritti Art. 15-22.',
+    'Política de privacidad de Ambrogio.ai alineada con el GDPR. Hosting en la UE, redacción automática de PII, retención 24 meses, derechos Arts. 15-22.',
   alternates: { canonical: '/legal/privacy' },
 };
 
 export default function PrivacyPage() {
   return (
-    <LegalPageLayout title="Privacy Policy" lastUpdated="8 maggio 2026">
+    <LegalPageLayout title="Política de privacidad" lastUpdated="8 de mayo de 2026">
       <p>
-        La presente Privacy Policy descrive come Ambrogio.ai (di seguito{' '}
-        <strong>&quot;Ambrogio&quot;</strong>, <strong>&quot;noi&quot;</strong>) raccoglie, utilizza
-        e protegge i dati personali degli utenti dei propri servizi B2B.
+        Esta Política de privacidad describe cómo Ambrogio.ai (en adelante{' '}
+        <strong>&quot;Ambrogio&quot;</strong>, <strong>&quot;nosotros&quot;</strong>) recopila,
+        utiliza y protege los datos personales de los usuarios de sus servicios B2B.
       </p>
 
-      <h2>1. Titolare del trattamento</h2>
+      <h2>1. Responsable del tratamiento</h2>
       <p>
-        Il titolare del trattamento è Ambrogio.ai, con sede in [da definire in fase di
-        costituzione], P.IVA [da inserire]. Per ogni questione relativa al trattamento dei dati:{' '}
+        El responsable del tratamiento es Ambrogio.ai, con domicilio en [por definir en fase de
+        constitución], identificación fiscal [por insertar]. Para cualquier cuestión relativa al
+        tratamiento de datos:{' '}
         <a href="mailto:privacy@ambrogio.ai">privacy@ambrogio.ai</a>.
       </p>
 
-      <h2>2. Categorie di dati raccolti</h2>
+      <h2>2. Categorías de datos recopilados</h2>
       <ul>
         <li>
-          <strong>Dati account business:</strong> nome studio, email, telefono, P.IVA, codice
-          fiscale, codice destinatario SDI.
+          <strong>Datos de cuenta business:</strong> nombre del estudio, email, teléfono, RFC/NIT,
+          identificación fiscal y código de facturación electrónica.
         </li>
         <li>
-          <strong>Dati conversazione:</strong> messaggi WhatsApp scambiati con i clienti finali del
-          tenant, vocali trascritti, metadati.
+          <strong>Datos de conversación:</strong> mensajes de WhatsApp intercambiados con los
+          clientes finales del tenant, audios transcritos y metadatos.
         </li>
         <li>
-          <strong>Dati operativi:</strong> log tecnici, request id, tempo risposta, stato job.
+          <strong>Datos operativos:</strong> logs técnicos, request id, tiempo de respuesta, estado
+          de jobs.
         </li>
         <li>
-          <strong>Dati di pagamento:</strong> processati direttamente da Stripe (EU). Non
-          conserviamo numeri carta o CVV.
+          <strong>Datos de pago:</strong> procesados directamente por Stripe (UE). No conservamos
+          números de tarjeta ni CVV.
         </li>
       </ul>
 
-      <h2>3. Finalità e basi giuridiche</h2>
+      <h2>3. Finalidades y bases jurídicas</h2>
       <ul>
         <li>
-          <strong>Erogazione del servizio</strong> (Art. 6.1.b GDPR — esecuzione contratto).
+          <strong>Prestación del servicio</strong> (Art. 6.1.b GDPR — ejecución del contrato).
         </li>
         <li>
-          <strong>Compliance fiscale</strong> (Art. 6.1.c — obbligo legale): fatturazione
-          elettronica SDI, conservazione 10 anni.
+          <strong>Cumplimiento fiscal</strong> (Art. 6.1.c — obligación legal): facturación
+          electrónica y conservación según la normativa aplicable.
         </li>
         <li>
-          <strong>Seguridad e prevenzione abusi</strong> (Art. 6.1.f — interesse legittimo): rate
-          limiting, audit log, fraud detection.
+          <strong>Seguridad y prevención de abusos</strong> (Art. 6.1.f — interés legítimo): rate
+          limiting, audit log, detección de fraude.
         </li>
         <li>
-          <strong>Comunicazioni di servizio</strong> (Art. 6.1.b): notifiche operative non
-          marketing.
+          <strong>Comunicaciones de servicio</strong> (Art. 6.1.b): notificaciones operativas no
+          comerciales.
         </li>
       </ul>
 
-      <h2>4. Localizzazione dei dati</h2>
+      <h2>4. Localización de los datos</h2>
       <p>
-        Tutti i dati sono ospitati in <strong>Unione Europea</strong>:
+        Todos los datos se alojan en la <strong>Unión Europea</strong>:
       </p>
       <ul>
-        <li>Database: Supabase Frankfurt (EU)</li>
-        <li>Hosting: Vercel EU region</li>
-        <li>Cache &amp; rate limit: Upstash EU</li>
-        <li>AI inference: Anthropic API EU region</li>
-        <li>Voce: ElevenLabs EU</li>
-      </ul>
-      <p>Nessun trasferimento verso paesi terzi senza adeguate garanzie (SCC ove applicabile).</p>
-
-      <h2>5. Conservazione</h2>
-      <ul>
-        <li>Dati account: per tutta la durata del rapporto + 12 mesi.</li>
-        <li>Conversaciones: 24 mesi rolling, salvo richieste legali.</li>
-        <li>Vocali audio: 90 giorni dalla trascrizione.</li>
-        <li>Dati fiscali (fatture): 10 anni come da normativa italiana.</li>
-        <li>Log tecnici: 12 mesi.</li>
-      </ul>
-
-      <h2>6. I tuoi diritti (Art. 15-22 GDPR)</h2>
-      <p>Hai diritto di:</p>
-      <ul>
-        <li>
-          <strong>Accedere</strong> ai tuoi dati e ottenere una copia (Art. 15) — disponibile dalla
-          dashboard, sezione &quot;Esporta dati&quot;.
-        </li>
-        <li>
-          <strong>Rettificare</strong> dati inesatti (Art. 16) — modifiche dirette dalla dashboard.
-        </li>
-        <li>
-          <strong>Cancellare</strong> i tuoi dati (Art. 17) — disponibile come &quot;Cancella
-          account&quot;, con grace period di 30 giorni.
-        </li>
-        <li>
-          <strong>Limitare</strong> o <strong>opporsi</strong> al trattamento (Art. 18, 21).
-        </li>
-        <li>
-          <strong>Portabilità</strong> in formato JSON strutturato (Art. 20).
-        </li>
+        <li>Base de datos: Supabase Frankfurt (UE)</li>
+        <li>Hosting: región UE de Vercel</li>
+        <li>Cache y rate limit: Upstash UE</li>
+        <li>Inferencia AI: Anthropic API región UE</li>
+        <li>Voz: ElevenLabs UE</li>
       </ul>
       <p>
-        Per esercitare questi diritti su clienti finali del tuo studio (i tuoi pazienti / clienti
-        WhatsApp), usa la sezione &quot;Customers&quot; della dashboard.
+        Ninguna transferencia a terceros países sin garantías adecuadas (SCC cuando aplique).
       </p>
 
-      <h2>7. Seguridad tecnica</h2>
+      <h2>5. Conservación</h2>
       <ul>
-        <li>Crittografia in transito (TLS 1.3) e a riposo (AES-256).</li>
-        <li>Multi-tenancy con Row-Level Security su ogni tabella.</li>
-        <li>PII redatti automaticamente nei log applicativi.</li>
-        <li>Rate limiting per prevenzione abusi.</li>
-        <li>CSP nonce-based per protezione XSS.</li>
-        <li>Webhook signature verification timing-safe.</li>
-        <li>Audit log immutabile per azioni sensibili.</li>
+        <li>Datos de cuenta: durante toda la relación + 12 meses.</li>
+        <li>Conversaciones: 24 meses rolling, salvo requerimientos legales.</li>
+        <li>Audios: 90 días desde la transcripción.</li>
+        <li>
+          Datos fiscales (facturas): el tiempo exigido por la normativa fiscal aplicable.
+        </li>
+        <li>Logs técnicos: 12 meses.</li>
       </ul>
 
-      <h2>8. Sub-processori</h2>
+      <h2>6. Tus derechos (Arts. 15-22 GDPR)</h2>
+      <p>Tienes derecho a:</p>
+      <ul>
+        <li>
+          <strong>Acceder</strong> a tus datos y obtener una copia (Art. 15) — disponible desde el
+          panel, sección &quot;Exportar datos&quot;.
+        </li>
+        <li>
+          <strong>Rectificar</strong> datos inexactos (Art. 16) — cambios directos desde el panel.
+        </li>
+        <li>
+          <strong>Suprimir</strong> tus datos (Art. 17) — disponible como &quot;Eliminar
+          cuenta&quot;, con periodo de gracia de 30 días.
+        </li>
+        <li>
+          <strong>Limitar</strong> u <strong>oponerte</strong> al tratamiento (Arts. 18, 21).
+        </li>
+        <li>
+          <strong>Portabilidad</strong> en formato JSON estructurado (Art. 20).
+        </li>
+      </ul>
       <p>
-        Lista pubblica e aggiornata in <a href="/legal/sub-processors">/legal/sub-processors</a>.
-        Notifica scritta minimo 30 giorni prima di aggiungere nuovi sub-processori.
+        Para ejercer estos derechos sobre clientes finales de tu estudio (tus pacientes / clientes
+        de WhatsApp), usa la sección &quot;Customers&quot; del panel.
       </p>
 
-      <h2>9. Reclami</h2>
+      <h2>7. Seguridad técnica</h2>
+      <ul>
+        <li>Cifrado en tránsito (TLS 1.3) y en reposo (AES-256).</li>
+        <li>Multi-tenancy con Row-Level Security en cada tabla.</li>
+        <li>PII redactada automáticamente en los logs de aplicación.</li>
+        <li>Rate limiting para prevenir abusos.</li>
+        <li>CSP basada en nonce para protección XSS.</li>
+        <li>Verificación timing-safe de firmas de webhook.</li>
+        <li>Audit log inmutable para acciones sensibles.</li>
+      </ul>
+
+      <h2>8. Subencargados</h2>
       <p>
-        Hai diritto di proporre reclamo al{' '}
-        <strong>Garante per la Protezione dei Dati Personali</strong> (
-        <a href="https://www.garanteprivacy.it/">www.garanteprivacy.it</a>) se ritieni che il
-        trattamento violi il GDPR.
+        Lista pública y actualizada en <a href="/legal/sub-processors">/legal/sub-processors</a>.
+        Notificación escrita con al menos 30 días de antelación antes de añadir nuevos
+        subencargados.
       </p>
 
-      <h2>10. Modifiche</h2>
+      <h2>9. Reclamaciones</h2>
       <p>
-        Aggiorniamo questa policy quando cambiano le tecnologie, i sub-processori o la normativa. Le
-        modifiche sostanziali ti vengono notificate via email almeno 30 giorni prima.
+        Tienes derecho a presentar una reclamación ante la autoridad de protección de datos
+        competente si consideras que el tratamiento vulnera el GDPR u otra normativa aplicable.
+      </p>
+
+      <h2>10. Modificaciones</h2>
+      <p>
+        Actualizamos esta política cuando cambian las tecnologías, los subencargados o la normativa.
+        Los cambios sustanciales se notifican por email al menos 30 días antes.
       </p>
 
       <hr className="divider" />
       <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-        Per richieste GDPR specifiche scrivi a <a href="mailto:dpo@ambrogio.ai">dpo@ambrogio.ai</a>.
-        Tempo di risposta: 30 giorni massimo.
+        Para solicitudes GDPR específicas escribe a{' '}
+        <a href="mailto:dpo@ambrogio.ai">dpo@ambrogio.ai</a>. Tiempo de respuesta: máximo 30 días.
       </p>
     </LegalPageLayout>
   );

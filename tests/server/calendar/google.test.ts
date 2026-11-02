@@ -68,12 +68,12 @@ describe('GoogleCalendarProvider', () => {
       appointmentId: 'appointment_1',
       tenantId: 'tenant_1',
       summary: 'Studio Ambrogio: Prima visita - Mario Rossi',
-      description: 'Prenotazione creata da Ambrogio.ai',
+      description: 'Reserva creada por Ambrogio.ai',
       start: new Date('2026-04-27T09:00:00.000Z'),
       end: new Date('2026-04-27T09:30:00.000Z'),
       timezone: 'UTC',
-      customerName: 'Mario Rossi',
-      customerPhone: '393331112233',
+      customerName: 'Mario Ruiz',
+      customerPhone: '525533311122',
     });
 
     expect(result).toMatchObject({
@@ -92,7 +92,7 @@ describe('GoogleCalendarProvider', () => {
           source: 'ambrogio.ai',
           tenantId: 'tenant_1',
           appointmentId: 'appointment_1',
-          customerPhone: '393331112233',
+          customerPhone: '525533311122',
         },
       },
     });

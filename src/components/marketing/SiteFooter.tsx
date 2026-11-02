@@ -79,7 +79,7 @@ export function SiteFooter() {
                 marginTop: 'var(--space-3)',
               }}
             >
-              Ambrogio.ai · Roma, Italia
+              Ambrogio.ai · Ciudad de México, México
               <br />
               <a href="mailto:hello@ambrogio.ai" style={{ color: 'var(--color-text-secondary)' }}>
                 hello@ambrogio.ai

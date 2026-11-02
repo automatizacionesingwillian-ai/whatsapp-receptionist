@@ -4,7 +4,7 @@ import { fetchWithTimeout } from '@/lib/http/fetch-with-timeout';
 import { logger } from '@/lib/logging/logger';
 import { createSupabaseAdminClient } from '@/lib/supabase/admin';
 import { readCredentialSecret } from '@/server/integrations/credential-encryption';
-import { WHATSAPP_PROVIDER } from '@/server/whatsapp/webhook-events';
+import { WHATSAPP_PROVIDERS, WHATSAPP_PROVIDER } from '@/server/whatsapp/webhook-events';
 
 export type SendWhatsAppTextInput = {
   to: string;
@@ -47,17 +47,20 @@ export interface WhatsAppMessageSender {
 
 type FetchLike = typeof fetch;
 
-export class Dialog360WhatsAppClient implements WhatsAppMessageSender {
+/**
+ * Cliente Meta WhatsApp Cloud API.
+ *
+ * POST `/{phone-number-id}/messages` con `Authorization: Bearer <token>`.
+ * Una sola Meta App puede servir N negocios: cada tenant aporta su
+ * `phoneNumberId` (+ token si no se usa un System User compartido).
+ */
+export class MetaCloudWhatsAppClient implements WhatsAppMessageSender {
   constructor(
     private readonly config: {
       apiUrl?: string;
-      apiKey?: string;
+      accessToken?: string;
+      phoneNumberId?: string;
       fetcher?: FetchLike;
-      /**
-       * Invocato quando il provider rifiuta la chiave (401/403). Serve a chi
-       * mantiene una cache di credenziali per scartare subito un valore stale
-       * invece di riprovarlo fino alla scadenza del TTL.
-       */
       onAuthFailure?: () => void;
     } = {},
   ) {}
@@ -94,21 +97,31 @@ export class Dialog360WhatsAppClient implements WhatsAppMessageSender {
   }
 
   private async sendMessage(body: Record<string, unknown>): Promise<SendWhatsAppTextResult> {
-    const apiKey = this.config.apiKey ?? env.WHATSAPP_API_KEY;
+    const accessToken = this.config.accessToken ?? env.WHATSAPP_API_KEY;
+    const phoneNumberId = this.config.phoneNumberId ?? env.WHATSAPP_PHONE_NUMBER_ID;
 
-    if (!apiKey) {
-      throw new AppError('internal', 'WhatsApp API key is not configured', {
+    if (!accessToken) {
+      throw new AppError('internal', 'WhatsApp access token is not configured', {
         expose: false,
       });
     }
 
+    if (!phoneNumberId) {
+      throw new AppError('internal', 'WhatsApp phone number ID is not configured', {
+        expose: false,
+      });
+    }
+
+    const baseUrl = (this.config.apiUrl ?? env.WHATSAPP_API_URL).replace(/\/$/, '');
+    const url = `${baseUrl}/${encodeURIComponent(phoneNumberId)}/messages`;
+
     const response = await fetchWithTimeout(
-      new URL('/messages', this.config.apiUrl ?? env.WHATSAPP_API_URL),
+      url,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'D360-API-KEY': apiKey,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(body),
       },
@@ -150,17 +163,14 @@ export class Dialog360WhatsAppClient implements WhatsAppMessageSender {
   }
 }
 
-/**
- * Credenziali WhatsApp per tenant.
- *
- * Il client nasceva senza configurazione e ricadeva su `env.WHATSAPP_API_KEY`:
- * una sola chiave globale, quindi un solo numero WhatsApp per tutti i tenant.
- * Identità di brand, quota di invio e rischio di ban erano condivisi, e il
- * secondo cliente pagante avrebbe risposto dal numero del primo.
- */
+/** @deprecated Alias temporal; usar `MetaCloudWhatsAppClient`. */
+export const Dialog360WhatsAppClient = MetaCloudWhatsAppClient;
+
 export type WhatsAppCredentials = {
-  readonly apiKey: string;
-  /** `global` segnala una configurazione legacy da migrare, non lo stato normale. */
+  readonly accessToken: string;
+  readonly phoneNumberId: string;
+  readonly wabaId: string | null;
+  /** `global` = fallback de env; migrar a credenciales por tenant. */
   readonly source: 'tenant' | 'global';
 };
 
@@ -170,18 +180,17 @@ export interface WhatsAppCredentialsResolver {
 }
 
 export interface WhatsAppCredentialsStore {
-  findActiveCredentials(tenantId: string): Promise<Record<string, unknown> | null>;
+  findActiveIntegration(tenantId: string): Promise<{
+    credentials: Record<string, unknown>;
+    phoneNumberId: string | null;
+    wabaId: string | null;
+  } | null>;
 }
 
 type CredentialsLogger = {
   warn(context: Record<string, unknown>, message: string): void;
 };
 
-/**
- * 5 minuti: evita di rileggere e decifrare la chiave a ogni messaggio di una
- * stessa raffica, e allo stesso tempo fa sparire da sola una chiave ruotata o
- * revocata senza bisogno di riavviare il processo.
- */
 const CREDENTIALS_CACHE_TTL_MS = 5 * 60 * 1000;
 
 type CredentialsCacheEntry = {
@@ -197,7 +206,9 @@ export class TenantWhatsAppCredentialsResolver implements WhatsAppCredentialsRes
     private readonly store: WhatsAppCredentialsStore,
     private readonly options: {
       ttlMs?: number;
-      globalApiKey?: string;
+      globalAccessToken?: string;
+      globalPhoneNumberId?: string;
+      globalWabaId?: string;
       now?: () => number;
       logger?: CredentialsLogger;
     } = {},
@@ -228,39 +239,62 @@ export class TenantWhatsAppCredentialsResolver implements WhatsAppCredentialsRes
   }
 
   private async load(tenantId: string): Promise<WhatsAppCredentials> {
-    const credentials = await this.store.findActiveCredentials(tenantId);
-    const tenantApiKey = credentials ? readCredentialSecret(credentials, 'api_key') : null;
+    const integration = await this.store.findActiveIntegration(tenantId);
+    const tenantToken = integration
+      ? (readCredentialSecret(integration.credentials, 'access_token') ??
+        readCredentialSecret(integration.credentials, 'api_key'))
+      : null;
 
-    if (tenantApiKey) {
-      return { apiKey: tenantApiKey, source: 'tenant' };
+    if (tenantToken && integration?.phoneNumberId) {
+      return {
+        accessToken: tenantToken,
+        phoneNumberId: integration.phoneNumberId,
+        wabaId: integration.wabaId,
+        source: 'tenant',
+      };
     }
 
-    const globalApiKey = (this.options.globalApiKey ?? env.WHATSAPP_API_KEY).trim();
+    const globalAccessToken = (
+      this.options.globalAccessToken ?? env.WHATSAPP_API_KEY
+    ).trim();
+    const globalPhoneNumberId = (
+      this.options.globalPhoneNumberId ?? env.WHATSAPP_PHONE_NUMBER_ID
+    ).trim();
+    const globalWabaId = (this.options.globalWabaId ?? env.WHATSAPP_WABA_ID).trim() || null;
 
-    if (!globalApiKey) {
-      throw new AppError('internal', 'No WhatsApp API key is configured for this tenant', {
+    if (!globalAccessToken || !globalPhoneNumberId) {
+      throw new AppError('internal', 'No WhatsApp Cloud API credentials for this tenant', {
         expose: false,
       });
     }
 
     this.log.warn(
-      { tenantId, hasIntegration: credentials !== null },
-      'Nessuna credenziale WhatsApp sul tenant: fallback alla chiave globale, configurazione da migrare',
+      { tenantId, hasIntegration: integration !== null },
+      'No WhatsApp credentials on tenant: falling back to global Meta token',
     );
 
-    return { apiKey: globalApiKey, source: 'global' };
+    return {
+      accessToken: globalAccessToken,
+      phoneNumberId: globalPhoneNumberId,
+      wabaId: globalWabaId,
+      source: 'global',
+    };
   }
 }
 
 export class SupabaseWhatsAppCredentialsStore implements WhatsAppCredentialsStore {
   private client: ReturnType<typeof createSupabaseAdminClient> | null = null;
 
-  async findActiveCredentials(tenantId: string): Promise<Record<string, unknown> | null> {
+  async findActiveIntegration(tenantId: string): Promise<{
+    credentials: Record<string, unknown>;
+    phoneNumberId: string | null;
+    wabaId: string | null;
+  } | null> {
     const { data, error } = await this.supabase()
       .from('integrations')
-      .select('credentials')
+      .select('credentials, external_account_id, config')
       .eq('tenant_id', tenantId)
-      .eq('provider', WHATSAPP_PROVIDER)
+      .in('provider', [...WHATSAPP_PROVIDERS])
       .eq('status', 'active')
       .maybeSingle();
 
@@ -271,16 +305,31 @@ export class SupabaseWhatsAppCredentialsStore implements WhatsAppCredentialsStor
       });
     }
 
-    const row = data as { credentials: Record<string, unknown> | null } | null;
+    if (!data) {
+      return null;
+    }
 
-    return row?.credentials ?? null;
+    const row = data as {
+      credentials: Record<string, unknown> | null;
+      external_account_id: string | null;
+      config: Record<string, unknown> | null;
+    };
+
+    const config = row.config ?? {};
+    const wabaId =
+      typeof config['waba_id'] === 'string' && config['waba_id'].trim()
+        ? config['waba_id'].trim()
+        : null;
+
+    return {
+      credentials: row.credentials ?? {},
+      phoneNumberId: row.external_account_id,
+      wabaId,
+    };
   }
 
   private supabase(): ReturnType<typeof createSupabaseAdminClient> {
-    // Client creato al primo uso: costruirlo nel campo farebbe fallire
-    // l'import del modulo negli ambienti senza credenziali Supabase.
     this.client ??= createSupabaseAdminClient();
-
     return this.client;
   }
 }
@@ -301,8 +350,9 @@ export class TenantWhatsAppMessageSenderResolver implements WhatsAppMessageSende
   async resolveSender(tenantId: string): Promise<WhatsAppMessageSender> {
     const resolved = await this.credentials.resolve(tenantId);
 
-    return new Dialog360WhatsAppClient({
-      apiKey: resolved.apiKey,
+    return new MetaCloudWhatsAppClient({
+      accessToken: resolved.accessToken,
+      phoneNumberId: resolved.phoneNumberId,
       ...(this.config.apiUrl !== undefined ? { apiUrl: this.config.apiUrl } : {}),
       ...(this.config.fetcher !== undefined ? { fetcher: this.config.fetcher } : {}),
       onAuthFailure: () => this.credentials.invalidate(tenantId),
@@ -312,10 +362,6 @@ export class TenantWhatsAppMessageSenderResolver implements WhatsAppMessageSende
 
 let sharedCredentialsResolver: WhatsAppCredentialsResolver | null = null;
 
-/**
- * Istanza condivisa di processo: la cache ha senso solo se sopravvive alla
- * singola invocazione del worker.
- */
 export function whatsAppCredentialsResolver(): WhatsAppCredentialsResolver {
   sharedCredentialsResolver ??= new TenantWhatsAppCredentialsResolver(
     new SupabaseWhatsAppCredentialsStore(),
@@ -324,7 +370,6 @@ export function whatsAppCredentialsResolver(): WhatsAppCredentialsResolver {
   return sharedCredentialsResolver;
 }
 
-/** Da chiamare quando un tenant collega o scollega il proprio numero. */
 export function invalidateWhatsAppCredentials(tenantId: string): void {
   sharedCredentialsResolver?.invalidate(tenantId);
 }
@@ -379,3 +424,5 @@ function toProviderTemplateComponents(
       : {}),
   }));
 }
+
+export { WHATSAPP_PROVIDER };

@@ -6,15 +6,14 @@ export const metadata: Metadata = {
 };
 
 /*
- * Questa pagina pubblicava KPI finanziari inventati (MRR €11.450, ARR
- * proiettato, 38 clienti paganti, churn, growth rate), uno storico MRR a sei
- * mesi e un elenco fatture, tutto hardcoded e presentato come reale. Il markup
- * precedente resta nella history di git.
+ * Esta página publicaba KPI financieros inventados (MRR, ARR proyectado,
+ * clientes de pago, churn, growth rate), un histórico MRR a seis meses y un
+ * listado de facturas, todo hardcodeado y presentado como real. El markup
+ * anterior permanece en el historial de git.
  *
- * Non è stato sostituito con dati veri perché le metriche di ricavo vanno
- * lette da Stripe, che è la fonte autorevole: ricalcolarle da una tabella
- * locale produrrebbe un secondo numero destinato a divergere da quello
- * fiscale.
+ * No se sustituyó con datos reales porque las métricas de ingresos deben
+ * leerse de Stripe, que es la fuente autoritativa: recalcularlas desde una
+ * tabla local produciría un segundo número destinado a divergir del fiscal.
  */
 export default function AdminBillingPage() {
   return (
@@ -22,19 +21,19 @@ export default function AdminBillingPage() {
       <header className="stack stack-2">
         <span className="eyebrow">Admin</span>
         <h1>Billing</h1>
-        <p className="muted">Metriche di ricavo e stato degli abbonamenti.</p>
+        <p className="muted">Métricas de ingresos y estado de las suscripciones.</p>
       </header>
 
       <div className="card card-padded stack stack-4">
-        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado ai dati reali</h2>
+        <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado a datos reales</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          Questa schermata mostrava MRR, ARR, numero di clienti paganti, churn e storico a sei mesi
-          come se fossero misurati. Erano valori scritti a mano: sono stati rimossi.
+          Esta pantalla mostraba MRR, ARR, número de clientes de pago, churn e histórico a seis
+          meses como si estuvieran medidos. Eran valores escritos a mano: se eliminaron.
         </p>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          La fonte autorevole per i ricavi è la dashboard Stripe, che è anche quella che concorda
-          con la contabilità. Un secondo calcolo fatto qui su dati locali finirebbe per divergere, e
-          a quel punto nessuno dei due numeri sarebbe affidabile.
+          La fuente autoritativa de ingresos es el dashboard de Stripe, que es también el que
+          concuerda con la contabilidad. Un segundo cálculo aquí sobre datos locales acabaría
+          divergiendo, y entonces ninguno de los dos números sería fiable.
         </p>
         <div className="row" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
           <a
@@ -43,7 +42,7 @@ export default function AdminBillingPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Apri la dashboard Stripe
+            Abrir el dashboard de Stripe
           </a>
         </div>
       </div>

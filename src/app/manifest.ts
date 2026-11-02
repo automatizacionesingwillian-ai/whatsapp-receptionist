@@ -5,12 +5,12 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Ambrogio.ai',
     short_name: 'Ambrogio',
     description:
-      'Reception AI sempre attiva per studi e PMI italiane. WhatsApp, voce, prenotazioni automatiche.',
+      'Recepción AI siempre activa para estudios y PyMEs. WhatsApp, voz y reservas automáticas.',
     start_url: '/',
     display: 'standalone',
     background_color: '#f8faf8',
     theme_color: '#0d766e',
-    lang: 'it-IT',
+    lang: 'es-419',
     icons: [
       {
         src: '/favicon.ico',

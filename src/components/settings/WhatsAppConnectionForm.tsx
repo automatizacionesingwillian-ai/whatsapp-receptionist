@@ -21,6 +21,7 @@ export interface WhatsAppConnectionView {
   readonly connected: boolean;
   readonly phoneNumberId: string | null;
   readonly displayPhoneNumber: string | null;
+  readonly wabaId?: string | null;
   readonly status: string | null;
   readonly hasApiKey: boolean;
   readonly connectedAt: string | null;
@@ -46,6 +47,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
     buildBody: (formData) => ({
       phoneNumberId: String(formData.get('phoneNumberId') ?? ''),
       displayPhoneNumber: String(formData.get('displayPhoneNumber') ?? ''),
+      wabaId: String(formData.get('wabaId') ?? ''),
       apiKey: String(formData.get('apiKey') ?? ''),
     }),
   });
@@ -114,18 +116,19 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               isMono={status.displayPhoneNumber !== null}
             />
             <DetailRow label="Phone number ID" value={status.phoneNumberId ?? '—'} isMono />
+            <DetailRow label="WABA ID" value={status.wabaId ?? '—'} isMono />
             <DetailRow
-              label="API key"
-              value={status.hasApiKey ? 'Guardada y cifrada' : 'Faltante: el canal no puede enviar'}
+              label="Access token"
+              value={status.hasApiKey ? 'Guardado y cifrado' : 'Faltante: el canal no puede enviar'}
             />
             <DetailRow label="Integración creada el" value={formatDate(status.connectedAt)} />
           </dl>
         ) : (
           <div className="stack stack-3">
             <p className="muted">
-              Mientras el número no esté conectado, los mensajes que llegan a WhatsApp no se
-              asocian a tu negocio y Ambrogio no responde. Completa el formulario abajo con los
-              datos del panel 360dialog: bastan treinta segundos y el canal queda activo.
+              Mientras el número no esté conectado, los mensajes de WhatsApp no se asocian a tu
+              negocio y Ambrogio no responde. Completa el formulario con los datos de tu app de Meta
+              (WhatsApp → API Setup).
             </p>
             {status.status !== null && status.status !== 'active' ? (
               <p className="helper">
@@ -182,8 +185,16 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               {isConnected ? 'Actualizar la conexión' : 'Conectar el número'}
             </h2>
             <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-              Los datos vienen del Client Hub de 360dialog, el proveedor que aloja tu número de
-              WhatsApp Business.
+              Datos de{' '}
+              <a
+                href="https://developers.facebook.com/apps/"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-link"
+              >
+                Meta for Developers
+              </a>
+              : WhatsApp → API Setup (Phone number ID, WhatsApp Business Account ID y token).
             </p>
           </div>
 
@@ -207,9 +218,29 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               disabled={isSubmitting}
             />
             <p id="phoneNumberId-help" className="helper">
-              En hub.360dialog.com abre el canal de WhatsApp: el Phone number ID está en la ficha del
-              número, junto al nombre del canal. Es el identificador con el que asociamos cada
-              mensaje entrante a tu negocio.
+              En la app Meta → WhatsApp → API Setup. Es el ID con el que asociamos cada mensaje
+              entrante a este negocio.
+            </p>
+          </div>
+
+          <div className="field">
+            <label htmlFor="wabaId" className="label">
+              WhatsApp Business Account ID (WABA)
+            </label>
+            <input
+              id="wabaId"
+              name="wabaId"
+              type="text"
+              maxLength={120}
+              autoComplete="off"
+              className="input"
+              defaultValue={status.wabaId ?? ''}
+              placeholder="ej. 102938475610293"
+              aria-describedby="wabaId-help"
+              disabled={isSubmitting}
+            />
+            <p id="wabaId-help" className="helper">
+              Opcional para enviar, recomendado para sincronizar plantillas aprobadas.
             </p>
           </div>
 
@@ -225,7 +256,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               autoComplete="off"
               className="input"
               defaultValue={status.displayPhoneNumber ?? ''}
-              placeholder="+39 02 1234567"
+              placeholder="+52 55 1234 5678"
               aria-describedby="displayPhoneNumber-help"
               disabled={isSubmitting}
             />
@@ -236,7 +267,7 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
 
           <div className="field">
             <label htmlFor="apiKey" className="label">
-              API key 360dialog
+              Access token de Meta
             </label>
             <input
               id="apiKey"
@@ -248,14 +279,15 @@ export function WhatsAppConnectionForm({ status, canManage }: WhatsAppConnection
               autoComplete="off"
               spellCheck={false}
               className="input"
-              placeholder={isConnected ? 'Vuelve a ingresar la clave para guardar' : 'Pega la clave'}
+              placeholder={
+                isConnected ? 'Vuelve a pegar el token para guardar' : 'Pega el access token'
+              }
               aria-describedby="apiKey-help"
               disabled={isSubmitting}
             />
             <p id="apiKey-help" className="helper">
-              En el Client Hub, sección API key del canal: la clave se muestra una sola vez al
-              generarla; si ya no la tienes, crea una nueva. La guardamos cifrada y no la mostramos
-              de nuevo, ni enmascarada: para cada cambio debes ingresarla otra vez.
+              Token permanente de System User (o el temporal de prueba). Lo guardamos cifrado y no
+              lo volvemos a mostrar: para rotarlo, pégalo de nuevo.
             </p>
           </div>
 

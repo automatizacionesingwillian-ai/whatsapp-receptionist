@@ -17,10 +17,10 @@ function fakeContextProvider(load: AiContextProvider['load']): AiContextProvider
 }
 
 const baseInput: ReplyOrchestratorInput = {
-  text: 'Vorrei prenotare domani',
+  text: 'Quiero reservar mañana',
   assistantName: 'Ambrogio',
   aiDisclosureEnabled: true,
-  locale: 'it-IT',
+  locale: 'es-419',
 };
 
 function fakeClassifier(intent: IntentClassification['intent']): IntentClassifier {
@@ -45,8 +45,8 @@ describe('ReplyOrchestrator.createReply (rule-based fallback)', () => {
     // Assert: classification e shouldReply attivi, disclosure presente
     expect(plan.shouldReply).toBe(true);
     expect(plan.classification.intent).toBe('booking_request');
-    expect(plan.replyText).toContain('sono Ambrogio');
-    expect(plan.replyText).toContain('prenotare');
+    expect(plan.replyText).toContain('soy Ambrogio');
+    expect(plan.replyText).toContain('reservar');
     expect(plan.metadata).toMatchObject({
       aiEngine: { provider: 'rule_based' },
       aiContext: null,
@@ -61,8 +61,8 @@ describe('ReplyOrchestrator.createReply (rule-based fallback)', () => {
     // Act
     const plan = await orchestrator.createReply({ ...baseInput, aiDisclosureEnabled: false });
 
-    // Assert: nessun prefix "Ciao, sono ..."
-    expect(plan.replyText).not.toContain('sono Ambrogio');
+    // Assert: ningún prefix "Hola, soy ..."
+    expect(plan.replyText).not.toContain('soy Ambrogio');
     expect(plan.replyText).toBeTruthy();
     expect(plan.shouldReply).toBe(true);
   });
@@ -108,7 +108,7 @@ describe('ReplyOrchestrator.createReply (domain reply generator)', () => {
     const generator: DomainReplyGenerator = {
       generate: vi.fn(async () => ({
         shouldReply: true,
-        replyText: 'Ti propongo martedi alle 10.',
+        replyText: 'Te propongo el martes a las 10.',
         metadata: { aiEngine: { provider: 'anthropic' } },
       })),
     };
@@ -118,8 +118,8 @@ describe('ReplyOrchestrator.createReply (domain reply generator)', () => {
     const plan = await orchestrator.createReply(baseInput);
 
     // Assert: testo prodotto dal generator, con disclosure
-    expect(plan.replyText).toContain('sono Ambrogio');
-    expect(plan.replyText).toContain('martedi');
+    expect(plan.replyText).toContain('soy Ambrogio');
+    expect(plan.replyText).toContain('martes');
     expect(plan.metadata).toEqual({ aiEngine: { provider: 'anthropic' } });
     expect(generator.generate).toHaveBeenCalledTimes(1);
   });
@@ -139,7 +139,7 @@ describe('ReplyOrchestrator.createReply (domain reply generator)', () => {
 
     // Assert: cadiamo sul rule-based body con fallback metadata
     expect(plan.shouldReply).toBe(true);
-    expect(plan.replyText).toContain('annullare');
+    expect(plan.replyText).toContain('cancelar');
     expect(plan.metadata).toEqual({
       aiEngine: { provider: 'rule_based', fallbackReason: 'domain_reply_failed' },
       aiContext: null,
@@ -247,7 +247,7 @@ describe('ReplyOrchestrator.createReply (context provider)', () => {
 
     // Assert: il rule-based body parte e il metadata contiene il fallbackReason
     expect(plan.shouldReply).toBe(true);
-    expect(plan.replyText).toContain('orari');
+    expect(plan.replyText).toContain('horarios');
     const metadata = plan.metadata as { aiContext: { fallbackReason: string } };
     expect(metadata.aiContext.fallbackReason).toBe('context_load_failed');
   });

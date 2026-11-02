@@ -326,11 +326,13 @@ describe('fetchWithTimeout', () => {
     });
 
     const error = await fetchWithTimeout(
-      new Request('https://waba-v2.360dialog.io/messages', { method: 'POST' }),
+      new Request('https://graph.facebook.com/v21.0/phone_123/messages', { method: 'POST' }),
       {},
       { fetchImpl: spy.impl },
     ).catch((caught: unknown) => caught);
 
-    expect((error as AppError).message).toContain('POST https://waba-v2.360dialog.io/messages');
+    expect((error as AppError).message).toContain(
+      'POST https://graph.facebook.com/v21.0/phone_123/messages',
+    );
   });
 });

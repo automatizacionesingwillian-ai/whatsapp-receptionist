@@ -4,7 +4,7 @@ import { logger } from '@/lib/logging/logger';
 import { encryptSecret, readCredentialSecret } from '@/server/integrations/credential-encryption';
 
 import { invalidateWhatsAppCredentials } from './client';
-import { WHATSAPP_PROVIDER } from './webhook-events';
+import { WHATSAPP_PROVIDER, WHATSAPP_PROVIDERS } from './webhook-events';
 
 /**
  * Collegamento del numero WhatsApp di un tenant.
@@ -18,18 +18,24 @@ import { WHATSAPP_PROVIDER } from './webhook-events';
 
 export interface WhatsAppConnectionInput {
   readonly tenantId: string;
-  /** `phone_number_id` del provider: è la chiave con cui il webhook risolve il tenant. */
+  /** `phone_number_id` de Meta: clave con la que el webhook resuelve el tenant. */
   readonly phoneNumberId: string;
-  /** Numero in formato leggibile, mostrato in interfaccia. */
+  /** Número legible, solo para la UI. */
   readonly displayPhoneNumber: string;
-  /** API key del provider per questo numero. Salvata cifrata. */
+  /**
+   * Access token de Meta para este número/WABA (System User o token del negocio).
+   * Se guarda cifrado; el campo API sigue llamándose `apiKey` por compatibilidad.
+   */
   readonly apiKey: string;
+  /** WhatsApp Business Account ID — necesario para sync de plantillas. */
+  readonly wabaId?: string;
 }
 
 export interface WhatsAppConnectionStatus {
   readonly connected: boolean;
   readonly phoneNumberId: string | null;
   readonly displayPhoneNumber: string | null;
+  readonly wabaId: string | null;
   readonly status: string | null;
   readonly hasApiKey: boolean;
   readonly connectedAt: string | null;
@@ -54,6 +60,7 @@ export interface WhatsAppProvisioningRepository {
     existingId: string | null;
     phoneNumberId: string;
     displayPhoneNumber: string;
+    wabaId: string | null;
     credentials: Record<string, unknown>;
   }): Promise<IntegrationRow>;
   revoke(input: { tenantId: string; integrationId: string }): Promise<void>;
@@ -106,20 +113,23 @@ export class WhatsAppProvisioningService {
 
     const existing = await this.repository.findByTenant(input.tenantId);
 
+    const wabaId = input.wabaId?.trim() || null;
     const row = await this.repository.upsert({
       tenantId: input.tenantId,
       existingId: existing?.id ?? null,
       phoneNumberId,
       displayPhoneNumber: input.displayPhoneNumber.trim(),
-      credentials: { api_key_encrypted: encryptSecret(apiKey) },
+      wabaId,
+      credentials: {
+        // Compat: el resolver lee access_token o api_key.
+        access_token_encrypted: encryptSecret(apiKey),
+        api_key_encrypted: encryptSecret(apiKey),
+      },
     });
 
-    // La cache credenziali ha un TTL di 5 minuti: senza invalidazione esplicita
-    // una chiave appena ruotata resterebbe inutilizzata fino alla scadenza, e
-    // i messaggi in uscita fallirebbero con la vecchia chiave nel frattempo.
     this.onCredentialsChanged(input.tenantId);
 
-    logger.info({ tenantId: input.tenantId }, 'Numero WhatsApp collegato');
+    logger.info({ tenantId: input.tenantId }, 'Número WhatsApp conectado (Meta Cloud API)');
 
     return toStatus(row);
   }
@@ -148,19 +158,27 @@ const DISCONNECTED: WhatsAppConnectionStatus = {
   connected: false,
   phoneNumberId: null,
   displayPhoneNumber: null,
+  wabaId: null,
   status: null,
   hasApiKey: false,
   connectedAt: null,
 };
 
 function toStatus(row: IntegrationRow): WhatsAppConnectionStatus {
+  const wabaId =
+    typeof row.config['waba_id'] === 'string' && row.config['waba_id'].trim()
+      ? row.config['waba_id'].trim()
+      : null;
+
   return {
     connected: row.status === 'active',
     phoneNumberId: row.external_account_id,
     displayPhoneNumber: row.external_display_id,
+    wabaId,
     status: row.status,
-    // Esponiamo l'esistenza della credenziale, mai il suo valore.
-    hasApiKey: readCredentialSecret(row.credentials, 'api_key') !== null,
+    hasApiKey:
+      readCredentialSecret(row.credentials, 'access_token') !== null ||
+      readCredentialSecret(row.credentials, 'api_key') !== null,
     connectedAt: row.created_at,
   };
 }
@@ -176,7 +194,7 @@ class SupabaseWhatsAppProvisioningRepository implements WhatsAppProvisioningRepo
       .from('integrations')
       .select(SupabaseWhatsAppProvisioningRepository.COLUMNS)
       .eq('tenant_id', tenantId)
-      .eq('provider', WHATSAPP_PROVIDER)
+      .in('provider', [...WHATSAPP_PROVIDERS])
       .maybeSingle();
 
     if (error) {
@@ -187,13 +205,11 @@ class SupabaseWhatsAppProvisioningRepository implements WhatsAppProvisioningRepo
   }
 
   async findByPhoneNumberId(phoneNumberId: string): Promise<IntegrationRow | null> {
-    // Query cross-tenant deliberata: serve proprio a scoprire se il numero
-    // appartiene già a qualcun altro. È l'unico punto del servizio che non
-    // filtra per tenant, e per questo non restituisce mai la riga al chiamante.
+    // Query cross-tenant deliberada: detectar si el número ya pertenece a otro.
     const { data, error } = await this.supabase
       .from('integrations')
       .select(SupabaseWhatsAppProvisioningRepository.COLUMNS)
-      .eq('provider', WHATSAPP_PROVIDER)
+      .in('provider', [...WHATSAPP_PROVIDERS])
       .eq('external_account_id', phoneNumberId)
       .maybeSingle();
 
@@ -209,6 +225,7 @@ class SupabaseWhatsAppProvisioningRepository implements WhatsAppProvisioningRepo
     existingId: string | null;
     phoneNumberId: string;
     displayPhoneNumber: string;
+    wabaId: string | null;
     credentials: Record<string, unknown>;
   }): Promise<IntegrationRow> {
     const mutation = {
@@ -218,7 +235,10 @@ class SupabaseWhatsAppProvisioningRepository implements WhatsAppProvisioningRepo
       external_display_id: input.displayPhoneNumber || null,
       status: 'active',
       credentials: input.credentials,
-      config: { phone_number_id: input.phoneNumberId },
+      config: {
+        phone_number_id: input.phoneNumberId,
+        ...(input.wabaId ? { waba_id: input.wabaId } : {}),
+      },
       updated_at: new Date().toISOString(),
     };
 

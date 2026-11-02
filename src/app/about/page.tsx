@@ -14,17 +14,17 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 const SITE_URL = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://ambrogio.ai';
 
 export const metadata: Metadata = {
-  title: 'Quiénes somos · Storia, missione e team',
+  title: 'Quiénes somos · Historia, misión y equipo',
   description:
-    'Ambrogio.ai è costruito da operatori di studi reali. Missione, valori, team e perché esistiamo: ridare il telefono alla vita.',
+    'Ambrogio.ai está construido por operadores de estudios reales. Misión, valores, equipo y por qué existimos: devolver el teléfono a la vida.',
   alternates: { canonical: '/about' },
   openGraph: {
     title: 'Quiénes somos · Ambrogio.ai',
     description:
-      'Ambrogio.ai è costruito da operatori di studi reali. Missione, valori, team italiano.',
+      'Ambrogio.ai está construido por operadores de estudios reales. Misión, valores, equipo latinoamericano.',
     url: '/about',
     type: 'profile',
-    locale: 'it_IT',
+    locale: 'es_419',
   },
 };
 
@@ -33,27 +33,27 @@ const FOUNDERS = [
     name: 'Christian Calabrò',
     jobTitle: 'Founder & CEO',
     description:
-      'Performance marketer e dev. 12 anni di esperienza tra cliniche, palestre e studi professionali. Ha gestito reception reali prima di scrivere una sola riga di codice.',
+      'Performance marketer y developer. 12 años de experiencia entre clínicas, gimnasios y estudios profesionales. Gestionó recepciones reales antes de escribir una sola línea de código.',
     sameAs: ['https://twitter.com/ambrogio_ai', 'https://linkedin.com/in/christian-calabro'],
   },
 ] as const;
 
 const VALUES = [
   {
-    title: 'Privacy non negoziabile',
-    body: 'Server EU, redact PII automatico, DPA pronto. La conformità non è un add-on: è il primo commit.',
+    title: 'Privacidad no negociable',
+    body: 'Servidores en la UE, redacción automática de PII, DPA listo. La conformidad no es un add-on: es el primer commit.',
   },
   {
-    title: 'AI utile, non spettacolare',
-    body: 'Niente prompt magici, niente chatbot finti. Modelli che capiscono il tuo settore e si fanno aiutare quando serve.',
+    title: 'IA útil, no espectacular',
+    body: 'Sin prompts mágicos, sin chatbots de fachada. Modelos que entienden tu sector y piden ayuda cuando hace falta.',
   },
   {
-    title: 'Prezzi trasparenti',
-    body: 'Niente moltiplicatori sui token, niente upsell. Sai cosa paghi e quanto guadagni in più ogni mese.',
+    title: 'Precios transparentes',
+    body: 'Sin multiplicadores sobre tokens, sin upsells. Sabes qué pagas y cuánto ganas de más cada mes.',
   },
   {
-    title: 'Costruito sul campo',
-    body: 'Ogni feature nasce da un cliente che ce l’ha chiesta. Niente roadmap a tavolino.',
+    title: 'Construido en el campo',
+    body: 'Cada función nace de un cliente que la pidió. Sin roadmaps de escritorio.',
   },
 ] as const;
 
@@ -84,14 +84,14 @@ export default function AboutPage() {
           type: 'AboutPage',
           name: 'Quiénes somos · Ambrogio.ai',
           description:
-            'Ambrogio.ai è costruito da operatori di studi reali. Missione, valori, team italiano.',
+            'Ambrogio.ai está construido por operadores de estudios reales. Misión, valores, equipo latinoamericano.',
           url: '/about',
           speakableSelectors: ['h1', '.lead', '#story-heading + p'],
         })}
       />
       {/*
-        Nessuno schema `Review` pubblicato: le recensioni vanno esposte come dati
-        strutturati solo quando sono reali, firmate dal cliente e verificabili.
+        Ningún schema `Review` publicado: las reseñas solo se exponen como datos
+        estructurados cuando son reales, firmadas por el cliente y verificables.
       */}
       <SiteHeader />
       <main id="main">
@@ -100,41 +100,41 @@ export default function AboutPage() {
             <header className="stack stack-4">
               <span className="badge">Quiénes somos</span>
               <h1 className="display text-balance">
-                Costruito da chi ha gestito reception vere, non da chi le ha studiate.
+                Construido por quien gestionó recepciones reales, no por quien las estudió.
               </h1>
               <p className="lead text-pretty">
-                Ambrogio.ai nasce nel 2026 con una missione semplice: ridare il telefono alla vita.
-                Le cliniche, le palestre, gli studi professionali italiani non hanno bisogno di un
-                altro chatbot. Hanno bisogno di un assistente che capisce, prende appuntamenti veri
-                e libera tempo umano per quello che conta.
+                Ambrogio.ai nace en 2026 con una misión simple: devolver el teléfono a la vida.
+                Las clínicas, los gimnasios y los estudios profesionales de Latinoamérica no
+                necesitan otro chatbot. Necesitan un asistente que entiende, agenda citas de verdad
+                y libera tiempo humano para lo que importa.
               </p>
             </header>
 
             <section className="stack stack-6" aria-labelledby="story-heading">
-              <h2 id="story-heading">La nostra storia</h2>
+              <h2 id="story-heading">Nuestra historia</h2>
               <p>
-                Il punto di partenza è un problema che chiunque abbia gestito uno studio conosce: le
-                chiamate che arrivano quando non c&apos;è nessuno a rispondere. Fuori orario, in
-                pausa pranzo, mentre si è con un cliente. Chi chiama raramente richiama: cerca
-                altrove. Il centralino tradizionale non risolve, perché registra un messaggio invece
-                di prendere un appuntamento.
+                El punto de partida es un problema que cualquiera que haya gestionado un estudio
+                conoce: las llamadas que llegan cuando no hay nadie para contestar. Fuera de
+                horario, en la hora de comida, mientras estás con un cliente. Quien llama rara vez
+                vuelve a intentar: busca en otro lado. El contestador tradicional no resuelve,
+                porque deja un mensaje en lugar de agendar una cita.
               </p>
               <p>
-                Ambrogio nasce per chiudere quel divario: un assistente che conversa su WhatsApp
-                nella lingua in cui scrivono i clienti, consulta la disponibilità reale
-                sull&apos;agenda e fissa l&apos;appuntamento. Abbiamo scelto di svilupparlo in open
-                source con licenza MIT perché le PMI italiane meritano AI di qualità, in italiano e
-                conforme al GDPR, senza dipendere da una scatola chiusa di cui non possono
-                verificare il funzionamento.
+                Ambrogio nace para cerrar esa brecha: un asistente que conversa por WhatsApp en el
+                español en que escriben tus clientes, consulta la disponibilidad real en la agenda
+                y fija la cita. Lo desarrollamos en open source con licencia MIT porque las PyMEs
+                latinoamericanas merecen IA de calidad, en español y alineada con buenas prácticas
+                de privacidad, sin depender de una caja cerrada cuyo funcionamiento no pueden
+                verificar.
               </p>
               <p>
-                Oggi Ambrogio.ai è in beta privata con i primi 50 studi pilota selezionati. Vogliamo
-                crescere lentamente per restare onesti.
+                Hoy Ambrogio.ai está en beta privada con los primeros 50 estudios piloto
+                seleccionados. Queremos crecer despacio para seguir siendo honestos.
               </p>
             </section>
 
             <section className="stack stack-6" aria-labelledby="values-heading">
-              <h2 id="values-heading">I nostri valori</h2>
+              <h2 id="values-heading">Nuestros valores</h2>
               <div
                 className="grid"
                 style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}
@@ -149,7 +149,7 @@ export default function AboutPage() {
             </section>
 
             <section className="stack stack-6" aria-labelledby="team-heading">
-              <h2 id="team-heading">Il team</h2>
+              <h2 id="team-heading">El equipo</h2>
               <div className="grid" style={{ gridTemplateColumns: '1fr' }}>
                 {FOUNDERS.map((person) => (
                   <article key={person.name} className="card card-padded stack stack-3">
@@ -176,7 +176,7 @@ export default function AboutPage() {
             </section>
 
             <section className="stack stack-4" aria-labelledby="contact-heading">
-              <h2 id="contact-heading">Vuoi parlare con noi?</h2>
+              <h2 id="contact-heading">¿Quieres hablar con nosotros?</h2>
               <address
                 className="card stack stack-2"
                 style={{
@@ -187,7 +187,7 @@ export default function AboutPage() {
                 <p>
                   <strong>Ambrogio.ai</strong>
                   <br />
-                  Roma, Italia
+                  Ciudad de México, México
                   <br />
                   <a href="mailto:hello@ambrogio.ai" className="btn-link">
                     hello@ambrogio.ai
@@ -198,7 +198,7 @@ export default function AboutPage() {
                   <a href="mailto:support@ambrogio.ai" className="btn-link">
                     support@ambrogio.ai
                   </a>{' '}
-                  · Supporto tecnico
+                  · Soporte técnico
                 </p>
                 <p>
                   <a href="mailto:dpo@ambrogio.ai" className="btn-link">
@@ -212,7 +212,7 @@ export default function AboutPage() {
                   Contáctanos
                 </Link>
                 <Link href="/legal/privacy" className="btn btn-secondary">
-                  Privacy policy
+                  Política de privacidad
                 </Link>
               </div>
             </section>

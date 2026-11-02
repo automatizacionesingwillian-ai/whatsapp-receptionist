@@ -130,7 +130,7 @@ describe('AppointmentNotificationService', () => {
       outboundMessageId: null,
       outboxJobId: null,
       templateName: 'appointment_reminder_24h',
-      languageCode: 'it',
+      languageCode: 'es',
     });
     const service = new AppointmentNotificationService(repository, templates);
 
@@ -267,7 +267,7 @@ class FakeTemplateMessageEnqueuer implements TemplateMessageEnqueuer {
       outboundMessageId: 'outbound_1',
       outboxJobId: 'job_1',
       templateName: 'appointment_confirmation',
-      languageCode: 'it',
+      languageCode: 'es',
     },
   ) {}
 

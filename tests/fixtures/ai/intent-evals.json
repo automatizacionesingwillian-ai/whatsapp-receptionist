@@ -1,30 +1,30 @@
 [
   {
-    "text": "Buongiorno, vorrei prenotare una visita domani mattina",
+    "text": "Hola, quiero reservar una cita mañana por la mañana",
     "expectedIntent": "booking_request"
   },
   {
-    "text": "Possiamo spostare l'appuntamento di martedi?",
+    "text": "Podemos mover la cita del martes?",
     "expectedIntent": "reschedule_request"
   },
   {
-    "text": "Devo annullare la prenotazione di oggi",
+    "text": "Necesito cancelar la reserva de hoy",
     "expectedIntent": "cancellation_request"
   },
   {
-    "text": "Quanto costa la prima visita?",
+    "text": "Cuanto cuesta la primera visita?",
     "expectedIntent": "pricing_question"
   },
   {
-    "text": "Siete aperti sabato pomeriggio?",
+    "text": "Estan abiertos el sabado por la tarde?",
     "expectedIntent": "opening_hours_question"
   },
   {
-    "text": "Vorrei parlare con una persona della segreteria",
+    "text": "Quiero hablar con un operador de recepcion",
     "expectedIntent": "human_handoff"
   },
   {
-    "text": "Ciao, grazie mille",
+    "text": "Hola, muchas gracias",
     "expectedIntent": "other"
   }
 ]

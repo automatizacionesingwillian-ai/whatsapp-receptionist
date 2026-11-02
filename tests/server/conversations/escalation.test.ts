@@ -58,9 +58,9 @@ describe('EscalationService', () => {
     expect(email?.text).toContain('Ho un dolore forte al dente');
     expect(email?.text).toContain('393331112233');
     expect(email?.text).toContain('Giulia Bianchi');
-    expect(email?.text).toContain('25 aprile 2026');
+    expect(email?.text).toContain('25 de abril de 2026');
     expect(email?.text).toContain('https://app.ambrogio.test/conversations/conversation_1');
-    expect(email?.text).toContain('avviso che una persona lo ricontattera');
+    expect(email?.text).toContain('aviso de que una persona lo contactar');
     expect(email?.html).toContain('https://app.ambrogio.test/conversations/conversation_1');
 
     expect(world.notifier.inserted[0]).toMatchObject({
@@ -69,7 +69,7 @@ describe('EscalationService', () => {
       externalId: 'escalation:message:wamid.1',
       metadata: { source: 'escalation_notice', reason: 'sensitive_handoff' },
     });
-    expect(world.notifier.inserted[0]?.content).toContain('avvisato subito una persona');
+    expect(world.notifier.inserted[0]?.content).toContain('de inmediato a una persona');
     expect(world.notifier.enqueued[0]).toMatchObject({
       tenantId: 'tenant_1',
       messageId: 'outbound_1',
@@ -139,7 +139,7 @@ describe('EscalationService', () => {
 
     expect(result).toMatchObject({ escalated: true, customerNotified: false });
     expect(world.repository.conversations.get('tenant_1:conversation_1')?.status).toBe('escalated');
-    expect(world.emailSender.sent[0]?.text).toContain('non ha ricevuto nessuna risposta');
+    expect(world.emailSender.sent[0]?.text).toContain('ninguna respuesta');
   });
 
   it('does not escalate the same conversation twice', async () => {
@@ -190,7 +190,7 @@ describe('EscalationService', () => {
       conversationId: 'conversation_1',
       customerIdentifier: '393331112233',
       inboundExternalId: 'message:wamid.1',
-      messageText: 'Vorrei parlare con un operatore',
+      messageText: 'Quiero hablar con un operador',
       occurredAt,
       reason: 'human_handoff_intent',
       aiReplied: true,
@@ -198,7 +198,7 @@ describe('EscalationService', () => {
 
     expect(result.customerNotified).toBe(false);
     expect(world.notifier.inserted).toHaveLength(0);
-    expect(world.emailSender.sent[0]?.text).toContain('ha gia risposto al cliente');
+    expect(world.emailSender.sent[0]?.text).toContain('ya respondi');
   });
 
   it('escalates without email when the tenant configured no escalation address', async () => {
@@ -206,7 +206,7 @@ describe('EscalationService', () => {
     world.repository.contact = {
       studioName: 'Studio Rossi',
       escalationEmail: null,
-      timezone: 'Europe/Rome',
+      timezone: 'America/Mexico_City',
     };
 
     const result = await world.service.escalate({
@@ -269,7 +269,7 @@ describe('WhatsAppAutoReplyService escalation wiring', () => {
       classification: { intent: 'human_handoff' },
     });
     expect(world.repository.conversations.get('tenant_1:conversation_1')?.status).toBe('escalated');
-    expect(world.emailSender.sent[0]?.text).toContain('segnali sensibili');
+    expect(world.emailSender.sent[0]?.text).toContain('sensibles');
     // Il guardrail blocca l'auto-reply: l'unico messaggio al cliente e' l'avviso di escalation.
     expect(repository.outboundMessages).toHaveLength(0);
     expect(world.notifier.enqueued).toHaveLength(1);
@@ -288,7 +288,7 @@ describe('WhatsAppAutoReplyService escalation wiring', () => {
       ...baseInput(),
       source: 'text',
       transcriptLanguageProbability: null,
-      text: 'Vorrei parlare con un operatore',
+      text: 'Quiero hablar con un operador',
     });
 
     expect(result).toMatchObject({
@@ -296,7 +296,7 @@ describe('WhatsAppAutoReplyService escalation wiring', () => {
       classification: { intent: 'human_handoff' },
     });
     expect(world.repository.conversations.get('tenant_1:conversation_1')?.status).toBe('escalated');
-    expect(world.emailSender.sent[0]?.text).toContain('chiesto di parlare con una persona');
+    expect(world.emailSender.sent[0]?.text).toContain('hablar con una persona');
     expect(repository.outboxJobs).toHaveLength(1);
     // L'auto-reply ha gia' scritto al cliente: nessun avviso di escalation aggiuntivo.
     expect(world.notifier.inserted).toHaveLength(0);
@@ -315,7 +315,7 @@ describe('WhatsAppAutoReplyService escalation wiring', () => {
       ...baseInput(),
       source: 'text',
       transcriptLanguageProbability: null,
-      text: 'Vorrei prenotare una visita domani mattina',
+      text: 'Quiero reservar una visita mañana por la mañana',
     });
 
     expect(world.repository.conversations.get('tenant_1:conversation_1')?.status).toBe('active');
@@ -356,11 +356,11 @@ function baseInput() {
     customerIdentifier: '393331112233',
     occurredAt,
     source: 'voice_transcript' as const,
-    provider: 'whatsapp_360dialog' as const,
+    provider: 'whatsapp_cloud' as const,
     whatsappMessageId: 'wamid.audio',
     phoneNumberId: 'phone_123',
     displayPhoneNumber: '390212345678',
-    transcriptLanguage: 'it',
+    transcriptLanguage: 'es',
     transcriptLanguageProbability: 0.98,
   };
 }
@@ -392,7 +392,7 @@ class FakeEscalationRepository implements EscalationRepository {
   contact: EscalationTenantContact = {
     studioName: 'Studio Rossi',
     escalationEmail: 'reception@studio.example',
-    timezone: 'Europe/Rome',
+    timezone: 'America/Mexico_City',
   };
   markResultOverride: boolean | null = null;
   failWith: Error | null = null;
@@ -541,7 +541,7 @@ class FakeAutoReplyRepository implements WhatsAppAutoReplyRepository {
       assistantName: 'Ambrogio',
       aiDisclosureEnabled: true,
       autoReplyEnabled: true,
-      defaultLocale: 'it-IT',
+      defaultLocale: 'es-419',
     };
   }
 

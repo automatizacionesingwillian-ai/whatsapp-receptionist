@@ -71,8 +71,8 @@ describe('WhatsAppVoicePipelineWorker', () => {
     expect(repository.messageTranscripts[0]).toMatchObject({
       tenantId: 'tenant_1',
       messageId: 'message_1',
-      transcriptText: 'Vorrei prenotare domani mattina',
-      transcriptLanguage: 'it',
+      transcriptText: 'Quiero reservar mañana por la mañana',
+      transcriptLanguage: 'es',
       audioDurationSecs: 4.2,
       mediaUri: 'supabase://ambrogio-media/tenant_1/voice/message_1/media_audio_1.ogg',
     });
@@ -105,12 +105,12 @@ describe('WhatsAppVoicePipelineWorker', () => {
       inboundMessageId: 'message_1',
       inboundExternalId: 'message:wamid.audio',
       customerIdentifier: '393331112233',
-      text: 'Vorrei prenotare domani mattina',
+      text: 'Quiero reservar mañana por la mañana',
       source: 'voice_transcript',
       whatsappMessageId: 'wamid.audio',
       phoneNumberId: 'phone_123',
       displayPhoneNumber: '390212345678',
-      transcriptLanguage: 'it',
+      transcriptLanguage: 'es',
       transcriptLanguageProbability: 0.98,
     });
   });
@@ -119,8 +119,8 @@ describe('WhatsAppVoicePipelineWorker', () => {
     const repository = new FakeVoiceRepository([voiceJob()]);
     repository.existingContext = {
       ...repository.createReplyContext('message_1'),
-      transcriptText: 'Vorrei prenotare domani mattina',
-      transcriptLanguage: 'it',
+      transcriptText: 'Quiero reservar mañana por la mañana',
+      transcriptLanguage: 'es',
       transcriptLanguageProbability: 0.98,
     };
     const mediaDownloader = new FakeMediaDownloader();
@@ -141,7 +141,7 @@ describe('WhatsAppVoicePipelineWorker', () => {
     expect(result.completedJobs).toBe(1);
     expect(mediaDownloader.downloads).toHaveLength(0);
     expect(transcriber.calls).toHaveLength(0);
-    expect(autoReplyHandler.calls[0]?.text).toBe('Vorrei prenotare domani mattina');
+    expect(autoReplyHandler.calls[0]?.text).toBe('Quiero reservar mañana por la mañana');
   });
 
   it('retries transient provider failures with backoff', async () => {
@@ -270,7 +270,7 @@ class FakeVoiceRepository implements WhatsAppVoiceRepository {
       transcriptText: transcript?.transcriptText ?? null,
       transcriptLanguage: transcript?.transcriptLanguage ?? null,
       transcriptLanguageProbability: 0.98,
-      provider: 'whatsapp_360dialog',
+      provider: 'whatsapp_cloud',
       whatsappMessageId: 'wamid.audio',
       phoneNumberId: 'phone_123',
       displayPhoneNumber: '390212345678',
@@ -377,8 +377,8 @@ class FakeVoiceTranscriber implements VoiceTranscriber {
     this.calls.push(input);
 
     return {
-      text: 'Vorrei prenotare domani mattina',
-      languageCode: 'it',
+      text: 'Quiero reservar mañana por la mañana',
+      languageCode: 'es',
       languageProbability: 0.98,
       audioDurationSecs: 4.2,
     };

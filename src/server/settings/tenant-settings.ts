@@ -1001,7 +1001,7 @@ function configFromRow(row: TenantConfigRow | null, tenantName: string): TenantC
     address: row?.address ?? null,
     phone: row?.phone ?? null,
     email: row?.email ?? null,
-    defaultLocale: row?.default_locale ?? 'it-IT',
+    defaultLocale: row?.default_locale ?? 'es-419',
     aiDisclosureEnabled: row?.ai_disclosure_enabled ?? true,
     autoReplyEnabled: row?.auto_reply_enabled ?? false,
     voiceMessagesEnabled: row?.voice_messages_enabled ?? true,
@@ -1093,7 +1093,7 @@ function normalizeNullableEmail(value: string | null | undefined, label: string)
 function normalizeLocale(value: string): string {
   const normalized = value.trim();
 
-  if (!/^[a-z]{2}(?:-[A-Z]{2})?$/.test(normalized)) {
+  if (!/^[a-z]{2}(?:-(?:[A-Z]{2}|[0-9]{3}))?$/.test(normalized)) {
     throw new AppError('bad_request', 'Default locale is invalid');
   }
 
