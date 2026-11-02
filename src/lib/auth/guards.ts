@@ -35,10 +35,7 @@ export async function requireSessionOrRedirect(): Promise<AuthSession> {
   // Autenticato ma senza claim tenant: l'onboarding non è ancora completato.
   // Prima qui si faceva redirect a `/login` e l'utente restava in loop dopo il
   // magic link (sessione valida, dashboard rifiutata, form "invia link" di nuovo).
-  if (
-    typeof tenantId !== 'string' ||
-    (role !== 'owner' && role !== 'admin' && role !== 'member')
-  ) {
+  if (typeof tenantId !== 'string' || (role !== 'owner' && role !== 'admin' && role !== 'member')) {
     redirect('/onboarding');
   }
 

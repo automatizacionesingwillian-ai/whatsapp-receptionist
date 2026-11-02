@@ -26,9 +26,9 @@ export default function AdminUsersPage() {
       <div className="card card-padded stack stack-4">
         <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado a datos reales</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          Se eliminaron los datos de ejemplo. Esta vista lee datos personales de usuarios de
-          tenants distintos: además del servicio cross-tenant hay que decidir qué campos debe ver
-          un super-admin, y registrar el acceso en <code className="mono">audit_log</code> como ya
+          Se eliminaron los datos de ejemplo. Esta vista lee datos personales de usuarios de tenants
+          distintos: además del servicio cross-tenant hay que decidir qué campos debe ver un
+          super-admin, y registrar el acceso en <code className="mono">audit_log</code> como ya
           ocurre con los endpoints GDPR.
         </p>
         <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>

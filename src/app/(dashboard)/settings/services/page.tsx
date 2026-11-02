@@ -15,8 +15,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 type LoadResult =
-  | { readonly ok: true; readonly services: readonly ServiceView[] }
-  | { readonly ok: false };
+  { readonly ok: true; readonly services: readonly ServiceView[] } | { readonly ok: false };
 
 async function loadServices(session: AuthSession): Promise<LoadResult> {
   try {
@@ -58,8 +57,8 @@ export default async function ServicesSettingsPage() {
           </span>
           <h1>Servicios y tarifario</h1>
           <p className="muted">
-            Qué ofreces, cuánto dura y cuánto cuesta. Ambrogio solo propone servicios activos y reserva
-            en la agenda exactamente la duración indicada.
+            Qué ofreces, cuánto dura y cuánto cuesta. Ambrogio solo propone servicios activos y
+            reserva en la agenda exactamente la duración indicada.
           </p>
         </div>
       </div>
@@ -73,9 +72,9 @@ export default async function ServicesSettingsPage() {
         <section className="card stack stack-3">
           <h2 style={{ fontSize: 'var(--text-xl)' }}>Tarifario no legible</h2>
           <p className="muted">
-            No pudimos recuperar los servicios guardados. No significa que se hayan perdido:
-            solo falló la lectura. Recarga en un momento y, si el problema continúa, escríbenos desde
-            la página de contacto.
+            No pudimos recuperar los servicios guardados. No significa que se hayan perdido: solo
+            falló la lectura. Recarga en un momento y, si el problema continúa, escríbenos desde la
+            página de contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/services" className="btn btn-secondary btn-sm">

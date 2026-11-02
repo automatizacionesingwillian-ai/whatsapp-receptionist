@@ -13,8 +13,8 @@ export default function DpaPage() {
   return (
     <LegalPageLayout title="Data Processing Agreement (DPA)" lastUpdated="8 de mayo de 2026">
       <p>
-        El presente acuerdo regula el tratamiento de datos personales conforme al Art. 28 GDPR
-        entre Ambrogio.ai (encargado del tratamiento) y el Tenant (responsable).
+        El presente acuerdo regula el tratamiento de datos personales conforme al Art. 28 GDPR entre
+        Ambrogio.ai (encargado del tratamiento) y el Tenant (responsable).
       </p>
 
       <h2>1. Objeto del tratamiento</h2>
@@ -60,8 +60,8 @@ export default function DpaPage() {
 
       <h2>7. Auditoría</h2>
       <p>
-        El Responsable puede solicitar auditorías anuales con 30 días de preaviso. Los costos
-        corren a cargo del Responsable salvo acuerdo distinto.
+        El Responsable puede solicitar auditorías anuales con 30 días de preaviso. Los costos corren
+        a cargo del Responsable salvo acuerdo distinto.
       </p>
 
       <h2>8. Vigencia</h2>

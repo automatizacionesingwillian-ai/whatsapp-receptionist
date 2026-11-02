@@ -15,8 +15,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 type LoadResult =
-  | { readonly ok: true; readonly hours: readonly BusinessHourView[] }
-  | { readonly ok: false };
+  { readonly ok: true; readonly hours: readonly BusinessHourView[] } | { readonly ok: false };
 
 async function loadHours(session: AuthSession): Promise<LoadResult> {
   try {
@@ -57,8 +56,8 @@ export default async function BusinessHoursSettingsPage() {
           </span>
           <h1>Horarios de apertura</h1>
           <p className="muted">
-            Son los datos con los que Ambrogio calcula la disponibilidad. Un error aquí se traduce en
-            citas fijadas cuando el negocio está cerrado.
+            Son los datos con los que Ambrogio calcula la disponibilidad. Un error aquí se traduce
+            en citas fijadas cuando el negocio está cerrado.
           </p>
         </div>
       </div>
@@ -72,9 +71,9 @@ export default async function BusinessHoursSettingsPage() {
         <section className="card stack stack-3">
           <h2 style={{ fontSize: 'var(--text-xl)' }}>Horarios no legibles</h2>
           <p className="muted">
-            No pudimos recuperar los horarios guardados. No significa que se hayan perdido:
-            solo falló la lectura. Recarga en un momento y, si el problema continúa, escríbenos desde
-            la página de contacto.
+            No pudimos recuperar los horarios guardados. No significa que se hayan perdido: solo
+            falló la lectura. Recarga en un momento y, si el problema continúa, escríbenos desde la
+            página de contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/business-hours" className="btn btn-secondary btn-sm">

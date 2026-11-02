@@ -14,8 +14,7 @@ export function resolvePostAuthDestination(input: {
   const tenantId = input.appMetadata['tenant_id'];
   const role = input.appMetadata['role'];
   const hasTenantClaims =
-    typeof tenantId === 'string' &&
-    (role === 'owner' || role === 'admin' || role === 'member');
+    typeof tenantId === 'string' && (role === 'owner' || role === 'admin' || role === 'member');
 
   if (!hasTenantClaims) {
     return '/onboarding';

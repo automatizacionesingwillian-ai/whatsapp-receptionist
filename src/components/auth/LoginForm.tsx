@@ -15,8 +15,7 @@ export function LoginForm() {
       'Si el correo está asociado a una cuenta, recibirás un enlace de acceso en unos instantes. Revisa también la carpeta de spam.',
   });
 
-  const recoveryLink =
-    state.status === 'success' ? readRecoveryLink(state.data) : null;
+  const recoveryLink = state.status === 'success' ? readRecoveryLink(state.data) : null;
 
   return (
     <form onSubmit={onSubmit} className="stack stack-4" noValidate>

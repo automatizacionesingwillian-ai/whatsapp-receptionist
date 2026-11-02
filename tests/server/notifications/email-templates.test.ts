@@ -17,10 +17,10 @@ describe('Email templates', () => {
         expiresInMinutes: 10,
       });
 
-      expect(result.subject).toContain('link');
+      expect(result.subject).toContain('enlace');
       expect(result.text).toContain('https://ambrogio.ai/auth/callback?token=xyz');
-      expect(result.text).toContain('10 minuti');
-      expect(result.html).toContain('Accedi ad Ambrogio.ai');
+      expect(result.text).toContain('10 minutos');
+      expect(result.html).toContain('Iniciar sesión en Ambrogio.ai');
       expect(result.html).toContain('href="https://ambrogio.ai/auth/callback?token=xyz"');
     });
   });
@@ -36,7 +36,7 @@ describe('Email templates', () => {
       expect(result.subject).toContain('Studio Dentistico Rossi');
       expect(result.text).toContain('Studio Dentistico Rossi');
       expect(result.html).toContain('Studio Dentistico Rossi');
-      expect(result.html).toContain('Continua il setup');
+      expect(result.html).toContain('Continuar la configuración');
     });
   });
 
@@ -72,7 +72,7 @@ describe('Email templates', () => {
       expect(result.subject).toContain('FE/2026/00012');
       expect(result.text).toContain('https://fic.example/12345.pdf');
       expect(result.text).toContain('€297,00');
-      expect(result.html).toContain('SDI');
+      expect(result.html).toContain('factura electrónica');
     });
   });
 
@@ -85,7 +85,7 @@ describe('Email templates', () => {
       });
 
       expect(result.subject).toContain('GDPR');
-      expect(result.text).toContain('24 ore');
+      expect(result.text).toContain('24 horas');
       expect(result.html).toContain('Art. 15 GDPR');
       expect(result.html).toContain('https://ambrogio.ai/exports/abc123');
     });

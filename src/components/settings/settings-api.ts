@@ -9,8 +9,7 @@ import { isApiError } from '@/lib/api-client';
  * POST, mentre queste route usano PUT, PATCH e DELETE.
  */
 export type ApiResult<T> =
-  | { readonly ok: true; readonly data: T }
-  | { readonly ok: false; readonly message: string };
+  { readonly ok: true; readonly data: T } | { readonly ok: false; readonly message: string };
 
 /**
  * Messaggi utente per i codici d'errore dell'API.

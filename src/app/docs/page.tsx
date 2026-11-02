@@ -45,7 +45,10 @@ const SECTIONS: ReadonlyArray<DocSection> = [
         label: 'Conexión de Google Calendar',
         href: '/help/articles/come-autorizzare-google-calendar',
       },
-      { label: 'Carga del tarifario de servicios', href: '/help/articles/caricare-il-listino-servizi' },
+      {
+        label: 'Carga del tarifario de servicios',
+        href: '/help/articles/caricare-il-listino-servizi',
+      },
       {
         label: 'Configuración de horarios',
         href: '/help/articles/configurare-gli-orari-di-apertura',
@@ -68,7 +71,10 @@ const SECTIONS: ReadonlyArray<DocSection> = [
     title: 'Cuenta y GDPR',
     items: [
       { label: 'Cambio de plan', href: '/help/articles/cambiare-piano' },
-      { label: 'Facturación electrónica', href: '/help/articles/scaricare-fatture-elettroniche-sdi' },
+      {
+        label: 'Facturación electrónica',
+        href: '/help/articles/scaricare-fatture-elettroniche-sdi',
+      },
       { label: 'Exportación de datos GDPR', href: '/help/articles/esportare-i-miei-dati-gdpr' },
       { label: 'Eliminación de cuenta', href: '/help/articles/cancellare-account' },
     ],

@@ -1,5 +1,12 @@
 # Ambrogio.ai Agent Memory
 
+## 2026-11-02 — CI verify: lint + tests ES — Cursor
+
+- `eslint --fix` + warnings residuales (unused vars / `as unknown`).
+- Tests alineados a es-419 (business-hours, services, emails, privacy retention).
+- Smoke cron/route: lectura de fuente en vez de `import()` de `route.ts` (timeouts).
+- `npm run verify` OK: typecheck + lint + 559 tests + db:lint.
+
 ## 2026-11-02 — Crons Vercel compatibles con Hobby — Cursor
 
 - Ajustado `vercel.json`: schedules `* * * * *`, `*/5` y `*/15` fallaban el deploy en Hobby (máx. 1 ejecución/día).

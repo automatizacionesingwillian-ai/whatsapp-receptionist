@@ -5,7 +5,6 @@ import {
   TenantSettingsService,
   type BusinessHourSettings,
   type TenantConfigSettings,
-  type TenantProfile,
   type TenantServiceSettings,
   type TenantSettingsRepository,
   type TenantSettingsSnapshot,

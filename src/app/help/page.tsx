@@ -109,8 +109,8 @@ export default async function HelpPage() {
               <span className="badge">Centro de ayuda</span>
               <h1 className="display text-balance">¿Cómo podemos ayudarte?</h1>
               <p className="lead text-pretty" style={{ margin: '0 auto' }}>
-                Guías, FAQ y canales directos. Respuesta en 4 horas hábiles para Starter, 1 hora para
-                Professional, inmediata para Agency.
+                Guías, FAQ y canales directos. Respuesta en 4 horas hábiles para Starter, 1 hora
+                para Professional, inmediata para Agency.
               </p>
               <div className="row" style={{ justifyContent: 'center', gap: 'var(--space-3)' }}>
                 <label htmlFor="help-search" className="sr-only">

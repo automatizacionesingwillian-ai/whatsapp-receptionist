@@ -254,9 +254,7 @@ export class TenantWhatsAppCredentialsResolver implements WhatsAppCredentialsRes
       };
     }
 
-    const globalAccessToken = (
-      this.options.globalAccessToken ?? env.WHATSAPP_API_KEY
-    ).trim();
+    const globalAccessToken = (this.options.globalAccessToken ?? env.WHATSAPP_API_KEY).trim();
     const globalPhoneNumberId = (
       this.options.globalPhoneNumberId ?? env.WHATSAPP_PHONE_NUMBER_ID
     ).trim();

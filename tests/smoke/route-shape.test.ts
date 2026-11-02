@@ -3,9 +3,12 @@
  *
  * Questo test è una rete di sicurezza per evitare regressioni dovute a refactor
  * di import o spostamento file, senza necessità di un server in esecuzione.
+ *
+ * Si analizza il sorgente invece di importare i moduli: in Vitest l'import di
+ * `route.ts` Next.js può caricare env/server e superare il timeout.
  */
 
-import { readdir } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -13,7 +16,7 @@ import { describe, expect, it } from 'vitest';
 
 const PROJECT_ROOT = fileURLToPath(new URL('../..', import.meta.url));
 const API_ROOT = join(PROJECT_ROOT, 'src/app/api');
-const VALID_HANDLERS = new Set(['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS', 'HEAD']);
+const VALID_HANDLERS = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'] as const;
 
 async function findRouteFiles(dir: string): Promise<string[]> {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -31,6 +34,21 @@ async function findRouteFiles(dir: string): Promise<string[]> {
   return result;
 }
 
+function exportedHandlers(source: string): string[] {
+  const found = new Set<string>();
+
+  for (const handler of VALID_HANDLERS) {
+    const pattern = new RegExp(
+      String.raw`\bexport\s+(?:async\s+)?function\s+${handler}\b|\bexport\s+(?:const|let|var)\s+${handler}\b|\bexport\s*\{[^}]*\b${handler}\b`,
+    );
+    if (pattern.test(source)) {
+      found.add(handler);
+    }
+  }
+
+  return [...found];
+}
+
 describe('API routes shape (smoke)', () => {
   it('every route.ts exports at least one HTTP handler', async () => {
     const routes = await findRouteFiles(API_ROOT);
@@ -40,25 +58,11 @@ describe('API routes shape (smoke)', () => {
     const failures: string[] = [];
 
     for (const routePath of routes) {
-      try {
-        const mod = (await import(routePath)) as Record<string, unknown>;
-        const exportedHandlers = Object.keys(mod).filter((key) => VALID_HANDLERS.has(key));
+      const source = await readFile(routePath, 'utf8');
+      const handlers = exportedHandlers(source);
 
-        if (exportedHandlers.length === 0) {
-          failures.push(`${relative(PROJECT_ROOT, routePath)} - no HTTP handler exported`);
-        }
-
-        for (const handlerName of exportedHandlers) {
-          if (typeof mod[handlerName] !== 'function') {
-            failures.push(
-              `${relative(PROJECT_ROOT, routePath)} - export ${handlerName} is not a function`,
-            );
-          }
-        }
-      } catch (error) {
-        failures.push(
-          `${relative(PROJECT_ROOT, routePath)} - import failed: ${(error as Error).message}`,
-        );
+      if (handlers.length === 0) {
+        failures.push(`${relative(PROJECT_ROOT, routePath)} - no HTTP handler exported`);
       }
     }
 

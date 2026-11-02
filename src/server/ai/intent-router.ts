@@ -58,10 +58,7 @@ const intentRules: IntentRule[] = [
     intent: 'cancellation_request',
     confidence: 0.9,
     minMatches: 2,
-    signals: [
-      /\b(cancelar|cancela|anular|anula)\b/,
-      /\b(cita|turno|reserva|reservacion|visita)\b/,
-    ],
+    signals: [/\b(cancelar|cancela|anular|anula)\b/, /\b(cita|turno|reserva|reservacion|visita)\b/],
   },
   {
     intent: 'pricing_question',
@@ -76,9 +73,7 @@ const intentRules: IntentRule[] = [
   {
     intent: 'human_handoff',
     confidence: 0.86,
-    signals: [
-      /\b(operador|persona|humano|recepcion|secretaria|asesor|llameme|llamenme)\b/,
-    ],
+    signals: [/\b(operador|persona|humano|recepcion|secretaria|asesor|llameme|llamenme)\b/],
   },
   {
     intent: 'booking_request',

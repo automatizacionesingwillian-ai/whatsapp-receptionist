@@ -22,8 +22,7 @@ export default function PrivacyPage() {
       <p>
         El responsable del tratamiento es Ambrogio.ai, con domicilio en [por definir en fase de
         constitución], identificación fiscal [por insertar]. Para cualquier cuestión relativa al
-        tratamiento de datos:{' '}
-        <a href="mailto:privacy@ambrogio.ai">privacy@ambrogio.ai</a>.
+        tratamiento de datos: <a href="mailto:privacy@ambrogio.ai">privacy@ambrogio.ai</a>.
       </p>
 
       <h2>2. Categorías de datos recopilados</h2>
@@ -76,18 +75,14 @@ export default function PrivacyPage() {
         <li>Inferencia AI: Anthropic API región UE</li>
         <li>Voz: ElevenLabs UE</li>
       </ul>
-      <p>
-        Ninguna transferencia a terceros países sin garantías adecuadas (SCC cuando aplique).
-      </p>
+      <p>Ninguna transferencia a terceros países sin garantías adecuadas (SCC cuando aplique).</p>
 
       <h2>5. Conservación</h2>
       <ul>
         <li>Datos de cuenta: durante toda la relación + 12 meses.</li>
         <li>Conversaciones: 24 meses rolling, salvo requerimientos legales.</li>
         <li>Audios: 90 días desde la transcripción.</li>
-        <li>
-          Datos fiscales (facturas): el tiempo exigido por la normativa fiscal aplicable.
-        </li>
+        <li>Datos fiscales (facturas): el tiempo exigido por la normativa fiscal aplicable.</li>
         <li>Logs técnicos: 12 meses.</li>
       </ul>
 

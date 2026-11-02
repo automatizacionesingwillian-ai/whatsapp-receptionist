@@ -29,8 +29,8 @@ export default function DashboardError({ error, reset }: Readonly<DashboardError
         <span className="eyebrow">Error</span>
         <h1 style={{ fontSize: 'var(--text-2xl)' }}>No pudimos cargar estos datos.</h1>
         <p className="muted">
-          El problema es de nuestro lado, no tuyo: ninguna conversación se perdió y Ambrogio
-          sigue respondiendo en WhatsApp. Reintenta en unos segundos.
+          El problema es de nuestro lado, no tuyo: ninguna conversación se perdió y Ambrogio sigue
+          respondiendo en WhatsApp. Reintenta en unos segundos.
         </p>
       </div>
 

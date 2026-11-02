@@ -40,8 +40,8 @@ describe('toDayDrafts', () => {
     const drafts = toDayDrafts([]);
 
     expect(drafts.map((item) => item.weekday)).toEqual([1, 2, 3, 4, 5, 6, 0]);
-    expect(weekdayLabel(drafts[0]?.weekday ?? -1)).toBe('Lunedì');
-    expect(weekdayLabel(drafts[6]?.weekday ?? -1)).toBe('Domenica');
+    expect(weekdayLabel(drafts[0]?.weekday ?? -1)).toBe('Lunes');
+    expect(weekdayLabel(drafts[6]?.weekday ?? -1)).toBe('Domingo');
   });
 
   it('marks days without saved hours as closed and leaves the times empty', () => {
@@ -109,7 +109,7 @@ describe('validateDayDrafts', () => {
 
     expect(issues).toHaveLength(1);
     expect(issues[0]?.weekday).toBe(1);
-    expect(issues[0]?.message).toContain('Lunedì');
+    expect(issues[0]?.message).toContain('Lunes');
   });
 
   it('rejects a closing time that is not after the opening time', () => {
@@ -209,7 +209,7 @@ describe('saveBusinessHours', () => {
 
     expect(result).toEqual({
       ok: false,
-      message: 'Alcuni dati non sono validi. Controlla i campi e riprova.',
+      message: 'Algunos datos no son válidos. Revisa los campos e inténtalo de nuevo.',
     });
   });
 
@@ -220,7 +220,7 @@ describe('saveBusinessHours', () => {
 
     expect(result).toEqual({
       ok: false,
-      message: 'Connessione non riuscita. Controlla la rete e riprova.',
+      message: 'No se pudo conectar. Revisa tu red e inténtalo de nuevo.',
     });
   });
 });

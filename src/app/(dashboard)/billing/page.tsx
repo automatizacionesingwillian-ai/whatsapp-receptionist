@@ -110,8 +110,8 @@ export default async function BillingPage() {
           <h2 style={{ fontSize: 'var(--text-lg)' }}>No puedo leer tu suscripción</h2>
           <p className="muted">
             Los datos de facturación no están disponibles en este momento. Reintenta en unos
-            instantes: mientras tanto puedes gestionar todo desde el portal de clientes de Stripe que
-            te enviamos por correo al suscribirte.
+            instantes: mientras tanto puedes gestionar todo desde el portal de clientes de Stripe
+            que te enviamos por correo al suscribirte.
           </p>
           <Link href="/status" className="btn btn-secondary" style={{ alignSelf: 'flex-start' }}>
             Estado del servicio
@@ -183,8 +183,8 @@ export default async function BillingPage() {
               <hr className="divider" style={{ margin: 0 }} />
               <h3 style={{ fontSize: 'var(--text-lg)' }}>Activar una suscripción</h3>
               <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                El pago se completa en Stripe. Puedes cambiar o cancelar en cualquier momento desde el
-                portal de clientes.
+                El pago se completa en Stripe. Puedes cambiar o cancelar en cualquier momento desde
+                el portal de clientes.
               </p>
               <div className="row" style={{ gap: 'var(--space-2)', flexWrap: 'wrap' }}>
                 {status.availablePlans.map((plan) => (

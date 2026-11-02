@@ -15,16 +15,18 @@ describe('LlmIntentClassifier', () => {
       ),
     );
 
-    await expect(classifier.classify({ text: 'Cuanto cuesta una visita?' })).resolves.toMatchObject({
-      intent: 'pricing_question',
-      confidence: 0.91,
-      matchedSignals: ['precio'],
-      aiUsage: {
-        feature: 'intent_classifier',
-        costCents: 1,
-        totalTokens: 15,
+    await expect(classifier.classify({ text: 'Cuanto cuesta una visita?' })).resolves.toMatchObject(
+      {
+        intent: 'pricing_question',
+        confidence: 0.91,
+        matchedSignals: ['precio'],
+        aiUsage: {
+          feature: 'intent_classifier',
+          costCents: 1,
+          totalTokens: 15,
+        },
       },
-    });
+    );
   });
 
   it('falls back to other when LLM confidence is low', async () => {

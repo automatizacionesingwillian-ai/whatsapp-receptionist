@@ -61,8 +61,8 @@ export default async function KnowledgePage() {
           <span className="eyebrow">Base de conocimiento</span>
           <h1>Lo que el asistente sabe de tu negocio</h1>
           <p className="muted" style={{ maxWidth: '60ch' }}>
-            Cada documento se indexa y se recupera cuando un cliente hace una pregunta
-            pertinente. Sin documentos, el asistente responde solo de forma genérica.
+            Cada documento se indexa y se recupera cuando un cliente hace una pregunta pertinente.
+            Sin documentos, el asistente responde solo de forma genérica.
           </p>
         </div>
       </div>
@@ -115,12 +115,9 @@ function KnowledgeBaseContent({
           <div className="card card-padded" role="status">
             <p style={{ fontSize: 'var(--text-sm)' }}>
               <strong>{notIndexedCount}</strong>{' '}
-              {notIndexedCount === 1
-                ? 'documento activo no está'
-                : 'documentos activos no están'}{' '}
+              {notIndexedCount === 1 ? 'documento activo no está' : 'documentos activos no están'}{' '}
               indexado para la búsqueda semántica. El asistente no{' '}
-              {notIndexedCount === 1 ? 'lo' : 'los'} recupera hasta que la indexación se
-              regenere.
+              {notIndexedCount === 1 ? 'lo' : 'los'} recupera hasta que la indexación se regenere.
             </p>
           </div>
         ) : null}

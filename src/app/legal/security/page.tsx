@@ -56,8 +56,8 @@ export default function SecurityPage() {
       <h2>Rate limiting</h2>
       <p>
         Upstash Redis con sliding window. Políticas nominadas por escenario: login, magic link,
-        onboarding, escritura de configuración, exportación GDPR. Protección de ráfagas en todos
-        los webhooks.
+        onboarding, escritura de configuración, exportación GDPR. Protección de ráfagas en todos los
+        webhooks.
       </p>
 
       <h2>Logging y PII</h2>
@@ -88,8 +88,8 @@ export default function SecurityPage() {
 
       <h2>Penetration testing</h2>
       <p>
-        Pen test anual con proveedor tercero. Informe disponible bajo NDA para planes Professional
-        y Agency.
+        Pen test anual con proveedor tercero. Informe disponible bajo NDA para planes Professional y
+        Agency.
       </p>
 
       <h2>Bug bounty</h2>

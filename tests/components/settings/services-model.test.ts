@@ -98,8 +98,9 @@ describe('centsToPriceInput / formatPrice / formatDuration', () => {
   });
 
   it('says explicitly when no price is set instead of showing zero', () => {
-    expect(formatPrice(null)).toBe('Prezzo non indicato');
-    expect(formatPrice(3500)).toContain('35,00');
+    expect(formatPrice(null)).toBe('Precio no indicado');
+    // Intl es-419 puede renderizar "35,00 €" o "EUR 35.00" según ICU del runtime.
+    expect(formatPrice(3500)).toMatch(/35([.,]00)/);
   });
 
   it('renders durations longer than an hour in hours and minutes', () => {
@@ -295,7 +296,7 @@ describe('service requests', () => {
 
     expect(result).toEqual({
       ok: false,
-      message: 'Non hai i permessi per completare questa operazione.',
+      message: 'No tienes permisos para completar esta operación.',
     });
   });
 

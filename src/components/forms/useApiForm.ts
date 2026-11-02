@@ -148,9 +148,7 @@ export function useApiForm(options: UseApiFormOptions): {
       }
 
       const successData =
-        payload !== null &&
-        typeof payload === 'object' &&
-        'data' in (payload as ApiSuccessEnvelope)
+        payload !== null && typeof payload === 'object' && 'data' in (payload as ApiSuccessEnvelope)
           ? (payload as ApiSuccessEnvelope).data
           : undefined;
 

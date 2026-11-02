@@ -17,8 +17,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 type LoadResult =
-  | { readonly ok: true; readonly status: WhatsAppConnectionView }
-  | { readonly ok: false };
+  { readonly ok: true; readonly status: WhatsAppConnectionView } | { readonly ok: false };
 
 async function loadStatus(tenantId: string): Promise<LoadResult> {
   try {
@@ -63,9 +62,9 @@ export default async function WhatsAppSettingsPage() {
         <section className="card stack stack-3">
           <h2 style={{ fontSize: 'var(--text-xl)' }}>Estado no legible</h2>
           <p className="muted">
-            No pudimos recuperar la configuración del canal. No significa que el
-            número se haya desconectado: solo falló la lectura. Recarga en un momento y, si
-            el problema continúa, escríbenos desde la página de contacto.
+            No pudimos recuperar la configuración del canal. No significa que el número se haya
+            desconectado: solo falló la lectura. Recarga en un momento y, si el problema continúa,
+            escríbenos desde la página de contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/whatsapp" className="btn btn-secondary btn-sm">

@@ -42,8 +42,7 @@ const POSTS: Record<string, Post> = {
     slug: 'gdpr-receptionist-ai-dpa-template',
     title: 'GDPR y recepción AI: el DPA que realmente necesitas',
     seoTitle: 'GDPR y DPA para AI Receptionist',
-    excerpt:
-      'Qué debe incluir un DPA para ser útil en una auditoría. Plantilla descargable.',
+    excerpt: 'Qué debe incluir un DPA para ser útil en una auditoría. Plantilla descargable.',
     body: `El Data Processing Agreement (DPA) es obligatorio cuando un proveedor de servicios trata datos personales por cuenta del responsable. Para una recepción AI es especialmente sensible porque se procesan conversaciones completas, notas de voz y, potencialmente, datos de salud.\n\nUn DPA sólido debe especificar: categorías de datos, finalidades, duración, subencargados, medidas técnicas, procedimiento ante brechas y derechos de los interesados.\n\nAmbrogio.ai ofrece un DPA precompilado con: hosting en la UE (Supabase Frankfurt), retención 24 meses, audit log inmutable, endpoints Art. 15/17 self-service y subencargados declarados públicamente.`,
     date: '28 de abril de 2026',
     isoDate: '2026-04-28',

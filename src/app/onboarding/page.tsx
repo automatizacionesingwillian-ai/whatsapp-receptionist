@@ -19,11 +19,7 @@ const ONBOARDING_HOWTO_SCHEMA = buildHowToEnrichedSchema({
   url: '/onboarding',
   totalTime: 'PT24H',
   tool: ['Cuenta Meta Business Manager', 'Google Calendar', 'Número WhatsApp Business'],
-  supply: [
-    'Listado de servicios',
-    'Horario de apertura',
-    'Datos de facturación',
-  ],
+  supply: ['Listado de servicios', 'Horario de apertura', 'Datos de facturación'],
   steps: [
     {
       name: 'Perfil del negocio',

@@ -6,8 +6,7 @@ import { SiteHeader } from '@/components/marketing/SiteHeader';
 
 export const metadata: Metadata = {
   title: 'Página no encontrada',
-  description:
-    'La página que buscas no existe o fue movida. Vuelve al inicio de Ambrogio.ai.',
+  description: 'La página que buscas no existe o fue movida. Vuelve al inicio de Ambrogio.ai.',
   robots: {
     index: false,
     follow: false,

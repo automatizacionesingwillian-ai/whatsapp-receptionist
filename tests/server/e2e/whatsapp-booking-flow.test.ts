@@ -129,7 +129,10 @@ describe('WhatsApp backend booking E2E flow', () => {
     });
     expect(lastOutboundText(repository)).toContain('¿Para qué día');
 
-    await webhook.processPayload(textPayload('wamid.reschedule.slots', 'mañana por la mañana'), context);
+    await webhook.processPayload(
+      textPayload('wamid.reschedule.slots', 'mañana por la mañana'),
+      context,
+    );
 
     expect(repository.bookingState()).toMatchObject({
       status: 'reschedule_slots_proposed',
@@ -257,7 +260,10 @@ describe('WhatsApp backend booking E2E flow', () => {
     });
 
     await webhook.processPayload(
-      textPayload('wamid.opted-out.booking', 'Quiero reservar una primera visita mañana por la mañana'),
+      textPayload(
+        'wamid.opted-out.booking',
+        'Quiero reservar una primera visita mañana por la mañana',
+      ),
       context,
     );
 

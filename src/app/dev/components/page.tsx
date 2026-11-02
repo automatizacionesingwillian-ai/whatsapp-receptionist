@@ -162,9 +162,7 @@ export default function ComponentsPreviewPage() {
               ◇
             </span>
             <h3 className="empty-state-title">Nada que mostrar</h3>
-            <p className="empty-state-text">
-              Cuando haya conversaciones o citas las verás aquí.
-            </p>
+            <p className="empty-state-text">Cuando haya conversaciones o citas las verás aquí.</p>
             <button type="button" className="btn btn-primary btn-sm">
               Crear el primero
             </button>

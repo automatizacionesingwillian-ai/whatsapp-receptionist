@@ -1,11 +1,5 @@
 export type BookingDayPart =
-  | 'any'
-  | 'morning'
-  | 'afternoon'
-  | 'evening'
-  | 'after_hour'
-  | 'before_hour'
-  | 'exact_hour';
+  'any' | 'morning' | 'afternoon' | 'evening' | 'after_hour' | 'before_hour' | 'exact_hour';
 
 export type BookingUrgency = 'normal' | 'urgent';
 
@@ -203,8 +197,7 @@ const eveningMarkerRegex = /\b(por la noche|en la noche|esta noche|de la noche|n
 
 const todayRegex = /\b(hoy|esta manana|esta tarde|esta noche)\b/;
 const afterTomorrowRegex = /\b(pasado manana|pasado-manana)\b/;
-const tomorrowRegex =
-  /\b((?<!pasado\s)(?<!esta\s)(?<!por la\s)(?<!en la\s)(?<!de la\s)manana)\b/;
+const tomorrowRegex = /\b((?<!pasado\s)(?<!esta\s)(?<!por la\s)(?<!en la\s)(?<!de la\s)manana)\b/;
 const nextWeekRegex = /\b(proxima semana|semana que viene|la proxima semana)\b/;
 const relativeDaysRegex =
   /\b(?:en|dentro de)\s+(\d{1,2}|un|una|dos|tres|cuatro|cinco|seis|siete|diez|quince)\s+(dias|dia|semanas|semana)\b/;
@@ -1021,10 +1014,7 @@ function numberPart(map: Map<string, string>, key: string): number {
 
 function removeBookingStopwords(value: string): string {
   return value
-    .replace(
-      /\b(un|una|el|la|los|las|para|cita|turno|reserva|quiero|quisiera)\b/g,
-      ' ',
-    )
+    .replace(/\b(un|una|el|la|los|las|para|cita|turno|reserva|quiero|quisiera)\b/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }

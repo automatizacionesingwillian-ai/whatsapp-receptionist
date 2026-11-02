@@ -58,7 +58,9 @@ export default function CaseStudiesPage() {
               style={{ maxWidth: '720px', marginBottom: 'var(--space-12)' }}
             >
               <span className="badge">Casos de estudio</span>
-              <h1 className="display text-balance">Ningún caso de estudio publicado. Todavía no.</h1>
+              <h1 className="display text-balance">
+                Ningún caso de estudio publicado. Todavía no.
+              </h1>
               <p className="lead text-pretty">
                 Ambrogio.ai está en beta con los primeros estudios piloto. Aún no tenemos resultados
                 medidos en un periodo lo bastante largo como para publicarlos como prueba, y

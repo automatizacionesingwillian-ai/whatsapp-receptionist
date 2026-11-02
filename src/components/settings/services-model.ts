@@ -242,7 +242,9 @@ export function formatPrice(cents: number | null): string {
   }
 
   // La divisione serve solo alla formattazione: il dato persistito resta intero.
-  return new Intl.NumberFormat('es-419', { style: 'currency', currency: 'EUR' }).format(cents / 100);
+  return new Intl.NumberFormat('es-419', { style: 'currency', currency: 'EUR' }).format(
+    cents / 100,
+  );
 }
 
 export function formatDuration(minutes: number): string {

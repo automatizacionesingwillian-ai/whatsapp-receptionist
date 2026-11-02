@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { LlmDomainReplyGenerator, type DomainReplyInput } from '@/server/ai/domain-reply';
+import { LlmDomainReplyGenerator } from '@/server/ai/domain-reply';
 import type { AiRuntimeContext } from '@/server/ai/context';
 import type { LlmClient, LlmCompletionInput } from '@/server/ai/llm';
 

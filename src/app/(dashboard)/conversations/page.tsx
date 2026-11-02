@@ -72,8 +72,8 @@ export default async function ConversationsPage({
           <span className="eyebrow">Conversaciones</span>
           <h1>Inbox</h1>
           <p className="muted">
-            Cada chat atendida por Ambrogio, con estado actualizado. Abre una conversación para
-            leer el historial y responder manualmente.
+            Cada chat atendida por Ambrogio, con estado actualizado. Abre una conversación para leer
+            el historial y responder manualmente.
           </p>
         </div>
 
@@ -130,8 +130,8 @@ export default async function ConversationsPage({
         <div className="card card-padded stack stack-3" role="alert">
           <h2 style={{ fontSize: 'var(--text-lg)' }}>No podemos cargar las conversaciones</h2>
           <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            El servicio no respondió. Recarga la página: si el problema continúa, revisa el
-            estado del sistema.
+            El servicio no respondió. Recarga la página: si el problema continúa, revisa el estado
+            del sistema.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/conversations" className="btn btn-secondary btn-sm">
@@ -148,9 +148,7 @@ export default async function ConversationsPage({
         <div className="card">
           <div className="empty-state">
             <p className="empty-state-title">
-              {hasFilters
-                ? 'Ninguna conversación con estos filtros'
-                : 'Aún no hay conversaciones'}
+              {hasFilters ? 'Ninguna conversación con estos filtros' : 'Aún no hay conversaciones'}
             </p>
             <p className="empty-state-text">
               {hasFilters

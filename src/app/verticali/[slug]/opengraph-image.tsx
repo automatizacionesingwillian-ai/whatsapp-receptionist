@@ -16,7 +16,11 @@ const VERTICAL_META: Record<string, { label: string; metric: string; color: stri
     metric: 'Recordatorios automáticos',
     color: 'oklch(55% 0.1 80)',
   },
-  fitness: { label: 'Gimnasios y PT', metric: 'Disponibilidad en vivo', color: 'oklch(45% 0.13 145)' },
+  fitness: {
+    label: 'Gimnasios y PT',
+    metric: 'Disponibilidad en vivo',
+    color: 'oklch(45% 0.13 145)',
+  },
   professional: {
     label: 'Negocios profesionales',
     metric: 'Leads precalificados',

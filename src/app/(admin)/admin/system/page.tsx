@@ -275,8 +275,8 @@ export default async function AdminSystemPage() {
         <span className="badge badge-warm">Cross-tenant</span>
         <h1>Sistema</h1>
         <p className="muted">
-          Estado medido de las dependencias, configuración runtime y colas de trabajo. Cada valor
-          de esta página se detecta al cargar: nada se declara a mano.
+          Estado medido de las dependencias, configuración runtime y colas de trabajo. Cada valor de
+          esta página se detecta al cargar: nada se declara a mano.
         </p>
       </div>
 
@@ -286,8 +286,8 @@ export default async function AdminSystemPage() {
           <span className={`badge ${overall.badgeClass}`}>{overall.label}</span>
         </div>
         <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-          Sondas ejecutadas a las {formatDateTime(now.toISOString())} (zona America/Mexico_City).
-          El mismo dato en formato máquina está en <span className="mono">/api/health/deep</span>.
+          Sondas ejecutadas a las {formatDateTime(now.toISOString())} (zona America/Mexico_City). El
+          mismo dato en formato máquina está en <span className="mono">/api/health/deep</span>.
         </p>
 
         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }} className="stack stack-2">
@@ -306,8 +306,8 @@ export default async function AdminSystemPage() {
           </span>
         </div>
         <p className="muted" style={{ fontSize: 'var(--text-xs)' }}>
-          El panel solo muestra si una variable está configurada, nunca su contenido. La fecha de
-          la última rotación no aparece porque el sistema no la registra.
+          El panel solo muestra si una variable está configurada, nunca su contenido. La fecha de la
+          última rotación no aparece porque el sistema no la registra.
         </p>
 
         <div style={{ overflowX: 'auto' }}>

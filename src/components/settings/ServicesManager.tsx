@@ -157,8 +157,8 @@ export function ServicesManager({ services, canManage }: ServicesManagerProps) {
 
         {list.length === 0 ? (
           <p className="helper">
-            Ningún servicio configurado. Mientras el tarifario esté vacío, Ambrogio no puede proponer
-            ni reservar nada.
+            Ningún servicio configurado. Mientras el tarifario esté vacío, Ambrogio no puede
+            proponer ni reservar nada.
           </p>
         ) : (
           <ul className="stack stack-3" style={{ listStyle: 'none', padding: 0, margin: 0 }}>

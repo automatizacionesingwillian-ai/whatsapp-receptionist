@@ -27,7 +27,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     assertWhatsAppWebhookAuthenticity({ rawBody, headers: request.headers });
     await enforceWhatsAppWebhookRateLimit(request.headers);
 
-    const payload = WhatsAppWebhookPayloadSchema.parse(JSON.parse(rawBody) as unknown);
+    const parsedJson: unknown = JSON.parse(rawBody);
+    const payload = WhatsAppWebhookPayloadSchema.parse(parsedJson);
     const service = createWhatsAppWebhookService();
 
     return service.processPayload(payload, {

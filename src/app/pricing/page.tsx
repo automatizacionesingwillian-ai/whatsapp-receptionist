@@ -181,8 +181,8 @@ export default async function PricingPage() {
             >
               <h3>¿Necesitas un plan a medida?</h3>
               <p className="muted" style={{ maxWidth: '50ch' }}>
-                Negoci grandes, cadenas, grupos de salud, agencias con más de 10 clientes.
-                Armemos juntos una oferta dedicada.
+                Negoci grandes, cadenas, grupos de salud, agencias con más de 10 clientes. Armemos
+                juntos una oferta dedicada.
               </p>
               <Link href="/contact?plan=enterprise" className="btn btn-primary">
                 Habla con nosotros

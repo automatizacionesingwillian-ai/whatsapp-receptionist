@@ -4,12 +4,7 @@ import { createSupabaseAdminClient } from '@/lib/supabase/admin';
 import { WHATSAPP_PROVIDER } from '@/server/whatsapp/webhook-events';
 
 export type SyncedWhatsAppTemplateStatus =
-  | 'draft'
-  | 'pending'
-  | 'approved'
-  | 'rejected'
-  | 'paused'
-  | 'disabled';
+  'draft' | 'pending' | 'approved' | 'rejected' | 'paused' | 'disabled';
 
 export type SyncedWhatsAppTemplate = {
   name: string;

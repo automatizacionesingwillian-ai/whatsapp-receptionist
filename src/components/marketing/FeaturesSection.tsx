@@ -27,8 +27,7 @@ const FEATURES: ReadonlyArray<Feature> = [
   },
   {
     title: 'Escalamiento humano fluido',
-    description:
-      'Cuando hace falta, te pasa la conversación. Sin incomodidad, sin perder el hilo.',
+    description: 'Cuando hace falta, te pasa la conversación. Sin incomodidad, sin perder el hilo.',
     icon: '/assets/site-images/ambrogio/svg/04-human-escalation.svg',
     size: 'half',
   },
@@ -47,7 +46,8 @@ const FEATURES: ReadonlyArray<Feature> = [
   },
   {
     title: 'Panel claro, datos honestos',
-    description: 'KPI en tiempo real. Conversaciones, reservas, voz, facturación — en una pantalla.',
+    description:
+      'KPI en tiempo real. Conversaciones, reservas, voz, facturación — en una pantalla.',
     icon: '/assets/site-images/ambrogio/svg/11-dashboard-command-center.svg',
     size: 'third',
   },

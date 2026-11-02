@@ -39,8 +39,8 @@ export default function AdminError({ error, reset }: Readonly<AdminErrorProps>) 
       <section className="card stack stack-4">
         <p style={{ fontSize: 'var(--text-sm)' }}>
           Causas típicas: base de datos Supabase no alcanzable, credenciales de servicio no
-          configuradas, o timeout de un proveedor externo. El estado de cada dependencia también
-          se puede consultar fuera del panel en <code className="mono">/api/health/deep</code>.
+          configuradas, o timeout de un proveedor externo. El estado de cada dependencia también se
+          puede consultar fuera del panel en <code className="mono">/api/health/deep</code>.
         </p>
 
         {error.digest ? (

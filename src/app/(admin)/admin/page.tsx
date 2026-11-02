@@ -166,7 +166,8 @@ export default async function AdminOverviewPage() {
               <h2 style={{ fontSize: 'var(--text-lg)' }}>Ningún tenant registrado</h2>
               <p style={{ fontSize: 'var(--text-sm)' }}>
                 La plataforma está configurada pero aún no tiene clientes. El primer tenant nace de
-                un registro: a partir de ahí aparecen conversaciones, colas de trabajo y facturación.
+                un registro: a partir de ahí aparecen conversaciones, colas de trabajo y
+                facturación.
               </p>
               <div className="row" style={{ gap: 'var(--space-3)' }}>
                 <Link href="/register" className="btn btn-primary">

@@ -95,8 +95,8 @@ export default async function VerticalsIndexPage() {
                 Cada sector habla su idioma. Ambrogio lo conoce.
               </h1>
               <p className="lead text-pretty" style={{ margin: '0 auto' }}>
-                Nada de IA genérica. Modelos, prompts y flujos ajustados a cómo se habla de verdad en
-                cada oficio.
+                Nada de IA genérica. Modelos, prompts y flujos ajustados a cómo se habla de verdad
+                en cada oficio.
               </p>
             </div>
 

@@ -232,8 +232,8 @@ export function AiPromptForm({ settings, canManage }: AiPromptFormProps) {
             />
             <p id="promptText-help" className="helper">
               {personaLength} / {settings.limits.maxLength} caracteres. Mínimo{' '}
-              {settings.limits.minLength}. Escribe instrucciones, no ejemplos de respuesta: el modelo
-              las aplica a cada mensaje.
+              {settings.limits.minLength}. Escribe instrucciones, no ejemplos de respuesta: el
+              modelo las aplica a cada mensaje.
             </p>
           </div>
 

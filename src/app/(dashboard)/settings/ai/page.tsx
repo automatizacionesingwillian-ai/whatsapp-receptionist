@@ -74,10 +74,9 @@ export default async function AiSettingsPage() {
         <section className="card stack stack-3">
           <h2 style={{ fontSize: 'var(--text-xl)' }}>Configuración no legible</h2>
           <p className="muted">
-            No pudimos recuperar la personalidad configurada. No significa que se haya
-            perdido: solo falló la lectura y las respuestas siguen usando la
-            última versión activa. Recarga en un momento y, si el problema continúa, escríbenos desde
-            contacto.
+            No pudimos recuperar la personalidad configurada. No significa que se haya perdido: solo
+            falló la lectura y las respuestas siguen usando la última versión activa. Recarga en un
+            momento y, si el problema continúa, escríbenos desde contacto.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href="/settings/ai" className="btn btn-secondary btn-sm">

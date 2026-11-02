@@ -10,12 +10,10 @@ export const metadata: Metadata = {
 };
 
 const ERROR_MESSAGES: Record<string, string> = {
-  link_non_valido:
-    'El enlace de acceso no es válido o expiró. Solicita uno nuevo abajo.',
+  link_non_valido: 'El enlace de acceso no es válido o expiró. Solicita uno nuevo abajo.',
   link_incompleto:
     'El enlace de acceso está incompleto. Solicita uno nuevo con el formulario de abajo.',
-  sessione_mancante:
-    'No pudimos crear la sesión. Solicita un nuevo enlace de acceso.',
+  sessione_mancante: 'No pudimos crear la sesión. Solicita un nuevo enlace de acceso.',
 };
 
 interface LoginPageProps {

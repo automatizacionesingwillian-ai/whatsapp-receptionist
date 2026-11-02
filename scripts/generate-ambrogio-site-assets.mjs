@@ -238,10 +238,6 @@ function base(asset, index, content) {
 </svg>`;
 }
 
-function card(x, y, w, h, r = 32, fill = '#ffffff', opacity = 0.82) {
-  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" opacity="${opacity}" filter="url(#smallShadow-a0)"/>`;
-}
-
 function rect(x, y, w, h, r, fill, opacity = 1, extra = '') {
   return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" opacity="${opacity}" ${extra}/>`;
 }

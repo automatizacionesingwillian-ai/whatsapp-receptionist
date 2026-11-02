@@ -3,8 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { MetaCloudWhatsAppMediaClient } from '@/server/whatsapp/media';
 
 const API_URL = 'https://graph.facebook.com/v21.0';
-const MEDIA_DOWNLOAD_URL =
-  'https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=media_1';
+const MEDIA_DOWNLOAD_URL = 'https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=media_1';
 
 describe('MetaCloudWhatsAppMediaClient', () => {
   it('retrieves metadata and downloads media bytes with a Bearer token', async () => {

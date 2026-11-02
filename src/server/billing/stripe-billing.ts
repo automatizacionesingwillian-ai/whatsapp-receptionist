@@ -820,8 +820,7 @@ function readPlanMetadata(subscription: Stripe.Subscription): BillingPlan | null
 
 function readSubscriptionPeriodEnd(subscription: Stripe.Subscription): Date | null {
   const item = subscription.items?.data?.[0] as
-    | (Stripe.SubscriptionItem & { current_period_end?: number })
-    | undefined;
+    (Stripe.SubscriptionItem & { current_period_end?: number }) | undefined;
 
   if (item && typeof item.current_period_end === 'number') {
     return new Date(item.current_period_end * 1000);

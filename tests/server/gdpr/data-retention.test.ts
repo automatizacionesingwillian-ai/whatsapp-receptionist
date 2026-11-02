@@ -108,8 +108,8 @@ describe('DataRetentionService', () => {
   it('le soglie corrispondono a quelle dichiarate nella privacy policy pubblica', async () => {
     const policyPage = await readFile(join(PROJECT_ROOT, 'src/app/legal/privacy/page.tsx'), 'utf8');
 
-    expect(policyPage).toContain(`Conversazioni: ${RETENTION_POLICY.conversationsMonths} mesi`);
-    expect(policyPage).toContain(`Vocali audio: ${RETENTION_POLICY.voiceDays} giorni`);
-    expect(policyPage).toContain(`Log tecnici: ${RETENTION_POLICY.technicalLogsMonths} mesi`);
+    expect(policyPage).toContain(`Conversaciones: ${RETENTION_POLICY.conversationsMonths} meses`);
+    expect(policyPage).toContain(`Audios: ${RETENTION_POLICY.voiceDays} días`);
+    expect(policyPage).toContain(`Logs técnicos: ${RETENTION_POLICY.technicalLogsMonths} meses`);
   });
 });

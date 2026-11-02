@@ -14,9 +14,7 @@ describe('RuleBasedIntentClassifier', () => {
       intent: 'booking_request',
     });
 
-    await expect(
-      classifier.classify({ text: 'Puedo mover la cita?' }),
-    ).resolves.toMatchObject({
+    await expect(classifier.classify({ text: 'Puedo mover la cita?' })).resolves.toMatchObject({
       intent: 'reschedule_request',
     });
 

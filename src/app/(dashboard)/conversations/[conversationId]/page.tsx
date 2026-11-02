@@ -108,8 +108,8 @@ export default async function ConversationDetailPage({
         <div className="card card-padded stack stack-3" role="alert">
           <h1 style={{ fontSize: 'var(--text-xl)' }}>No podemos abrir la conversación</h1>
           <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-            El servicio no respondió. Recarga la página: si el problema continúa, revisa el
-            estado del sistema.
+            El servicio no respondió. Recarga la página: si el problema continúa, revisa el estado
+            del sistema.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)' }}>
             <Link href={`/conversations/${conversationId}`} className="btn btn-secondary btn-sm">
@@ -212,8 +212,8 @@ export default async function ConversationDetailPage({
           )}
           {optedOut === true ? (
             <p style={{ fontSize: 'var(--text-sm)' }}>
-              El cliente revocó el consentimiento: no se le puede enviar ningún mensaje hasta que
-              lo restablezca escribiendo de nuevo.
+              El cliente revocó el consentimiento: no se le puede enviar ningún mensaje hasta que lo
+              restablezca escribiendo de nuevo.
             </p>
           ) : null}
         </div>
@@ -237,7 +237,9 @@ export default async function ConversationDetailPage({
         )}
 
         {messages.length === MESSAGE_LIMIT ? (
-          <p className="helper">Mostramos los primeros {MESSAGE_LIMIT} mensajes de la conversación.</p>
+          <p className="helper">
+            Mostramos los primeros {MESSAGE_LIMIT} mensajes de la conversación.
+          </p>
         ) : null}
       </section>
 

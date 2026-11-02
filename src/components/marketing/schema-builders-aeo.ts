@@ -170,9 +170,7 @@ interface EventSchemaInput {
   url?: string;
   eventStatus?: 'EventScheduled' | 'EventCancelled' | 'EventPostponed' | 'EventMovedOnline';
   eventAttendanceMode?:
-    | 'OnlineEventAttendanceMode'
-    | 'OfflineEventAttendanceMode'
-    | 'MixedEventAttendanceMode';
+    'OnlineEventAttendanceMode' | 'OfflineEventAttendanceMode' | 'MixedEventAttendanceMode';
 }
 
 /** Event: annunci, lanci, webinar. Utile per changelog di tipo "lancio". */
@@ -195,13 +193,7 @@ export function buildEventSchema(input: EventSchemaInput): Record<string, unknow
 }
 
 type WebPageSubType =
-  | 'WebPage'
-  | 'AboutPage'
-  | 'ContactPage'
-  | 'FAQPage'
-  | 'CollectionPage'
-  | 'ItemPage'
-  | 'QAPage';
+  'WebPage' | 'AboutPage' | 'ContactPage' | 'FAQPage' | 'CollectionPage' | 'ItemPage' | 'QAPage';
 
 interface WebPageSchemaInput {
   type?: WebPageSubType;

@@ -29,10 +29,10 @@ export default function AdminAuditPage() {
       <div className="card card-padded stack stack-4">
         <h2 style={{ fontSize: 'var(--text-lg)' }}>Aún no conectado al registro real</h2>
         <p style={{ color: 'var(--color-text-secondary)' }}>
-          Las entradas de ejemplo se eliminaron. La tabla{' '}
-          <code className="mono">audit_log</code> existe y la pueblan de verdad los endpoints GDPR
-          (Arts. 15 y 17): esta pantalla debe conectarse a esos datos, no rellenarse con
-          placeholders, porque un registro de audit solo vale si refleja lo que ocurrió de verdad.
+          Las entradas de ejemplo se eliminaron. La tabla <code className="mono">audit_log</code>{' '}
+          existe y la pueblan de verdad los endpoints GDPR (Arts. 15 y 17): esta pantalla debe
+          conectarse a esos datos, no rellenarse con placeholders, porque un registro de audit solo
+          vale si refleja lo que ocurrió de verdad.
         </p>
         <p className="muted" style={{ fontSize: 'var(--text-sm)' }}>
           Fuente autoritativa mientras tanto: la tabla <code className="mono">audit_log</code> en el

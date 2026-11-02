@@ -103,10 +103,10 @@ export default function AboutPage() {
                 Construido por quien gestionó recepciones reales, no por quien las estudió.
               </h1>
               <p className="lead text-pretty">
-                Ambrogio.ai nace en 2026 con una misión simple: devolver el teléfono a la vida.
-                Las clínicas, los gimnasios y los estudios profesionales de Latinoamérica no
-                necesitan otro chatbot. Necesitan un asistente que entiende, agenda citas de verdad
-                y libera tiempo humano para lo que importa.
+                Ambrogio.ai nace en 2026 con una misión simple: devolver el teléfono a la vida. Las
+                clínicas, los gimnasios y los estudios profesionales de Latinoamérica no necesitan
+                otro chatbot. Necesitan un asistente que entiende, agenda citas de verdad y libera
+                tiempo humano para lo que importa.
               </p>
             </header>
 
@@ -121,8 +121,8 @@ export default function AboutPage() {
               </p>
               <p>
                 Ambrogio nace para cerrar esa brecha: un asistente que conversa por WhatsApp en el
-                español en que escriben tus clientes, consulta la disponibilidad real en la agenda
-                y fija la cita. Lo desarrollamos en open source con licencia MIT porque las PyMEs
+                español en que escriben tus clientes, consulta la disponibilidad real en la agenda y
+                fija la cita. Lo desarrollamos en open source con licencia MIT porque las PyMEs
                 latinoamericanas merecen IA de calidad, en español y alineada con buenas prácticas
                 de privacidad, sin depender de una caja cerrada cuyo funcionamiento no pueden
                 verificar.

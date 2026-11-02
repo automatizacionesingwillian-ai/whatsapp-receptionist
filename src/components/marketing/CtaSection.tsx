@@ -41,8 +41,8 @@ export function CtaSection() {
               margin: '0 auto',
             }}
           >
-            Los primeros 50 negocios reciben onboarding co-gestionado gratis (€500 de valor) y precio
-            beta congelado por 12 meses.
+            Los primeros 50 negocios reciben onboarding co-gestionado gratis (€500 de valor) y
+            precio beta congelado por 12 meses.
           </p>
           <div className="row" style={{ gap: 'var(--space-3)', justifyContent: 'center' }}>
             <Link

@@ -230,10 +230,7 @@ describe('WhatsAppWebhookService', () => {
     });
 
     await service.processPayload(textPayload('wamid.stop', 'STOP'), context);
-    await service.processPayload(
-      textPayload('wamid.cancel-appointment', 'cancela cita'),
-      context,
-    );
+    await service.processPayload(textPayload('wamid.cancel-appointment', 'cancela cita'), context);
 
     expect(repository.optOuts.has('tenant_1:whatsapp:393331112233')).toBe(true);
     expect(repository.persistedOptOuts[0]).toMatchObject({

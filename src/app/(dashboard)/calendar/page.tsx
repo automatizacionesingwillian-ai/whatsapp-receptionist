@@ -151,9 +151,7 @@ export default async function CalendarPage() {
               >
                 <h2 style={{ fontSize: 'var(--text-lg)' }}>{day.label}</h2>
                 <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-                  {day.appointments.length === 1
-                    ? '1 cita'
-                    : `${day.appointments.length} citas`}
+                  {day.appointments.length === 1 ? '1 cita' : `${day.appointments.length} citas`}
                 </span>
               </header>
 

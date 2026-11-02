@@ -135,10 +135,10 @@ describe('HealthWatchdogService', () => {
   });
 
   it('usa la soglia di staleness configurata per calcolare il taglio', async () => {
-    let received: Date | null = null;
+    const captured: { staleBefore?: Date } = {};
     const repository: WatchdogRepository = {
       async readQueueStats(input) {
-        received = input.staleBefore;
+        captured.staleBefore = input.staleBefore;
         return { pendingJobs: 0, staleJobs: 0, deadLetterJobs: 0, oldestPendingAt: null };
       },
     };
@@ -148,7 +148,6 @@ describe('HealthWatchdogService', () => {
       staleAfterMinutes: 30,
     }).check();
 
-    expect(received).not.toBeNull();
-    expect((received as unknown as Date).toISOString()).toBe('2026-07-27T11:30:00.000Z');
+    expect(captured.staleBefore?.toISOString()).toBe('2026-07-27T11:30:00.000Z');
   });
 });
