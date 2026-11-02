@@ -114,7 +114,7 @@ export class AiPromptSettingsService {
     if (versions.some((version) => version.active && version.promptText === promptText)) {
       throw new AppError(
         'conflict',
-        'La personalita attiva e gia questa: nessuna modifica da salvare',
+        'La personalidad activa ya es esta: no hay cambios que guardar',
       );
     }
 
@@ -164,7 +164,7 @@ export class AiPromptSettingsService {
     });
 
     if (!activated) {
-      throw new AppError('not_found', 'Versione del prompt non trovata');
+      throw new AppError('not_found', 'Versión del prompt no encontrada');
     }
 
     await this.repository.deactivateOtherVersions({
@@ -378,14 +378,14 @@ function normalizePersona(value: string): string {
   if (normalized.length < MIN_PERSONA_LENGTH) {
     throw new AppError(
       'bad_request',
-      `La personalita deve contenere almeno ${MIN_PERSONA_LENGTH} caratteri`,
+      `La personalidad debe tener al menos ${MIN_PERSONA_LENGTH} caracteres`,
     );
   }
 
   if (normalized.length > MAX_PERSONA_LENGTH) {
     throw new AppError(
       'bad_request',
-      `La personalita non puo superare ${MAX_PERSONA_LENGTH} caratteri`,
+      `La personalidad no puede superar ${MAX_PERSONA_LENGTH} caracteres`,
     );
   }
 

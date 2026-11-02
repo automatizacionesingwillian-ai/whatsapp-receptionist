@@ -29,7 +29,7 @@ export type SynthesizedVoiceReply = {
 
 export async function transcribeVoiceMessage({
   audio,
-  languageCode = 'it',
+  languageCode = 'es',
   keyterms = [],
 }: TranscribeVoiceMessageInput): Promise<VoiceTranscript> {
   const client = createElevenLabsClient();
@@ -55,7 +55,7 @@ export async function transcribeVoiceMessage({
 export async function synthesizeVoiceReply({
   text,
   voiceId = env.ELEVENLABS_DEFAULT_VOICE_ID,
-  languageCode = 'it',
+  languageCode = 'es',
 }: SynthesizeVoiceReplyInput): Promise<SynthesizedVoiceReply> {
   const client = createElevenLabsClient();
   const audioStream = await client.textToSpeech.convert(voiceId, {

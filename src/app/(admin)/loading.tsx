@@ -11,7 +11,7 @@ export default function AdminLoading() {
       <div className="stack stack-2">
         <span className="badge badge-warm">Cross-tenant</span>
         <h1 style={{ opacity: 0.5 }}>Cargando…</h1>
-        <p className="muted">Interrogazione di database e provider esterni in corso.</p>
+        <p className="muted">Consultando la base de datos y los proveedores externos.</p>
       </div>
 
       <div
@@ -35,7 +35,7 @@ export default function AdminLoading() {
           }}
         />
         <span className="muted" style={{ fontSize: 'var(--text-sm)' }}>
-          Le misurazioni vengono eseguite a ogni caricamento, non lette da cache.
+          Las mediciones se ejecutan en cada carga; no se leen de caché.
         </span>
       </div>
 

@@ -356,7 +356,7 @@ function UsageBadge({ usage }: { readonly usage: UsageSnapshot }) {
   }
 
   if (usage.softWarning) {
-    return <span className="badge badge-warm">Sopra l&apos;80% del piano</span>;
+    return <span className="badge badge-warm">Por encima del 80% del plan</span>;
   }
 
   return <span className="badge badge-success">Dentro de los límites del plan</span>;
@@ -382,7 +382,7 @@ function UsageMeter({
       </p>
       <div
         role="meter"
-        aria-label={`${label}: ${percent}% del limite di piano`}
+        aria-label={`${label}: ${percent}% del límite del plan`}
         aria-valuenow={percent}
         aria-valuemin={0}
         aria-valuemax={100}

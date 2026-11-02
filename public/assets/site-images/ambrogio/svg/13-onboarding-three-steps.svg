@@ -58,14 +58,14 @@
     <circle cx="72" cy="76" r="38" fill="url(#primary-a12)"/>
     <text x="72" y="88" text-anchor="middle" fill="#fff" font-size="34" font-weight="900">2</text>
     <text x="46" y="154" fill="#111827" font-size="38" font-weight="850" opacity="1">Configura</text>
-    <text x="46" y="206" fill="#111827" font-size="24" font-weight="700" opacity="0.62">FAQ, orari, servizi</text>
+    <text x="46" y="206" fill="#111827" font-size="24" font-weight="700" opacity="0.62">FAQ, horarios, servicios</text>
   </g>
     <g transform="translate(1010 330)">
     <rect x="0" y="0" width="330" height="300" rx="50" fill="#fff" opacity=".88" filter="url(#softShadow-a12)"/>
     <circle cx="72" cy="76" r="38" fill="url(#primary-a12)"/>
     <text x="72" y="88" text-anchor="middle" fill="#fff" font-size="34" font-weight="900">3</text>
     <text x="46" y="154" fill="#111827" font-size="38" font-weight="850" opacity="1">Vai live</text>
-    <text x="46" y="206" fill="#111827" font-size="24" font-weight="700" opacity="0.62">Ambrogio prenota</text>
+    <text x="46" y="206" fill="#111827" font-size="24" font-weight="700" opacity="0.62">Ambrogio reserva</text>
   </g>
     <path d="M465 510 C520 440 560 420 620 420" stroke="url(#accent-a12)" stroke-width="10" fill="none" stroke-linecap="round"/>
     <path d="M900 420 C960 420 1000 450 1052 510" stroke="url(#accent-a12)" stroke-width="10" fill="none" stroke-linecap="round"/>

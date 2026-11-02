@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title-a15 desc-a15">
   <title id="title-a15">Knowledge base</title>
-  <desc id="desc-a15">FAQ, servizi e orari trasformati in knowledge base per Ambrogio</desc>
+  <desc id="desc-a15">FAQ, servicios y horarios convertidos en knowledge base para Ambrogio</desc>
   
   <defs>
     <linearGradient id="bg-a15" x1="0" y1="0" x2="1" y2="1">
@@ -47,7 +47,7 @@
     <text x="120" y="132" fill="#111827" font-size="72" font-weight="880" opacity="1">La memoria</text>
     <text x="120" y="190" fill="#111827" font-size="44" font-weight="740" opacity="0.7">del tuo studio</text>
     <g transform="translate(120 300)">
-      <rect x="0" y="0" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="47" fill="#111827" font-size="28" font-weight="830">FAQ</text><rect x="0" y="96" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="143" fill="#111827" font-size="28" font-weight="830">Servizi</text><rect x="0" y="192" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="239" fill="#111827" font-size="28" font-weight="830">Orari</text><rect x="0" y="288" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="335" fill="#111827" font-size="28" font-weight="830">Prezzi</text>
+      <rect x="0" y="0" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="47" fill="#111827" font-size="28" font-weight="830">FAQ</text><rect x="0" y="96" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="143" fill="#111827" font-size="28" font-weight="830">Servicios</text><rect x="0" y="192" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="239" fill="#111827" font-size="28" font-weight="830">Horarios</text><rect x="0" y="288" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-a15)"/><text x="34" y="335" fill="#111827" font-size="28" font-weight="830">Precios</text>
     </g>
     <path d="M470 470 C590 390 650 390 750 455" stroke="url(#accent-a15)" stroke-width="12" fill="none" stroke-linecap="round"/>
     <g transform="translate(810 220)">

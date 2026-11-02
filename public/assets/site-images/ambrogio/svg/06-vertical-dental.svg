@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title-a5 desc-a5">
   <title id="title-a5">Studio dentistico</title>
-  <desc id="desc-a5">Studio dentistico con prenotazioni WhatsApp gestite da Ambrogio</desc>
+  <desc id="desc-a5">Clínica dental con reservas WhatsApp gestionadas por Ambrogio</desc>
   
   <defs>
     <linearGradient id="bg-a5" x1="0" y1="0" x2="1" y2="1">
@@ -46,7 +46,7 @@
     
     <g transform="translate(120 120)">
       <text x="0" y="70" fill="#111827" font-size="70" font-weight="880" opacity="1">Studio dentistico</text>
-      <text x="0" y="126" fill="#111827" font-size="38" font-weight="720" opacity="0.68">richieste, vocali e appuntamenti</text>
+      <text x="0" y="126" fill="#111827" font-size="38" font-weight="720" opacity="0.68">solicitudes, notas de voz y citas</text>
       <rect x="0" y="220" width="560" height="520" rx="62" fill="#fff" opacity=".86" filter="url(#softShadow-a5)"/>
       <path d="M245 190 C190 126 112 156 120 244 C128 348 190 430 226 384 C242 364 260 364 276 384 C312 430 374 348 382 244 C390 156 312 126 257 190" fill="url(#primary-a5)" opacity=".9"/>
       <g filter="url(#smallShadow-a0)"><rect x="80" y="432" width="310" height="58" rx="29" fill="#be123c" opacity="1" /><text x="108" y="471" fill="#fff" font-size="22" font-weight="750" opacity="1">Pulizia 10:30</text></g>
@@ -62,13 +62,13 @@
       <text x="92" y="56" fill="#fff" font-size="25" font-weight="800">Ambrogio</text>
       <g>
     <rect x="30" y="140" width="294" height="92" rx="24" fill="#fff" filter="url(#smallShadow-a0)"/>
-    <text x="54" y="176" fill="#0f172a" font-size="22" font-weight="650">Avete posto oggi?</text>
+    <text x="54" y="176" fill="#0f172a" font-size="22" font-weight="650">¿Tienen lugar hoy?</text>
   </g><g>
     <rect x="78" y="266" width="246" height="116" rx="24" fill="#0f766e" filter="url(#smallShadow-a0)"/>
-    <text x="102" y="302" fill="#ffffff" font-size="22" font-weight="650">Si, ti confermo ${slot}.</text>
+    <text x="102" y="302" fill="#ffffff" font-size="22" font-weight="650">Sí, te confirmo ${slot}.</text>
   </g><g>
     <rect x="30" y="430" width="292" height="86" rx="24" fill="#fff" filter="url(#smallShadow-a0)"/>
-    <text x="54" y="466" fill="#0f172a" font-size="22" font-weight="650">Grazie!</text>
+    <text x="54" y="466" fill="#0f172a" font-size="22" font-weight="650">¡Gracias!</text>
   </g>
     </g>
   </g>

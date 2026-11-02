@@ -12,7 +12,7 @@ export function createSupabaseBrowserClient() {
   const anonKey = process.env['NEXT_PUBLIC_SUPABASE_ANON_KEY'];
 
   if (!url || !anonKey) {
-    throw new Error('Supabase browser client: URL o anon key mancanti');
+    throw new Error('Supabase browser client: faltan URL o anon key');
   }
 
   return createBrowserClient(url, anonKey);

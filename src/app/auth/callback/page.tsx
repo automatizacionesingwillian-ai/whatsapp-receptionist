@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { AuthCallbackClient } from '@/components/auth/AuthCallbackClient';
 
 export const metadata: Metadata = {
-  title: 'Accesso in corso · Ambrogio.ai',
+  title: 'Iniciando sesión · Ambrogio.ai',
   robots: { index: false, follow: false },
 };
 

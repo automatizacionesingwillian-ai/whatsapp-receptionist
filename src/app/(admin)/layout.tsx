@@ -4,10 +4,10 @@ import type { ReactNode } from 'react';
 import { requireSuperAdminOrRedirect } from '@/lib/auth/guards';
 
 const ADMIN_NAV = [
-  { href: '/admin', label: 'Overview' },
+  { href: '/admin', label: 'Resumen' },
   { href: '/admin/tenants', label: 'Tenants' },
-  { href: '/admin/users', label: 'Utenti' },
-  { href: '/admin/billing', label: 'Billing' },
+  { href: '/admin/users', label: 'Usuarios' },
+  { href: '/admin/billing', label: 'Facturación' },
   { href: '/admin/audit', label: 'Audit log' },
   { href: '/admin/system', label: 'Sistema' },
 ] as const;
@@ -104,7 +104,7 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
               fontWeight: 600,
             }}
           >
-            ← Esci da admin
+            ← Salir de admin
           </Link>
         </div>
       </header>

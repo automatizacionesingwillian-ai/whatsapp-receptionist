@@ -78,7 +78,7 @@ describe('HealthWatchdogService', () => {
     expect(report.oldestPendingMinutes).toBe(120);
     expect(report.notified).toBe(true);
     expect(sender.sent).toHaveLength(1);
-    expect(sender.sent[0]?.subject).toContain('non stanno uscendo');
+    expect(sender.sent[0]?.subject).toContain('no están saliendo');
   });
 
   it('segnala la coda in accumulo anche senza job fermi', async () => {
@@ -96,7 +96,7 @@ describe('HealthWatchdogService', () => {
 
     expect(report.status).toBe('warning');
     expect(report.deadLetterJobs).toBe(3);
-    expect(report.reasons.join(' ')).toContain('esaurito i tentativi');
+    expect(report.reasons.join(' ')).toContain('agotaron los reintentos');
   });
 
   it('la condizione critica prevale su quella di avviso', async () => {

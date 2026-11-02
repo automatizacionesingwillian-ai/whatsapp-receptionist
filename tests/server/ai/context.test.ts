@@ -17,7 +17,7 @@ describe('AiContextProvider', () => {
     const context = await provider.load({
       tenantId: 'tenant_1',
       conversationId: 'conversation_1',
-      query: 'Quanto costa igiene dentale?',
+      query: '¿Cuánto cuesta la higiene dental?',
     });
 
     expect(context.activePrompt).toMatchObject({
@@ -47,8 +47,8 @@ describe('AiContextProvider', () => {
     repository.vectorMatches = [
       {
         id: 'kb_vector',
-        title: 'Prezzi igiene',
-        content: 'Risposta vettoriale piu precisa.',
+        title: 'Precios higiene',
+        content: 'Respuesta vectorial más precisa.',
         category: 'pricing',
         score: 0.91,
         updatedAt: '2026-04-25T09:00:00.000Z',
@@ -60,11 +60,11 @@ describe('AiContextProvider', () => {
     const context = await provider.load({
       tenantId: 'tenant_1',
       conversationId: 'conversation_1',
-      query: 'Quanto costa igiene dentale?',
+      query: '¿Cuánto cuesta la higiene dental?',
     });
 
     expect(embeddingClient.calls[0]).toMatchObject({
-      text: 'Quanto costa igiene dentale?',
+      text: '¿Cuánto cuesta la higiene dental?',
       metadata: {
         tenantId: 'tenant_1',
       },
@@ -111,7 +111,7 @@ class FakeAiContextRepository implements AiContextRepository {
         promptKey: 'domain_reply',
         version: 1,
         model: 'global-model',
-        promptText: 'Prompt globale',
+        promptText: 'Prompt global',
       },
       {
         id: 'prompt_tenant_v2',
@@ -128,15 +128,15 @@ class FakeAiContextRepository implements AiContextRepository {
     return [
       {
         id: 'kb_igiene',
-        title: 'Igiene dentale',
-        content: 'Il costo della seduta di igiene dentale viene comunicato dallo studio.',
+        title: 'Higiene dental',
+        content: 'El costo de la sesión de higiene dental lo comunica el estudio.',
         category: 'pricing',
         updatedAt: '2026-04-25T09:00:00.000Z',
       },
       {
         id: 'kb_parcheggio',
-        title: 'Parcheggio',
-        content: 'Parcheggio disponibile in zona.',
+        title: 'Estacionamiento',
+        content: 'Estacionamiento disponible en la zona.',
         category: 'logistics',
         updatedAt: '2026-04-25T09:00:00.000Z',
       },

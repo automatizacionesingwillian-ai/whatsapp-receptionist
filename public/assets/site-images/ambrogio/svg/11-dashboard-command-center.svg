@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title-a10 desc-a10">
   <title id="title-a10">Dashboard operativa</title>
-  <desc id="desc-a10">Dashboard Ambrogio con conversazioni, appuntamenti e metriche</desc>
+  <desc id="desc-a10">Dashboard Ambrogio con conversaciones, citas y métricas</desc>
   
   <defs>
     <linearGradient id="bg-a10" x1="0" y1="0" x2="1" y2="1">
@@ -48,7 +48,7 @@
       <text x="0" y="70" fill="#111827" font-size="72" font-weight="880" opacity="1">Command center</text>
       <rect x="0" y="150" width="1320" height="680" rx="56" fill="#fff" opacity=".9" filter="url(#softShadow-a10)"/>
       <rect x="0" y="150" width="260" height="680" rx="56" fill="#0f172a"/>
-      <rect x="36" y="215" width="188" height="46" rx="23" fill="#22d3ee" opacity="1"/><text x="62" y="246" fill="#fff" font-size="20" font-weight="750">Dashboard</text><rect x="36" y="293" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="324" fill="#fff" font-size="20" font-weight="750">Conversazioni</text><rect x="36" y="371" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="402" fill="#fff" font-size="20" font-weight="750">Calendario</text><rect x="36" y="449" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="480" fill="#fff" font-size="20" font-weight="750">Voice</text><rect x="36" y="527" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="558" fill="#fff" font-size="20" font-weight="750">Privacy</text>
+      <rect x="36" y="215" width="188" height="46" rx="23" fill="#22d3ee" opacity="1"/><text x="62" y="246" fill="#fff" font-size="20" font-weight="750">Dashboard</text><rect x="36" y="293" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="324" fill="#fff" font-size="20" font-weight="750">Conversaciones</text><rect x="36" y="371" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="402" fill="#fff" font-size="20" font-weight="750">Calendario</text><rect x="36" y="449" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="480" fill="#fff" font-size="20" font-weight="750">Voice</text><rect x="36" y="527" width="188" height="46" rx="23" fill="#ffffff" opacity="0.1"/><text x="62" y="558" fill="#fff" font-size="20" font-weight="750">Privacy</text>
       <rect x="320" y="215" width="260" height="150" rx="34" fill="#7c3aed" opacity=".1"/>
       <rect x="620" y="215" width="260" height="150" rx="34" fill="#f59e0b" opacity=".12"/>
       <rect x="920" y="215" width="330" height="150" rx="34" fill="#22d3ee" opacity=".12"/>

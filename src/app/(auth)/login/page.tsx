@@ -10,6 +10,11 @@ export const metadata: Metadata = {
 };
 
 const ERROR_MESSAGES: Record<string, string> = {
+  enlace_invalido: 'El enlace de acceso no es válido o expiró. Solicita uno nuevo abajo.',
+  enlace_incompleto:
+    'El enlace de acceso está incompleto. Solicita uno nuevo con el formulario de abajo.',
+  sesion_faltante: 'No pudimos crear la sesión. Solicita un nuevo enlace de acceso.',
+  // Alias de claves italianas anteriores (enlaces/bookmarks viejos).
   link_non_valido: 'El enlace de acceso no es válido o expiró. Solicita uno nuevo abajo.',
   link_incompleto:
     'El enlace de acceso está incompleto. Solicita uno nuevo con el formulario de abajo.',

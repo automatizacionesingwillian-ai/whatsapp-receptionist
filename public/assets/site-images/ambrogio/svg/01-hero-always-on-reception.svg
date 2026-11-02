@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title-a0 desc-a0">
   <title id="title-a0">Segreteria sempre attiva</title>
-  <desc id="desc-a0">Assistente AI Ambrogio che gestisce messaggi e appuntamenti anche fuori orario</desc>
+  <desc id="desc-a0">Asistente AI Ambrogio que gestiona mensajes y citas también fuera de horario</desc>
   
   <defs>
     <linearGradient id="bg-a0" x1="0" y1="0" x2="1" y2="1">
@@ -65,11 +65,11 @@
       
       <g>
     <rect x="28" y="130" width="288" height="94" rx="24" fill="#fff" filter="url(#smallShadow-a0)"/>
-    <text x="52" y="166" fill="#0f172a" font-size="22" font-weight="650">Buonasera, vorrei</text><text x="52" y="194" fill="#0f172a" font-size="22" font-weight="650">prenotare</text>
+    <text x="52" y="166" fill="#0f172a" font-size="22" font-weight="650">Buenas noches, quiero</text><text x="52" y="194" fill="#0f172a" font-size="22" font-weight="650">reservar</text>
   </g>
       <g>
     <rect x="82" y="250" width="246" height="126" rx="24" fill="#0f766e" filter="url(#smallShadow-a0)"/>
-    <text x="106" y="286" fill="#ffffff" font-size="22" font-weight="650">Certo. Ho 3 slot liberi</text><text x="106" y="314" fill="#ffffff" font-size="22" font-weight="650">domani.</text>
+    <text x="106" y="286" fill="#ffffff" font-size="22" font-weight="650">Claro. Tengo 3 horarios libres</text><text x="106" y="314" fill="#ffffff" font-size="22" font-weight="650">mañana.</text>
   </g>
       <g>
     <rect x="28" y="405" width="300" height="112" rx="24" fill="#fff" filter="url(#smallShadow-a0)"/>
@@ -77,7 +77,7 @@
   </g>
       <g>
     <rect x="72" y="546" width="256" height="82" rx="24" fill="#0f766e" filter="url(#smallShadow-a0)"/>
-    <text x="96" y="582" fill="#ffffff" font-size="22" font-weight="650">Perfetto. Prenotato.</text>
+    <text x="96" y="582" fill="#ffffff" font-size="22" font-weight="650">Perfecto. Reservado.</text>
   </g>
     </g>
   </g>

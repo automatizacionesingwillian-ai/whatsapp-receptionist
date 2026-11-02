@@ -55,7 +55,7 @@ describe('WhatsAppTemplateSyncService', () => {
         {
           id: '123',
           name: 'appointment_reminder_24h',
-          language: 'it',
+          language: 'es',
           category: 'UTILITY',
           status: 'APPROVED',
           quality_rating: 'GREEN',
@@ -64,14 +64,14 @@ describe('WhatsAppTemplateSyncService', () => {
         {
           id: '124',
           name: 'promo',
-          language_code: 'it',
+          language_code: 'es',
           category: 'MARKETING',
           status: 'PAUSED',
         },
         {
           id: '125',
           name: 'invalid_category',
-          language: 'it',
+          language: 'es',
           category: 'UNKNOWN',
           status: 'APPROVED',
         },
@@ -97,7 +97,7 @@ describe('WhatsAppTemplateSyncService', () => {
         {
           externalId: '123',
           name: 'appointment_reminder_24h',
-          languageCode: 'it',
+          languageCode: 'es',
           category: 'utility',
           status: 'approved',
           qualityRating: 'GREEN',
@@ -106,7 +106,7 @@ describe('WhatsAppTemplateSyncService', () => {
         {
           externalId: '124',
           name: 'promo',
-          languageCode: 'it',
+          languageCode: 'es',
           category: 'marketing',
           status: 'paused',
         },
@@ -128,7 +128,7 @@ describe('template normalization helpers', () => {
     expect(
       normalizeTemplate({
         name: 'appointment_confirmation',
-        language: 'it',
+        language: 'es',
         category: 'UTILITY',
         status: 'Active - High Quality',
       }),

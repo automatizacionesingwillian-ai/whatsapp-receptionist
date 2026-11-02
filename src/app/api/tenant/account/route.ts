@@ -20,7 +20,7 @@ import { createGdprDeleteService } from '@/server/gdpr/data-delete';
 export const runtime = 'nodejs';
 
 const DeleteAccountBodySchema = z.object({
-  confirmationPhrase: z.literal('ELIMINA DEFINITIVAMENTE'),
+  confirmationPhrase: z.literal('ELIMINAR DEFINITIVAMENTE'),
 });
 
 const CancelDeletionBodySchema = z.object({

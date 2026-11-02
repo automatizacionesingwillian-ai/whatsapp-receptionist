@@ -133,7 +133,7 @@ export class WhatsAppVoicePipelineWorker {
       });
       const transcript = await this.transcriber.transcribe({
         audio: mediaToBlob(media),
-        languageCode: 'it',
+        languageCode: 'es',
       });
       const messageMetadata = {
         whatsappVoice: {

@@ -267,7 +267,7 @@ class FakeDomainReplyGenerator implements DomainReplyGenerator {
   async generate(_input: DomainReplyInput): Promise<DomainReplyResult> {
     return {
       shouldReply: true,
-      replyText: 'La visita va confermata dallo studio.',
+      replyText: 'La cita la confirma el estudio.',
       metadata: {
         aiEngine: {
           provider: 'anthropic',

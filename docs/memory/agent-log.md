@@ -1,5 +1,11 @@
 # Ambrogio.ai Agent Memory
 
+## 2026-11-02 — Italiano residual → español LATAM (UI + negocio) — Cursor
+
+- Admin shell/loading, auth callback, conversaciones, billing, errores API/AI/WhatsApp, watchdog emails, STT `es`, assets SVG marketing.
+- E2E markers ES; claves auth nuevas con alias IT.
+- Pendiente menor: slugs `/verticali` y help articles italianos (SEO/redirects).
+
 ## 2026-11-02 — CI verify: lint + tests ES — Cursor
 
 - `eslint --fix` + warnings residuales (unused vars / `as unknown`).

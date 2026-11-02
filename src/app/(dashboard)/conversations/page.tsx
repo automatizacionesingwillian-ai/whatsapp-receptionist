@@ -258,7 +258,7 @@ export default async function ConversationsPage({
                   href={buildHref({ status, channel, before: result.nextCursor })}
                   className="btn btn-secondary btn-sm"
                 >
-                  Conversaciones più vecchie
+                  Conversaciones anteriores
                 </Link>
               ) : null}
             </div>

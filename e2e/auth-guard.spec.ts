@@ -39,7 +39,7 @@ const ADMIN_PATHS = [
  * nel payload RSC serializzato.
  */
 const DASHBOARD_SHELL_MARKER = 'Navegación del panel';
-const ADMIN_SHELL_MARKER = 'Esci da admin';
+const ADMIN_SHELL_MARKER = 'Salir de admin';
 const LOGIN_BUTTON = 'Enviar enlace de acceso';
 
 const LOGIN_URL = /\/login(\?.*)?$/;

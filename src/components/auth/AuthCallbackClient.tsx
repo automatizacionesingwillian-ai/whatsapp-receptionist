@@ -33,7 +33,7 @@ export function AuthCallbackClient() {
         hashParams.get('error');
 
       if (providerError) {
-        window.location.replace(`/login?error=${encodeURIComponent('link_non_valido')}`);
+        window.location.replace(`/login?error=${encodeURIComponent('enlace_invalido')}`);
         return;
       }
 
@@ -46,7 +46,7 @@ export function AuthCallbackClient() {
       if (code) {
         const { error } = await supabase.auth.exchangeCodeForSession(code);
         if (error) {
-          window.location.replace(`/login?error=${encodeURIComponent('link_non_valido')}`);
+          window.location.replace(`/login?error=${encodeURIComponent('enlace_invalido')}`);
           return;
         }
       } else if (accessToken && refreshToken) {
@@ -55,7 +55,7 @@ export function AuthCallbackClient() {
           refresh_token: refreshToken,
         });
         if (error) {
-          window.location.replace(`/login?error=${encodeURIComponent('link_non_valido')}`);
+          window.location.replace(`/login?error=${encodeURIComponent('enlace_invalido')}`);
           return;
         }
       } else if (tokenHash && type) {
@@ -64,14 +64,14 @@ export function AuthCallbackClient() {
           type: type as 'magiclink' | 'signup' | 'email' | 'recovery' | 'invite',
         });
         if (error) {
-          window.location.replace(`/login?error=${encodeURIComponent('link_non_valido')}`);
+          window.location.replace(`/login?error=${encodeURIComponent('enlace_invalido')}`);
           return;
         }
       } else {
-        // detectSessionInUrl / sessione già presente
+        // detectSessionInUrl / sesión ya presente
         const { data } = await supabase.auth.getSession();
         if (!data.session) {
-          window.location.replace(`/login?error=${encodeURIComponent('link_incompleto')}`);
+          window.location.replace(`/login?error=${encodeURIComponent('enlace_incompleto')}`);
           return;
         }
       }
@@ -84,7 +84,7 @@ export function AuthCallbackClient() {
       if (cancelled) return;
 
       if (userError || !user) {
-        window.location.replace(`/login?error=${encodeURIComponent('sessione_mancante')}`);
+        window.location.replace(`/login?error=${encodeURIComponent('sesion_faltante')}`);
         return;
       }
 
@@ -101,7 +101,7 @@ export function AuthCallbackClient() {
     completeAuth().catch(() => {
       if (!cancelled) {
         setMessage('No se pudo iniciar sesión. Redirigiendo…');
-        window.location.replace(`/login?error=${encodeURIComponent('link_non_valido')}`);
+        window.location.replace(`/login?error=${encodeURIComponent('enlace_invalido')}`);
       }
     });
 

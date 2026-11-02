@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title-a2 desc-a2">
-  <title id="title-a2">Prenotazione automatica</title>
-  <desc id="desc-a2">Flusso visuale da messaggio WhatsApp a slot calendario prenotato</desc>
+  <title id="title-a2">Reserva automática</title>
+  <desc id="desc-a2">Flujo visual de mensaje WhatsApp a horario de calendario reservado</desc>
   
   <defs>
     <linearGradient id="bg-a2" x1="0" y1="0" x2="1" y2="1">
@@ -45,12 +45,12 @@
   <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     
     <g transform="translate(110 130)">
-      <text x="0" y="70" fill="#111827" font-size="64" font-weight="850" opacity="1">Dal messaggio</text>
+      <text x="0" y="70" fill="#111827" font-size="64" font-weight="850" opacity="1">Del mensaje</text>
       <text x="0" y="130" fill="#111827" font-size="50" font-weight="760" opacity="0.78">allo slot in calendario</text>
       <rect x="0" y="220" width="400" height="420" rx="42" fill="#fff" opacity=".88" filter="url(#softShadow-a2)"/>
       <g>
     <rect x="42" y="270" width="316" height="112" rx="24" fill="#fff" filter="url(#smallShadow-a0)"/>
-    <text x="66" y="306" fill="#0f172a" font-size="22" font-weight="650">Avete posto domani</text><text x="66" y="334" fill="#0f172a" font-size="22" font-weight="650">mattina?</text>
+    <text x="66" y="306" fill="#0f172a" font-size="22" font-weight="650">¿Tienen lugar mañana</text><text x="66" y="334" fill="#0f172a" font-size="22" font-weight="650">por la mañana?</text>
   </g>
       <g>
     <rect x="72" y="420" width="286" height="110" rx="24" fill="#0f766e" filter="url(#smallShadow-a0)"/>
@@ -65,7 +65,7 @@
       <text x="50" y="76" fill="#fff" font-size="44" font-weight="850" opacity="1">Mercoledi</text>
       <g><rect x="64" y="180" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="156" y="180" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="248" y="180" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="340" y="180" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="432" y="180" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="64" y="264" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="156" y="264" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="248" y="264" width="70" height="56" rx="16" fill="url(#primary-a2)" opacity="1" /><rect x="340" y="264" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="432" y="264" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="64" y="348" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="156" y="348" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="248" y="348" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="340" y="348" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="432" y="348" width="70" height="56" rx="16" fill="url(#primary-a2)" opacity="1" /><rect x="64" y="432" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="156" y="432" width="70" height="56" rx="16" fill="url(#primary-a2)" opacity="1" /><rect x="248" y="432" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="340" y="432" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /><rect x="432" y="432" width="70" height="56" rx="16" fill="#e2e8f0" opacity="0.75" /></g>
       <rect x="64" y="510" width="432" height="58" rx="29" fill="#7c3aed" opacity=".12"/>
-      <text x="92" y="549" fill="#7c3aed" font-size="30" font-weight="850" opacity="1">10:30 prenotato</text>
+      <text x="92" y="549" fill="#7c3aed" font-size="30" font-weight="850" opacity="1">10:30 reservado</text>
     </g>
   </g>
 </svg>

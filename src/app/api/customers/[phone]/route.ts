@@ -14,7 +14,7 @@ import { createGdprDeleteService } from '@/server/gdpr/data-delete';
 export const runtime = 'nodejs';
 
 const DeleteCustomerBodySchema = z.object({
-  confirmationPhrase: z.literal('CANCELLA'),
+  confirmationPhrase: z.literal('ELIMINAR'),
 });
 
 const PhoneParamSchema = z

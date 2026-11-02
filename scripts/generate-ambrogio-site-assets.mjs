@@ -27,21 +27,21 @@ const assets = [
     slug: 'hero-always-on-reception',
     title: 'Segreteria sempre attiva',
     use: 'Hero principale o hero alternativo',
-    alt: 'Assistente AI Ambrogio che gestisce messaggi e appuntamenti anche fuori orario',
+    alt: 'Asistente AI Ambrogio que gestiona mensajes y citas también fuera de horario',
     composition: 'hero',
   },
   {
     slug: 'whatsapp-voice-transcript',
-    title: 'Vocali WhatsApp trascritti',
+    title: 'Notas de voz de WhatsApp transcritas',
     use: 'Sezione vocali ed ElevenLabs',
-    alt: 'Messaggio vocale WhatsApp trasformato in testo e risposta di Ambrogio',
+    alt: 'Nota de voz WhatsApp trasformato in testo e risposta di Ambrogio',
     composition: 'voice',
   },
   {
     slug: 'calendar-booking-flow',
-    title: 'Prenotazione automatica',
+    title: 'Reserva automática',
     use: 'Come funziona, booking, Google Calendar',
-    alt: 'Flusso visuale da messaggio WhatsApp a slot calendario prenotato',
+    alt: 'Flujo visual de mensaje WhatsApp a horario de calendario reservado',
     composition: 'calendar',
   },
   {
@@ -62,21 +62,21 @@ const assets = [
     slug: 'vertical-dental',
     title: 'Studio dentistico',
     use: 'Verticali: dentisti',
-    alt: 'Studio dentistico con prenotazioni WhatsApp gestite da Ambrogio',
+    alt: 'Clínica dental con reservas WhatsApp gestionadas por Ambrogio',
     composition: 'vertical-dental',
   },
   {
     slug: 'vertical-beauty',
-    title: 'Centro estetico',
+    title: 'Centro de estética',
     use: 'Verticali: estetica e beauty',
-    alt: 'Centro estetico con messaggi e appuntamenti automatizzati',
+    alt: 'Centro de estética con mensajes y citas automatizadas',
     composition: 'vertical-beauty',
   },
   {
     slug: 'vertical-fitness',
     title: 'Palestra e pilates',
     use: 'Verticali: fitness, palestre, pilates',
-    alt: 'Studio fitness con calendario lezioni e richieste WhatsApp',
+    alt: 'Gimnasio con calendario de clases y solicitudes WhatsApp',
     composition: 'vertical-fitness',
   },
   {
@@ -97,14 +97,14 @@ const assets = [
     slug: 'dashboard-command-center',
     title: 'Dashboard operativa',
     use: 'Dashboard preview',
-    alt: 'Dashboard Ambrogio con conversazioni, appuntamenti e metriche',
+    alt: 'Dashboard Ambrogio con conversaciones, citas y métricas',
     composition: 'dashboard',
   },
   {
     slug: 'roi-calculator',
     title: 'ROI calculator',
     use: 'Sezione ROI e pricing',
-    alt: 'Calcolo ritorno economico degli appuntamenti recuperati con Ambrogio',
+    alt: 'Cálculo del retorno económico de las citas recuperadas con Ambrogio',
     composition: 'roi',
   },
   {
@@ -116,30 +116,30 @@ const assets = [
   },
   {
     slug: 'night-to-morning-bookings',
-    title: 'Da notte ad appuntamenti',
+    title: 'De la noche a las citas',
     use: 'Prima/Dopo, hero storytelling',
-    alt: 'Richieste arrivate di notte diventano appuntamenti confermati al mattino',
+    alt: 'Solicitudes nocturnas que se convierten en citas confirmadas por la mañana',
     composition: 'night',
   },
   {
     slug: 'voice-personality',
     title: 'Voce naturale',
     use: 'Voice AI e risposte vocali',
-    alt: 'Voce AI naturale per risposte vocali WhatsApp opzionali',
+    alt: 'Voz AI natural para respuestas de voz WhatsApp opcionales',
     composition: 'voice-personality',
   },
   {
     slug: 'knowledge-base',
     title: 'Knowledge base',
     use: 'AI engine, FAQ, configurazione',
-    alt: 'FAQ, servizi e orari trasformati in knowledge base per Ambrogio',
+    alt: 'FAQ, servicios y horarios convertidos en knowledge base para Ambrogio',
     composition: 'knowledge',
   },
   {
     slug: 'agency-white-label',
     title: 'White-label agenzie',
     use: 'Pagina Per Agenzie',
-    alt: "Agenzia che gestisce piu' clienti white-label con Ambrogio",
+    alt: "Agencia que gestiona varios clientes white-label con Ambrogio",
     composition: 'agency',
   },
   {
@@ -323,10 +323,10 @@ function calendarGrid(x, y, p, id) {
 const renderers = {
   hero: (id, p) => {
     const inner = `
-      ${bubble(28, 130, 288, 94, 'Buonasera, vorrei prenotare', true)}
-      ${bubble(82, 250, 246, 126, 'Certo. Ho 3 slot liberi domani.', false, p[0])}
+      ${bubble(28, 130, 288, 94, 'Buenas noches, quiero reservar', true)}
+      ${bubble(82, 250, 246, 126, 'Claro. Tengo 3 horarios libres mañana.', false, p[0])}
       ${bubble(28, 405, 300, 112, 'Prendo quello delle 10:30', true)}
-      ${bubble(72, 546, 256, 82, 'Perfetto. Prenotato.', false, p[0])}`;
+      ${bubble(72, 546, 256, 82, 'Perfecto. Reservado.', false, p[0])}`;
     return `
       <g transform="translate(120 120)">
         ${label(0, 70, 'Ambrogio.ai', p[3], 74, 850)}
@@ -343,16 +343,16 @@ const renderers = {
   },
   voice: (id, p) => {
     const inner = `
-      ${bubble(26, 132, 300, 86, 'Messaggio vocale', true)}
+      ${bubble(26, 132, 300, 86, 'Nota de voz', true)}
       <rect x="48" y="248" width="260" height="82" rx="41" fill="#dcfce7"/>
       <circle cx="92" cy="289" r="24" fill="${p[0]}"/><polygon points="86,277 86,301 106,289" fill="#fff"/>
       ${waveform(132, 289, 10, p[0], 0.55)}
       ${bubble(28, 374, 300, 136, 'Transcript: spostare visita a venerdi', true)}
-      ${bubble(74, 545, 252, 92, 'Fatto. Ti propongo due orari.', false, p[0])}`;
+      ${bubble(74, 545, 252, 92, 'Listo. Te propongo dos horarios.', false, p[0])}`;
     return `
       ${phone(id, p, 125, 110, 0.92, inner)}
       <g transform="translate(670 160)">
-        ${label(0, 60, 'Vocali capiti', p[3], 70, 850)}
+        ${label(0, 60, 'Notas de voz entendidas', p[3], 70, 850)}
         ${label(0, 118, 'senza perdere il tono umano', p[3], 38, 700, 0.68)}
         <rect x="0" y="190" width="690" height="300" rx="52" fill="#fff" opacity=".84" filter="url(#softShadow-${id})"/>
         ${waveform(72, 330, 28, p[0], 1)}
@@ -363,10 +363,10 @@ const renderers = {
   },
   calendar: (id, p) => `
     <g transform="translate(110 130)">
-      ${label(0, 70, 'Dal messaggio', p[3], 64, 850)}
+      ${label(0, 70, 'Del mensaje', p[3], 64, 850)}
       ${label(0, 130, 'allo slot in calendario', p[3], 50, 760, 0.78)}
       <rect x="0" y="220" width="400" height="420" rx="42" fill="#fff" opacity=".88" filter="url(#softShadow-${id})"/>
-      ${bubble(42, 270, 316, 112, 'Avete posto domani mattina?', true)}
+      ${bubble(42, 270, 316, 112, '¿Tienen lugar mañana por la mañana?', true)}
       ${bubble(72, 420, 286, 110, 'Si: 9:30 o 11:00.', false, p[0])}
     </g>
     <path d="M565 495 C660 430 720 410 815 420" stroke="url(#accent-${id})" stroke-width="12" fill="none" stroke-linecap="round"/>
@@ -377,7 +377,7 @@ const renderers = {
       ${label(50, 76, 'Mercoledi', '#fff', 44, 850)}
       ${calendarGrid(64, 180, p, id)}
       <rect x="64" y="510" width="432" height="58" rx="29" fill="${p[0]}" opacity=".12"/>
-      ${label(92, 549, '10:30 prenotato', p[0], 30, 850)}
+      ${label(92, 549, '10:30 reservado', p[0], 30, 850)}
     </g>`,
   handoff: (id, p) => `
     <g transform="translate(110 150)">
@@ -410,7 +410,7 @@ const renderers = {
   'vertical-dental': (id, p) =>
     verticalScene(id, p, 'Studio dentistico', 'Pulizia 10:30', 'vertical-dental'),
   'vertical-beauty': (id, p) =>
-    verticalScene(id, p, 'Centro estetico', 'Trattamento 16:00', 'vertical-beauty'),
+    verticalScene(id, p, 'Centro de estética', 'Trattamento 16:00', 'vertical-beauty'),
   'vertical-fitness': (id, p) =>
     verticalScene(id, p, 'Pilates studio', 'Lezione 18:30', 'vertical-fitness'),
   office: (id, p) => verticalScene(id, p, 'Studio professionale', 'Consulenza 12:00', 'office'),
@@ -429,7 +429,7 @@ const renderers = {
       ${label(0, 70, 'Command center', p[3], 72, 880)}
       <rect x="0" y="150" width="1320" height="680" rx="56" fill="#fff" opacity=".9" filter="url(#softShadow-${id})"/>
       <rect x="0" y="150" width="260" height="680" rx="56" fill="#0f172a"/>
-      ${['Dashboard', 'Conversazioni', 'Calendario', 'Voice', 'Privacy'].map((t, i) => `<rect x="36" y="${215 + i * 78}" width="188" height="46" rx="23" fill="${i === 0 ? p[1] : '#ffffff'}" opacity="${i === 0 ? 1 : 0.1}"/><text x="62" y="${246 + i * 78}" fill="#fff" font-size="20" font-weight="750">${t}</text>`).join('')}
+      ${['Dashboard', 'Conversaciones', 'Calendario', 'Voice', 'Privacy'].map((t, i) => `<rect x="36" y="${215 + i * 78}" width="188" height="46" rx="23" fill="${i === 0 ? p[1] : '#ffffff'}" opacity="${i === 0 ? 1 : 0.1}"/><text x="62" y="${246 + i * 78}" fill="#fff" font-size="20" font-weight="750">${t}</text>`).join('')}
       <rect x="320" y="215" width="260" height="150" rx="34" fill="${p[0]}" opacity=".1"/>
       <rect x="620" y="215" width="260" height="150" rx="34" fill="${p[4]}" opacity=".12"/>
       <rect x="920" y="215" width="330" height="150" rx="34" fill="${p[1]}" opacity=".12"/>
@@ -442,7 +442,7 @@ const renderers = {
       ${label(0, 70, 'Quanto vale', p[3], 70, 880)}
       ${label(0, 128, "una risposta in piu'?", p[3], 48, 760, 0.74)}
       <rect x="0" y="220" width="560" height="430" rx="54" fill="#fff" opacity=".88" filter="url(#softShadow-${id})"/>
-      ${['Richieste perse', 'Ticket medio', 'Appuntamenti recuperati'].map((t, i) => `<text x="62" y="${305 + i * 92}" fill="#334155" font-size="28" font-weight="750">${t}</text><rect x="360" y="${272 + i * 92}" width="130" height="44" rx="22" fill="#f1f5f9"/><text x="402" y="${303 + i * 92}" fill="${p[0]}" font-size="26" font-weight="850">${['12', '80', '7'][i]}</text>`).join('')}
+      ${['Solicitudes perdidas', 'Ticket medio', 'Appuntamenti recuperati'].map((t, i) => `<text x="62" y="${305 + i * 92}" fill="#334155" font-size="28" font-weight="750">${t}</text><rect x="360" y="${272 + i * 92}" width="130" height="44" rx="22" fill="#f1f5f9"/><text x="402" y="${303 + i * 92}" fill="${p[0]}" font-size="26" font-weight="850">${['12', '80', '7'][i]}</text>`).join('')}
       <rect x="62" y="550" width="430" height="64" rx="32" fill="url(#primary-${id})"/>
       ${label(96, 592, '+560 euro stimati', '#fff', 32, 850)}
     </g>
@@ -455,8 +455,8 @@ const renderers = {
     ${label(120, 140, 'Tre step', p[3], 72, 880)}
     ${label(120, 198, "e lo studio e' online", p[3], 42, 730, 0.7)}
     ${stepCard(130, 330, '1', 'Connetti', 'WhatsApp Business', p, id)}
-    ${stepCard(570, 260, '2', 'Configura', 'FAQ, orari, servizi', p, id)}
-    ${stepCard(1010, 330, '3', 'Vai live', 'Ambrogio prenota', p, id)}
+    ${stepCard(570, 260, '2', 'Configura', 'FAQ, horarios, servicios', p, id)}
+    ${stepCard(1010, 330, '3', 'Vai live', 'Ambrogio reserva', p, id)}
     <path d="M465 510 C520 440 560 420 620 420" stroke="url(#accent-${id})" stroke-width="10" fill="none" stroke-linecap="round"/>
     <path d="M900 420 C960 420 1000 450 1052 510" stroke="url(#accent-${id})" stroke-width="10" fill="none" stroke-linecap="round"/>`,
   night: (id, p) => `
@@ -466,11 +466,11 @@ const renderers = {
     <circle cx="290" cy="185" r="82" fill="#0f172a"/>
     <circle cx="1190" cy="240" r="110" fill="${p[4]}" opacity=".22"/>
     ${label(112, 120, '23:48', '#fff', 78, 850)}
-    ${bubble(120, 360, 470, 110, 'Salve, posso prenotare per domani?', true)}
+    ${bubble(120, 360, 470, 110, 'Hola, ¿puedo reservar para mañana?', true)}
     ${label(920, 138, '08:10', p[3], 78, 850)}
     <rect x="920" y="310" width="470" height="350" rx="54" fill="#fff" opacity=".88" filter="url(#softShadow-${id})"/>
     ${calendarGrid(980, 410, p, id)}
-    ${label(978, 378, '3 appuntamenti', p[3], 38, 850)}
+    ${label(978, 378, '3 citas', p[3], 38, 850)}
     <path d="M620 510 C760 420 850 420 980 500" stroke="url(#accent-${id})" stroke-width="12" fill="none" stroke-linecap="round"/>`,
   'voice-personality': (id, p) => `
     ${label(120, 140, 'Una voce', p[3], 72, 880)}
@@ -492,7 +492,7 @@ const renderers = {
     ${label(120, 132, 'La memoria', p[3], 72, 880)}
     ${label(120, 190, 'del tuo studio', p[3], 44, 740, 0.7)}
     <g transform="translate(120 300)">
-      ${['FAQ', 'Servizi', 'Orari', 'Prezzi'].map((t, i) => `<rect x="0" y="${i * 96}" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-${id})"/><text x="34" y="${i * 96 + 47}" fill="${p[3]}" font-size="28" font-weight="830">${t}</text>`).join('')}
+      ${['FAQ', 'Servicios', 'Horarios', 'Precios'].map((t, i) => `<rect x="0" y="${i * 96}" width="300" height="72" rx="24" fill="#fff" opacity=".88" filter="url(#smallShadow-${id})"/><text x="34" y="${i * 96 + 47}" fill="${p[3]}" font-size="28" font-weight="830">${t}</text>`).join('')}
     </g>
     <path d="M470 470 C590 390 650 390 750 455" stroke="url(#accent-${id})" stroke-width="12" fill="none" stroke-linecap="round"/>
     <g transform="translate(810 220)">
@@ -573,12 +573,12 @@ function verticalScene(id, p, title, slot, type) {
   return `
     <g transform="translate(120 120)">
       ${label(0, 70, title, p[3], 70, 880)}
-      ${label(0, 126, 'richieste, vocali e appuntamenti', p[3], 38, 720, 0.68)}
+      ${label(0, 126, 'solicitudes, notas de voz y citas', p[3], 38, 720, 0.68)}
       <rect x="0" y="220" width="560" height="520" rx="62" fill="#fff" opacity=".86" filter="url(#softShadow-${id})"/>
       ${icon}
       ${pill(80, 432, slot, p[0], '#fff', 310)}
     </g>
-    ${phone(id, p, 980, 150, 0.78, `${bubble(30, 140, 294, 92, 'Avete posto oggi?', true)}${bubble(78, 266, 246, 116, 'Si, ti confermo ${slot}.', false, p[0])}${bubble(30, 430, 292, 86, 'Grazie!', true)}`)}
+    ${phone(id, p, 980, 150, 0.78, `${bubble(30, 140, 294, 92, '¿Tienen lugar hoy?', true)}${bubble(78, 266, 246, 116, 'Sí, te confirmo ${slot}.', false, p[0])}${bubble(30, 430, 292, 86, '¡Gracias!', true)}`)}
     <path d="M690 500 C790 410 860 390 970 420" stroke="url(#accent-${id})" stroke-width="10" fill="none" stroke-linecap="round"/>`;
 }
 

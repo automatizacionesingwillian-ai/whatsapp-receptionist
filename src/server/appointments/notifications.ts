@@ -311,7 +311,7 @@ export class SupabaseAppointmentNotificationRepository implements AppointmentNot
       scheduledAt: new Date(row.scheduled_at),
       serviceName: row.service_type,
       status: row.status,
-      studioName: configRow?.studio_name ?? 'lo studio',
+      studioName: configRow?.studio_name ?? 'el estudio',
       timezone: tenantRow.timezone,
     };
   }

@@ -23,7 +23,7 @@ const ConnectWhatsAppSchema = z
 /** Collegare o scollegare il canale è una modifica di configurazione del tenant. */
 function assertCanManageIntegrations(role: string): void {
   if (role !== 'owner' && role !== 'admin') {
-    throw new AppError('forbidden', 'Solo owner e admin possono gestire le integrazioni');
+    throw new AppError('forbidden', 'Solo owner y admin pueden gestionar las integraciones');
   }
 }
 

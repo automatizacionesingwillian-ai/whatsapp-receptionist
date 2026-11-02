@@ -164,7 +164,7 @@ describe('WhatsAppProvisioningService', () => {
         displayPhoneNumber: '',
         apiKey: 'attacker_api_key',
       }),
-    ).rejects.toThrow('già collegato a un altro account');
+    ).rejects.toThrow('ya está vinculado a otra cuenta');
   });
 
   it('non rivela quale account detiene il numero conteso', async () => {

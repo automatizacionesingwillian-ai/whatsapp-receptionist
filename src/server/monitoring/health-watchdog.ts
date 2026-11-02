@@ -86,22 +86,20 @@ export class HealthWatchdogService {
       // Il caso grave: ci sono messaggi pronti da inviare e nessuno li prende.
       status = 'critical';
       reasons.push(
-        `${stats.staleJobs} messaggi in coda da oltre ${staleAfterMinutes} minuti: il worker dell'outbox non sta girando.`,
+        `${stats.staleJobs} mensajes en cola desde hace más de ${staleAfterMinutes} minutos: el worker del outbox no está corriendo.`,
       );
     }
 
     if (stats.pendingJobs >= backlogThreshold) {
       status = status === 'critical' ? 'critical' : 'warning';
       reasons.push(
-        `${stats.pendingJobs} messaggi in coda: la coda cresce più in fretta di quanto venga drenata.`,
+        `${stats.pendingJobs} mensajes en cola: la cola crece más rápido de lo que se drena.`,
       );
     }
 
     if (stats.deadLetterJobs > 0) {
       status = status === 'critical' ? 'critical' : 'warning';
-      reasons.push(
-        `${stats.deadLetterJobs} messaggi hanno esaurito i tentativi e non verranno più inviati.`,
-      );
+      reasons.push(`${stats.deadLetterJobs} mensajes agotaron los reintentos y ya no se enviarán.`);
     }
 
     const report: WatchdogReport = {
@@ -147,27 +145,27 @@ export class HealthWatchdogService {
 
     const subject =
       report.status === 'critical'
-        ? '[Ambrogio] I messaggi WhatsApp non stanno uscendo'
-        : '[Ambrogio] La coda messaggi richiede attenzione';
+        ? '[Ambrogio] Los mensajes de WhatsApp no están saliendo'
+        : '[Ambrogio] La cola de mensajes requiere atención';
 
     const body = [
       report.status === 'critical'
-        ? 'Il sistema non sta consegnando messaggi WhatsApp.'
-        : 'La coda dei messaggi WhatsApp mostra segnali di accumulo.',
+        ? 'El sistema no está entregando mensajes de WhatsApp.'
+        : 'La cola de mensajes de WhatsApp muestra señales de acumulación.',
       '',
       ...report.reasons.map((reason) => `- ${reason}`),
       '',
-      `In coda: ${report.pendingJobs}`,
-      `Fermi da troppo tempo: ${report.staleJobs}`,
-      `Non più ritentabili: ${report.deadLetterJobs}`,
+      `En cola: ${report.pendingJobs}`,
+      `Detenidos demasiado tiempo: ${report.staleJobs}`,
+      `Ya no reintentables: ${report.deadLetterJobs}`,
       report.oldestPendingMinutes === null
         ? ''
-        : `Messaggio più vecchio in coda: ${report.oldestPendingMinutes} minuti fa`,
+        : `Mensaje más antiguo en cola: hace ${report.oldestPendingMinutes} minutos`,
       '',
-      `Rilevazione: ${report.checkedAt}`,
+      `Detección: ${report.checkedAt}`,
       '',
-      'Prima cosa da verificare: che i cron della piattaforma stiano effettivamente',
-      'invocando /api/internal/jobs/whatsapp-outbox e che rispondano 200.',
+      'Primera verificación: que los cron de la plataforma estén invocando',
+      'efectivamente /api/internal/jobs/whatsapp-outbox y respondan 200.',
     ]
       .filter((line) => line !== '')
       .join('\n');
@@ -181,7 +179,7 @@ export class HealthWatchdogService {
       });
       return true;
     } catch (error) {
-      logger.error({ err: error }, 'Watchdog: invio della notifica fallito');
+      logger.error({ err: error }, 'Watchdog: falló el envío de la notificación');
       return false;
     }
   }

@@ -102,11 +102,11 @@ export class WhatsAppProvisioningService {
     if (owner && owner.tenant_id !== input.tenantId && owner.status === 'active') {
       logger.warn(
         { tenantId: input.tenantId, conflictingTenantId: owner.tenant_id },
-        'Tentativo di collegare un numero WhatsApp già assegnato a un altro tenant',
+        'Intento de vincular un número WhatsApp ya asignado a otro tenant',
       );
       // Messaggio deliberatamente generico: confermare che il numero esiste
       // altrove rivelerebbe informazioni sugli altri tenant.
-      throw new AppError('conflict', 'Questo numero risulta già collegato a un altro account.', {
+      throw new AppError('conflict', 'Este número ya está vinculado a otra cuenta.', {
         expose: true,
       });
     }
@@ -148,7 +148,7 @@ export class WhatsAppProvisioningService {
 
     await this.repository.revoke({ tenantId, integrationId: existing.id });
     this.onCredentialsChanged(tenantId);
-    logger.info({ tenantId }, 'Numero WhatsApp scollegato');
+    logger.info({ tenantId }, 'Número WhatsApp desvinculado');
 
     return DISCONNECTED;
   }

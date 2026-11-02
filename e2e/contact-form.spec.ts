@@ -34,9 +34,7 @@ async function fillContactForm(page: Page, input: ContactInput): Promise<void> {
     await page.getByLabel('Negocio', { exact: true }).fill(input.company);
   }
   await page.getByLabel('¿De qué quieres hablar?', { exact: true }).selectOption('sales');
-  await page
-    .getByLabel('Mensaje', { exact: true })
-    .fill('Quiero probar Ambrogio en mi negocio.');
+  await page.getByLabel('Mensaje', { exact: true }).fill('Quiero probar Ambrogio en mi negocio.');
   await page.getByLabel(/Acepto el tratamiento de datos/).check();
 }
 
